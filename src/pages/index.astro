@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import supabase from '../lib/supabaseClient';
 import '../styles/base.css';
+import { getCollection } from 'astro:content';
+const allPosts = await getCollection('blog');
 
 const { data: posts, error } = await supabase
   .from('blog')
@@ -19,7 +21,10 @@ if (error) {
 			{posts.map(blog => (
 				<li key={blog.id}>{blog.content}</li>
 			))}
-			</ul>
+		</ul>
+		<ul class="flex flex-col">
+			{allPosts.map((post) => <a href={'/blog/' +post.slug}>{post.data.title}</a>)}
+		</ul>
 	</main>
 </Layout>
 
