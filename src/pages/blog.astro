@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+
+// Mengambil semua postingan blog
+const posts = await getCollection('blog');
+
+// Mengurutkan postingan berdasarkan pubDate dari terbaru ke terlama
+posts.sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime());
+
+// Mengambil hanya 3 postingan terbaru
+const latestPosts = posts.slice(0, 3);
+---
+
+<html>
+  <head>
+    <title>My Astro Blog</title>
+  </head>
+  <body>
+    <h1>My Blog</h1>
+    <ul>
+      {latestPosts.map((post) => (
+        <li>
+          <a href={post.url}>{post.data.title}</a>
+          <p>{post.data.description}</p>
+          <small>{new Date(post.data.pubDate).toLocaleDateString()}</small>
+        </li>
+      ))}
+    </ul>
+  </body>
+</html>
