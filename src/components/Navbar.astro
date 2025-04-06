@@ -2,24 +2,24 @@
 const currentPath = Astro.url.pathname;
 const navLinks = [
   { name: 'HOME', href: '/' },
-  { name: 'PROFILE', href: '/profile' },
-  { name: 'PROJECTS', href: '/projects' },
-  { name: 'BLOG', href: '/blog' },
+  { name: 'PROFILE', href: '/#' },
+  { name: 'PROJECTS', href: '/' },
+  { name: 'BLOG', href: '/#' },
 ];
 import NavIsland from './NavIsland.svelte';
 ---
 
-<nav class="relative w-full flex justify-between items-center mb-8">
+<nav class="sticky top-0 z-50 bg-black/80 backdrop-blur-sm w-full flex justify-between items-center mb-8">
   <!-- Line -->
   <div class="absolute bottom-0 h-px w-full bg-pink-500 opacity-30"></div>
 
-  <div class="flex gap-6 text-sm font-bold text-pink-300 relative z-10">
+  <div class="flex text-md font-bold text-pink-300">
     {navLinks.map(link => (
       <a
         href={link.href}
-        class={`px-2 py-1 rounded transition-all duration-200 ${
+        class={`px-8 py-2 transition-all duration-200 ${
           currentPath === link.href
-            ? 'bg-pink-900/30 text-pink-100 -mb-px border-b-2 border-pink-500'
+            ? 'bg-pink-900/30 text-pink-100 border-b-2 border-main'
             : 'hover:bg-pink-800/10'
         }`}
       >

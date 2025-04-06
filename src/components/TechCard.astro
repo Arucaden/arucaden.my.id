@@ -1,0 +1,17 @@
+---
+const {
+  name,
+  icon,
+  highlight = false,
+  class: customClass
+} = Astro.props;
+
+const highlightClass = highlight
+  ? "bg-pink-400 text-black"
+  : "text-pink-300";
+---
+
+<div class={`inline-flex items-center gap-2 border border-pink-500 rounded-xl px-3 py-1 text-sm ${highlightClass} ${customClass}`}>
+  <img src={icon} alt={name} class="w-5 h-5 object-contain" />
+  <span>{name}</span>
+</div>

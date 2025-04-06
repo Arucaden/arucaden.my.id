@@ -6,10 +6,12 @@ export default defineConfig({
     presetWind4(),
     presetAttributify(),
     presetWebFonts({
+      provider: 'google',
       fonts: {
-        sans: 'JetBrains Mono',
-      },
+        sans: '"Figtree", sans-serif'
+      }
     }),
+
   ],
   shortcuts: [
     ['crt-bg', 'bg-[#140a0d] relative overflow-hidden'],
@@ -17,6 +19,9 @@ export default defineConfig({
     ['crt-text', 'text-pink-400 text-shadow-[0_0_5px_#ff4d6d,0_0_10px_#ff4d6d,0_0_15px_#ff4d6d] animate-flicker'],
   ],
   theme: {
+    fontFamily: {
+      sans: '"Figtree", sans-serif',
+    },
     colors: {
       'crt-red': '#ff4d6d',
       'crt-bg': '#140a0d',
