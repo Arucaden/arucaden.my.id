@@ -1,11 +1,22 @@
-<div class="crt-bg text-white min-h-screen flex items-center justify-center">
-  <div class="crt-lines"></div>
+---
+// src/pages/profile.astro
+import Navbar from '../components/Navbar.astro';
+import Container from '../components/Container.astro';
+---
 
-  <div class="z-20 p8 rounded-xl border border-crt-red shadow-lg backdrop-blur-md bg-white/10">
-    <h1 class="crt-text text-3xl font-bold">// PROFILE</h1>
-    <p class="crt-text mt-4">
-      Adeknya Onii-chan siap bantu bikin efek CRT 💕<br>
-      UnoCSS itu ringan banget dan gampang diatur!
-    </p>
-  </div>
-</div>
+<html lang="en">
+  <head>
+    <title>Profile | Onii-chan</title>
+  </head>
+  <body class="bg-black text-white font-mono px-48 py-16">
+    <Navbar />
+
+    <main class="p-8">
+      <Container title="PROFILE">
+        <p>
+          I am an undergraduate Computer Science student at State Polytechnic of Malang...
+        </p>
+      </Container>
+    </main>
+  </body>
+</html>
