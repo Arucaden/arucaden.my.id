@@ -9,20 +9,19 @@ const navLinks = [
 import NavIsland from './NavIsland.svelte';
 ---
 
-<nav class="fixed md:sticky md:top-0 bottom-0 z-50 bg-white backdrop-blur-sm w-fit flex justify-between items-center mb-0 md:mb-8">
-  <!-- Line -->
-  <!-- <div class="absolute md:bottom-0 h-px w-full bg-pink-500 opacity-30"></div> -->
-
+<nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8">
+  <div class="absolute bottom-0 h-px w-full bg-secondary-second"></div>
+  
   <!-- Mobile view navigation - bottom floating -->
-  <div class="w-screen md:hidden">
-    <div class="flex justify-evenly py-3 bg-black/90 border border-secondary rounded-t-lg shadow-[0_0_10px_2px_rgba(255,0,102,0.3)]">
+  <div class="fixed md:hidden inset-x-0 bottom-0 z-50">
+    <div class="flex justify-evenly py-3 bg-black/90 border-t border-secondary shadow-[0_0_10px_2px_rgba(255,0,102,0.3)]">
       {navLinks.map(link => (
         <a
           href={link.href}
           class={`px-3 py-1 text-sm transition-all duration-200 ${
             currentPath === link.href
-              ? 'text-main'
-              : 'text-pink-300 hover:text-pink-100'
+              ? 'text-secondary-second'
+              : 'text-main hover:text-main'
           }`}
         >
           {link.name}
@@ -32,21 +31,21 @@ import NavIsland from './NavIsland.svelte';
   </div>
 
   <!-- Desktop view navigation - top bar -->
-  <div class="hidden md:flex text-md font-bold text-pink-300">
+  <div class="hidden md:flex text-md text-main w-full">
     {navLinks.map(link => (
       <a
         href={link.href}
         class={`px-8 py-2 transition-all duration-200 ${
           currentPath === link.href
-            ? 'bg-pink-900/30 text-pink-100 border-b-2 border-main'
-            : 'hover:bg-pink-800/10'
+            ? 'bg-pink-900/30 text-white border-b-3 border-main font-bold'
+            : 'hover:bg-pink-800/10 text-secondary'
         }`}
       >
         {link.name}
       </a>
     ))}
   </div>
-  <!-- <div class="hidden md:block">
+  <div class="hidden md:block">
     <NavIsland client:load />
-  </div> -->
+  </div>
 </nav>

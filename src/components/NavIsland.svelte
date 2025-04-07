@@ -3,6 +3,6 @@
     let date = new Date().toLocaleDateString('en-GB');
   </script>
   
-  <span class="text-xs text-pink-400">
+  <span class="font-semibold text-white-text">
     {date}
   </span>

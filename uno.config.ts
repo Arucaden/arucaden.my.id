@@ -33,6 +33,7 @@ export default defineConfig({
       'crt-bg': '#140a0d',
       'main': '#E7576C',
       'secondary': '#BB404D',
+      'secondary-second': '#782e35',
       'white-text': '#F7E2E5',
       'black-text': '#310C0C',
     }
