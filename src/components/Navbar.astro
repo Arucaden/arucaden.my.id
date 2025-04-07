@@ -2,18 +2,37 @@
 const currentPath = Astro.url.pathname;
 const navLinks = [
   { name: 'HOME', href: '/' },
-  { name: 'PROFILE', href: '/#' },
-  { name: 'PROJECTS', href: '/' },
-  { name: 'BLOG', href: '/#' },
+  { name: 'PROFILE', href: '/#profile' },
+  { name: 'PROJECTS', href: '/#projects' },
+  { name: 'BLOG', href: '/#blog' },
 ];
 import NavIsland from './NavIsland.svelte';
 ---
 
-<nav class="sticky top-0 z-50 bg-black/80 backdrop-blur-sm w-full flex justify-between items-center mb-8">
+<nav class="fixed md:sticky md:top-0 bottom-0 z-50 bg-white backdrop-blur-sm w-fit flex justify-between items-center mb-0 md:mb-8">
   <!-- Line -->
-  <div class="absolute bottom-0 h-px w-full bg-pink-500 opacity-30"></div>
+  <!-- <div class="absolute md:bottom-0 h-px w-full bg-pink-500 opacity-30"></div> -->
 
-  <div class="flex text-md font-bold text-pink-300">
+  <!-- Mobile view navigation - bottom floating -->
+  <div class="w-screen md:hidden">
+    <div class="flex justify-evenly py-3 bg-black/90 border border-secondary rounded-t-lg shadow-[0_0_10px_2px_rgba(255,0,102,0.3)]">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class={`px-3 py-1 text-sm transition-all duration-200 ${
+            currentPath === link.href
+              ? 'text-main'
+              : 'text-pink-300 hover:text-pink-100'
+          }`}
+        >
+          {link.name}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Desktop view navigation - top bar -->
+  <div class="hidden md:flex text-md font-bold text-pink-300">
     {navLinks.map(link => (
       <a
         href={link.href}
@@ -27,5 +46,7 @@ import NavIsland from './NavIsland.svelte';
       </a>
     ))}
   </div>
-  <NavIsland client:load />
+  <!-- <div class="hidden md:block">
+    <NavIsland client:load />
+  </div> -->
 </nav>

@@ -1,0 +1,46 @@
+---
+import Container from './Container.astro';
+import TechCard from './TechCard.svelte';
+import MyLinks from './MyLinks.astro';
+---
+
+<Container title="PROFILE">
+  <div class="flex flex-col md:flex-row gap-4">
+    <div class="flex flex-col w-full md:w-2/3">
+      <div class="flex flex-col space-y-4">
+        <p class="text-lg font-medium">/Description</p>
+        <p class="text-sm sm:text-base">
+          I am an undergraduate Computer Science student at State Polytechnic of Malang, 
+          specializing as no specialization i just generalist with no capable of limiting or focusing 
+          on one subject, also im single, if you want to make me as your dog and leash me whatever you want,
+          feel free to connect.
+        </p>
+        <p class="text-lg font-medium">/ Techstack</p>
+        <div class="flex flex-row flex-wrap gap-2 mb-4">
+          <TechCard name="Astro" highlight={false} />
+          <TechCard name="Astro" highlight={false} />
+          <TechCard name="Astro" highlight={false} />
+          <TechCard name="Astro" highlight={false} />
+          <TechCard name="Astro" highlight={false} />
+          <TechCard name="Astro" highlight={false} />
+          <TechCard name="Astro" highlight={false} />
+          <TechCard name="Astro" highlight={false} />
+        </div>
+          
+        <p class="text-lg font-medium">/ Language</p>
+        <div class="flex flex-row flex-wrap gap-2">
+          <TechCard name="Astro" icon="favicon.svg" highlight={true} />
+          <TechCard name="Astro" icon="favicon.svg" highlight={true} />
+          <TechCard name="Astro" icon="favicon.svg" highlight={true} />
+        </div>
+          
+        <p class="text-lg font-medium">/ Links </p>
+        <MyLinks />
+      </div>
+    </div>
+    <div class="flex flex-col w-full md:w-1/3 md:h-114 mt-6 md:mt-0">
+      <p class="text-lg font-medium">/ Image</p>
+        <img src="Me.png" alt="Profile Picture" class="border-2 border-pink-500 w-full h-full object-cover" />
+    </div>
+  </div>
+</Container>

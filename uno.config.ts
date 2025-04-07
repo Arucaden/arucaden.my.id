@@ -1,10 +1,16 @@
 // uno.config.ts
-import { defineConfig, presetAttributify, presetWebFonts, presetWind4 } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetWebFonts, presetWind4 } from 'unocss'
 
 export default defineConfig({
   presets: [
     presetWind4(),
     presetAttributify(),
+    presetIcons({
+      collections: {
+        'grommet-icons': () => import('@iconify-json/grommet-icons/icons.json').then(i => i.default),
+        'ri': () => import('@iconify-json/ri/icons.json').then(i => i.default),
+      }
+    }),
     presetWebFonts({
       provider: 'google',
       fonts: {
