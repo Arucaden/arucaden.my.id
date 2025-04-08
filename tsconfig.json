@@ -4,7 +4,9 @@
     "module": "Node16",
     "types": ["astro/client"],
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
