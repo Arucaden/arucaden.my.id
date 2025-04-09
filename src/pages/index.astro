@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/BaseLayout.astro'
 import ProfileSection from '../components/ProfileSection.astro'
+import ArtworksSection from '../components/ArtworksSection.svelte'
 // import ProjectsSection from '../components/ProjectsSection.astro'
 // import BlogSection from '../components/BlogSection.astro'
 ---
@@ -11,7 +12,7 @@ import ProfileSection from '../components/ProfileSection.astro'
   </section>
 
   <section id="projects" class="min-h-screen">
-    <!-- <ProjectsSection /> -->
+    <ArtworksSection client:only="svelte"/>
   </section>
 
   <section id="blog" class="min-h-screen">
