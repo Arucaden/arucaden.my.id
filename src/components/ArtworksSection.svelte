@@ -2,15 +2,15 @@
   import Artwork from './Artwork.svelte';
   import ArtworkList from './ArtworkList.svelte';
   import { artworks } from '../data/artworks.ts';
+  import Container from './';
 
   let selectedArtwork = $state(artworks[0]);
-  console.log("[Container] Initial selectedArtwork:", selectedArtwork);
 
-  function handleSelect(art) {
-    console.log("[Container] handleSelect called with:", art);
+  function handleSelect(art: typeof artworks[0]) {
     selectedArtwork = art;
   }
 </script>
+
 
 
 <div class="space-y-6">

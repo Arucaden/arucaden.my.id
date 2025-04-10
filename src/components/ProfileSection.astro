@@ -2,9 +2,11 @@
 import Container from './Container.astro';
 import TechCard from './TechCard.svelte';
 import MyLinks from './MyLinks.astro';
-import { techStack, languages } from '../data/techstack.ts';
-const highlighted = ["Astro", "Unity"];
-const highlightedLang = ["English", "Indonesia"];
+import { techItems } from '../data/techstack.ts';
+
+const languages = techItems.filter(item => item.type === 'language');
+const highlightedTech = ["Astro", "Unity"];
+const highlightedLangs = ["English", "Indonesia"];
 ---
 
 <Container title="PROFILE">
@@ -23,16 +25,26 @@ const highlightedLang = ["English", "Indonesia"];
         <div class="flex flex-col">
           <p class="text-sm font-medium text-secondary">/ Techstack</p>
           <div class="flex flex-row flex-wrap gap-2">
-            {techStack.map(name => (
-              <TechCard name={name} highlight={highlighted.includes(name)} />
+            {techItems.map(tech => (
+              <TechCard
+                name={tech.name}
+                type={tech.type}
+                icon={tech.icon}
+                highlight={highlightedTech.includes(tech.name)}
+              />
             ))}
           </div>
         </div>
         <div class="flex flex-col">
           <p class="text-sm font-medium text-secondary">/ Language</p>
           <div class="flex flex-row flex-wrap gap-2">
-            {languages.map(name => (
-              <TechCard name={name} highlight={highlightedLang.includes(name)} />
+            {languages.map(language => (
+              <TechCard
+                name={language.name}
+                type={language.type}
+                icon={language.icon}
+                highlight={highlightedLangs.includes(language.name)}
+              />
             ))}
           </div>    
         </div>

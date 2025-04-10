@@ -1,21 +1,21 @@
 ---
 import Layout from '../layouts/BaseLayout.astro'
-import ProfileSection from '../components/ProfileSection.astro'
-import ArtworksSection from '../components/ArtworksSection.svelte'
-// import ProjectsSection from '../components/ProjectsSection.astro'
-// import BlogSection from '../components/BlogSection.astro'
+import Profile from '../components/ProfileSection.astro'
+import Artworks from '../components/ArtworksSection.svelte'
+import Projects from '../components/ProjectsContainer.svelte'
+import { projects } from '../data/projects';
 ---
 
 <Layout>
   <section id="profile" class="min-h-screen">
-    <ProfileSection />
+    <Profile />
   </section>
 
   <section id="projects" class="min-h-screen">
-    <ArtworksSection client:only="svelte"/>
+    <Artworks client:only="svelte"/>
   </section>
 
   <section id="blog" class="min-h-screen">
-    <!-- <BlogSection /> -->
+    <Projects projects={projects} client:only="svelte" />
   </section>
 </Layout>

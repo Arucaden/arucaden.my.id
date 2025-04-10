@@ -7,7 +7,7 @@ export const artworks: Artwork[] = [
     year: 2020,
     image: "/artworks/mikadzuki.png",
     description: "Psychology's friend request (it can't be helped...)",
-    tags: ["#Mikadzuki", "#pedang", "#istriNanda", "#stress", "#kaburduludaripsikolog"],
+    tags: ["#Mikadzuki", "#pedang", "#istriNanda", "#stress", "#kaburduludaripsikolog", "#2D"],
   },
   {
     title: "Shinobu Peace",
