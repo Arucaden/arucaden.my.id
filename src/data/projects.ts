@@ -1,11 +1,4 @@
-export type Project = {
-    title: string;
-    description?: string;
-    subtitle?: string;
-    image: string;
-    tech: string[];
-    url?: string;
-  };
+import { Project } from '../types/project.ts';
   
 export const projects: Project[] = [
   {

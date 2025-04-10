@@ -1,6 +1,6 @@
 <script lang="ts">
-    import ProjectCard from '../components/ProjectCard.svelte';
-    import type { Project } from '../data/projects.ts';
+    import ProjectCard from './ProjectCard.svelte';
+    import type { Project } from '../../types/project.ts';
     let { projects = [] }: { projects?: Project[] } = $props();
 </script>
   

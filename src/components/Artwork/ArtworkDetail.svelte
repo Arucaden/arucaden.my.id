@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Artwork } from '../data/artMeta.ts';
+  import type { Artwork } from '../../types/artwork.ts';
   let { artwork }: { artwork: Artwork } = $props();
 </script>
 
@@ -9,7 +9,7 @@
   <p class="text-sm">{artwork.description}</p>
   <div class="text-xs text-secondary mt-2">
     {#each artwork.tags as tag}
-      <span>{tag} </span>
+      <span> {tag} </span>
     {/each}
   </div>
 </div>

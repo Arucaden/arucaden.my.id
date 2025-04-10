@@ -38,5 +38,22 @@ export default defineConfig({
       'black-text': '#310C0C',
     }
   },
-  safelist: ['animate-scanline', 'animate-flicker'],
+  safelist: [
+    'animate-scanline', 
+    'animate-flicker',
+    'i-grommet-icons:js',
+    'i-grommet-icons:python',
+    'i-grommet-icons:gamepad',
+    'i-grommet-icons:code',
+    'i-grommet-icons:brush',
+    'i-grommet-icons:astro',
+    'i-grommet-icons:css3',
+    'i-grommet-icons:svelte',
+    'i-grommet-icons:blender',
+    'i-grommet-icons:figma',
+    'i-grommet-icons:database',
+    'i-grommet-icons:flutter',
+    'i-grommet-icons:java',
+    'i-grommet-icons:clipstudio',
+  ],
 });

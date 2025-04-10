@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Tech } from '../data/techstack.ts';
 
-  let { name, type, icon, highlight = false, customClass = '' }: 
+  let { name, icon, highlight = false, customClass = '' }: 
   Tech & { highlight?: boolean; customClass?: string; } = $props();
 </script>
 

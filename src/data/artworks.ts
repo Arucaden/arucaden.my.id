@@ -1,5 +1,4 @@
-// artworks.ts
-import type { Artwork } from './artMeta.ts';
+import type { Artwork } from '../types/artwork.ts';
 
 export const artworks: Artwork[] = [
   {
@@ -11,6 +10,27 @@ export const artworks: Artwork[] = [
   },
   {
     title: "Shinobu Peace",
+    year: 2023,
+    image: "/artworks/shinobu.png",
+    description: "Shinobu chillin'~",
+    tags: ["#2D", "#Scenery"],
+  },
+  {
+    title: "Shinobu Pweace",
+    year: 2023,
+    image: "/artworks/shinobu.png",
+    description: "Shinobu chillin'~",
+    tags: ["#2D", "#Scenery"],
+  },
+  {
+    title: "Shinobu Pwewace",
+    year: 2023,
+    image: "/artworks/shinobu.png",
+    description: "Shinobu chillin'~",
+    tags: ["#2D", "#Scenery"],
+  },
+  {
+    title: "Shinobu Pwewsace",
     year: 2023,
     image: "/artworks/shinobu.png",
     description: "Shinobu chillin'~",
