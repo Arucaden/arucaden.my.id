@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Tech } from '../data/techstack.ts';
+  import type { Tech } from '../types/techstack.ts';
 
   let { name, icon, highlight = false, customClass = '' }: 
   Tech & { highlight?: boolean; customClass?: string; } = $props();

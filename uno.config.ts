@@ -46,3 +46,7 @@ export default defineConfig({
     'i-grommet-icons:clipstudio',
   ],
 });
+function presetScrollbar(): import("unocss").PresetOrFactoryAwaitable<{ colors: { main: string; secondary: string; tertiary: string; 'main-shade': string; 'white-text': string; 'black-text': string; }; }> | import("unocss").PresetOrFactoryAwaitable<{ colors: { main: string; secondary: string; tertiary: string; 'main-shade': string; 'white-text': string; 'black-text': string; }; }>[] {
+  throw new Error('Function not implemented.');
+}
+

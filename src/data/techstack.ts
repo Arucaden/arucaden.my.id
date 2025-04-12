@@ -1,8 +1,4 @@
-export type Tech = {
-  name: string;
-  type: 'tech' | 'language';
-  icon?: string;
-};
+import { Tech } from "../types/techstack.ts";
 
 export const techItems: Tech[] = [
   { name: "JavaScript", type: "tech", icon: "i-logos-javascript" },
