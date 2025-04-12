@@ -27,11 +27,12 @@
     onclick={() => expanded = !expanded}
   > Full Art ^
   </button>
+  
   <!-- Highlights -->
   <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
     {#each previewArtworks as art (art.title)}
       <button
-        class="border-2 border-secondary-second overflow-hidden hover:scale-108% transition-all"
+        class="image-border2 overflow-hidden hover:hov-fx transition-all"
         onclick={() => (currentArtwork = art)}
       >
         <img src={art.image} alt={art.title} class="w-full h-24 object-cover rounded-md" />

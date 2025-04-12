@@ -1,5 +1,4 @@
-// uno.config.ts
-import { defineConfig, presetAttributify, presetIcons, presetWebFonts, presetWind4 } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetWind4 } from 'unocss'
 
 export default defineConfig({
   presets: [
@@ -11,32 +10,22 @@ export default defineConfig({
         'ri': () => import('@iconify-json/ri/icons.json').then(i => i.default),
       }
     }),
-    presetWebFonts({
-      provider: 'google',
-      fonts: {
-        sans: '"Figtree", sans-serif'
-      }
-    }),
 
   ],
   shortcuts: [
-    ['crt-bg', 'bg-[#140a0d] relative overflow-hidden'],
-    ['crt-lines', 'absolute inset-0 bg-repeat bg-[linear-gradient(rgba(255,255,255,0.05)_0px,rgba(77,21,21,0.1)_2px,rgba(0,0,0,0.2)_4px)] opacity-30 animate-scanline z-10 pointer-events-none'],
-    ['crt-text', 'text-pink-400 text-shadow-[0_0_5px_#ff4d6d,0_0_10px_#ff4d6d,0_0_15px_#ff4d6d] animate-flicker'],
+    ['image-border', 'border-2 border-secondary p-1'],
+    ['image-border2', 'border-2 border-tertiary p-1'],
+    ['hov-fx', 'scale-104% duration-200 ease-in-out shadow-[0_0_16px_rgba(255,77,109,0.5)] border-2 border-main'],
   ],
   theme: {
-    fontFamily: {
-      sans: '"Figtree", sans-serif',
-    },
     colors: {
-      'crt-red': '#ff4d6d',
-      'crt-bg': '#140a0d',
-      'main': '#E7576C',
-      'secondary': '#BB404D',
-      'secondary-second': '#782e35',
+      'main': '#FF5768',
+      'secondary': '#DB4B59',
+      'tertiary': '#8A2F38',
+      'main-shade': '#A13741',
       'white-text': '#F7E2E5',
       'black-text': '#310C0C',
-    }
+    },
   },
   safelist: [
     'animate-scanline', 
