@@ -28,13 +28,14 @@
   </div>
 {/if}
 
-<div class={previewMode ? 'flex overflow-x-auto gap-4 py-2' : 'grid grid-cols-2 sm:grid-cols-3 gap-4'}>
+<!-- All -->
+<div class={previewMode ? 'flex overflow-x-auto gap-4 py-2' : 'grid grid-cols-2 sm:grid-cols-5 gap-2'}>
   {#each filtered as art (art.title)}
     <button
-      class="border rounded-xl overflow-hidden bg-white/10 hover:bg-main hover:text-black-text transition-all min-w-[120px] max-w-[160px] flex-shrink-0"
+      class="border-2 border-secondary overflow-hidden hover:scale-108% transition-all w-full flex flex-col"
       onclick={() => { onSelect(art); }}
     >
-      <img src={art.image} alt={art.title} class="w-full h-32 object-cover rounded-t-md" />
+      <img src={art.image} alt={art.title} class="w-full h-full object-cover" />
       {#if !previewMode}
         <div class="p-2 text-sm font-semibold text-left">{art.title}</div>
       {/if}
