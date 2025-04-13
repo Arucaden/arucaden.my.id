@@ -30,7 +30,11 @@
   onblur={() => (hovered = false)}
   onkeydown={(e) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      if (url) window.location.href = url;
+      if (slug) {
+        window.location.href = `/projects/${slug}`;
+      } else if (url) {
+        window.location.href = url;
+      }
     }
   }}
 >

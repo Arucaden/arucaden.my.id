@@ -1,6 +1,6 @@
 ---
 const { content } = Astro.props;
-const { title, image, description, tech, collaborators, tags, links } = content.data;
+const { title, image, description, tech} = content.data;
 ---
 
 <article class="prose prose-invert">
@@ -16,8 +16,4 @@ const { title, image, description, tech, collaborators, tags, links } = content.
     {content.body}
   </slot>
 
-  <div class="mt-6">
-    {links.visit && <a href={links.visit} class="btn">Visit</a>}
-    {links.source && <a href={links.source} class="btn">Source</a>}
-  </div>
 </article>

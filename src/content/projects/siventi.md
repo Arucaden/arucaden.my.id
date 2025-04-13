@@ -4,7 +4,6 @@ description: "A web-based inventory management system for the department of IT a
 image: "/projects/siventi.png"
 tech: ["PHP", "Javascript", "MySQL", "CSS"]
 url: "#"
-layout: "../../layouts/ProjectLayout.astro"
 ---
 
 ## Overview

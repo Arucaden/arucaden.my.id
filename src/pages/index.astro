@@ -3,9 +3,15 @@ import Layout from '../layouts/BaseLayout.astro'
 import Profile from '@components/Profile/ProfileWrapper.astro'
 import Artworks from '@components/Artwork/ArtworkWrapper.svelte'
 import Projects from '@components/Projects/ProjectWrapper.svelte'
-import { projects } from '@data/projects.ts';
 import { artworks } from '@data/artworks.ts';
+import { getCollection } from 'astro:content';
 import Container from '@components/Container.astro';
+
+const projectEntries = await getCollection('projects');
+const projects = projectEntries.map(entry => ({
+  ...entry.data,
+  slug: entry.slug,
+}));
 ---
 
 <Layout>
