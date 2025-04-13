@@ -6,7 +6,7 @@ export const projects: Project[] = [
     description:
       'A web-based inventory management system, including borrowing and returning for the department of IT at State Polytechnic of Malang.',
     image: '/projects/siventi.png',
-    tech: ['php', 'js'],
+    tech: ['PHP', 'Javascript', 'MySQL', 'CSS'],
     url: '#',
   },
   {

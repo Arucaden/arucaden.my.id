@@ -1,9 +1,22 @@
-<script>
-    let hovered = $state(false);
+<script lang="ts">
+  import { techItems } from '../../data/techstack.ts';
+  import TechCard from '../TechCard.svelte';
+  import type { Tech } from '../../types/techstack.ts';
 
-    let {title, description, image, tech = [], url = undefined} = $props();
+  let hovered = $state(false);
+  let { title, description, image, tech = [], url = undefined } = $props();
+
+  function resolveTech(techNames: string[]): Tech[] {
+    return techNames.map(name => {
+      return techItems.find(t => t.name.toLowerCase() === name.toLowerCase()) ?? {
+        name,
+        type: 'tech',
+        icon: 'i-heroicons-question-mark-circle', // default icon kalau nggak ketemu
+      };
+    });
+  }
 </script>
-  
+
 <div 
   class="relative border border-solid border-[#a73344] rounded-2 overflow-hidden transition duration-300 ease"
   role="button"
@@ -23,12 +36,14 @@
     <div class="absolute inset-0 bg-[rgba(20,10,10,0.95)] text-white flex flex-col justify-center p-4 gap-2">
       <div class="content">
         <h3 class="text-lg font-bold">{title}</h3>
-          <p class="text-sm">{description}</p>
+        <p class="text-sm">{description}</p>
+
         <div class="flex gap-2 flex-wrap">
-          {#each tech as tag}
-            <span class="bg-[#333] px-2.5 py-1.5 rounded text-xs">{tag}</span>
+          {#each resolveTech(tech) as t}
+            <TechCard {...t} customClass="text-xs py-1 px-2" />
           {/each}
         </div>
+
         {#if url}
           <a class="mt-2 inline-block bg-[#ff0077] px-4 py-2 rounded-md text-white no-underline text-sm" href={url}>Learn more →</a>
         {/if}

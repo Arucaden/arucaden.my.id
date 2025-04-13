@@ -9,19 +9,19 @@ import Container from '@components/Container.astro';
 ---
 
 <Layout>
-  <section id="profile" class="min-h-screen">
+  <section id="profile" class="min-h-screen bg-black">
     <Container title="Profile">
       <Profile />
     </Container>
   </section>
 
-  <section id="projects" class="min-h-screen">
+  <section id="artworks" class="min-h-screen bg-blue flex flex-col justify-center">
     <Container title="Artworks">
       <Artworks artworks={artworks} client:only="svelte" />
     </Container>
   </section>
 
-  <section id="blog" class="min-h-screen">
+  <section id="projects" class="min-h-screen bg-red flex flex-col justify-center">
     <Container title="Projects">
       <Projects projects={projects} client:only="svelte" />
     </Container>
