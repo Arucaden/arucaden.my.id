@@ -1,0 +1,23 @@
+---
+const { content } = Astro.props;
+const { title, image, description, tech, collaborators, tags, links } = content.data;
+---
+
+<article class="prose prose-invert">
+  <img src={image} alt={title} class="rounded-xl mb-4" />
+  <h1>{title}</h1>
+  <p class="text-lg">{description}</p>
+
+  <div class="mt-4 flex gap-2 flex-wrap">
+    {tech.map(t => <span class="bg-main text-black px-3 py-1 rounded text-xs">{t}</span>)}
+  </div>
+
+  <slot name="content">
+    {content.body}
+  </slot>
+
+  <div class="mt-6">
+    {links.visit && <a href={links.visit} class="btn">Visit</a>}
+    {links.source && <a href={links.source} class="btn">Source</a>}
+  </div>
+</article>

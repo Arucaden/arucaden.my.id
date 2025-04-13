@@ -2,17 +2,20 @@
   import { techItems } from '../../data/techstack.ts';
   import TechCard from '../TechCard.svelte';
   import type { Tech } from '../../types/techstack.ts';
+  
 
   let hovered = $state(false);
-  let { title, description, image, tech = [], url = undefined } = $props();
+  let { title, description, image, tech = [], url = undefined, slug } = $props();
 
   function resolveTech(techNames: string[]): Tech[] {
     return techNames.map(name => {
-      return techItems.find(t => t.name.toLowerCase() === name.toLowerCase()) ?? {
-        name,
-        type: 'tech',
-        icon: 'i-heroicons-question-mark-circle', // default icon kalau nggak ketemu
-      };
+      return (
+        techItems.find(t => t.name.toLowerCase() === name.toLowerCase()) ?? {
+          name,
+          type: 'tech',
+          icon: 'i-heroicons-question-mark-circle',
+        }
+      );
     });
   }
 </script>
@@ -32,22 +35,24 @@
   }}
 >
   <img src={image} alt={title} class="w-full h-auto block" />
+
   {#if hovered}
     <div class="absolute inset-0 bg-[rgba(20,10,10,0.95)] text-white flex flex-col justify-center p-4 gap-2">
-      <div class="content">
-        <h3 class="text-lg font-bold">{title}</h3>
-        <p class="text-sm">{description}</p>
+      <h3 class="text-lg font-bold">{title}</h3>
+      <p class="text-sm">{description}</p>
 
-        <div class="flex gap-2 flex-wrap">
-          {#each resolveTech(tech) as t}
-            <TechCard {...t} customClass="text-xs py-1 px-2" />
-          {/each}
-        </div>
-
-        {#if url}
-          <a class="mt-2 inline-block bg-[#ff0077] px-4 py-2 rounded-md text-white no-underline text-sm" href={url}>Learn more →</a>
-        {/if}
+      <div class="flex gap-2 flex-wrap">
+        {#each resolveTech(tech) as t}
+          <TechCard {...t} customClass="text-xs py-1 px-2" />
+        {/each}
       </div>
+
+      {#if slug}
+        <a class="mt-2 inline-block bg-[#ff0077] px-4 py-2 rounded-md text-white no-underline text-sm" 
+        href={`/projects/${slug}`}>
+          Learn more →
+        </a>
+      {/if}
     </div>
   {/if}
 </div>

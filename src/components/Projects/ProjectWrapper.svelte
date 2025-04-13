@@ -6,6 +6,6 @@
   
 <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
   {#each projects as p}
-    <ProjectCard {...p} />
+    <ProjectCard {...p} slug={p.slug} />
   {/each}
 </div>
