@@ -1,56 +1,81 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import NavIsland from './NavIsland.svelte';
+  let date = new Date().toLocaleDateString('en-ID');
 
   const navLinks = [
-    { name: 'HOME', href: '/' },
-    { name: 'PROFILE', href: '/#profile' },
-    { name: 'Artworks', href: '/#artworks' },
-    { name: 'Projects', href: '/#projects' },
+    { name: 'HOME', href: '/', id: '' },
+    { name: 'PROFILE', href: '/#profile', id: 'profile' },
+    { name: 'Artworks', href: '/#artworks', id: 'artworks' },
+    { name: 'Projects', href: '/#projects', id: 'projects' },
   ];
+
+  let activeSection = $state('');
+  let scrolledPastTop = $state(false);
   
-  let currentSection = '';
-  let currentPath = window.location.pathname;
-  
-  function isActive(href: string) {
-    if (href === '/') {
-      return currentPath === '/' && currentSection === '';
+  function isActive(link) {
+    if (link.id === '') {
+      // if top section is active, return Home highlight true
+      return !scrolledPastTop && activeSection === '';
     }
-    if (href.includes('#')) {
-      return href.endsWith(currentSection);
-    }
-    return href === currentPath;
+    return link.id === activeSection;
   }
-  
-  onMount(() => {
-    const sections = document.querySelectorAll('section[id]');
+
+  $effect(() => {
+    const sections = Array.from(document.querySelectorAll('section[id]'));
     
-    const updateActiveSection = () => {
-      let foundSection = '';
+    // Check if hash is present in URL on load
+    if (window.location.hash) {
+      const hashId = window.location.hash.substring(1);
+      activeSection = hashId;
+    }
+    
+    const scrollHandler = () => {
+      scrolledPastTop = window.scrollY > 100;
       
-      sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const sectionHeight = section.getBoundingClientRect().height;
+      if (sections.length === 0) return;
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect();
+        const buffer = 100;
         
-        // Check if the section is in the viewport
-        if (sectionTop <= 200 && sectionTop + sectionHeight > 200) {
-          foundSection = '#' + section.id;
+        if (rect.top <= buffer && rect.bottom >= buffer) {
+          activeSection = section.id;
+          return;
         }
-      });
+      }
       
-      currentSection = foundSection;
+      // top = home
+      if (window.scrollY < 100) {
+        activeSection = '';
+      }
     };
     
-    updateActiveSection(); // Initial check
-    window.addEventListener('scroll', updateActiveSection);
+    scrollHandler();
+    
+    window.addEventListener('scroll', scrollHandler);
+    
+    navLinks.forEach(link => {
+      if (link.href.includes('#')) {
+        const element = document.querySelector(link.href.substring(link.href.indexOf('#')));
+        if (element) {
+          document.querySelectorAll(`a[href="${link.href}"]`).forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+              e.preventDefault();
+              element.scrollIntoView({ behavior: 'smooth' });
+              window.history.pushState(null, '', link.href);
+              activeSection = link.id;
+            });
+          });
+        }
+      }
+    });
     
     return () => {
-      window.removeEventListener('scroll', updateActiveSection);
+      window.removeEventListener('scroll', scrollHandler);
     };
   });
 </script>
 
-<nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8 bg-black/70 z-50">
+<nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8 bg-black/80 z-50">
   <div class="absolute bottom-0 h-2px w-full bg-tertiary"></div>
   
   <!-- Mobile view navigation - bottom floating -->
@@ -60,7 +85,7 @@
         <a
           href={link.href}
           class={`px-3 py-1 text-sm transition-all duration-200 ${
-            isActive(link.href)
+            isActive(link)
               ? 'text-secondary-second'
               : 'text-main hover:text-main'
           }`}
@@ -77,7 +102,7 @@
       <a
         href={link.href}
         class={`px-8 py-2 transition-all duration-200 ${
-          isActive(link.href)
+          isActive(link)
             ? 'bg-pink-900/30 text-white border-b-4 border-main font-bold'
             : 'hover:bg-pink-800/10 text-secondary'
         }`}
@@ -87,6 +112,6 @@
     {/each}
   </div>
   <div class="hidden md:block md:mr-4">
-    <NavIsland />
+    <span class="font-semibold text-white-text">{date}</span>
   </div>
 </nav>

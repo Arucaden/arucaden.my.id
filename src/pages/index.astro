@@ -15,19 +15,19 @@ const projects = projectEntries.map(entry => ({
 ---
 
 <Layout>
-  <section id="profile" class="h-auto bg-blue pb-10 flex flex-col">
+  <section id="profile" class="h-auto pb-10 pt-3 flex flex-col">
     <Container title="Profile">
       <Profile />
     </Container>
   </section>
 
-  <section id="artworks" class="min-h-screen flex flex-col justify-center">
+  <section id="artworks" class="min-h-screen pt-3 flex flex-col justify-center">
     <Container title="Artworks">
       <Artworks artworks={artworks} client:only="svelte" />
     </Container>
   </section>
 
-  <section id="projects" class="min-h-screen flex flex-col justify-center">
+  <section id="projects" class="min-h-screen pt-3 flex flex-col justify-center">
     <Container title="Projects">
       <Projects projects={projects} client:only="svelte" />
     </Container>
