@@ -9,8 +9,8 @@ const navLinks = [
 import NavIsland from './NavIsland.svelte';
 ---
 
-<nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8">
-  <div class="absolute bottom-0 h-px w-full bg-secondary-second"></div>
+<nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8 bg-black/70">
+  <div class="absolute bottom-0 h-2px w-full bg-tertiary"></div>
   
   <!-- Mobile view navigation - bottom floating -->
   <div class="fixed md:hidden inset-x-0 bottom-0 z-50">
@@ -37,7 +37,7 @@ import NavIsland from './NavIsland.svelte';
         href={link.href}
         class={`px-8 py-2 transition-all duration-200 ${
           currentPath === link.href
-            ? 'bg-pink-900/30 text-white border-b-3 border-main font-bold'
+            ? 'bg-pink-900/30 text-white border-b-4 border-main font-bold'
             : 'hover:bg-pink-800/10 text-secondary'
         }`}
       >
@@ -45,7 +45,7 @@ import NavIsland from './NavIsland.svelte';
       </a>
     ))}
   </div>
-  <div class="hidden md:block">
+  <div class="hidden md:block md:mr-4">
     <NavIsland client:load />
   </div>
 </nav>
