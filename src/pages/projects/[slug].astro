@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntryBySlug } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import ProjectLayout from '@/layouts/ProjectLayout.astro';
 
 // Define all possible routes at build time
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 // Then access the specific project for this route
 const { slug } = Astro.params;
-const project = await getEntryBySlug('projects', slug);
+const project = await getEntry('projects', slug);
 
 if (!project) {
   return Astro.redirect('/404');
