@@ -2,10 +2,10 @@
   let date = new Date().toLocaleDateString('en-ID');
 
   const navLinks = [
-    { name: 'HOME', href: '/', id: '' },
+    { name: 'H', href: '/', id: '' },
     { name: 'PROFILE', href: '/#profile', id: 'profile' },
-    { name: 'Artworks', href: '/#artworks', id: 'artworks' },
-    { name: 'Projects', href: '/#projects', id: 'projects' },
+    { name: 'ARTWORKS', href: '/#artworks', id: 'artworks' },
+    { name: 'PROJECTS', href: '/#projects', id: 'projects' },
   ];
 
   let activeSection = $state('');
@@ -76,7 +76,7 @@
 </script>
 
 <nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8 bg-black/80 z-50">
-  <div class="absolute bottom-0 h-2px w-full bg-tertiary"></div>
+  <div class="hidden md:block absolute bottom-0 h-2px w-full bg-tertiary"></div>
   
   <!-- Mobile view navigation - bottom floating -->
   <div class="fixed md:hidden inset-x-0 bottom-0 z-50">
@@ -101,10 +101,10 @@
     {#each navLinks as link}
       <a
         href={link.href}
-        class={`px-8 py-2 transition-all duration-200 ${
+        class={`px-10 py-3 transition-all duration-200 text-sm ${
           isActive(link)
-            ? 'bg-pink-900/30 text-white border-b-4 border-main font-bold'
-            : 'hover:bg-pink-800/10 text-secondary'
+            ? 'bg-main/20 text-white border-b-4 border-main font-bold'
+            : 'hover:bg-main/12 text-secondary'
         }`}
       >
         {link.name}

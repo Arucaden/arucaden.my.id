@@ -50,7 +50,7 @@
   {expanded ? 'Collapse ˅' : 'Expand ^'}
 </button>
 
-  <div transition:fly={{ y: 20, duration: 300 }}>
+  <div in:fly={{ y: 20, duration: 300 }}>
     <ArtworkList artworks={artworks} onSelect={handleSelect} />
   </div>
 {/if}

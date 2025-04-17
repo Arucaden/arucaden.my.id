@@ -20,7 +20,7 @@
     transition-all hover:hov-fx
     ${highlight 
       ? 'bg-main text-black-text border border-main' 
-      : 'text-text-white border-secondary hover:border-main'} ${customClass}
+      : 'text-gray-text border-secondary hover:border-main hover:text-white'} ${customClass}
   `}
 >
   {#if icon}
