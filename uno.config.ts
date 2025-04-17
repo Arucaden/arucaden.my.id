@@ -1,9 +1,20 @@
-import { defineConfig, presetAttributify, presetIcons, presetWind4 } from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetWind4, presetWebFonts} from 'unocss'
+import { presetAnimations } from 'unocss-preset-animations'
 
 export default defineConfig({
   presets: [
     presetWind4(),
     presetAttributify(),
+    presetAnimations(),
+    presetWebFonts({
+      themeKey: 'font',
+      provider: 'google',
+      fonts: {
+        sans: 'Figtree',
+        mono: 'Fira Code',
+      }
+    }),
+
     presetIcons({
       collections: {
         'grommet-icons': () => import('@iconify-json/grommet-icons/icons.json').then(i => i.default),
@@ -28,8 +39,6 @@ export default defineConfig({
     },
   },
   safelist: [
-    'animate-scanline', 
-    'animate-flicker',
     'i-grommet-icons:js',
     'i-grommet-icons:python',
     'i-grommet-icons:gamepad',
@@ -46,7 +55,3 @@ export default defineConfig({
     'i-grommet-icons:clipstudio',
   ],
 });
-function presetScrollbar(): import("unocss").PresetOrFactoryAwaitable<{ colors: { main: string; secondary: string; tertiary: string; 'main-shade': string; 'white-text': string; 'black-text': string; }; }> | import("unocss").PresetOrFactoryAwaitable<{ colors: { main: string; secondary: string; tertiary: string; 'main-shade': string; 'white-text': string; 'black-text': string; }; }>[] {
-  throw new Error('Function not implemented.');
-}
-

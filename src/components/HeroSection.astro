@@ -2,9 +2,9 @@
 const { name = "DAFFA MAULANA SATRIA", title = "Game Developer" } = Astro.props;
 ---
 
-<section
-  class="relative h-screen w-full bg-cover bg-center flex items-center justify-center text-white text-center"
-  style="background-image: url('../../public/artworks/Mikazuki.png');"
+<section 
+  class="relative h-screen w-full flex flex-col justify-center items-center text-center animate-fade-in animate-duration-1000"
+  style="background-image: url('/artworks/Mikazuki.png'); background-size: cover; background-position: center;"
 >
   <!-- Overlay -->
   <div class="absolute inset-0 bg-black/40 z-0" />
@@ -16,9 +16,9 @@ const { name = "DAFFA MAULANA SATRIA", title = "Game Developer" } = Astro.props;
   </div>
 
   <!-- Scroll Down Indicator -->
-  <div class="absolute bottom-8 z-10 animate-bounce">
-    <a href="#profile">
-      <div class="i-lucide-chevron-down w-6 h-6 text-white" />
+  <div class="absolute bottom-8 z-10">
+    <a href="#profile" class="opacity-80 hover:opacity-100 animate-bounce">
+      <div class="i-heroicons-chevron-down w-6 h-6" />
     </a>
   </div>
 </section>

@@ -19,6 +19,8 @@
     "@iconify-json/grommet-icons": "^1.2.1",
     "@iconify-json/ri": "^1.2.5",
     "@unocss/preset-icons": "^66.1.0-beta.10",
-    "unocss": "^66.1.0-beta.10"
+    "@unocss/preset-web-fonts": "^66.1.0-beta.11",
+    "unocss": "^66.1.0-beta.10",
+    "unocss-preset-animations": "^1.1.1"
   }
 }
