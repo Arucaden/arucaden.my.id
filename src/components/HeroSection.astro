@@ -1,0 +1,24 @@
+---
+const { name = "DAFFA MAULANA SATRIA", title = "Game Developer" } = Astro.props;
+---
+
+<section
+  class="relative h-screen w-full bg-cover bg-center flex items-center justify-center text-white text-center"
+  style="background-image: url('../../public/artworks/Mikazuki.png');"
+>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/40 z-0" />
+
+  <!-- Content -->
+  <div class="z-10 px-4">
+    <h1 class="text-3xl md:text-5xl font-bold tracking-wider">{name}</h1>
+    <p class="text-md md:text-lg mt-2">{title}</p>
+  </div>
+
+  <!-- Scroll Down Indicator -->
+  <div class="absolute bottom-8 z-10 animate-bounce">
+    <a href="#profile">
+      <div class="i-lucide-chevron-down w-6 h-6 text-white" />
+    </a>
+  </div>
+</section>

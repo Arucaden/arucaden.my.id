@@ -6,6 +6,8 @@ import Projects from '@components/Projects/ProjectWrapper.svelte'
 import { artworks } from '@data/artworks.ts';
 import { getCollection } from 'astro:content';
 import Container from '@components/Container.astro';
+import HeroSection from '@components/HeroSection.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const projectEntries = await getCollection('projects');
 const projects = projectEntries.map(entry => ({
@@ -14,7 +16,9 @@ const projects = projectEntries.map(entry => ({
 }));
 ---
 
-<Layout>
+<HeroSection />
+
+<BaseLayout>
   <section id="profile" class="h-auto pb-10 pt-3 flex flex-col">
     <Container title="Profile">
       <Profile />
