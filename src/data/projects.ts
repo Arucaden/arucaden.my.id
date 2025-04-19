@@ -1,41 +1,41 @@
-import { Project } from '../types/project.ts';
-  
-export const projects: Project[] = [
-  {
+export const projects = {
+  "siventi": {
     title: 'SIVENTI',
-    description:
-      'A web-based inventory management system, including borrowing and returning for the department of IT at State Polytechnic of Malang.',
+    description: 'A web-based inventory management system, including borrowing and returning for the department of IT at State Polytechnic of Malang.',
     image: '/projects/Siventi.png',
     tech: ['PHP', 'Javascript', 'MySQL', 'CSS'],
     url: '#',
-    slug: 'siventi',
   },
-  {
+  "siruwa": {
     title: 'SIRUWA',
-    description: '',
+    description: 'Room and Space Management System',
     image: '/projects/Siruwa.png',
     tech: ['Laravel', 'MySQL', 'Tailwind', 'Alpine'],
-    slug: '',
   },
-  {
+  "presensee": {
     title: 'PresenSee',
-    description: '',
-    image: '/projects/Presensee.png',
+    description: 'Facial recognition attendance system for educational institutions',
+    image: '/projects/PresenSee.png',
     tech: ['Laravel', 'MySQL', 'Python', 'Dlib', 'Google ML Kit', 'Flutter', 'Nginx'],
-    slug: '',
   },
-  {
+  "portfolioweb": {
     title: 'DAFFA MAULANA SATRIA',
-    description: '',
+    description: 'Personal portfolio website showcasing projects and artworks',
     image: '/projects/PortfolioWeb.png',
-    tech: ['2D', 'pixel art'],
-    slug: '',
+    tech: ['Svelte', 'Astro', 'UnoCSS'],
   },
-  {
+  "damnedveil": {
     title: 'DAMNED VEIL',
-    description: '',
-    image: '/projects/siventi.png',
-    tech: ['Unity', 'C#', 'ClipStudio'],
-    slug: '',
+    description: 'Horror game with psychological elements and immersive storytelling',
+    image: '/projects/DamnedVeil.png',
+    tech: ['Unity', 'C#', 'Clip Studio'],
   },
-];
+};
+
+// well just backup
+// export const projectsArray = Object.entries(projects).map(
+//   ([slug, data]) => ({
+//     ...data,
+//     slug
+//   })
+// );

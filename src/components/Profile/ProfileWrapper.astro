@@ -3,10 +3,34 @@ import TechCard from '../TechCard.svelte';
 import MyLinks from './MyLinks.astro';
 import { techItems } from '@data/techstack.ts';
 
-const tech = techItems.filter(item => item.type === 'tech');
-const languages = techItems.filter(item => item.type === 'language');
+const techToShow = [
+  'Astro', 
+  'Unity', 
+  'Svelte', 
+  'Tailwind', 
+  'Python', 
+  'JavaScript', 
+  'Flutter', 
+  'Java', 
+  'Blender',
+  'Figma',
+  'MySQL',
+  'Laravel',
+  'Photoshop',
+  'Illustrator',
+  'UnoCSS',
+  'C#',
+  'Clip Studio',
+];
+const langsToShow = ["English", "Indonesia", "Japan"];
 
-const highlightedTechSet = new Set(["Astro", "Unity"]);
+const tech = techItems
+  .filter(item => item.type === 'tech' && techToShow.includes(item.name));
+
+const languages = techItems
+  .filter(item => item.type === 'language' && langsToShow.includes(item.name));
+
+const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
 const highlightedLangsSet = new Set(["English", "Indonesia"]);
 ---
 

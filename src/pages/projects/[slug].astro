@@ -1,22 +1,30 @@
 ---
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import ProjectLayout from '@/layouts/ProjectLayout.astro';
+import { projects as projectsData } from '@data/projects.ts';
 
 // Define all possible routes at build time
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
-  return projects.map(project => ({
-    params: { slug: project.slug },
+  return projects.map(entry => ({
+    params: { slug: entry.slug },
+    props: { 
+      entry,
+      projectData: projectsData[entry.slug] || {}
+    }
   }));
 }
 
-// Then access the specific project for this route
-const { slug } = Astro.params;
-const project = await getEntry('projects', slug);
+const { entry, projectData } = Astro.props;
 
-if (!project) {
-  return Astro.redirect('/404');
-}
+// Create a proper CollectionEntry structure
+const enrichedEntry = {
+  ...entry,
+  data: {
+    ...projectData,  // Start with projects.ts data
+    ...entry.data,   // Override with any frontmatter data
+  }
+};
 ---
 
-<ProjectLayout content={project} />
+<ProjectLayout content={enrichedEntry} />

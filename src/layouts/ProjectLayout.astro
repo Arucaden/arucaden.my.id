@@ -1,19 +1,27 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+import TechCard from '@/components/TechCard.svelte'; 
+
+interface Props {
+  content: CollectionEntry<'projects'>;
+}
+
 const { content } = Astro.props;
-const { title, image, description, tech} = content.data;
+const { title, image, description, tech, publishDate } = content.data;
+const { Content } = await content.render();
 ---
 
-<article class="prose prose-invert">
-  <img src={image} alt={title} class="rounded-xl mb-4" />
-  <h1>{title}</h1>
-  <p class="text-lg">{description}</p>
+<article class="prose prose-invert max-w-none">
+  {image && <img src={image} alt={title} class="rounded-xl mb-6 aspect-video object-cover" />}
+  <h1 class="mb-2">{title}</h1>
+  {publishDate && <time class="text-sm text-gray-400">{publishDate.toLocaleDateString('en-us', { year: 'numeric', month: 'short', day: 'numeric' })}</time>}
+  <p class="text-lg mt-4">{description}</p>
 
-  <div class="mt-4 flex gap-2 flex-wrap">
-    {tech.map(t => <span class="bg-main text-black px-3 py-1 rounded text-xs">{t}</span>)}
-  </div>
+  {tech && tech.length > 0 && (
+    <div class="mt-6 mb-8 flex gap-2 flex-wrap">
+      {tech.map(t => <TechCard name={t} showName={true} customClass="px-2 py-1 text-xs" iconClass="w-4 h-4" />)}
+    </div>
+  )}
 
-  <slot name="content">
-    {content.body}
-  </slot>
-
+  <Content />
 </article>
