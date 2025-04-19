@@ -2,11 +2,11 @@
 import { links } from '../../data/links.ts';
 ---
 
-<div class="flex gap-2 flex-wrap">
+<div class="flex gap-x-2 flex-wrap">
   {links.map(link => (
     <a
       href={link.href}
-      class="flex items-center gap-2 text-pink-300 transition-all"
+      class="flex items-center gap-2 text-main transition-all"
       target="_blank"
     >
       <div class="border-2 border-secondary px-5 py-1 rounded-2 flex items-center justify-center hover:hov-fx">

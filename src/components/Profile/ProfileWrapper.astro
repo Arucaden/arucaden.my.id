@@ -34,22 +34,22 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
 const highlightedLangsSet = new Set(["English", "Indonesia"]);
 ---
 
-<div class="flex flex-col md:flex-row justify-between gap-8"> 
+<div class="flex flex-col md:flex-row justify-start gap-8"> 
   <!-- Main -->
-  <div class="flex flex-col w-full md:w-2/3 space-y-6"> 
+  <div class="flex flex-col w-full md:w-2/3 space-y-4"> 
     
     <section aria-labelledby="desc-heading"> 
-      <h2 id="desc-heading" class="section-title">/ Description</h2> 
-      <p class="text-md sm:text-base">
-        I am an undergraduate Computer Science student at State Polytechnic of Malang, 
-        specializing as no specialization i just generalist with no capable of limiting or focusing 
-        on one subject, also im single, if you want to make me as your dog and leash me whatever you want,
-        feel free to connect.
+      <h2 id="desc-heading" class="section-title">.Description</h2> 
+      <p class="text-md sm:text-base flex flex-col">
+        I code things. I draw things. Sometimes I blend them into games.  
+        Always learning, always curious, anything about interactive or visually cool.  
+        Outside of coding, I enjoy anime and gaming, they're part of what sparks my creativity.  
+        <span>Let's build something fun and meaningful together!.</span>
       </p>
     </section>
 
     <section aria-labelledby="tech-heading">
-      <h2 id="tech-heading" class="section-title">/ Techstack</h2>
+      <h2 id="tech-heading" class="section-title">.Techstack</h2>
       <div class="flex flex-row flex-wrap gap-2">
         {tech.map(t => (
           <TechCard
@@ -64,7 +64,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
     </section>
 
     <section aria-labelledby="lang-heading">
-      <h2 id="lang-heading" class="section-title">/ Language</h2>
+      <h2 id="lang-heading" class="section-title">.Language</h2>
       <div class="flex flex-row flex-wrap gap-2">
         {languages.map(lang => (
           <TechCard
@@ -79,19 +79,19 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
     </section>
 
     <section aria-labelledby="links-heading">
-      <h2 id="links-heading" class="section-title">/ Links </h2>
+      <h2 id="links-heading" class="section-title">.Link </h2>
       <MyLinks />
     </section>
   </div>
 
   <!-- portrait -->
   <aside class="flex flex-col w-full md:w-80 mt-6 md:mt-0"> 
-    <h2 class="section-title">/ Portrait</h2> 
+    <h2 class="section-title">.Portrait</h2> 
     <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
       <img 
         src="Me.png" 
         alt="Portrait of Daffa Maulana Satria" 
-        class="image-border w-full h-full object-cover object-center absolute top-0 left-0" 
+        class="image-border2 w-full h-full object-cover object-center absolute top-0 left-0" 
       />
     </div>
   </aside>

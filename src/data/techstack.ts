@@ -24,6 +24,8 @@ export const techItems: Tech[] = [
   { name: "Svelte", type: "tech", icon: "/icons/logos--svelte-icon.svg" },
   { name: "Tailwind", type: "tech", icon: "/icons/logos--tailwindcss-icon.svg" },
   { name: "UnoCSS", type: "tech", icon: "/icons/logos--unocss.svg" },
+
+  
   { name: "English", type: "language"},
   { name: "Indonesia", type: "language" },
   { name: "Japan", type: "language" }

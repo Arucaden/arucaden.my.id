@@ -32,7 +32,7 @@
   <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
     {#each previewArtworks as art (art.title)}
       <button
-        class="image-border2 overflow-hidden hover:hov-fx transition-all"
+        class="image-border2 brightness-90 overflow-hidden hover:hov-fx hover:brightness-100 transition-all"
         onclick={() => (currentArtwork = art)}
       >
         <img src={art.image} alt={art.title} class="w-full h-24 object-cover rounded-md" />

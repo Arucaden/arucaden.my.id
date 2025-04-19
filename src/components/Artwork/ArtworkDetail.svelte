@@ -14,17 +14,20 @@
 
   <div class="flex flex-col w-full md:w-1/2 space-y-4">
     <div>
-      <span class="section-title">/ Title</span>
-      <h2 class="text-lg font-bold">{artwork.title} ({artwork.year})</h2>
+      <span class="section-title">.Title</span>
+      <h2 class="text-lg font-bold flex flex-row items-end gap-2">
+        {artwork.title} 
+        <span class="text-xs text-gray-text pb-1">({artwork.year})</span> 
+      </h2>
     </div>
     
     <div>
-      <span class="section-title">/ Description</span>
+      <span class="section-title">.Description</span>
       <p class="text-md">{artwork.description}</p>
     </div>
     
     <div>
-      <span class="section-title">/ Tags</span>
+      <span class="section-title">.Tags</span>
       <div class="flex flex-wrap gap-2">
         {#each artwork.tags as tag}
           <span class="mt-1 text-xs py-1 px-2 rounded-full bg-main/20 text-secondary">

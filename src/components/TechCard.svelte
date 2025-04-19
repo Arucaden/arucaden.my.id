@@ -10,8 +10,8 @@
   class={`inline-flex items-center gap-2 border-2 rounded-xl px-4 py-2 text-sm
     transition-all hover:hov-fx
     ${highlight 
-      ? 'bg-main text-black-text border border-main' 
-      : 'text-gray-text border-secondary hover:border-main hover:text-white'} ${customClass}
+      ? 'text-white-text border border-main' 
+      : 'text-white-text border-tertiary brightness-80 hover:border-main hover:text-white'} ${customClass}
   `}
 >
   {#if icon}

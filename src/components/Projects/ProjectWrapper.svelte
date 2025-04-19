@@ -4,7 +4,7 @@
     let { projects = [] }: { projects?: Project[] } = $props();
 </script>
   
-<div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6">
+<div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-2">
   {#each projects as p}
     <ProjectCard {...p} slug={p.slug} />
   {/each}
