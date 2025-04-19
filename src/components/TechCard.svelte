@@ -1,18 +1,8 @@
 <script lang="ts">
   import type { Tech } from '../types/techstack.ts';
 
-  let { 
-    name, 
-    icon, 
-    highlight = false, 
-    customClass = '',
-    showName = true 
-  }: 
-  Tech & { 
-    highlight?: boolean; 
-    customClass?: string;
-    showName?: boolean;
-  } = $props();
+  let { name, icon, highlight = false, customClass = '', showName = true }: 
+  Tech & { highlight?: boolean; customClass?: string; showName?: boolean; } = $props();
 </script>
 
 <div
@@ -24,7 +14,7 @@
   `}
 >
   {#if icon}
-    <div class={`${icon} w-5 h-5 transition-transform duration-200`}></div>
+    <img src={icon} alt={name} class="w-5 h-5 transition-transform duration-200" />
   {/if}
   {#if showName}
     <span class="text-sm font-semibold cursor-default">{name}</span>
