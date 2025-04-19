@@ -9,9 +9,9 @@ import { links } from '../../data/links.ts';
       class="flex items-center gap-2 text-pink-300 transition-all"
       target="_blank"
     >
-        <div class="border-2 border-secondary p-2 rounded-2 flex items-center justify-center w-16 h-8 hover:hov-fx">
-            <div class={`${link.icon} text-xl text-white-text`}></div>
-        </div>
+      <div class="border-2 border-secondary px-5 py-1 rounded-2 flex items-center justify-center hover:hov-fx">
+        <img src={link.icon} alt={link.name} class="w-5 h-5"/>
+      </div>
     </a>
   ))}
 </div>

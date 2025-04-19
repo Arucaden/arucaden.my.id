@@ -2,26 +2,26 @@ export const links = [
     {
       name: 'Email',
       href: 'mailto:daffamaulanasatria@gmail.com',
-      icon: 'i-grommet-icons:mail',
+      icon: '/icons/logos--google-gmail.svg',
     },
     {
       name: 'LinkedIn',
       href: 'https://linkedin.com/in/daffa-ms',
-      icon: 'i-ri:linkedin-box-fill',
+      icon: '/icons/logos--linkedin-icon.svg',
     },
     {
       name: 'GitHub',
       href: 'https://github.com/Arucaden',
-      icon: 'i-grommet-icons:github',
+      icon: '/icons/logos--github-icon.svg',
     },
     {
       name: 'itch.io',
       href: 'https://itch.io/profile/arucaden',
-      icon: 'i-grommet-icons:gamepad',
+      icon: '/icons/mdi--google-gamepad.svg',
     },
     {
       name: 'cv',
-      href: 'https://twitter.com/daffa',
-      icon: 'i-grommet-icons:document-user',
+      href: '',
+      icon: '/icons/mdi--file-document.svg',
     },
   ];

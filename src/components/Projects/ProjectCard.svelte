@@ -47,7 +47,7 @@
 
       <div class="flex gap-2 flex-wrap">
         {#each resolveTech(tech) as t}
-          <TechCard {...t} customClass="text-xs py-1 px-2" showName={false} />
+          <TechCard {...t} iconClass="px-4 py-4" showName={false} />
         {/each}
       </div>
 
