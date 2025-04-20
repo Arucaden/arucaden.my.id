@@ -11,11 +11,9 @@ import HeroSection from '@components/HeroSection.astro';
 
 const projectEntries = await getCollection('projects');
 const projects = projectEntries.map(entry => ({
-  ...projectsData[entry.slug], // Get metadata from projects.ts
+  ...projectsData[entry.slug],
   ...entry.data,
   slug: entry.slug,
-  // Keep any frontmatter data (will override projectsData if duplicate keys exist)
-  // Add a reference to access the content if needed
   content: entry
 }));
 ---

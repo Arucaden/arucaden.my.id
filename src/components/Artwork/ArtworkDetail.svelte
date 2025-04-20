@@ -8,7 +8,7 @@
     <img 
       src={artwork.image} 
       alt={artwork.title} 
-      class="image-border w-full h-full object-cover absolute inset-0 rounded-lg" 
+      class="image-border w-full h-full object-contain absolute inset-0 rounded-lg" 
     />
   </div>
 

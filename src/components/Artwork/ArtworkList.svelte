@@ -12,6 +12,7 @@
   let filtered = $derived(
     selectedTag ? artworks.filter(art => art.tags.includes(selectedTag)) : artworks
   );
+  
 </script>
 
 {#if !previewMode}

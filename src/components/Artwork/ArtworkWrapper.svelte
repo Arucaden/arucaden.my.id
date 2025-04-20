@@ -3,6 +3,7 @@
   import ArtworkList from './ArtworkList.svelte';
   import { fly } from 'svelte/transition';
   import type { Artwork as ArtType } from '../../types/artwork.ts';
+  import '../../styles/global.css';
 
   let { artworks }: { artworks: ArtType[] } = $props();
 
@@ -50,7 +51,7 @@
   {expanded ? 'Collapse ˅' : 'Expand ^'}
 </button>
 
-  <div in:fly={{ y: 20, duration: 300 }}>
+  <div in:fly={{ y: 20, duration: 300 }} class="p-1 h-md overflow-x-auto custom-scroll-container">
     <ArtworkList artworks={artworks} onSelect={handleSelect} />
   </div>
 {/if}
