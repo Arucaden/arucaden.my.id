@@ -1,11 +1,9 @@
 import { defineConfig, presetAttributify, presetIcons, presetWind4, presetWebFonts} from 'unocss'
-import { presetAnimations } from 'unocss-preset-animations'
 
 export default defineConfig({
   presets: [
     presetWind4(),
     presetAttributify(),
-    presetAnimations(),
     presetWebFonts({
       themeKey: 'font',
       provider: 'google',
