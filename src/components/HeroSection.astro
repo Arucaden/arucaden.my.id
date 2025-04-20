@@ -1,19 +1,32 @@
 ---
 const { name = "DAFFA MAULANA SATRIA" } = Astro.props;
-const titles = ["Game Developer", "Illustrator", "Fullstack Developer"];
+const titles = ["Game Developer", "Front End Developer", "Illustrator"];
 ---
 
 <section 
   class="relative h-screen w-full flex flex-col justify-center items-center text-center animate-fade-in animate-duration-1000"
-  style="background-image: url('/artworks/Mikazuki.png'); background-size: cover; background-position: center;"
+  style="background-image: url('/artworks/Mikazuki.webp'); background-size: cover; background-position: center;"
 >
   <div class="absolute inset-0 bg-black/60 backdrop-blur-sm z-0" />
 
   <div class="z-10 px-4 flex flex-col items-center">
-    <h1 class="text-3xl md:text-5xl font-bold tracking-wider mb-3">{name}</h1>
+    <div id="name-container" class="relative">
+      <h1 
+        id="name-text" 
+        class="text-3xl md:text-5xl font-bold tracking-wider mb-3"
+        data-text={name}
+      >{name}</h1>
+    </div>
     
     <div class="h-8 md:h-10 overflow-hidden">
-      <div id="title-text" class="text-md md:text-xl relative text-main font-bold"></div>
+      <div id="title-container" class="relative">
+        <span 
+          id="title-text" 
+          class="text-md md:text-xl font-bold whitespace-nowrap text-main"
+          data-titles={JSON.stringify(titles)}
+          data-index="0"
+        ></span>
+      </div>
     </div>
   </div>
 
@@ -25,77 +38,145 @@ const titles = ["Game Developer", "Illustrator", "Fullstack Developer"];
 </section>
 
 <style>
+  /* Common glitch styles */
+  .glitching {
+    position: relative;
+  }
+  
+  /* Title glitch styles */
+  #title-container.glitching #title-text {
+    animation: glitch 1s linear;
+    position: relative;
+  }
+
+  #title-container.glitching #title-text::before,
+  #title-container.glitching #title-text::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  #title-container.glitching #title-text::before {
+    animation: glitchTop 0.6s linear;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  }
+
+  #title-container.glitching #title-text::after {
+    animation: glitchBotom 1s linear;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  }
+  
+  /* Name glitch styles */
+  #name-container.glitching #name-text {
+    animation: glitch 1.2s linear;
+    position: relative;
+  }
+
+  #name-container.glitching #name-text::before,
+  #name-container.glitching #name-text::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  #name-container.glitching #name-text::before {
+    animation: glitchTop 0.8s linear;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+  }
+
+  #name-container.glitching #name-text::after {
+    animation: glitchBotom 1.2s linear;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+  }
+  
+  /* Keyframes are shared between both elements */
   @keyframes glitch {
-    0% {
-      transform: translate(0);
-      opacity: 1;
+    2%,64% {
+      transform: translate(2px,0) skew(0deg);
     }
-    20% {
-      transform: translate(-5px, 5px);
-      opacity: 0.9;
+    4%,60% {
+      transform: translate(-2px,0) skew(0deg);
     }
-    40% {
-      transform: translate(-5px, -5px);
-      opacity: 1;
-    }
-    60% {
-      transform: translate(5px, 5px);
-      opacity: 0.9;
-    }
-    80% {
-      transform: translate(5px, -5px);
-      opacity: 1;
-    }
-    100% {
-      transform: translate(0);
-      opacity: 1;
+    62% {
+      transform: translate(0,0) skew(5deg); 
     }
   }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+  
+  @keyframes glitchTop {
+    2%,64% {
+      transform: translate(2px,-2px);
+    }
+    4%,60% {
+      transform: translate(-2px,2px);
+    }
+    62% {
+      transform: translate(13px,-1px) skew(-13deg); 
+    }
   }
-
-  .glitch-text {
-    animation: glitch 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .fade-in {
-    animation: fadeIn 0.8s ease-out;
+  
+  @keyframes glitchBotom {
+    2%,64% {
+      transform: translate(-2px,0);
+    }
+    4%,60% {
+      transform: translate(-2px,0);
+    }
+    62% {
+      transform: translate(-22px,5px) skew(21deg); 
+    }
   }
 </style>
 
 <script>
-  const titles = ["Game Developer", "Illustrator", "Fullstack Developer"];
-  const titleElement = document.getElementById('title-text');
-  let currentIndex = 0;
-
-  // Function to create a typed text effect with glitch
-  function updateText(text, element) {
-    // Force a reflow to reset animations by removing both classes
-    element.classList.remove("glitch-text", "fade-in");
+  document.addEventListener('DOMContentLoaded', () => {
+    const titleElement = document.getElementById('title-text');
+    const titleContainer = document.getElementById('title-container');
+    const nameElement = document.getElementById('name-text');
+    const nameContainer = document.getElementById('name-container');
     
-    // This technique forces the browser to acknowledge the class removal
-    void element.offsetWidth;
-    
-    // Update the text content
-    element.textContent = text;
-    
-    // Add both animations back
-    element.classList.add("glitch-text", "fade-in");
-  }
+    if (!titleElement || !nameElement) return;
 
-  // Initial text
-  if (titleElement) {
-    updateText(titles[0], titleElement);
-  }
+    const titles = JSON.parse(titleElement.dataset.titles || '["Game Developer"]');
+    let currentIndex = parseInt(titleElement.dataset.index || '0');
+    
+    // Set initial title text
+    titleElement.textContent = titles[currentIndex];
+    titleElement.setAttribute('data-text', titles[currentIndex]);
 
-  // Rotate through titles
-  setInterval(() => {
-    if (titleElement) {
-      currentIndex = (currentIndex + 1) % titles.length;
-      updateText(titles[currentIndex], titleElement);
+    // Function to apply glitch effect to any element
+    function applyGlitch(container, duration = 1000) {
+      container.classList.add('glitching');
+      
+      setTimeout(() => {
+        container.classList.remove('glitching');
+      }, duration);
     }
-  }, 3000); // Change every 3 seconds
+    
+    // Rotate titles with glitch effect
+    setInterval(() => {
+      // Glitch the title
+      applyGlitch(titleContainer, 900);
+      
+      // Change text after glitch starts
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % titles.length;
+        const newTitle = titles[currentIndex];
+        
+        titleElement.textContent = newTitle;
+        titleElement.setAttribute('data-text', newTitle);
+      }, 300);
+    }, 3000); // Change title every 3 seconds
+    
+    // Occasionally glitch the name (less frequently)
+    setInterval(() => {
+      // Only glitch the name when not glitching the title
+      if (!titleContainer.classList.contains('glitching')) {
+        applyGlitch(nameContainer, 1200);
+      }
+    }, 8000); // Glitch name every 8 seconds
+  });
 </script>

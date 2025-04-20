@@ -38,7 +38,15 @@
     }
   }}
 >
-  <img src={image} alt={title} class="w-full h-full object-cover" />
+  <img 
+    src={image} 
+    alt={title} 
+    loading="lazy" 
+    decoding="async"
+    width="800"
+    height="600"
+    class="rounded-lg object-cover w-full h-full"
+  />
 
   {#if hovered}
     <div 
@@ -50,7 +58,7 @@
         
         {#if slug}
           <a 
-            class="bg-main px-3 py-1 rounded-md text-black-text no-underline text-xs font-medium hover:bg-main-light transition-colors" 
+            class="bg-main px-3 py-2 rounded-md text-black-text no-underline text-xs font-bold hover:bg-main-light transition-colors" 
             href={`/projects/${slug}`}
             transition:fly={{ y: -10, duration: 200, delay: 100 }}
           >
