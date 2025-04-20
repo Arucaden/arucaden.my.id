@@ -8,8 +8,11 @@
     <img 
       src={artwork.image} 
       alt={artwork.title} 
-      class="image-border w-full h-full object-contain absolute inset-0 rounded-lg" 
+      loading="lazy"
+      decoding="async"
+      class="image-border w-full h-full object-contain absolute inset-0 rounded-lg"
     />
+  
   </div>
 
   <div class="flex flex-col w-full md:w-1/2 space-y-4">

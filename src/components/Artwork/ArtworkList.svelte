@@ -36,7 +36,15 @@
       class="image-border2 overflow-hidden hover-hov-fx transition-all w-full flex flex-col"
       onclick={() => { onSelect(art); }}
     >
-      <img src={art.image} alt={art.title} class="w-full h-full object-cover" />
+      <img 
+        src={art.image} 
+        alt={art.title} 
+        loading="lazy" 
+        decoding="async"
+        width="800"
+        height="600"
+        class="rounded-sm object-cover w-full h-36"
+      />
       {#if !previewMode}
         <div class="p-2 text-sm font-semibold text-left">{art.title}</div>
       {/if}
