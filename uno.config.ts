@@ -25,7 +25,8 @@ export default defineConfig({
     ['image-border', 'border-2 border-secondary p-1 rounded-lg'],
     ['image-border2', 'border-2 border-tertiary p-1 rounded-lg'],
     ['hov-fx', 'scale-104% duration-200 ease-in-out shadow-[0_0_16px_rgba(255,77,109,0.5)] border-2 border-main'],
-    ['section-title', 'text-sm font-medium text-secondary text-secondary mb-1']
+    ['section-title', 'text-sm font-medium text-secondary text-secondary mb-1'],
+    ['project-side-title', 'text-base font-bold text-main text-secondary']
   ],
   theme: {
     colors: {

@@ -2,6 +2,10 @@
   background: radial-gradient(circle at center, #4b004b 0%, #0d0010 70%);
 }
 
+.crt-bg-flat {
+  background: #0d0010;
+}
+
 html {
   scroll-behavior: smooth;
 }

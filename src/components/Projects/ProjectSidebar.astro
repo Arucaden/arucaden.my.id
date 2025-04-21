@@ -1,0 +1,173 @@
+---
+import TechCard from '@/components/TechCard.svelte';
+import { techItems } from '@data/techstack.ts';
+
+interface Props {
+  title: string;
+  tech?: string[];
+  url?: string;
+  sourceUrl?: string;
+}
+
+const { tech = [], url = "#", sourceUrl } = Astro.props;
+
+function findTechWithIcon(name: string) {
+  const foundTech = techItems.find(t => 
+    t.name.toLowerCase() === name.toLowerCase()
+  );
+  
+  return {
+    name,
+    type: 'tech',
+    icon: foundTech?.icon || undefined
+  };
+}
+---
+
+<!-- Regular stacked layout for desktop, table for mobile -->
+<aside class="md:sticky md:top-2 self-start w-full">
+  <!-- Desktop view (original design, hidden on mobile) -->
+  <div class="hidden md:block">
+    <!-- Links section -->
+    <div class="rounded-xl">
+      <h2 id="links-heading" class="project-side-title">.Links</h2>
+      <div class="flex gap-2 flex-wrap">
+        {url && (
+          <a 
+            href={url} 
+            target="_blank" 
+            rel="noopener"
+            class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
+          >
+            Visit
+          </a>
+        )}
+        {sourceUrl && (
+          <a 
+            href={sourceUrl} 
+            target="_blank" 
+            rel="noopener"
+            class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
+          >
+            Source
+          </a>
+        )}
+      </div>
+      <div class="h-2px w-full bg-tertiary mt-4"></div>
+    </div>
+
+    <!-- Tech Stack section -->
+    {tech.length > 0 && (
+      <div class="rounded-xl mt-4">
+        <h2 id="tech-heading" class="project-side-title">.Tech_Stack</h2>
+        <div class="flex gap-2 flex-wrap">
+          {tech.map(t => {
+            const techWithIcon = findTechWithIcon(t);
+            return (
+              <TechCard 
+                name={techWithIcon.name} 
+                icon={techWithIcon.icon} 
+                type={techWithIcon.type}
+                showName={true} 
+                customClass="px-2 py-1 text-xs" 
+                iconClass="w-4 h-4" 
+              />
+            );
+          })}
+        </div>
+        <div class="h-2px w-full bg-tertiary mt-4"></div>
+      </div>
+    )}
+
+    <!-- Contents section -->
+    <div class="rounded-xl mt-4">
+      <h2 id="tech-heading2" class="project-side-title">.Contents</h2>
+      <ul class="text-sm list-disc list-inside space-y-1 text-white/80">
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#opinion">Opinion</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mobile  -->
+  <div class="block md:hidden border-2 border-tertiary rounded-lg overflow-hidden">
+    <table class="w-full">
+      <tr class="border-b-2 border-tertiary items-center">
+        <th class="p-3 text-left text-main text-sm font-mono">.Links</th>
+        <td class="p-3">
+          <div class="flex gap-2 flex-wrap">
+            {url && (
+              <a 
+                href={url} 
+                target="_blank" 
+                rel="noopener"
+                class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
+              >
+                Visit
+              </a>
+            )}
+            {sourceUrl && (
+              <a 
+                href={sourceUrl} 
+                target="_blank" 
+                rel="noopener"
+                class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
+              >
+                Source
+              </a>
+            )}
+          </div>
+        </td>
+      </tr>
+      
+      {tech.length > 0 && (
+        <tr class="border-b-2 border-tertiary">
+          <th class="p-3 text-left text-main text-sm font-mono">.Tech_Stack</th>
+          <td class="p-3">
+            <div class="flex gap-2 flex-wrap">
+              {tech.map(t => {
+                const techWithIcon = findTechWithIcon(t);
+                return (
+                  <TechCard 
+                    name={techWithIcon.name} 
+                    icon={techWithIcon.icon} 
+                    type={techWithIcon.type}
+                    showName={true} 
+                    customClass="px-2 py-1 text-xs" 
+                    iconClass="w-4 h-4" 
+                  />
+                );
+              })}
+            </div>
+          </td>
+        </tr>
+      )}
+      
+      <tr>
+        <th class="p-3 text-left text-main text-sm font-mono">.Contents</th>
+        <td class="p-3">
+          <ul class="text-sm space-y-1 text-white/80">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#opinion">Opinion</a></li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</aside>
+
+<style>
+  th {
+    vertical-align: top;
+    width: 30%;
+  }
+  
+  .project-side-title {
+    font-family: monospace;
+    font-size: 1rem;
+    color: var(--color-main, #ff0077);
+    margin-bottom: 0.5rem;
+  }
+</style>

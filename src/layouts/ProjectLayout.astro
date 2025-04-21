@@ -1,100 +1,71 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import TechCard from '@/components/TechCard.svelte'; 
 import '../styles/global.css';
-import Container from '@components/Container.astro';
-import { techItems } from '@data/techstack.ts';
+import ArticleContainer from '@components/ArticleContainer.astro';
+import ProjectSidebar from '@components/Projects/ProjectSidebar.astro';
 
 interface Props {
   content: CollectionEntry<'projects'>;
 }
 
 const { content } = Astro.props;
-const { title, image, description, tech = [], publishDate } = content.data;
+const { title, image, description, tech = [], publishDate, url } = content.data;
 const { Content } = await content.render();
-
-// Function to find tech icons by name (case-insensitive)
-function findTechWithIcon(name: string) {
-  const foundTech = techItems.find(t => 
-    t.name.toLowerCase() === name.toLowerCase()
-  );
-  
-  return {
-    name,
-    type: 'tech',
-    icon: foundTech?.icon || undefined
-  };
-}
 ---
 
-<article class="crt-bg px-4 md:px-12 lg:px-24 pt-8 md:pt-12 min-h-screen mx-auto">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-    <div class="w-full max-w-full overflow-hidden col-span-2">
+<article class="crt-bg-flat px-4 md:px-12 lg:px-24 pt-8 md:pt-12 min-h-screen mx-auto">
+  <ArticleContainer title={title} description={description}>
+    <!-- Mobile: Reorder the elements (image, then sidebar, then content) -->
+    <div class="w-full max-w-full overflow-hidden block md:hidden">
+      <!-- Image first on mobile -->
       <img 
         src={image} 
         alt={title} 
-        class="image-border w-full object-cover" 
+        class="image-border2 w-full object-cover aspect-video" 
       />
       
-      <!-- Title moved under the image -->
-      <h1 class="text-xl text-main md:text-2xl font-bold tracking-wide mb-1 mt-6 break-words"> {title} </h1>
-      {publishDate && (
-        <time class="text-xs text-white block mb-4">
-          {publishDate.toLocaleDateString('en-us', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric'
-          })}
-        </time>
-      )}
-
-      <!-- Description and content with overflow handling -->
-      <div class="text-sm text-white sm:text-base prose prose-invert max-w-none">
-        <span class="text-lg font-semibold text-secondary mb-3 break-words">
-          {description}
-        </span>
+      <!-- Sidebar next on mobile -->
+      <div class="mt-6 mb-6">
+        <ProjectSidebar 
+          title={title}
+          tech={tech}
+          url={url}
+          sourceUrl={url}
+        />
+      </div>
+      
+      <!-- Content last on mobile -->
+      <div class="text-sm text-white sm:text-base mt-4">
         <Content />
       </div>
     </div>
+    
+    <!-- Desktop: Standard layout (hidden on mobile) -->
+    <div class="hidden md:block w-full max-w-full overflow-hidden">
+      <img 
+        src={image} 
+        alt={title} 
+        class="image-border2 w-full object-cover aspect-video" 
+      />
 
-    <!-- Sticky sidebar -->
-    <aside class="space-y-6 md:sticky md:top-8 self-start">
-      <Container title={title}>
-        <div class="flex gap-2">
-          <a href="#" class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors">Visit</a>
-          <a href="#" class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors">Source</a>
-        </div>
-      </Container>
+      <div class="text-sm text-white sm:text-base mt-4">
+        <Content />
+      </div>
+    </div>
+    
+    <!-- Only show divider on md screens and up -->
+    <div class="hidden md:block bg-tertiary w-2px"></div>
 
-      <Container title="Tech Stack">
-        <div class="flex gap-2 flex-wrap">
-          {tech && tech.map(t => {
-            const techWithIcon = findTechWithIcon(t);
-            return (
-              <TechCard 
-                name={techWithIcon.name} 
-                icon={techWithIcon.icon} 
-                type={techWithIcon.type}
-                showName={true} 
-                customClass="px-2 py-1 text-xs" 
-                iconClass="w-4 h-4" 
-              />
-            );
-          })}
-        </div>
-      </Container>
-
-      <Container title="Table of Contents">
-        <ul class="text-sm list-disc list-inside space-y-1 text-white/80">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#opinion">Opinion</a></li>
-        </ul>
-      </Container>
-      
-    </aside>
-  </div>
+    <!-- Only show this sidebar on desktop -->
+    <div class="hidden md:block">
+      <ProjectSidebar 
+        title={title}
+        tech={tech}
+        url={url}
+        sourceUrl={url}
+      />
+    </div>
+  </ArticleContainer>
 </article>
 
 <style>
