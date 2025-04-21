@@ -7,15 +7,22 @@
 </script>
 
 <div
-  class={`inline-flex items-center gap-2 border-2 rounded-xl px-4 py-2 text-sm
-    transition-all hover:hov-fx
+  class={`inline-flex items-center gap-2 border-2 rounded-xl bg-black/50 px-4 py-2 text-sm transition-all hover:hov-fx
     ${highlight 
-      ? 'text-white-text border border-main' 
-      : 'text-white-text border-tertiary brightness-80 hover:border-main hover:text-white'} ${customClass}
+      ? 'text-white border border-main' 
+      : 'text-white-text border-tertiary hover:border-main hover:text-white'} ${customClass}
   `}
 >
   {#if icon}
-    <img src={icon} alt={name} class={`transition-transform duration-200 ${iconClass}`} />
+    <img 
+      src={icon} 
+      alt={name} 
+      width="20"
+      height="20"
+      loading="lazy"
+      class={`transition-transform duration-200 
+      ${iconClass}`} 
+    />
   {/if}
 
   {#if showName}

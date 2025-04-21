@@ -1,4 +1,5 @@
 ---
+import '../../styles/profile.css';
 import TechCard from '../TechCard.svelte';
 import MyLinks from './MyLinks.astro';
 import { techItems } from '@data/techstack.ts';
@@ -28,7 +29,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
     
     <section aria-labelledby="desc-heading"> 
       <h2 id="desc-heading" class="section-title">.Description</h2> 
-      <p class="text-md sm:text-base flex flex-col">
+      <p class="prose-text flex flex-col">
         I code things. I draw things. Sometimes I blend them into games.  
         Always learning, always curious, anything about interactive or visually cool.  
         Outside of coding, I enjoy anime and gaming, they're part of what sparks my creativity.  
@@ -36,21 +37,20 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
       </p>
     </section>
 
-    <!-- Tech stack with show more/less functionality on mobile -->
     <section aria-labelledby="tech-heading">
       <div class="flex justify-between items-center">
         <h2 id="tech-heading" class="section-title">.Techstack</h2>
         <button id="tech-toggle" class="md:hidden text-sm text-main hover:text-white">Show All</button>
       </div>
       
-      <div id="tech-container" class="flex flex-row flex-wrap gap-2 md:max-h-full max-h-[120px] overflow-hidden transition-all duration-300">
+      <div id="tech-container" class="flex flex-row flex-wrap gap-2 md:max-h-full max-h-[120px] overflow-visible transition-all duration-300 py-1 px-1">
         {tech.map(t => (
           <TechCard
             name={t.name}
             type={t.type}
             icon={t.icon}
             highlight={highlightedTechSet.has(t.name)}
-            showName={true} 
+            showName={true}
           />
         ))}
       </div>
@@ -76,7 +76,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
       <MyLinks />
     </section>
     
-    <!-- Mobile-only: Show portrait button -->
+    <!-- Mobile -->
     <button 
       id="show-portrait" 
       class="md:hidden bg-main/20 text-main hover:bg-main hover:text-black-text transition-colors py-2 px-4 rounded-lg text-center mt-4"
@@ -85,7 +85,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
     </button>
   </div>
 
-  <!-- Portrait - hidden on mobile, visible on desktop -->
+  <!-- Desktop -->
   <aside class="hidden md:flex flex-col w-full md:w-80 mt-6 md:mt-0"> 
     <h2 class="section-title">.Portrait</h2> 
     <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
@@ -100,7 +100,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
   </aside>
 </div>
 
-<!-- Full-screen portrait overlay (hidden by default) -->
+<!-- Me full screen  -->
 <div id="portrait-overlay" class="fixed inset-0 bg-black/90 z-50 hidden flex-col items-center justify-center p-4">
   <div class="relative w-full max-w-md max-h-[80vh] overflow-hidden">
     <Image 
@@ -120,59 +120,11 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
 </div>
 
 <script>
-  // Tech stack expand/collapse functionality
+  import { initProfileEffects } from '../../scripts/profileEffects.js';
+  
   document.addEventListener('DOMContentLoaded', () => {
-    const techToggle = document.getElementById('tech-toggle');
-    const techContainer = document.getElementById('tech-container');
+    const cleanup = initProfileEffects();
     
-    if (techToggle && techContainer) {
-      let expanded = false;
-
-      techToggle.addEventListener('click', () => {
-        expanded = !expanded;
-        
-        if (expanded) {
-          techContainer.style.maxHeight = techContainer.scrollHeight + 'px';
-          techToggle.textContent = 'Show Less';
-        } else {
-          techContainer.style.maxHeight = '120px';
-          techToggle.textContent = 'Show All';
-        }
-      });
-    }
-    
-    // Portrait overlay functionality
-    const showPortrait = document.getElementById('show-portrait');
-    const closePortrait = document.getElementById('close-portrait');
-    const portraitOverlay = document.getElementById('portrait-overlay');
-    
-    if (showPortrait && closePortrait && portraitOverlay) {
-      showPortrait.addEventListener('click', () => {
-        portraitOverlay.classList.remove('hidden');
-        portraitOverlay.classList.add('flex');
-        document.body.classList.add('overflow-hidden'); // Prevent body scrolling
-      });
-      
-      closePortrait.addEventListener('click', () => {
-        portraitOverlay.classList.add('hidden');
-        portraitOverlay.classList.remove('flex');
-        document.body.classList.remove('overflow-hidden');
-      });
-    }
+    document.addEventListener('astro:before-swap', cleanup);
   });
 </script>
-
-<style>
-  /* Gradient fade for collapsed tech stack */
-  #tech-container:not(.expanded) {
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0));
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0));
-  }
-
-  @media (min-width: 768px) {
-    #tech-container {
-      mask-image: none !important;
-      -webkit-mask-image: none !important;
-    }
-  }
-</style>

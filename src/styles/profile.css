@@ -1,0 +1,32 @@
+#tech-container {
+  max-height: 120px;
+  position: relative; 
+}
+
+#tech-container:not(.expanded) {
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0));
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0));
+}
+
+#tech-container.expanded {
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+#tech-container > * {
+  z-index: 5;
+  transform-origin: center center;
+}
+
+#tech-container > *:hover,
+#tech-container > *.highlight {
+  z-index: 10; 
+}
+
+@media (min-width: 768px) {
+  #tech-container {
+    max-height: none;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+}
