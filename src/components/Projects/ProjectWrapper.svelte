@@ -5,13 +5,11 @@
   
   let { projects = [] }: { projects?: Project[] } = $props();
   
-  // Check if we're on mobile (client-side only)
   let isMobile = $state(false);
   
   onMount(() => {
     isMobile = window.innerWidth < 768;
     
-    // Listen for window resize
     const handleResize = () => {
       isMobile = window.innerWidth < 768;
     };
@@ -24,7 +22,7 @@
   });
 </script>
 
-<!-- Mobile layout with scrollable container - scrollbar hidden -->
+<!-- Mobile -->
 {#if isMobile}
   <div class="projects-wrapper">
     <div 
@@ -39,7 +37,7 @@
     </div>
   </div>
 {:else}
-  <!-- Desktop layout (unchanged) -->
+
   <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-2">
     {#each projects as p}
       <ProjectCard {...p} slug={p.slug} />
@@ -48,13 +46,11 @@
 {/if}
 
 <style>
-  /* Apply gradient fade effect and hide scrollbar */
   @media (max-width: 768px) {
-    /* Wrapper to help with overflow */
     .projects-wrapper {
       position: relative;
       z-index: 1;
-      overflow: visible; /* This is important */
+      overflow: visible;
     }
     
     #projects-container {

@@ -13,51 +13,49 @@ const { title, image, description, tech = [], publishDate, url } = content.data;
 const { Content } = await content.render();
 ---
 
-<article class="crt-bg-flat px-4 md:px-12 lg:px-24 pt-8 md:pt-12 min-h-screen mx-auto">
+<article class="crt-bg-flat px-4 md:px-12 lg:px-48 pt-8 md:pt-12 min-h-screen mx-auto">
   <ArticleContainer title={title} description={description}>
-    <!-- Mobile: Reorder the elements (image, then sidebar, then content) -->
-    <div class="w-full max-w-full overflow-hidden block md:hidden">
-      <!-- Image first on mobile -->
-      <img 
-        src={image} 
-        alt={title} 
-        class="image-border2 w-full object-cover aspect-video" 
-      />
-      
-      <!-- Sidebar next on mobile -->
-      <div class="mt-6 mb-6">
+    <!-- Mobile layout -->
+    <div class="md:hidden space-y-6">
+        <img 
+          src={image} 
+          alt={title} 
+          class="image-border2 w-full object-cover aspect-video" 
+        />
+
         <ProjectSidebar 
           title={title}
           tech={tech}
           url={url}
           sourceUrl={url}
         />
+
+      <!-- 3. Content third -->
+      <div class="text-sm text-white sm:text-base mt-4 break-words overflow-hidden">
+        <div class="prose-container">
+          <Content />
+        </div>
+      </div>
+    </div>
+    
+    <!-- Desktop -->
+    <div class="hidden md:grid md:grid-cols-[3fr_auto_1fr] gap-6">
+      <div class="w-full overflow-hidden">
+        <img 
+          src={image} 
+          alt={title} 
+          class="image-border2 w-full object-cover aspect-video" 
+        />
+
+        <div class="text-sm text-white sm:text-base mt-4 break-words overflow-hidden">
+          <div class="prose-container">
+            <Content />
+          </div>
+        </div>
       </div>
       
-      <!-- Content last on mobile -->
-      <div class="text-sm text-white sm:text-base mt-4">
-        <Content />
-      </div>
-    </div>
-    
-    <!-- Desktop: Standard layout (hidden on mobile) -->
-    <div class="hidden md:block w-full max-w-full overflow-hidden">
-      <img 
-        src={image} 
-        alt={title} 
-        class="image-border2 w-full object-cover aspect-video" 
-      />
+      <div class="bg-tertiary w-2px h-full"></div>
 
-      <div class="text-sm text-white sm:text-base mt-4">
-        <Content />
-      </div>
-    </div>
-    
-    <!-- Only show divider on md screens and up -->
-    <div class="hidden md:block bg-tertiary w-2px"></div>
-
-    <!-- Only show this sidebar on desktop -->
-    <div class="hidden md:block">
       <ProjectSidebar 
         title={title}
         tech={tech}
@@ -69,18 +67,45 @@ const { Content } = await content.render();
 </article>
 
 <style>
+  /* Content overflow handling */
+  .prose-container {
+    width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  /* Pre blocks */
   :global(.prose pre) {
     max-width: 100%;
     overflow-x: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
   
+  /* Code blocks */
+  :global(.prose code) {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  /* Images */
   :global(.prose img) {
     max-width: 100%;
     height: auto;
   }
   
+  /* Tables */
   :global(.prose table) {
     display: block;
     overflow-x: auto;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Ensure all content inside prose is contained */
+  :global(.prose *) {
+    max-width: 100%;
   }
 </style>

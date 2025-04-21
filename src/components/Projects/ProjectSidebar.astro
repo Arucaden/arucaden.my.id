@@ -24,11 +24,9 @@ function findTechWithIcon(name: string) {
 }
 ---
 
-<!-- Regular stacked layout for desktop, table for mobile -->
 <aside class="md:sticky md:top-2 self-start w-full">
-  <!-- Desktop view (original design, hidden on mobile) -->
+  <!-- Desktop view -->
   <div class="hidden md:block">
-    <!-- Links section -->
     <div class="rounded-xl">
       <h2 id="links-heading" class="project-side-title">.Links</h2>
       <div class="flex gap-2 flex-wrap">
@@ -56,7 +54,6 @@ function findTechWithIcon(name: string) {
       <div class="h-2px w-full bg-tertiary mt-4"></div>
     </div>
 
-    <!-- Tech Stack section -->
     {tech.length > 0 && (
       <div class="rounded-xl mt-4">
         <h2 id="tech-heading" class="project-side-title">.Tech_Stack</h2>
@@ -79,7 +76,6 @@ function findTechWithIcon(name: string) {
       </div>
     )}
 
-    <!-- Contents section -->
     <div class="rounded-xl mt-4">
       <h2 id="tech-heading2" class="project-side-title">.Contents</h2>
       <ul class="text-sm list-disc list-inside space-y-1 text-white/80">
@@ -162,12 +158,5 @@ function findTechWithIcon(name: string) {
   th {
     vertical-align: top;
     width: 30%;
-  }
-  
-  .project-side-title {
-    font-family: monospace;
-    font-size: 1rem;
-    color: var(--color-main, #ff0077);
-    margin-bottom: 0.5rem;
   }
 </style>
