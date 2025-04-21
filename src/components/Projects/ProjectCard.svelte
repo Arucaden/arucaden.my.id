@@ -45,7 +45,7 @@
     decoding="async"
     width="800"
     height="600"
-    class="rounded-lg object-cover w-full h-full"
+    class="rounded-sm object-cover w-full h-full"
   />
 
   {#if hovered}

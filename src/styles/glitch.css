@@ -54,13 +54,13 @@
 
 /* Japanese text styling */
 .text-japanese {
-  color: #FF0059;
+  color: #FF005E;
   text-shadow: 0 0 5px rgba(255, 90, 145, 0.7);
 }
 
 #name-container.glitching .text-japanese::before,
 #name-container.glitching .text-japanese::after {
-  color: #FF0059;
+  color: #FF005E;
   text-shadow: 0 0 5px rgba(255, 90, 145, 0.7);
 }
 

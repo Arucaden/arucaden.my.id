@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import '../styles/global.css';
 import ArticleContainer from '@components/ArticleContainer.astro';
 import ProjectSidebar from '@components/Projects/ProjectSidebar.astro';
+import { Image } from 'astro:assets';
 
 interface Props {
   content: CollectionEntry<'projects'>;
@@ -12,41 +13,37 @@ const { content } = Astro.props;
 const { title, image, description, tech = [], publishDate, url } = content.data;
 const { Content } = await content.render();
 ---
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
 
-<article class="crt-bg-flat px-4 md:px-12 lg:px-48 pt-8 md:pt-12 min-h-screen mx-auto">
-  <ArticleContainer title={title} description={description}>
-    <!-- Mobile layout -->
-    <div class="md:hidden space-y-6">
-        <img 
-          src={image} 
-          alt={title} 
-          class="image-border2 w-full object-cover aspect-video" 
-        />
-
-        <ProjectSidebar 
-          title={title}
-          tech={tech}
-          url={url}
-          sourceUrl={url}
-        />
-
-      <!-- 3. Content third -->
-      <div class="text-sm text-white sm:text-base mt-4 break-words overflow-hidden">
-        <div class="prose-container">
-          <Content />
-        </div>
-      </div>
-    </div>
-    
-    <!-- Desktop -->
-    <div class="hidden md:grid md:grid-cols-[3fr_auto_1fr] gap-6">
-      <div class="w-full overflow-hidden">
-        <img 
-          src={image} 
-          alt={title} 
-          class="image-border2 w-full object-cover aspect-video" 
-        />
-
+  <article class="crt-bg-flat px-4 md:px-12 lg:px-24 pt-8 md:pt-12 min-h-screen mx-auto">
+    <ArticleContainer title={title} description={description}>
+      <!-- Mobile layout - fixed indentation -->
+      <div class="md:hidden space-y-6">
+        <!-- Image -->
+          <Image 
+            src={image} 
+            alt={title}
+            width={800}
+            height={450}
+            class="image-border2 w-full object-cover aspect-video"
+            loading="lazy" 
+          />
+  
+        <!-- Sidebar with table layout -->
+          <ProjectSidebar 
+            title={title}
+            tech={tech}
+            url={url}
+            sourceUrl={url}
+          />
+  
+        <!-- Content -->
         <div class="text-sm text-white sm:text-base mt-4 break-words overflow-hidden">
           <div class="prose-container">
             <Content />
@@ -54,17 +51,35 @@ const { Content } = await content.render();
         </div>
       </div>
       
-      <div class="bg-tertiary w-2px h-full"></div>
+      <!-- Desktop layout -->
+      <div class="hidden md:grid md:grid-cols-[3fr_auto_1fr] gap-6">
+        <div class="w-full overflow-hidden">
+          <img 
+            src={image} 
+            alt={title} 
+            class="image-border2 w-full object-cover aspect-video" 
+          />
+  
+          <div class="text-sm text-white sm:text-base mt-4 break-words overflow-hidden">
+            <div class="prose-container">
+              <Content />
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-tertiary w-2px h-full"></div>
+  
+        <ProjectSidebar 
+          title={title}
+          tech={tech}
+          url={url}
+          sourceUrl={url}
+        />
+      </div>
+    </ArticleContainer>
+  </article>
 
-      <ProjectSidebar 
-        title={title}
-        tech={tech}
-        url={url}
-        sourceUrl={url}
-      />
-    </div>
-  </ArticleContainer>
-</article>
+</html>
 
 <style>
   /* Content overflow handling */
