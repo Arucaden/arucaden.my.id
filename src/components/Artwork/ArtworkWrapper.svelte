@@ -21,15 +21,6 @@
 {#if !expanded}
   <!-- Big Preview -->
   <Artwork artwork={currentArtwork} />
-
-  <!-- Button styled like ProfileWrapper's Show Portrait button -->
-  <button 
-    type="button" 
-    class="bg-main/20 text-main hover:bg-main hover:text-black-text transition-colors py-2 px-4 rounded-lg text-center mt-4 w-full"
-    onclick={() => expanded = !expanded}
-  >
-    View All Artworks
-  </button>
   
   <!-- Highlights (hidden on mobile) -->
   <div class="hidden sm:grid grid-cols-5 gap-2 mt-4">
@@ -42,18 +33,26 @@
       </button>
     {/each}
   </div>
+
+  <button 
+    type="button" 
+    class="button-fx w-full mt-4"
+    onclick={() => expanded = !expanded}
+    >
+    View All Artworks
+  </button>
 {/if}
 
 {#if expanded}
-  <button 
-    type="button" 
-    class="bg-main/20 text-main hover:bg-main hover:text-black-text transition-colors py-2 px-4 rounded-lg text-center mb-4 w-full"
-    onclick={() => expanded = !expanded}
-  >
-    Back to Preview
-  </button>
-
   <div in:fly={{ y: 20, duration: 300 }} class="p-1 h-md overflow-x-auto custom-scroll-container">
     <ArtworkList artworks={artworks} onSelect={handleSelect} />
   </div>
+
+  <button 
+    type="button" 
+    class="button-fx mt-4 w-full"
+    onclick={() => expanded = !expanded}
+  >
+  Back to Preview
+</button>
 {/if}

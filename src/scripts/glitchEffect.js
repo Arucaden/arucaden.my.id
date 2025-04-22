@@ -117,7 +117,7 @@ export function initGlitchEffects() {
           setTimeout(() => {
             nameTimer = setInterval(() => {
               applyNameGlitch();
-            }, 4000);
+            }, 5000);
           }, 1300);
         }
         retryCount++;
@@ -130,7 +130,7 @@ export function initGlitchEffects() {
         }, 5000);
       }, 1300);
     }
-  }, 1500);
+  }, 1200);
   
   return function cleanup() {
     clearTimeout(titleTimer);

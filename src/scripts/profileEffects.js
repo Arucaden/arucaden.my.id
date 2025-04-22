@@ -1,10 +1,6 @@
-/**
- * Initializes interactive functionality for the profile section
- * - Tech stack expansion/collapse
- * - Portrait overlay display
- */
+
 export function initProfileEffects() {
-  // Tech stack expand/collapse functionality
+  // Tech stack expand/collapse
   const techToggle = document.getElementById('tech-toggle');
   const techContainer = document.getElementById('tech-container');
   

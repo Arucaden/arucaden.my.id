@@ -29,7 +29,6 @@
   </div>
 {/if}
 
-<!-- All -->
 <div class={previewMode ? 'flex overflow-x-auto gap-4 py-2' : 'grid grid-cols-2 sm:grid-cols-5 gap-2'}>
   {#each filtered as art (art.title)}
     <button

@@ -2,7 +2,7 @@
   let date = new Date().toLocaleDateString('en-ID');
 
   const navLinks = [
-    { name: 'H', href: '/', id: '' },
+    { name: 'H', href: '/#', id: '' },
     { name: 'PROFILE', href: '/#profile', id: 'profile' },
     { name: 'ARTWORKS', href: '/#artworks', id: 'artworks' },
     { name: 'PROJECTS', href: '/#projects', id: 'projects' },
@@ -78,16 +78,16 @@
 <nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8 bg-black/80 z-50">
   <div class="hidden md:block absolute bottom-0 h-2px w-full bg-tertiary"></div>
   
-  <!-- Mobile view navigation - bottom floating -->
+  <!-- Mobile -->
   <div class="fixed md:hidden inset-x-0 bottom-0 z-50">
-    <div class="flex justify-evenly py-3 bg-black/90 border-t border-secondary shadow-[0_0_10px_2px_rgba(255,0,102,0.3)]">
+    <div class="flex justify-evenly py-3 bg-black/90 border-t-2 border-tertiary shadow-[0_0_10px_2px_rgba(255,0,102,0.3)]">
       {#each navLinks as link}
         <a
           href={link.href}
           class={`px-3 py-1 text-sm transition-all duration-200 ${
             isActive(link)
-              ? 'text-secondary-second'
-              : 'text-main hover:text-main'
+              ? 'text-main font-bold'
+              : 'text-tertiary hover:text-main'
           }`}
         >
           {link.name}
@@ -96,7 +96,7 @@
     </div>
   </div>
 
-  <!-- Desktop view navigation - top bar -->
+  <!-- Desktop -->
   <div class="hidden md:flex text-md text-main w-full">
     {#each navLinks as link}
       <a

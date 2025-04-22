@@ -19,7 +19,6 @@
       alt={name} 
       width="20"
       height="20"
-      loading="lazy"
       class={`transition-transform duration-200 
       ${iconClass}`} 
     />
