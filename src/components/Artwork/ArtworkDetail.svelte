@@ -33,7 +33,7 @@
       <span class="section-title">.Tags</span>
       <div class="flex flex-wrap gap-2">
         {#each artwork.tags as tag}
-          <span class="mt-1 text-xs py-1 px-2 rounded-full bg-main/20 text-secondary">
+          <span class="mt-1 text-xs py-1 px-2 rounded-full bg-tertiary/20 text-secondary/90">
             {tag}
           </span>
         {/each}

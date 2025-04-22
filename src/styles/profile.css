@@ -59,4 +59,9 @@
     mask-image: none !important;
     -webkit-mask-image: none !important;
   }
+
+  .hidden-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

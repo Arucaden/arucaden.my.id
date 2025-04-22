@@ -2,7 +2,7 @@
   let date = new Date().toLocaleDateString('en-ID');
 
   const navLinks = [
-    { name: 'H', href: '/#', id: '' },
+    { name: 'HOME', href: '/#', id: '', isIcon: true, icon: '/icons/mdi--home.svg' },
     { name: 'PROFILE', href: '/#profile', id: 'profile' },
     { name: 'ARTWORKS', href: '/#artworks', id: 'artworks' },
     { name: 'PROJECTS', href: '/#projects', id: 'projects' },
@@ -84,13 +84,17 @@
       {#each navLinks as link}
         <a
           href={link.href}
-          class={`px-3 py-1 text-sm transition-all duration-200 ${
+          class={`${link.isIcon ? 'px-2' : 'px-3'} py-1 text-sm transition-all duration-200 ${
             isActive(link)
               ? 'text-main font-bold'
               : 'text-tertiary hover:text-main'
           }`}
         >
-          {link.name}
+          {#if link.isIcon}
+            <img src={link.icon} alt="Home" class="w-5 h-5 inline-block" />
+          {:else}
+            {link.name}
+          {/if}
         </a>
       {/each}
     </div>
@@ -101,13 +105,17 @@
     {#each navLinks as link}
       <a
         href={link.href}
-        class={`px-10 py-3 transition-all duration-200 text-sm ${
+        class={`${link.isIcon ? 'px-5' : 'px-10'} py-3 transition-all duration-200 text-sm ${
           isActive(link)
             ? 'bg-main/20 text-white border-b-4 border-main font-bold'
             : 'hover:bg-main/12 text-secondary'
         }`}
       >
-        {link.name}
+        {#if link.isIcon}
+          <img src={link.icon} alt="Home" class="w-5 h-5 inline-block" />
+        {:else}
+          {link.name}
+        {/if}
       </a>
     {/each}
   </div>
