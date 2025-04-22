@@ -27,7 +27,7 @@
   <div class="projects-wrapper">
     <div 
       id="projects-container"
-      class="grid grid-cols-1 gap-4 max-h-[750px] overflow-y-auto scrollbar-hidden pb-4 px-3"
+      class="grid grid-cols-1 gap-4 max-h-screen overflow-y-auto scrollbar-hidden pb-4 px-3"
     >
       {#each projects as p}
         <div class="card-wrapper">

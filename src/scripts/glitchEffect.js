@@ -105,38 +105,33 @@ export function initGlitchEffects() {
   // Start the title rotation after a short delay
   setTimeout(rotateTitle, 1500);
 
-  // Force first name glitch after exactly 2 seconds with retry
   let firstGlitchTimer = setTimeout(() => {
-    // Try to run first name glitch
+    // first name glitch
     if (!applyNameGlitch()) {
-      // If blocked, retry until successful
       let retryCount = 0;
       const retryTimer = setInterval(() => {
         if (applyNameGlitch() || retryCount > 10) {
-          // Success or max retries reached
           clearInterval(retryTimer);
           
-          // Set up recurring name glitches every 5 seconds
-          // Wait for first animation to complete before scheduling next
+          // Set up recurring glitches
           setTimeout(() => {
             nameTimer = setInterval(() => {
               applyNameGlitch();
-            }, 4000); // Exactly 5 seconds between start of animations
+            }, 4000);
           }, 1300);
         }
         retryCount++;
-      }, 300); // Retry every 300ms
+      }, 300);
     } else {
-      // First attempt succeeded, set up recurring glitches
+
       setTimeout(() => {
         nameTimer = setInterval(() => {
           applyNameGlitch();
-        }, 5000); // Exactly 5 seconds
+        }, 5000);
       }, 1300);
     }
-  }, 2000);
+  }, 1500);
   
-  // Cleanup function
   return function cleanup() {
     clearTimeout(titleTimer);
     clearTimeout(firstGlitchTimer);

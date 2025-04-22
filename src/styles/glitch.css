@@ -54,17 +54,17 @@
 
 /* Japanese text styling */
 .text-japanese {
-  color: #FF005E;
-  text-shadow: 0 0 5px rgb(255, 0, 144);
+  color: #ff4873;
+  text-shadow: 0 0 5px rgba(240, 116, 186, 0.27);
 }
 
 #name-container.glitching .text-japanese::before,
 #name-container.glitching .text-japanese::after {
-  color: #FF005E;
-  text-shadow: 0 0 5px rgb(255, 0, 144);
+  color: #ff4873;
+  text-shadow: 0 0 5px rgba(240, 116, 186, 0.27);
 }
 
-/* Generic bug element for custom use */
+
 bug {
   animation: glitch 1s linear infinite;
   position: relative;
@@ -88,7 +88,7 @@ bug:after {
   clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
 }
 
-/* === Shared Keyframes === */
+/* Keyframes */
 @keyframes glitch {
   2%,64% {
     transform: translate(2px,0) skew(0deg);
