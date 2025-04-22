@@ -27,6 +27,8 @@ export default defineConfig({
     ['section-title', 'text-sm font-medium text-secondary text-secondary mb-1'],
     ['project-side-title', 'text-base font-bold text-main text-secondary mb-1'],
     ['prose-text', 'text-base leading-relaxed text-white'],
+    ['button-fx', 'bg-main/20 text-secondary font-medium hover:hov-button-fx transition-all py-2 px-4 rounded-lg text-center cursor-pointer'],
+    ['hov-button-fx', 'scale-102% duration-200 ease-in-out shadow-[0_0_12px_rgba(255,77,109,0.2)] text-white']
   ],
   theme: {
     colors: {

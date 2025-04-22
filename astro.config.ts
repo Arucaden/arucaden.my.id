@@ -12,4 +12,7 @@ export default defineConfig({
         svelte( { extensions: ['.svelte'] }),
         mdx(),
     ],
+    server: {
+        host: true,
+    }
 });
