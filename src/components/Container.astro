@@ -8,7 +8,7 @@ const { title, maxHeight = false } = Astro.props;
 ---
 
 <div class={`border-2 border-secondary bg-black/40 p-3 md:p-4 shadow-[0_0_8px_rgba(255,77,109,0.5)] rounded-xl ${maxHeight ? 'md:max-h-xl md:overflow-auto' : ''}`}>
-  <div class="bg-main text-black-text font-sans font-extrabold text-sm md:text-lg px-3 md:px-4 py-1 rounded-lg">
+  <div class="bg-main text-black-text font-sans font-bold md:font-extrabold text-lg md:text-lg px-3 md:px-4 py-1 rounded-lg">
     {title}
   </div>
 
