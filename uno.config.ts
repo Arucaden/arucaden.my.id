@@ -1,9 +1,10 @@
-import { defineConfig, presetAttributify, presetIcons, presetWind4, presetWebFonts} from 'unocss'
+import { defineConfig, presetAttributify, presetIcons, presetWind4, presetWebFonts, presetTypography} from 'unocss'
 
 export default defineConfig({
   presets: [
     presetWind4(),
     presetAttributify(),
+    presetTypography(),
     presetWebFonts({
       themeKey: 'font',
       provider: 'google',
@@ -28,7 +29,7 @@ export default defineConfig({
     ['project-side-title', 'text-base font-bold text-main text-secondary mb-1'],
     ['prose-text', 'text-base leading-relaxed text-white'],
     ['button-fx', 'bg-main/20 text-main font-medium hover:hov-button-fx transition-all py-2 px-4 rounded-lg text-center cursor-pointer'],
-    ['hov-button-fx', 'scale-102% duration-200 ease-in-out shadow-[0_0_12px_rgba(255,77,109,0.2)] text-white']
+    ['hov-button-fx', 'scale-102% duration-200 ease-in-out shadow-[0_0_12px_rgba(255,77,109,0.2)] text-white'],
   ],
   theme: {
     colors: {

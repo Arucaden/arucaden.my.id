@@ -21,7 +21,7 @@ const { Content } = await content.render();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
-  <article class="crt-bg-flat px-4 md:px-12 lg:px-24 pt-8 md:pt-12 min-h-screen mx-auto">
+  <article class="crt-bg-flat px-4 md:px-12 lg:px-24 py-8 md:py-12 min-h-screen mx-auto">
     <ArticleContainer title={title} description={description}>
       <!-- Mobile layout - fixed indentation -->
       <div class="md:hidden space-y-6">
@@ -44,8 +44,8 @@ const { Content } = await content.render();
           />
   
         <!-- Content -->
-        <div class="text-sm text-white sm:text-base mt-4 break-words overflow-hidden">
-          <div class="prose-container">
+        <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
+          <div class="w-full prose prose-invert prose-p:text-white-text prose-headings:text-[#FF2E5E] prose-strong:text-[#DB4B59] prose-a:text-[#8A2F38] prose-li:marker:text-[#8A2F38] prose-blockquote:bg-tertiary/20 prose-blockquote:py-1 prose-blockquote:px-1 prose-blockquote:rounded-lg prose-blockquote:break-words">
             <Content />
           </div>
         </div>
@@ -60,8 +60,8 @@ const { Content } = await content.render();
             class="image-border2 w-full object-cover aspect-video" 
           />
   
-          <div class="text-sm text-white sm:text-base mt-4 break-words overflow-hidden">
-            <div class="prose-container">
+          <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
+            <div class="w-full prose prose-invert prose-p:text-white-text prose-headings:text-[#FF2E5E] prose-strong:text-[#DB4B59] prose-a:text-[#8A2F38] prose-li:marker:text-[#8A2F38] prose-blockquote:bg-tertiary/20 prose-blockquote:py-1 prose-blockquote:rounded-lg max-w-none">
               <Content />
             </div>
           </div>
@@ -80,47 +80,3 @@ const { Content } = await content.render();
   </article>
 
 </html>
-
-<style>
-  /* Content overflow handling */
-  .prose-container {
-    width: 100%;
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-    hyphens: auto;
-  }
-
-  /* Pre blocks */
-  :global(.prose pre) {
-    max-width: 100%;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-  
-  /* Code blocks */
-  :global(.prose code) {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-  
-  /* Images */
-  :global(.prose img) {
-    max-width: 100%;
-    height: auto;
-  }
-  
-  /* Tables */
-  :global(.prose table) {
-    display: block;
-    overflow-x: auto;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Ensure all content inside prose is contained */
-  :global(.prose *) {
-    max-width: 100%;
-  }
-</style>
