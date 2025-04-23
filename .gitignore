@@ -29,8 +29,6 @@ public/artworks/**
 
 .idx/
 
-.firebase/
-
 .firebaserc
 
 firebase.json
