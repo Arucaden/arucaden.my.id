@@ -3,9 +3,24 @@
   import TechCard from '../TechCard.svelte';
   import type { Tech } from '../../types/techstack.ts';
   import { fade, fly } from 'svelte/transition';
+  import { onMount } from 'svelte';
 
   let hovered = $state(false);
+  let isMobile = $state(false);
   let { title, description, image, tech = [], url = undefined, slug } = $props();
+
+  onMount(() => {
+    isMobile = window.innerWidth < 768;
+    
+    const handleResize = () => {
+      isMobile = window.innerWidth < 768;
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  });
 
   function resolveTech(techNames: string[]): Tech[] {
     return techNames.map(name => {
@@ -18,16 +33,23 @@
       );
     });
   }
+  
+  function handleCardClick() {
+    if (isMobile && slug) {
+      window.location.href = `/projects/${slug}`;
+    }
+  }
 </script>
 
 <div 
   class="relative image-border2 hover:hov-fx rounded-2 overflow-hidden transition-all duration-300 ease-in-out w-full h-54"
   role="button"
   tabindex="0"
-  onmouseover={() => (hovered = true)} 
-  onfocus={() => (hovered = true)}
-  onmouseleave={() => (hovered = false)}
-  onblur={() => (hovered = false)}
+  onmouseover={() => (!isMobile && (hovered = true))} 
+  onfocus={() => (!isMobile && (hovered = true))}
+  onmouseleave={() => (!isMobile && (hovered = false))}
+  onblur={() => (!isMobile && (hovered = false))}
+  onclick={handleCardClick}
   onkeydown={(e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       if (slug) {
@@ -48,17 +70,24 @@
     class="rounded-sm object-cover w-full h-full"
   />
 
-  {#if hovered}
+  <!-- Mobile info bar  -->
+  <div class="md:hidden absolute bottom-0 left-0 right-0 bg-black/70 p-3 gap-2">
+    <h3 class="text-base font-bold text-white truncate">{title}</h3>
+    <p class="text-sm text-gray-300 line-clamp-1">{description}</p>
+  </div>
+
+  <!-- Desktop hover overlay -->
+  {#if hovered && !isMobile}
     <div 
       class="absolute inset-0 bg-black/80 text-white flex flex-col p-4 gap-2"
       transition:fade={{ duration: 200 }}
     >
-      <div class="flex justify-between items-center mb-2">
-        <h3 class="text-lg font-bold">{title}</h3>
+      <div class="flex justify-between items-first mb-2">
+        <h3 class="text-lg font-bold max-w-[60%]">{title}</h3>
         
         {#if slug}
           <a 
-            class="bg-main px-3 py-2 rounded-md text-black-text no-underline text-xs font-bold hover:bg-main-light transition-colors" 
+            class="bg-main px-3 py-2 h-fit rounded-md text-black-text no-underline text-xs font-bold hover:bg-main-light transition-colors" 
             href={`/projects/${slug}`}
             transition:fly={{ y: -10, duration: 200, delay: 100 }}
           >
@@ -80,3 +109,12 @@
     </div>
   {/if}
 </div>
+
+<style>
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

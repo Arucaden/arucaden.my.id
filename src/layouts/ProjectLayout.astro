@@ -10,7 +10,7 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const { title, image, description, tech = [], publishDate, url } = content.data;
+const { title, image, description, tech = [], publishDate, url, sourceUrl } = content.data;
 const { Content } = await content.render();
 ---
 <html>
@@ -23,7 +23,7 @@ const { Content } = await content.render();
 
   <article class="crt-bg-flat px-4 md:px-12 lg:px-24 py-8 md:py-12 min-h-screen mx-auto">
     <ArticleContainer title={title} description={description}>
-      <!-- Mobile layout - fixed indentation -->
+      <!-- Mobile layout -->
       <div class="md:hidden space-y-6">
         <!-- Image -->
           <Image 
@@ -40,12 +40,12 @@ const { Content } = await content.render();
             title={title}
             tech={tech}
             url={url}
-            sourceUrl={url}
+            sourceUrl={sourceUrl}
           />
   
         <!-- Content -->
         <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
-          <div class="w-full prose prose-invert prose-p:text-white-text prose-headings:text-[#FF2E5E] prose-strong:text-[#DB4B59] prose-a:text-[#8A2F38] prose-li:marker:text-[#8A2F38] prose-blockquote:bg-tertiary/20 prose-blockquote:py-1 prose-blockquote:px-1 prose-blockquote:rounded-lg prose-blockquote:break-words">
+          <div class="w-full purosu">
             <Content />
           </div>
         </div>
@@ -61,7 +61,7 @@ const { Content } = await content.render();
           />
   
           <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
-            <div class="w-full prose prose-invert prose-p:text-white-text prose-headings:text-[#FF2E5E] prose-strong:text-[#DB4B59] prose-a:text-[#8A2F38] prose-li:marker:text-[#8A2F38] prose-blockquote:bg-tertiary/20 prose-blockquote:py-1 prose-blockquote:rounded-lg max-w-none">
+            <div class="w-full purosu max-w-none">
               <Content />
             </div>
           </div>
@@ -73,10 +73,9 @@ const { Content } = await content.render();
           title={title}
           tech={tech}
           url={url}
-          sourceUrl={url}
+          sourceUrl={sourceUrl}
         />
       </div>
     </ArticleContainer>
   </article>
-
 </html>

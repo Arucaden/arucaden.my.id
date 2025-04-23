@@ -9,7 +9,7 @@ interface Props {
   sourceUrl?: string;
 }
 
-const { tech = [], url = "#", sourceUrl } = Astro.props;
+const { tech = [], url, sourceUrl } = Astro.props;
 
 function findTechWithIcon(name: string) {
   const foundTech = techItems.find(t => 
