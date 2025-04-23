@@ -2,37 +2,35 @@ name: Build & Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Checkout repo public ke path default
+      # Checkout public repo
       - uses: actions/checkout@v3
 
-      # 2) Checkout repo private ke path target
+      # Checkout artwork private repo
       - name: Clone private artworks
         uses: actions/checkout@v3
         with:
           repository: Arucaden/daffa-artworks
           token: ${{ secrets.PRIVATE_REPO_TOKEN }}
-          path: public/artworks             
+          path: public/artworks   #ignored
 
-      # 3) Setup Node & install deps
       - uses: actions/setup-node@v3
         with:
-          node-version: 22
+          node-version: 20
+          cache: npm
       - run: npm ci
 
-      # 4) Build project (artworks sudah ada secara lokal)
       - run: npm run build
 
-      # 5) Deploy ke Firebase Hosting
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SA }}
+          projectId: arucaden
           channelId: live
-          projectId: your-project-id

@@ -1,5 +1,6 @@
 # build output
 dist/
+.output/
 
 # generated types
 .astro/
@@ -25,3 +26,5 @@ pnpm-debug.log*
 
 #artwork path so you can't steal it (even though you can just right click and save)
 public/artworks/**
+
+.idx/
