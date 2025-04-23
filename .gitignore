@@ -28,7 +28,3 @@ pnpm-debug.log*
 public/artworks/**
 
 .idx/
-
-.firebaserc
-
-firebase.json
