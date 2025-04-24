@@ -23,9 +23,8 @@ const { Content } = await content.render();
 
   <article class="crt-bg-flat px-4 md:px-12 lg:px-24 py-8 md:py-12 min-h-screen mx-auto">
     <ArticleContainer title={title} description={description}>
-      <!-- Mobile layout -->
+      <!-- Mobile -->
       <div class="md:hidden space-y-6">
-        <!-- Image -->
           <Image 
             src={image} 
             alt={title}
@@ -35,7 +34,6 @@ const { Content } = await content.render();
             loading="lazy" 
           />
   
-        <!-- Sidebar with table layout -->
           <ProjectSidebar 
             title={title}
             tech={tech}
@@ -43,7 +41,6 @@ const { Content } = await content.render();
             sourceUrl={sourceUrl}
           />
   
-        <!-- Content -->
         <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
           <div class="w-full purosu">
             <Content />
@@ -51,7 +48,7 @@ const { Content } = await content.render();
         </div>
       </div>
       
-      <!-- Desktop layout -->
+      <!-- Desktop -->
       <div class="hidden md:grid md:grid-cols-[3fr_auto_1fr] gap-6">
         <div class="w-full overflow-hidden">
           <img 

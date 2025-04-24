@@ -70,20 +70,20 @@
     class="rounded-sm object-cover w-full h-full"
   />
 
-  <!-- Mobile info bar  -->
+  <!-- Mobile bar  -->
   <div class="md:hidden absolute bottom-0 left-0 right-0 bg-black/70 p-3 gap-2">
     <h3 class="text-base font-bold text-white truncate">{title}</h3>
     <p class="text-sm text-gray-300 line-clamp-1">{description}</p>
   </div>
 
-  <!-- Desktop hover overlay -->
+  <!-- Desktop overlay -->
   {#if hovered && !isMobile}
     <div 
       class="absolute inset-0 bg-black/80 text-white flex flex-col p-4 gap-2"
       transition:fade={{ duration: 200 }}
     >
       <div class="flex justify-between items-first mb-2">
-        <h3 class="text-lg font-bold max-w-[60%]">{title}</h3>
+        <h3 class="text-lg font-bold max-w-[65%]">{title}</h3>
         
         {#if slug}
           <a 
