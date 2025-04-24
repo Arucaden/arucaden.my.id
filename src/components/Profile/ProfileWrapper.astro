@@ -52,6 +52,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
               icon={t.icon}
               highlight={highlightedTechSet.has(t.name)}
               showName={true}
+              client:visible
             />
           </div>
         ))}
@@ -68,6 +69,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
             icon={lang.icon}
             highlight={highlightedLangsSet.has(lang.name)}
             showName={true}
+            client:visible
           />
         ))}
       </div>    

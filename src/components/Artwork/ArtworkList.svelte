@@ -6,6 +6,11 @@
     previewMode?: boolean
   } = $props();
 
+  // Sort artworks by year (newest first) by default
+  const sortedArtworks = artworks.sort((a, b) => 
+    (b.year || 0) - (a.year || 0)
+  );
+
   const tags = ["#2d", "#pixel", "#scenery", '#oc', '#fanart'];
   let selectedTags = $state<string[]>([]);
 
@@ -18,16 +23,15 @@
     }
   }
 
-  // Filter artworks based on selected tags - AND logic
+
   let filtered = $derived(
     selectedTags.length > 0 
-      ? artworks.filter(art => 
-          // Show only artworks that have ALL the selected tags (AND relationship)
+      ? sortedArtworks.filter(art => 
           selectedTags.every(selectedTag => 
             art.tags.includes(selectedTag)
           )
         )
-      : artworks
+      : sortedArtworks
   );
 </script>
 
