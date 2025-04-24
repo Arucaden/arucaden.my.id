@@ -24,7 +24,4 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-#artwork path so you can't steal it (even though you can just right click and save)
-public/artworks/**
-
 .idx/
