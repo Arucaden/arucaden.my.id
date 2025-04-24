@@ -4,4 +4,4 @@
 
 > WIP shine eternal
 
-![image](public/assets/preview.gif)
+![image](/public/assets/preview.gif)
