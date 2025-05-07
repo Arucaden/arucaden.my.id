@@ -7,7 +7,6 @@ import { projects as projectsData} from '@data/projects.ts';
 import { artworks } from '@data/artworks.ts';
 import { getCollection } from 'astro:content';
 import Container from '@components/Container.astro';
-import HeroSection from '@components/HeroSection.astro';
 
 const projectEntries = await getCollection('projects');
 // First merge the data
@@ -18,16 +17,13 @@ let projects = projectEntries.map(entry => ({
   content: entry
 }));
 
-// Then sort by year (newest first)
+// sort by year
 projects = projects.sort((a, b) => {
   const yearA = a.publishDate ? new Date(a.publishDate).getFullYear() : a.year || 0;
   const yearB = b.publishDate ? new Date(b.publishDate).getFullYear() : b.year || 0;
   return yearB - yearA;
 });
 ---
-
-<HeroSection />
-
 <Layout>
   <section id="profile" class="h-auto pb-10 pt-3 flex flex-col">
     <Container title="Profile">
