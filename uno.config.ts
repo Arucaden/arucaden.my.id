@@ -43,5 +43,4 @@ export default defineConfig({
       'black-text': '#310C0C',
     },
   },
-  safelist: [],
 });
