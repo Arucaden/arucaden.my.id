@@ -6,15 +6,15 @@
     previewMode?: boolean
   } = $props();
 
-  // Sort artworks by year (newest first) by default
+  // Sort artworks by year
   const sortedArtworks = artworks.sort((a, b) => 
     (b.year || 0) - (a.year || 0)
   );
 
-  const tags = ["#2d", "#pixel", "#scenery", '#oc', '#fanart'];
+  const tags = ["#2d", "#pixel", "#scenery", '#oc', '#fanart', '#design', '#3d'];
   let selectedTags = $state<string[]>([]);
 
-  // Toggle tag selection
+  // tag
   function toggleTag(tag: string) {
     if (selectedTags.includes(tag)) {
       selectedTags = selectedTags.filter(t => t !== tag);
