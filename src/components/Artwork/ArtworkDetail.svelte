@@ -4,15 +4,18 @@
 </script>
 
 <div class="flex flex-col md:flex-row text-white gap-6 mb-6">
-  <div class="w-full md:w-1/2 aspect-[3/1.8] relative overflow-hidden">
-    <img 
-      src={artwork.image} 
-      alt={artwork.title} 
-      loading="lazy"
-      decoding="async"
-      class="image-border w-full h-full object-contain absolute inset-0 rounded-lg"
-    />
-  
+  <div class="w-full md:w-1/2 relative overflow-hidden flex items-center justify-center">
+    <div class="max-w-2xl max-h-[500px] w-full">
+      <div class="aspect-[3/1.8] relative">
+        <img 
+          src={artwork.image} 
+          alt={artwork.title} 
+          loading="lazy"
+          decoding="async"
+          class="image-border w-full h-full object-contain absolute inset-0 rounded-lg"
+        />
+      </div>
+    </div>
   </div>
 
   <div class="flex flex-col w-full md:w-1/2 space-y-4">

@@ -21,10 +21,11 @@ const { Content } = await content.render();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
 
-  <article class="crt-bg-flat px-4 md:px-12 lg:px-24 py-8 md:py-12 min-h-screen mx-auto">
-    <ArticleContainer title={title} description={description}>
-      <!-- Mobile -->
-      <div class="md:hidden space-y-6">
+  <article class="crt-bg-flat min-h-screen mx-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 md:py-12">
+      <ArticleContainer title={title} description={description}>
+        <!-- Mobile -->
+        <div class="md:hidden space-y-6">
           <Image 
             src={image} 
             alt={title}
@@ -33,46 +34,50 @@ const { Content } = await content.render();
             class="image-border2 w-full object-cover aspect-video"
             loading="lazy" 
           />
-  
+
           <ProjectSidebar 
             title={title}
             tech={tech}
             url={url}
             sourceUrl={sourceUrl}
           />
-  
-        <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
-          <div class="w-full purosu">
-            <Content />
-          </div>
-        </div>
-      </div>
-      
-      <!-- Desktop -->
-      <div class="hidden md:grid md:grid-cols-[3fr_auto_1fr] gap-6">
-        <div class="w-full overflow-hidden">
-          <img 
-            src={image} 
-            alt={title} 
-            class="image-border2 w-full object-cover aspect-video" 
-          />
-  
+
           <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
-            <div class="w-full purosu max-w-none">
+            <div class="w-full purosu">
               <Content />
             </div>
           </div>
         </div>
         
-        <div class="bg-tertiary w-2px h-full"></div>
-  
-        <ProjectSidebar 
-          title={title}
-          tech={tech}
-          url={url}
-          sourceUrl={sourceUrl}
-        />
-      </div>
-    </ArticleContainer>
+        <!-- Desktop -->
+        <div class="hidden md:grid md:grid-cols-[3fr_auto_1fr] gap-6">
+          <div class="w-full overflow-hidden">
+            <Image 
+              src={image} 
+              alt={title}
+              width={1200}
+              height={675}
+              class="image-border2 w-full object-cover aspect-video" 
+              loading="lazy"
+            />
+
+            <div class="text-sm text-white-text sm:text-base mt-4 break-words overflow-hidden">
+              <div class="w-full purosu max-w-none">
+                <Content />
+              </div>
+            </div>
+          </div>
+          
+          <div class="bg-tertiary w-2px h-full"></div>
+
+          <ProjectSidebar 
+            title={title}
+            tech={tech}
+            url={url}
+            sourceUrl={sourceUrl}
+          />
+        </div>
+      </ArticleContainer>
+    </div>
   </article>
 </html>
