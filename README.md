@@ -4,4 +4,4 @@
 
 > WIP shine eternal
 
-![!\[image\](/pub)](public/preview.gif)
+![alt text](public/arucaden.gif)

@@ -1,15 +1,22 @@
 ---
 import TechCard from '@/components/TechCard.svelte';
 import { techItems } from '@data/techstack.ts';
+import { Image } from 'astro:assets';
+import web from 'public/icons/majesticons--globe-earth-2-line.svg';
+import source from 'public/icons/logos--github-icon.svg';
 
 interface Props {
   title: string;
   tech?: string[];
   url?: string;
   sourceUrl?: string;
+  headings?: Array<{depth: number; slug: string; text: string;}>;
 }
 
-const { tech = [], url, sourceUrl } = Astro.props;
+const { tech = [], url, sourceUrl, headings = [] } = Astro.props;
+
+// Filter headings to only include h2 and h3 (depth 2 and 3)
+const contentHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 
 function findTechWithIcon(name: string) {
   const foundTech = techItems.find(t => 
@@ -32,21 +39,33 @@ function findTechWithIcon(name: string) {
       <div class="flex gap-2 flex-wrap">
         {url && (
           <a 
-            href={url} 
+            href={url}
             target="_blank" 
             rel="noopener"
-            class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
+            class="font-bold text-center inline-flex items-center gap-2 bg-main/10 hover:bg-main/20 text-main text-sm px-3 py-2 rounded-lg transition-colors"
           >
+            <Image
+              src={web}
+              alt="External link icon"
+              class="w-4 h-4"
+              decoding="lazy"
+            />
             Visit
           </a>
         )}
         {sourceUrl && (
           <a 
-            href={sourceUrl} 
+            href={sourceUrl}
             target="_blank" 
             rel="noopener"
-            class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
+            class="font-bold text-center inline-flex items-center gap-2 bg-main/10 hover:bg-main/20 text-main text-sm px-3 py-2 rounded-lg transition-colors"
           >
+            <Image
+              src={source}
+              alt="External link icon"
+              class="w-4 h-4"
+              decoding="lazy"
+            />
             Source
           </a>
         )}
@@ -76,33 +95,44 @@ function findTechWithIcon(name: string) {
       </div>
     )}
 
-    <div class="rounded-xl mt-4">
-      <h2 id="tech-heading2" class="project-side-title">.Contents</h2>
-      <ul class="text-sm list-disc list-inside space-y-1 text-white/80">
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#features">Features</a></li>
-        <li><a href="#opinion">Opinion</a></li>
-      </ul>
-    </div>
+    {contentHeadings.length > 0 && (
+      <div class="rounded-xl mt-4">
+        <h2 id="contents-heading" class="project-side-title">.Contents</h2>
+        <ul class="text-sm list-disc list-inside space-y-1 text-white/80">
+          {contentHeadings.map((heading) => (
+            <li class={`${heading.depth === 3 ? "ml-4" : ""}`}>
+              <a href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
   </div>
 
-  <!-- Mobile  -->
+  <!-- Mobile view -->
   <div class="block md:hidden border-2 border-tertiary rounded-lg overflow-hidden">
     <table class="w-full">
       <tr class="border-b-2 border-tertiary items-center">
         <th class="p-3 text-left text-main text-sm font-mono">.Links</th>
         <td class="p-3">
           <div class="flex gap-2 flex-wrap">
-            {url && (
-              <a 
-                href={url} 
-                target="_blank" 
-                rel="noopener"
-                class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
-              >
-                Visit
-              </a>
-            )}
+            <a 
+            href={url}
+            target="_blank" 
+            rel="noopener"
+            class="font-bold inline-flex items-center gap-2 bg-main/10 hover:bg-main/20 text-main text-sm px-3 py-2 rounded-lg transition-colors"
+          >
+            <Image
+              src={web}
+              alt="External link icon"
+              class="w-5 h-5"
+              decoding="lazy"
+            />
+
+            Visit
+          </a>
             {sourceUrl && (
               <a 
                 href={sourceUrl} 
@@ -140,16 +170,22 @@ function findTechWithIcon(name: string) {
         </tr>
       )}
       
-      <tr>
-        <th class="p-3 text-left text-main text-sm font-mono">.Contents</th>
-        <td class="p-3">
-          <ul class="text-sm space-y-1 text-white/80">
-            <li><a href="#overview">Overview</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#opinion">Opinion</a></li>
-          </ul>
-        </td>
-      </tr>
+      {contentHeadings.length > 0 && (
+        <tr>
+          <th class="p-3 text-left text-main text-sm font-mono">.Contents</th>
+          <td class="p-3">
+            <ul class="text-sm space-y-1 text-white/80">
+              {contentHeadings.map((heading) => (
+                <li class={`${heading.depth === 3 ? "ml-4" : ""}`}>
+                  <a href={`#${heading.slug}`}>
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </td>
+        </tr>
+      )}
     </table>
   </div>
 </aside>

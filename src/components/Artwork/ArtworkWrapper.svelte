@@ -15,7 +15,24 @@
     expanded = false;
   }
 
-  const previewArtworks = artworks.slice(0, 5);
+  // Define your featured/showcase artwork titles
+  const featuredArtworkTitles = [
+    "Mikazuki 「三日月」 feat. 1koma",
+    "孤独",
+    "Sorasaki Hina 「空崎ヒナ」",
+    "Dusk 「黄昏」",
+    "Magical Pixel"
+  ];
+  
+  // Filter the artworks to get only the featured ones
+  const previewArtworks = artworks.filter(art => 
+    featuredArtworkTitles.includes(art.title)
+  );
+  
+  // Sort them according to the order in featuredArtworkTitles
+  previewArtworks.sort((a, b) => {
+    return featuredArtworkTitles.indexOf(a.title) - featuredArtworkTitles.indexOf(b.title);
+  });
 </script>
 
 {#if !expanded}

@@ -36,7 +36,6 @@ export const projects = {
     description: 'Horror game with psychological elements and immersive storytelling',
     image: '/projects/DamnedVeil.png',
     url: 'https://noiverre.itch.io/damnedveil',
-    sourceUrl: 'https://github.com/username/damnedveil',
     tech: ['Unity', 'C#', 'Clip Studio'],
   },
 };

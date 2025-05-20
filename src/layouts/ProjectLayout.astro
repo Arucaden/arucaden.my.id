@@ -4,14 +4,15 @@ import '../styles/global.css';
 import ArticleContainer from '@components/ArticleContainer.astro';
 import ProjectSidebar from '@components/Projects/ProjectSidebar.astro';
 import { Image } from 'astro:assets';
+import BackButton from '@components/BackButton.astro';
 
 interface Props {
   content: CollectionEntry<'projects'>;
 }
 
 const { content } = Astro.props;
-const { title, image, description, tech = [], publishDate, url, sourceUrl } = content.data;
-const { Content } = await content.render();
+const { title, image, description, tech = [], url, sourceUrl } = content.data;
+const { Content, headings } = await content.render();
 ---
 <html>
   <head>
@@ -23,6 +24,8 @@ const { Content } = await content.render();
 
   <article class="crt-bg-flat min-h-screen mx-auto">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 md:py-12">
+      <BackButton href="/#projects" text="Back to Projects"/>
+
       <ArticleContainer title={title} description={description}>
         <!-- Mobile -->
         <div class="md:hidden space-y-6">
@@ -75,6 +78,7 @@ const { Content } = await content.render();
             tech={tech}
             url={url}
             sourceUrl={sourceUrl}
+            headings={headings}
           />
         </div>
       </ArticleContainer>

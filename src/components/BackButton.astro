@@ -1,0 +1,14 @@
+---
+const { href = "/#projects" } = Astro.props;
+import { Image } from 'astro:assets';
+import arrow from 'public/icons/arrow-down.svg';
+---
+
+<a href={href} class="inline-flex items-center font-bold gap-2 px-4 py-2 rounded-xl bg-main/10 text-main hover:bg-main/20 transition-colors mb-4">
+  <Image 
+    src={arrow} 
+    alt="Back to Projects" 
+    class="w-4 h-4 rotate-90"
+  />
+  <span>Back to Projects</span>
+</a>

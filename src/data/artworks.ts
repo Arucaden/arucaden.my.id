@@ -197,4 +197,11 @@ export const artworks: Artwork[] = [
     description: "Another OC from another eternal WIP game project (2), he is the main character of the game, and Astra's partner.",
     tags: ["#oc", "#3d"],
   },
+  {
+    title: "孤独",
+    year: 2025,
+    image: "/artworks/Face.webp",
+    description: "I stood alone and yet, I did not fall. Because strength isn't always loud… sometimes, it breathes in stillness「強い」.",
+    tags: ["#oc", "#2d"],
+  },
 ];
