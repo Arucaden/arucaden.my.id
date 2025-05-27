@@ -38,6 +38,13 @@ export const projects = {
     url: 'https://noiverre.itch.io/damnedveil',
     tech: ['Unity', 'C#', 'Clip Studio'],
   },
+  "anogalaxyshooter": {
+    title: 'Ano Galaxy Shooter',
+    description: 'yet another 2D space shooter game',
+    image: '/projects/AnoGalaxyShooter.png',
+    url: 'https://arucaden.itch.io/ano-galaxy-shooter',
+    tech: ['Unity', 'C#'],
+  },
 };
 
 // well just backup
