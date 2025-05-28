@@ -19,8 +19,8 @@ let projects = projectEntries.map(entry => ({
 
 // sort by year
 projects = projects.sort((a, b) => {
-  const yearA = a.publishDate ? new Date(a.publishDate).getFullYear() : a.year || 0;
-  const yearB = b.publishDate ? new Date(b.publishDate).getFullYear() : b.year || 0;
+  const yearA = a.date ? new Date(a.date).getFullYear() : a.year || 0;
+  const yearB = b.date ? new Date(b.date).getFullYear() : b.year || 0;
   return yearB - yearA;
 });
 ---
