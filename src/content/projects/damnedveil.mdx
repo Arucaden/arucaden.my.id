@@ -71,7 +71,16 @@ Anyway, I actually just stole this line from a relationship advice post, but hey
 
 I learned a lot from this project, especially implementing normal mapping in pixel art. It was a challenging because this game is a 2D pixel game, and normal mapping is usually associated with 3D graphics.
 
-Also I learned how to use Unity's Event System to make my code more modular and decoupled. This has been a game-changer for me, and I will definitely use it in my future projects.
+Also I learned how to use Unity's Event System to make my code more modular and decoupled. This has been a game-changer for me, and I will definitely use it in my future projects. Here's a quick explanation of how it works:
+> - **Delegate** : You call your friend directly and ask them to do something. <br />
+> You need to know exactly who to call, and they need to have a phone ready to pick up. If your friend changes their number or isn't available, the call fails.
+
+> - **UnityEvent** = You announce something on a megaphone, and everyone who registered to listen will respond. <br />
+> You don't care who hears it. You just announce it, and whoever is subscribed/listening will react in their own way.
+
+In short:
+- Use **Delegate** for internal logic that needs precision.
+- Use **UnityEvent** when you want flexible, Inspector-exposed interactions (drag n drop in), like UI, triggers, effects.
 
 ### Final Thoughts
 

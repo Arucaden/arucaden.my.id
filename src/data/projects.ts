@@ -23,13 +23,13 @@ export const projects = {
     url: 'https://presensee.example.com',
     sourceUrl: 'https://github.com/username/presensee',
   },
-  "portfolioweb": {
-    title: 'DAFFA MAULANA SATRIA',
+  "arucaden": {
+    title: 'arucaden.my.id',
     description: 'Personal portfolio website showcasing projects and artworks',
-    image: '/projects/PortfolioWeb.png',
+    image: '/projects/arucaden.png',
     tech: ['Svelte', 'Astro', 'UnoCSS'],
-    url: 'https://daffamaulana.dev',
-    sourceUrl: 'https://github.com/username/portfolio',
+    url: 'https://arucaden.my.id',
+    sourceUrl: 'https://github.com/Arucaden/arucaden.my.id',
   },
   "damnedveil": {
     title: 'DAMNED VEIL',
