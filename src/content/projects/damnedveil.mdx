@@ -37,13 +37,27 @@ Normal maps allow pixel surfaces to react to light dynamically, creating a sense
   style={{ maxWidth: "60%", borderRadius: "12px" }}
 />
 
+Global normal map overview :
+
+<div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+  <img
+    src="/projectsProperties/damnedVeil/nnm.png"
+    alt="Normal Map 1"
+    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
+  />
+  <img
+    src="/projectsProperties/damnedVeil/ynm.png"
+    alt="Normal Map 2"
+    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
+  />
+</div>
+
 Short story: I had to find a way to make it work in a 2D space while keeping the pixel art — with very limited tutorial resources.
 So I found a way _a shortcut_ to generate normal maps from my tilesets using this website: [Normal Map](https://cpetry.github.io/NormalMap-Online/). *I don't know who the random guy that created this site is, but it was a lifesaver for me. It allowed me to create normal maps quickly and easily, and it has a lot of options to customize the results to fit my needs.
 
 I also helped with programming thing, well it wasn't anything critical, but I got to implement the main menu, level routing, and pause menu.
-Sounds simple, right? But from here, I learned something that changed how I code in Unity forever : the **Unity Event System**.
+Sounds simple, right? But from here, I learned something that changed how I code in Unity forever, the **Unity Event System**.
 
-Think of Unity Events like a way to make your code more modular and decoupled. Instead of tightly connecting two scripts together, you let them "talk" through events.
 
 ### Challenges
 
@@ -75,7 +89,7 @@ Also I learned how to use Unity's Event System to make my code more modular and 
 > - **Delegate** : You call your friend directly and ask them to do something. <br />
 > You need to know exactly who to call, and they need to have a phone ready to pick up. If your friend changes their number or isn't available, the call fails.
 
-> - **UnityEvent** = You announce something on a megaphone, and everyone who registered to listen will respond. <br />
+> - **UnityEvent** : You announce something on a megaphone, and everyone who registered to listen will respond. <br />
 > You don't care who hears it. You just announce it, and whoever is subscribed/listening will react in their own way.
 
 In short:
