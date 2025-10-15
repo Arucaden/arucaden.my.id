@@ -2,20 +2,37 @@
 import Navbar from '@components/Navbar/Navbar.svelte';
 import '../styles/global.css';
 import HeroSection from '@components/HeroSection.astro';
+const SITE = 'https://arucaden.my.id';
+const pageTitle = 'Daffa Maulana Satria';
+const description = 'Game Developer, 2D Illustrator, and UI/UX Designer - Gamedev - Illustrator.';
+const canonical = new URL(Astro.url.pathname, SITE).toString();
 ---
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Daffa Maulana Satria</title>
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#FF2E5E" />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:site_name" content="{pageTitle}" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${SITE}/artworks/Mikazuki.webp`} />
+
+    <link rel="preload" as="image" href="/artworks/Mikazuki.webp" />
   </head>
 
   <body class="flex crt-bg flex-col text-white min-h-screen custom-scroll">
     <HeroSection />
     <main class="flex-grow mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 pt-8 md:pt-12">
-      <Navbar client:only="svelte" />
+      <Navbar client:load />
       <slot />
     </main>
     <footer class="w-full h-12 text-center flex items-center justify-center mt-4 md:mt-0 mb-16 md:mb-4">

@@ -22,7 +22,7 @@ export const projects = {
     description: 'Facial recognition attendance system for educational institutions',
     date: '2024-11-22',
     image: '/projects/PresenSee.png',
-    tech: ['Laravel', 'MySQL', 'Python', 'Dlib', 'Google ML Kit', 'Flutter', 'Nginx'],
+    tech: ['Laravel', 'MySQL', 'Python', 'Dlib', 'Flutter'],
     url: 'https://presensee.example.com',
     sourceUrl: 'https://github.com/username/presensee',
   },

@@ -2,25 +2,19 @@
 import '../../styles/profile.css';
 import TechCard from '../TechCard.svelte';
 import MyLinks from './MyLinks.astro';
+import Experiences from './Experiences.astro';
 import { techItems } from '@data/techstack.ts';
 import { Image } from 'astro:assets';
 import me from '../../../public/Me.webp';
 
 const techToShow = [
-  'Astro', 'Unity', 'Svelte', 'Tailwind', 'Python', 'JavaScript', 
-  'Flutter', 'Java', 'Blender', 'Figma', 'MySQL', 'Laravel',
-  'Photoshop', 'Illustrator', 'UnoCSS', 'C#', 'Clip Studio',
+  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio',
 ];
-const langsToShow = ["English", "Indonesia"];
 
 const tech = techItems
   .filter(item => item.type === 'tech' && techToShow.includes(item.name));
 
-const languages = techItems
-  .filter(item => item.type === 'language' && langsToShow.includes(item.name));
-
 const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
-const highlightedLangsSet = new Set(["English", "Indonesia"]);
 ---
 
 <div class="flex flex-col md:flex-row justify-start gap-8"> 
@@ -30,7 +24,7 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
     <section aria-labelledby="desc-heading"> 
       <h2 id="desc-heading" class="section-title">.Description</h2> 
       <p class="prose-text flex flex-col">
-        I code things. I draw things. Sometimes I blend them into games.  
+        I code things. I draw things. Sometimes I blend them into a game.  
         Always learning, always curious, anything about interactive or visually cool.  
         Outside of coding, I enjoy anime and gaming. That is how my creativity sparks!.  
         <span>Let's build something fun and meaningful together!</span>
@@ -59,27 +53,13 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
       </div>
     </section>
 
-    <section aria-labelledby="lang-heading">
-      <h2 id="lang-heading" class="section-title">.Language</h2>
-      <div class="flex flex-row flex-wrap gap-2">
-        {languages.map(lang => (
-          <TechCard
-            name={lang.name}
-            type={lang.type}
-            icon={lang.icon}
-            highlight={highlightedLangsSet.has(lang.name)}
-            showName={true}
-            client:visible
-          />
-        ))}
-      </div>    
-    </section>
-
-    <section aria-labelledby="links-heading">
-      <h2 id="links-heading" class="section-title">.Link</h2>
+    <section aria-labelledby="links-heading" class="md-hidden">
+      <h2 id="links-heading" class="section-title">.Links</h2>
       <MyLinks />
     </section>
-    
+
+    <Experiences />
+
     <!-- Mobile -->
     <button 
       id="show-portrait" 
@@ -90,17 +70,25 @@ const highlightedLangsSet = new Set(["English", "Indonesia"]);
   </div>
 
   <!-- Desktop -->
-  <aside class="hidden md:flex flex-col w-full md:w-80 mt-6 md:mt-0"> 
-    <h2 class="section-title">.Portrait</h2> 
-    <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
-      <Image 
-        src={me}
-        alt="Portrait of Daffa Maulana Satria"
-        widths={[400, 800]}
-        sizes="(max-width: 768px) 100vw, 50vw"
-        class="image-border2 w-full h-full object-cover object-top absolute top-0 left-0"
-      />
+  <aside class="hidden md:flex flex-col w-full md:w-80 mt-6 md:mt-0 gap-4">
+    <div>
+      <h2 class="section-title">.Portrait</h2> 
+      <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
+        <Image 
+          src={me}
+          alt="Portrait of Daffa Maulana Satria"
+          widths={[400, 800]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          class="image-border2 w-full h-full object-cover object-top absolute top-0 left-0"
+        />
+      </div>
     </div>
+
+    <section aria-labelledby="links-heading">
+      <h2 id="links-heading" class="section-title">.Link</h2>
+      <MyLinks />
+    </section>
+
   </aside>
 </div>
 

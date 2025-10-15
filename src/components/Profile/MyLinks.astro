@@ -1,15 +1,17 @@
 ---
-import { links } from '../../data/links.ts';
+import { links } from '@data/links.ts';
 ---
 
-<div class="flex gap-2 flex-wrap">
+<div class="grid w-full gap-2 grid-cols-5">
   {links.map(link => (
     <a
       href={link.href}
-      class="flex items-center gap-2 text-main transition-all relative group"
+      class="block text-main transition-all relative group"
       target="_blank"
+      aria-label={link.name}
+      rel="noopener noreferrer"
     >
-      <div class="border-2 border-main bg-black/70 px-6 md:px-5 py-2 md:py-1 rounded-2 flex items-center justify-center hover:hov-fx">
+      <div class="border-2 border-main bg-black/70 px-6 md:px-4 py-2 md:py-2 rounded-2 flex items-center justify-center hover:hov-fx w-full max-w-[22rem] mx-auto">
         <img 
           src={link.icon} 
           alt={link.name} 
