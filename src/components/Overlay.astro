@@ -1,0 +1,63 @@
+---
+interface Props {
+  id: string;
+  title?: string;
+  closeButtonId?: string;
+  closeLabel?: string;
+  stickyHeader?: boolean;
+  class?: string;
+  headerClass?: string;
+  zIndexClass?: string;
+  paddingClass?: string;
+  shade?: boolean;
+  backdropBlur?: string; 
+}
+
+const {
+  id,
+  title,
+  closeButtonId = 'overlay-close',
+  closeLabel = 'Back',
+  stickyHeader = true,
+  class: rootExtra = '',
+  headerClass = '',
+  zIndexClass = 'z-10',
+  paddingClass = 'p-2',
+  shade = true,
+  backdropBlur = 'backdrop-blur-sm',
+} = Astro.props as Props;
+---
+
+<div id={id} class={`absolute inset-0 ${zIndexClass} overlay-base flex flex-col ${paddingClass} ${rootExtra} ${shade ? 'bg-black/60' : ''} ${backdropBlur}`}>
+  {Astro.slots.has('header') || title || closeButtonId ? (
+    <div class={`flex items-center justify-between mb-2 bg-black/70 border border-secondary/30 rounded-md px-3 py-2 ${stickyHeader ? 'sticky top-0 z-20' : ''} ${headerClass}`}>
+      {Astro.slots.has('header') ? (
+        <slot name="header" />
+      ) : (
+        <>
+          <h2 class="section-title m-0">{title}</h2>
+          <button id={closeButtonId} type="button" class="button-fx">{closeLabel}</button>
+        </>
+      )}
+    </div>
+  ) : null}
+
+  <div class="flex-1 overflow-y-auto">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .overlay-base {
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity 200ms ease, transform 200ms ease;
+  }
+  .overlay-base.overlay-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+</style>
+

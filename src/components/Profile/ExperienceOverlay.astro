@@ -1,0 +1,25 @@
+---
+import { experiences } from '@data/experiences.ts';
+import Overlay from '@components/Overlay.astro';
+---
+
+<Overlay id="experiences-overlay" title=".Experiences" closeButtonId="hide-all-experiences">
+  <div class="space-y-3">
+    {experiences.map(exp => (
+      <article class="border-2 border-secondary/30 bg-black/70 rounded-lg p-3">
+        <div class="flex items-center justify-between w-full">
+          <p class="prose-text font-medium">{exp.company}</p>
+          <p class="prose-text text-gray-300">{exp.period}</p>
+        </div>
+        <p class="text-sm text-gray-300 mt-1">{exp.type}</p>
+        {exp.points?.length > 0 && (
+          <ul class="mt-2 list-disc list-inside">
+            {exp.points.map(pt => (
+              <li class="text-sm text-white/90">{pt}</li>
+            ))}
+          </ul>
+        )}
+      </article>
+    ))}
+  </div>
+</Overlay>

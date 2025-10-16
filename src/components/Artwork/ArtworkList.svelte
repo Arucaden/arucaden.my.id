@@ -1,12 +1,12 @@
 <script lang="ts">
-  import type { Artwork } from '../../types/artwork.ts';
-  let { artworks, onSelect, previewMode = false }: {
+  import type { Artwork } from '@/types/artwork.ts';
+
+  let { artworks, onSelect = undefined, previewMode = false }: {
     artworks: Artwork[],
-    onSelect: (art: Artwork) => void,
+    onSelect?: (art: Artwork) => void,
     previewMode?: boolean
   } = $props();
 
-  // Sort artworks by year
   const sortedArtworks = artworks.sort((a, b) => 
     (b.year || 0) - (a.year || 0)
   );
@@ -14,7 +14,6 @@
   const tags = ["#2d", "#pixel", "#scenery", '#oc', '#fanart', '#design', '#3d'];
   let selectedTags = $state<string[]>([]);
 
-  // tag
   function toggleTag(tag: string) {
     if (selectedTags.includes(tag)) {
       selectedTags = selectedTags.filter(t => t !== tag);
@@ -53,7 +52,13 @@
   {#each filtered as art (art.title)}
     <button
       class="image-border2 overflow-hidden hover:hov-fx transition-all w-full flex flex-col"
-      onclick={() => { onSelect(art); }}
+      onclick={() => { 
+        if (onSelect) {
+          onSelect(art); 
+        } else if (typeof window !== 'undefined') {
+          window.dispatchEvent(new CustomEvent('artwork:select', { detail: art }));
+        }
+      }}
     >
       <img 
         src={art.image} 

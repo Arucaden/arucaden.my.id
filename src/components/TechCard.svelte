@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Tech } from '../types/techstack.ts';
+  import type { Tech } from '@/types/techstack.ts';
 
   let { 
     name, icon, highlight = false, customClass = '', iconClass = 'w-5 h-5', showName = true }: 
