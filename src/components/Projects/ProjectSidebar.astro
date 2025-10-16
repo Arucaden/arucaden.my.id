@@ -15,7 +15,6 @@ interface Props {
 
 const { tech = [], url, sourceUrl, headings = [] } = Astro.props;
 
-// Filter headings to only include h2 and h3 (depth 2 and 3)
 const contentHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
 
 function findTechWithIcon(name: string) {

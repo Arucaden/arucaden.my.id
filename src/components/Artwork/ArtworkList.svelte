@@ -73,7 +73,6 @@
         <div class="p-2 text-sm font-semibold text-left">
           {art.title}
           
-          <!-- Show matching tags -->
           {#if selectedTags.length > 0}
             <div class="flex flex-wrap gap-1 mt-1">
               {#each art.tags.filter(tag => selectedTags.includes(tag)) as tag}
