@@ -2,10 +2,10 @@ import type { Experience } from '@/types/experience.ts';
 
 export const experiences: Experience[] = [
   {
-    company: '3PM-Game studio',
+    company: '3PM-Solutions',
     period: '1 July 2025 - 31 December 2025',
     type: 'Internship',
-    location: 'Hybrid',
+    location: 'On-site',
     role: 'Game Developer Intern',
     points: 
     [
@@ -23,7 +23,7 @@ export const experiences: Experience[] = [
     company: 'PT. Teknologi Solusi Aquatic',
     period: '1 February 2025 - 31 June 2025',
     type: 'Internship',
-    location: 'On-site',
+    location: 'Hybrid',
     role: 'Flutter Developer Intern',
     points: 
     [
