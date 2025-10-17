@@ -20,9 +20,9 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
 
 <div id="profile-shell" class="relative">
   <div id="profile-content" class="flex flex-col gap-8">
-  <!-- Two-cols: Left (content) + Right (portrait) -->
+
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-    <!-- Left column: Description + Techstack + Links -->
+    <!-- Description + Techstack + Links -->
     <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
       <section aria-labelledby="desc-heading" class="flex flex-col">
         <h2 id="desc-heading" class="section-title">.Description</h2>
@@ -37,10 +37,10 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
         <button id="show-portrait" class="md:hidden button-fx w-max">Show Portrait</button>
       </section>
 
-      <section aria-labelledby="links-heading">
+      <!-- <section aria-labelledby="links-heading">
         <h2 id="links-heading" class="section-title">.Links</h2>
         <MyLinks />
-      </section>
+      </section> -->
 
       <section aria-labelledby="tech-heading">
         <div class="flex justify-between items-center">
@@ -82,11 +82,11 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
     </aside>
   </div>
 
-    <!-- Full-width: Experiences -->
+    <!-- Experiences -->
     <Experiences client:visible />
   </div>
 
-  <!-- Experiences Overlay component -->
+  <!-- Experiences Overlay -->
   <ExperienceOverlay />
 </div>
 
