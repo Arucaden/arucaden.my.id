@@ -4,8 +4,6 @@ import Profile from '@components/Profile/ProfileWrapper.astro'
 import Artworks from '@components/Artwork/ArtworkWrapper.svelte'
 import Projects from '@components/Projects/ProjectWrapper.svelte'
 import { projects as projectsData} from '@data/projects.ts';
-import Blogs from '@components/Blog/BlogWrapper.astro';
-import { blogs } from '@data/blogs.ts';
 import { artworks } from '@data/artworks.ts';
 import { getCollection } from 'astro:content';
 import Container from '@components/Container.astro';
@@ -45,9 +43,4 @@ projects = projects.sort((a, b) => {
     </Container>
   </section>
 
-  <section id="blog" class="min-h-[60vh] pt-3 flex flex-col md:justify-center" aria-labelledby="blog-heading">
-    <Container title="Blog" headingId="blog-heading">
-      <Blogs blogs={blogs} />
-    </Container>
-  </section>
 </Layout>

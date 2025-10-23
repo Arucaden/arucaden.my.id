@@ -6,7 +6,7 @@ export const experiences: Experience[] = [
     period: '1 July 2025 - 31 December 2025',
     type: 'Internship',
     location: 'On-site',
-    role: 'Game Developer Intern',
+    role: 'Game Programmer Intern',
     points: 
     [
       'Designed modular and scalable game systems to ensure maintainability and easy updates.',

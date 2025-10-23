@@ -1,15 +1,15 @@
 ---
 import '@/styles/profile.css';
 import TechCard from '../TechCard.svelte';
-import MyLinks from './MyLinks.astro';
 import Experiences from './Experiences.svelte';
 import ExperienceOverlay from './ExperienceOverlay.astro';
 import { techItems } from '@data/techstack.ts';
 import { Image } from 'astro:assets';
 import me from '@/public/Me.webp';
+import MyLinks from './MyLinks.astro';
 
 const techToShow = [
-  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio',
+  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio', 'Photoshop',
 ];
 
 const tech = techItems
@@ -21,7 +21,7 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
 <div id="profile-shell" class="relative">
   <div id="profile-content" class="flex flex-col gap-8">
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-x-14 items-start">
     <!-- Description + Techstack + Links -->
     <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
       <section aria-labelledby="desc-heading" class="flex flex-col">
@@ -29,7 +29,7 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
         <p id="desc-paragraph" class="prose-text flex flex-col">
           I code things. I draw things. Sometimes I blend them into a game.
           Always learning, always curious, anything about interactive or visually cool.
-          Outside of coding, I enjoy anime and gaming. That is how my creativity sparks!.
+          Outside of coding, I enjoy anime and gaming.
           <span>Let's build something fun and meaningful together!</span>
         </p>
 
@@ -37,10 +37,10 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
         <button id="show-portrait" class="md:hidden button-fx w-max">Show Portrait</button>
       </section>
 
-      <!-- <section aria-labelledby="links-heading">
+      <section aria-labelledby="links-heading">
         <h2 id="links-heading" class="section-title">.Links</h2>
         <MyLinks />
-      </section> -->
+      </section>
 
       <section aria-labelledby="tech-heading">
         <div class="flex justify-between items-center">
