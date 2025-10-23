@@ -3,6 +3,11 @@
   position: relative; 
 }
 
+/* Ensure portrait stays 1:1 square */
+#portrait-wrapper {
+  aspect-ratio: 1 / 1;
+}
+
 #tech-container:not(.expanded) {
   mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0));
   -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0));

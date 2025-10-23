@@ -10,9 +10,9 @@ import { experiences } from '@data/experiences.ts';
       <article class="border-2 border-secondary/30 bg-black/30 rounded-lg p-3">
         <div class="flex items-center justify-between w-full">
           <p class="prose-text font-medium">{exp.company}</p>
-          <p class="prose-text text-gray-300">{exp.period}</p>
+          <p class="prose-text color-gray-text">{exp.period}</p>
         </div>
-        <p class="text-sm text-gray-300 mt-1">{exp.type}</p>
+        <p class="text-sm color-gray-text mt-1">{exp.type}</p>
 
         {exp.points?.length > 0 && (
           <ul class="mt-2 list-disc list-inside">

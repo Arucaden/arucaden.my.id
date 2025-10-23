@@ -2,27 +2,27 @@
 import { links } from '@data/links.ts';
 ---
 
-<div class="grid w-full gap-2 grid-cols-5">
+<div class="flex flex-wrap gap-2">
   {links.map(link => (
     <a
       href={link.href}
-      class="block text-main transition-all relative group"
+      class="inline-block text-main transition-all relative group"
       target="_blank"
       aria-label={link.name}
       rel="noopener noreferrer"
     >
-      <div class="border-2 border-main bg-black/70 px-6 md:px-4 py-2 md:py-2 rounded-2 flex items-center justify-center hover:hov-fx w-full max-w-[22rem] mx-auto">
+      <div class="border-2 border-main bg-black/70 w-10 h-10 md:w-11 md:h-11 rounded-2 flex items-center justify-center hover:hov-fx">
         <img 
           src={link.icon} 
           alt={link.name} 
-          class="w-5 h-5"
+          class="w-4 h-4 md:w-5 md:h-5"
           decoding="async"
           width="20"
           height="20"
         />
       </div>
       
-      <div class="absolute top-6 transform mt-2 px-3 py-2 bg-black/95 border border-main/30 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-10 shadow-lg">
+      <div class="absolute top-8 transform mt-2 px-3 py-2 bg-black/95 border border-main/30 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-10 shadow-lg">
         <div class="font-semibold text-main">{link.name}</div>
         {link.description && (
           <div class="text-xs text-gray-300 mt-1">{link.description}</div>

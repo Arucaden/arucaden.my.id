@@ -1,14 +1,15 @@
 ---
-import '../../styles/profile.css';
+import '@/styles/profile.css';
 import TechCard from '../TechCard.svelte';
-import MyLinks from './MyLinks.astro';
-import Experiences from './Experiences.astro';
+import Experiences from './Experiences.svelte';
+import ExperienceOverlay from './ExperienceOverlay.astro';
 import { techItems } from '@data/techstack.ts';
 import { Image } from 'astro:assets';
-import me from '../../../public/Me.webp';
+import me from '@/public/Me.webp';
+import MyLinks from './MyLinks.astro';
 
 const techToShow = [
-  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio',
+  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio', 'Photoshop',
 ];
 
 const tech = techItems
@@ -17,79 +18,76 @@ const tech = techItems
 const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
 ---
 
-<div class="flex flex-col md:flex-row justify-start gap-8"> 
-  <!-- Main -->
-  <div class="flex flex-col w-full md:w-2/3 gap-4"> 
-    
-    <section aria-labelledby="desc-heading"> 
-      <h2 id="desc-heading" class="section-title">.Description</h2> 
-      <p class="prose-text flex flex-col">
-        I code things. I draw things. Sometimes I blend them into a game.  
-        Always learning, always curious, anything about interactive or visually cool.  
-        Outside of coding, I enjoy anime and gaming. That is how my creativity sparks!.  
-        <span>Let's build something fun and meaningful together!</span>
-      </p>
-    </section>
+<div id="profile-shell" class="relative">
+  <div id="profile-content" class="flex flex-col gap-8">
 
-    <section aria-labelledby="tech-heading">
-      <div class="flex justify-between items-center">
-        <h2 id="tech-heading" class="section-title">.Techstack</h2>
-        <button id="tech-toggle" class="md:hidden text-sm text-main hover:text-white"> Show_All </button>
-      </div>
-      
-      <div id="tech-container" class="flex flex-row flex-wrap gap-2 md:max-h-full max-h-[120px] overflow-y-hidden transition-all duration-300 py-1 pb-2 md:pb-1 px-1">
-        {tech.map((t, index) => (
-          <div class={`tech-card-wrapper ${index > 6 ? 'md:opacity-100 md:translate-y-0 hidden-card opacity-0 translate-y-0' : ''}`}>
-            <TechCard
-              name={t.name}
-              type={t.type}
-              icon={t.icon}
-              highlight={highlightedTechSet.has(t.name)}
-              showName={true}
-              client:visible
-            />
-          </div>
-        ))}
-      </div>
-    </section>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-x-14 items-start">
+    <!-- Description + Techstack + Links -->
+    <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
+      <section aria-labelledby="desc-heading" class="flex flex-col">
+        <h2 id="desc-heading" class="section-title">.Description</h2>
+        <p id="desc-paragraph" class="prose-text flex flex-col">
+          I code things. I draw things. Sometimes I blend them into a game.
+          Always learning, always curious, anything about interactive or visually cool.
+          Outside of coding, I enjoy anime and gaming.
+          <span>Let's build something fun and meaningful together!</span>
+        </p>
 
-    <section aria-labelledby="links-heading" class="md-hidden">
-      <h2 id="links-heading" class="section-title">.Links</h2>
-      <MyLinks />
-    </section>
+        <!-- Mobile portrait trigger -->
+        <button id="show-portrait" class="md:hidden button-fx w-max">Show Portrait</button>
+      </section>
 
-    <Experiences />
+      <section aria-labelledby="links-heading">
+        <h2 id="links-heading" class="section-title">.Links</h2>
+        <MyLinks />
+      </section>
 
-    <!-- Mobile -->
-    <button 
-      id="show-portrait" 
-      class="md:hidden button-fx"
-    >
-      Show Portrait
-    </button>
-  </div>
+      <section aria-labelledby="tech-heading">
+        <div class="flex justify-between items-center">
+          <h2 id="tech-heading" class="section-title">.Techstack</h2>
+          <button id="tech-toggle" class="md:hidden text-sm text-main hover:text-white"> Show_All </button>
+        </div>
 
-  <!-- Desktop -->
-  <aside class="hidden md:flex flex-col w-full md:w-80 mt-6 md:mt-0 gap-4">
-    <div>
-      <h2 class="section-title">.Portrait</h2> 
-      <div class="relative w-full aspect-[3/4] overflow-hidden rounded-lg">
-        <Image 
-          src={me}
-          alt="Portrait of Daffa Maulana Satria"
-          widths={[400, 800]}
-          sizes="(max-width: 768px) 100vw, 50vw"
-          class="image-border2 w-full h-full object-cover object-top absolute top-0 left-0"
-        />
-      </div>
+        <div id="tech-container" class="flex flex-row flex-wrap gap-2 md:max-h-full max-h-[120px] overflow-y-hidden transition-all duration-300 py-1 pb-2 md:pb-1 px-1">
+          {tech.map((t, index) => (
+            <div class={`tech-card-wrapper ${index > 6 ? 'md:opacity-100 md:translate-y-0 hidden-card opacity-0 translate-y-0' : ''}`}>
+              <TechCard
+                name={t.name}
+                type={t.type}
+                icon={t.icon}
+                highlight={highlightedTechSet.has(t.name)}
+                showName={true}
+                client:visible
+              />
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
 
-    <section aria-labelledby="links-heading">
-      <h2 id="links-heading" class="section-title">.Link</h2>
-      <MyLinks />
-    </section>
+    <!-- Right column: Portrait -->
+    <aside class="hidden md:flex flex-col gap-4 md:col-span-1">
+      <div>
+        <h2 id="portrait-title" class="section-title">.Portrait</h2>
+        <div id="portrait-wrapper" class="relative w-full overflow-hidden rounded-lg">
+          <Image
+            src={me}
+            alt="Portrait of Daffa Maulana Satria"
+            widths={[200, 400]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+            class="image-border2 w-full h-full object-cover object-top"
+          />
+        </div>
+      </div>
+    </aside>
+  </div>
 
-  </aside>
+    <!-- Experiences -->
+    <Experiences client:visible />
+  </div>
+
+  <!-- Experiences Overlay -->
+  <ExperienceOverlay />
 </div>
 
 <!-- Me full screen  -->
