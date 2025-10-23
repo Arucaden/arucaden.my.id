@@ -25,21 +25,22 @@ projects = projects.sort((a, b) => {
 });
 ---
 <Layout>
-  <section id="profile" class="h-auto pb-10 pt-3 flex flex-col">
-    <Container title="Profile">
+  <section id="profile" class="h-auto pb-10 pt-3 flex flex-col" aria-labelledby="profile-heading">
+    <Container title="Profile" headingId="profile-heading">
       <Profile/>
     </Container>
   </section>
 
-  <section id="artworks" class="min-h-screen pt-3 flex flex-col md:justify-center">
-    <Container title="Artworks">
+  <section id="artworks" class="min-h-screen pt-3 flex flex-col md:justify-center" aria-labelledby="artworks-heading">
+    <Container title="Artworks" headingId="artworks-heading">
       <Artworks artworks={artworks} client:visible />
     </Container>
   </section>
 
-  <section id="projects" class="min-h-screen pt-3 flex flex-col md:justify-center">
-    <Container title="Projects">
+  <section id="projects" class="min-h-screen pt-3 flex flex-col md:justify-center" aria-labelledby="projects-heading">
+    <Container title="Projects" headingId="projects-heading">
       <Projects projects={projects} client:visible />
     </Container>
   </section>
+
 </Layout>

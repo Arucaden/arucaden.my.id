@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { techItems } from '../../data/techstack.ts';
+  import { techItems } from '@/data/techstack.ts';
   import TechCard from '../TechCard.svelte';
-  import type { Tech } from '../../types/techstack.ts';
+  import type { Tech } from '@/types/techstack.ts';
   import { fade, fly } from 'svelte/transition';
   import { onMount } from 'svelte';
 
@@ -114,6 +114,7 @@
   .line-clamp-1 {
     display: -webkit-box;
     -webkit-line-clamp: 1;
+    line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }

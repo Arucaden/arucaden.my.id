@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Artwork } from '../../types/artwork.ts';
+  import type { Artwork } from '@/types/artwork.ts';
   let { artwork }: { artwork: Artwork } = $props();
 </script>
 

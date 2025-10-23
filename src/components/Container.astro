@@ -2,15 +2,18 @@
 interface Props {
   title: string;
   maxHeight?: boolean;
+  headingId?: string;
 }
 
-const { title, maxHeight = false } = Astro.props;
+const { title, maxHeight = false, headingId } = Astro.props as Props;
+const makeId = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const resolvedId = headingId || makeId(title);
 ---
 
 <div class={`border-2 border-secondary bg-black/40 p-3 md:p-4 shadow-[0_0_8px_rgba(255,77,109,0.5)] rounded-xl ${maxHeight ? 'md:max-h-xl md:overflow-auto' : ''}`}>
-  <div class="bg-main text-black-text font-sans font-bold md:font-extrabold text-lg md:text-lg px-3 md:px-4 py-1 rounded-lg">
+  <h2 id={resolvedId} class="bg-main text-black-text font-semibold md:font-semibold text-lg md:text-lg px-3 md:px-4 py-1 rounded-lg">
     {title}
-  </div>
+  </h2>
 
   <div class="mt-3 md:mt-4">
     <slot />
@@ -18,7 +21,6 @@ const { title, maxHeight = false } = Astro.props;
 </div>
 
 <style>
-  /* Add custom scrollbar for containers with maxHeight */
   div::-webkit-scrollbar {
     width: 4px;
   }
