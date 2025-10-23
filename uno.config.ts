@@ -9,7 +9,7 @@ export default defineConfig({
       themeKey: 'font',
       provider: 'google',
       fonts: {
-        sans: 'Figtree',
+        sans: 'Figtree:400,700,800',
       }
     }),
 
