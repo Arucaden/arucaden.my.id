@@ -2,9 +2,9 @@ export type Blog = {
   title: string;
   slug: string;
   excerpt: string;
-  date: string; // ISO or human-readable
-  readTime?: string; // e.g., '5 min read'
+  date: string;
+  readTime?: string;
   tags?: string[];
-  href?: string; // optional absolute or relative link
+  href?: string; // link
 };
 

@@ -6,6 +6,7 @@
     { name: 'PROFILE', href: '/#profile', id: 'profile' },
     { name: 'ARTWORKS', href: '/#artworks', id: 'artworks' },
     { name: 'PROJECTS', href: '/#projects', id: 'projects' },
+    { name: 'BLOG', href: '/#blogs', id: 'blogs' },
   ];
 
   let activeSection = $state('');
@@ -13,64 +14,61 @@
   
   function isActive(link) {
     if (link.id === '') {
-      // if top section is active, return Home highlight true
       return !scrolledPastTop && activeSection === '';
     }
     return link.id === activeSection;
   }
 
+  function handleNavClick(e: Event, link: any) {
+    if (link.href.includes('#')) {
+      if (link.id === '') {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.history.pushState(null, '', '/');
+        activeSection = '';
+      } else {
+        const element = document.getElementById(link.id);
+        if (element) {
+          e.preventDefault();
+          element.scrollIntoView({ behavior: 'smooth' });
+          window.history.pushState(null, '', link.href);
+          activeSection = link.id;
+        }
+      }
+    }
+  }
+
   $effect(() => {
-    const sections = Array.from(document.querySelectorAll('section[id]'));
-    
-    // Check if hash is present in URL on load
     if (window.location.hash) {
-      const hashId = window.location.hash.substring(1);
-      activeSection = hashId;
+      activeSection = window.location.hash.substring(1);
     }
     
+    const sections = Array.from(document.querySelectorAll('section[id]'));
+    
+    // Use an IntersectionObserver to cleanly detect active section in view
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            activeSection = entry.target.id;
+          }
+        });
+      },
+      { rootMargin: '-20% 0px -50% 0px', threshold: 0 }
+    );
+    sections.forEach(sec => observer.observe(sec));
+
     const scrollHandler = () => {
       scrolledPastTop = window.scrollY > 100;
-      
-      if (sections.length === 0) return;
-
-      for (const section of sections) {
-        const rect = section.getBoundingClientRect();
-        const buffer = 100;
-        
-        if (rect.top <= buffer && rect.bottom >= buffer) {
-          activeSection = section.id;
-          return;
-        }
-      }
-      
-      // top = home
-      if (window.scrollY < 100) {
-        activeSection = '';
-      }
+      if (window.scrollY < 100) activeSection = ''; 
     };
     
-    scrollHandler();
-    
     window.addEventListener('scroll', scrollHandler);
-    
-    navLinks.forEach(link => {
-      if (link.href.includes('#')) {
-        const element = document.querySelector(link.href.substring(link.href.indexOf('#')));
-        if (element) {
-          document.querySelectorAll(`a[href="${link.href}"]`).forEach(anchor => {
-            anchor.addEventListener('click', (e) => {
-              e.preventDefault();
-              element.scrollIntoView({ behavior: 'smooth' });
-              window.history.pushState(null, '', link.href);
-              activeSection = link.id;
-            });
-          });
-        }
-      }
-    });
+    scrollHandler();
     
     return () => {
       window.removeEventListener('scroll', scrollHandler);
+      observer.disconnect();
     };
   });
 </script>
@@ -84,9 +82,10 @@
       {#each navLinks as link}
         <a
           href={link.href}
+          onclick={(e) => handleNavClick(e, link)}
           class={`${link.isIcon ? 'px-2' : 'px-3'} py-1 text-sm transition-all duration-200 ${
             isActive(link)
-              ? 'text-main font-bold'
+              ? 'text-white font-bold'
               : 'text-tertiary hover:text-main'
           }`}
         >
@@ -105,6 +104,7 @@
     {#each navLinks as link}
       <a
         href={link.href}
+        onclick={(e) => handleNavClick(e, link)}
         class={`${link.isIcon ? 'px-5' : 'px-10'} py-3 transition-all duration-200 text-sm ${
           isActive(link)
             ? 'bg-main/20 text-white border-b-4 border-main font-bold'

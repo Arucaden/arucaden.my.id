@@ -4,6 +4,8 @@
   import type { Tech } from '@/types/techstack.ts';
   import { fade, fly } from 'svelte/transition';
   import { onMount } from 'svelte';
+  import { Image } from 'astro:assets';
+  import arrow from 'public/icons/arrow-down.svg';
 
   let hovered = $state(false);
   let isMobile = $state(false);
@@ -71,7 +73,7 @@
   />
 
   <!-- Mobile bar  -->
-  <div class="md:hidden absolute bottom-0 left-0 right-0 bg-black/70 p-3 gap-2">
+  <div class="md:hidden absolute bottom-1 left-1 right-1 bg-black/70 p-3 gap-2 rounded-b-sm z-10">
     <h3 class="text-base font-bold text-white truncate">{title}</h3>
     <p class="text-sm text-gray-300 line-clamp-1">{description}</p>
   </div>
@@ -79,21 +81,22 @@
   <!-- Desktop overlay -->
   {#if hovered && !isMobile}
     <div 
-      class="absolute inset-0 bg-black/80 text-white flex flex-col p-4 gap-2"
+      class="absolute inset-1 rounded-sm bg-black/80 text-white flex flex-col p-4 gap-2 z-10"
       transition:fade={{ duration: 200 }}
     >
-      <div class="flex justify-between items-first mb-2">
-        <h3 class="text-lg font-bold max-w-[65%]">{title}</h3>
-        
-        {#if slug}
-          <a 
-            class="bg-main px-3 py-2 h-fit rounded-md text-black-text no-underline text-xs font-bold hover:bg-main-light transition-colors" 
-            href={`/projects/${slug}`}
-            transition:fly={{ y: -10, duration: 200, delay: 100 }}
-          >
-            Learn more →
-          </a>
-        {/if}
+      <div class="mb-2">
+        <h3 class="text-lg font-bold leading-snug">
+          {#if slug || url}
+            <a 
+              href={slug ? `/projects/${slug}` : url} 
+              class="link-fx-white"
+            >
+              {title}
+            </a>
+          {:else}
+            {title}
+          {/if}
+        </h3>
       </div>
       
       <p class="text-sm">{description}</p>

@@ -9,7 +9,7 @@ import me from '@/public/Me.webp';
 import MyLinks from './MyLinks.astro';
 
 const techToShow = [
-  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio', 'Photoshop',
+  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio', 'Photoshop', 'Laravel', 'Flutter', 
 ];
 
 const tech = techItems
@@ -26,11 +26,12 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
     <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
       <section aria-labelledby="desc-heading" class="flex flex-col">
         <h2 id="desc-heading" class="section-title">.Description</h2>
-        <p id="desc-paragraph" class="prose-text flex flex-col">
-          I code things. I draw things. Sometimes I blend them into a game.
-          Always learning, always curious, anything about interactive or visually cool.
-          Outside of coding, I enjoy anime and gaming.
-          <span>Let's build something fun and meaningful together!</span>
+        <p id="desc-paragraph" class="prose-text leading-relaxed">
+        I build games and interactive visuals as a Computer Science student focused on game development and creative tech. 
+        As <a href="https://drive.google.com/file/d/15sRZIJPUoKbrHDbzhk_kAQvc2xNkSRo-/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-fx">
+          Unity Certified Associate: Programmer
+        </a>, I explore how ideas turn into playable experiences.
+        <span class="block mt-4">On my free time, I like to watch anime or play games.</span>
         </p>
 
         <!-- Mobile portrait trigger -->

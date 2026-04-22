@@ -1,16 +1,17 @@
 ---
 import { experiences } from '@data/experiences.ts';
 import Overlay from '@components/Overlay.astro';
+import ExperienceBadge from './ExperienceBadge.svelte';
 ---
 
 <Overlay id="experiences-overlay" title=".Experiences" closeButtonId="hide-all-experiences">
   <div class="space-y-2">
     {experiences.map(exp => (
       <article class="border-2 border-secondary/30 bg-black/70 rounded-lg p-2">
-        <div class="flex items-center gap-2 min-w-0">
-          <p class="prose-text font-semibold leading-tight">{exp.company}</p>
-          <span class="text-sm px-2 py-0.5 rounded-full bg-main/15 text-main border border-main/40 shrink-0">{exp.type}</span>
-          <span class="text-sm px-2 py-0.5 rounded-full border border-secondary/40 color-gray-text shrink-0">{exp.location}</span>
+        <div class="flex items-center gap-1.5 min-w-0">
+          <p class="prose-text font-semibold leading-tight mr-1">{exp.company}</p>
+          <ExperienceBadge text={exp.type} customClass="shrink-0" />
+          <ExperienceBadge text={exp.location} customClass="shrink-0" />
           <span class="ml-auto text-xs color-gray-text whitespace-nowrap">{exp.period}</span>
         </div>
         {exp.role && (

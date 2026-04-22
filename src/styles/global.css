@@ -28,3 +28,34 @@ html {
 .custom-scroll-container::-webkit-scrollbar-track {
   background-color: #2b090e;
 }
+
+.link-fx, .link-fx-white {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  transition: color 0.2s ease-in-out;
+}
+
+.link-fx { color: #E25172; }
+.link-fx:hover { color: #ffffff; }
+
+.link-fx-white { color: #ffffff; }
+.link-fx-white:hover { color: #E25172; }
+
+.link-fx::after, .link-fx-white::after {
+  content: '';
+  position: absolute;
+  display: block;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  transition: width 0.3s ease-in-out;
+}
+
+.link-fx::after { background-color: #ffffff; }
+.link-fx-white::after { background-color: #E25172; }
+
+.link-fx:hover::after, .link-fx-white:hover::after {
+  width: 100%;
+}

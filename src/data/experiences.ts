@@ -2,6 +2,20 @@ import type { Experience } from '@/types/experience.ts';
 
 export const experiences: Experience[] = [
   {
+    company: 'Nanami.id',
+    period: 'October 2025 - current',
+    type: 'Part-time',
+    location: 'Remote',
+    role: 'Lead of Game and Design Nanami-WAVE',
+    points: 
+    [
+      'Establish and document design and game development workflows, standards, and guidelines to ensure efficient, scalable, and consistent production processes.',
+      'Oversee the development of Visual Novel content, including story structure, branching narrative, visual direction, music mood, and controlled use of Generative AI.',
+      'Maintain effective communication and healthy collaboration within the team.',
+      'Manage design scope and priorities to align creative ambition with project timelines and available resources.'
+    ],
+  },
+  {
     company: '3PM-Solutions',
     period: '1 July 2025 - 31 December 2025',
     type: 'Internship',
@@ -34,6 +48,22 @@ export const experiences: Experience[] = [
       'Translated UI/UX designs from Figma to responsive Flutter code, ensuring a consistent user experience across devices.',
       'Developed reusable widgets and components to maintain design consistency and performance across the application.',
       'Used Provider state management to efficiently manage application state and improve performance.'
+    ],
+  },
+    {
+    company: 'Workshop Riset Informatika',
+    period: 'January 2024 - December 2024',
+    type: 'Campus Organization',
+    location: 'On-site',
+    role: 'Vice Head of Game Development Miniclass',
+    points: 
+    [
+      'Support the Head of the Miniclass in planning and managing all activities.',
+      'Act as a liaison between the mentoring team and participants to ensure smooth communication.',
+      'Design and structure the syllabus, focusing on foundational game development concepts.',
+      'Ensure the curriculum aligns with industry trends and participant needs.',
+      'Provide hands-on mentoring to participants, offering guidance on technical and creative aspects of game development.',
+      'Gather feedback from participants and mentors to improve the miniclass experience.'
     ],
   },
 ];

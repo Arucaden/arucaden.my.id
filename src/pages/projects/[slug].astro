@@ -4,7 +4,9 @@ import ProjectLayout from '@/layouts/ProjectLayout.astro';
 import { projects as projectsData } from '@data/projects.ts';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  const projects = await getCollection('projects', ({ data }) => {
+    return data.draft !== true;
+  });
   return projects.map(entry => ({
     params: { slug: entry.slug },
     props: { 

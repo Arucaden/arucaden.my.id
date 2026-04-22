@@ -7,14 +7,6 @@
 
   let { artworks }: { artworks: ArtType[] } = $props();
 
-  let currentArtwork: ArtType = $state(artworks[0]);
-  let overlayVisible = $state(false);
-
-  function handleSelect(art: ArtType) {
-    currentArtwork = art;
-    overlayVisible = false;
-  }
-
   // featured artwork titles
   const featuredArtworkTitles = [
     "Mikazuki 「三日月」 feat. 1koma",
@@ -32,6 +24,14 @@
   previewArtworks.sort((a, b) => {
     return featuredArtworkTitles.indexOf(a.title) - featuredArtworkTitles.indexOf(b.title);
   });
+
+  let currentArtwork: ArtType = $state(previewArtworks.length > 0 ? previewArtworks[0] : artworks[0]);
+  let overlayVisible = $state(false);
+
+  function handleSelect(art: ArtType) {
+    currentArtwork = art;
+    overlayVisible = false;
+  }
 </script>
 
 <div id="artworks-shell" class="relative">

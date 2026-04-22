@@ -11,40 +11,37 @@ interface Props {
 const { title, excerpt, date, readTime, tags = [], href = '#' } = Astro.props as Props;
 
 const formattedDate = (() => {
-  // Accept ISO or human-readable; fall back to raw
   const d = new Date(date);
   return isNaN(d.getTime()) ? date : d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: '2-digit' });
 })();
 ---
 
-<article class="relative image-border2 hover:hov-fx rounded-2 overflow-hidden transition-all duration-300 ease-in-out w-full bg-black/40">
-  <!-- Decorative top bar -->
+<article class="relative image-border2 hover:hov-fx rounded-2 overflow-hidden transition-all duration-300 ease-in-out w-full h-full flex flex-col bg-black/40">
   <div class="h-1.5 w-full bg-gradient-to-r from-main via-secondary to-tertiary" />
 
-  <div class="p-3 flex flex-col gap-2">
-    <header class="flex items-start gap-2">
-      <h3 class="text-base font-bold text-white leading-snug flex-1">
-        <a href={href} class="no-underline hover:underline underline-offset-4">{title}</a>
+  <div class="p-3 flex flex-col gap-2 flex-grow">
+    <header class="flex items-start">
+      <h3 class="text-base font-bold text-white leading-snug">
+        <a href={href} class="link-fx-white font-bold">{title}</a>
       </h3>
-      <div class="text-3 px-2 py-0.5 rounded-full border border-secondary/40 text-gray-200 whitespace-nowrap">
-        {formattedDate}
-      </div>
     </header>
 
     <p class="text-sm text-white/90 leading-snug mt-1">{excerpt}</p>
 
-    {tags.length > 0 && (
-      <div class="flex flex-wrap gap-1 mt-1">
-        {tags.map(t => (
-          <span class="text-3 px-2 py-0.5 rounded-full bg-main/15 text-main border border-main/40">{t}</span>
-        ))}
-      </div>
-    )}
+    <div class="mt-auto flex flex-col">
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-1 mt-1">
+          {tags.map(t => (
+            <span class="badge badge-active">{t}</span>
+          ))}
+        </div>
+      )}
 
-    <footer class="mt-2 flex items-center justify-between">
-      <span class="text-xs text-gray-300">{readTime || ''}</span>
-      <a href={href} class="button-fx text-xs px-3 py-1">Read →</a>
-    </footer>
+      <footer class="mt-2 flex items-center justify-between">
+        <span class="text-xs text-gray-text">{readTime || ''}</span>
+        <span class="text-xs text-gray-text">{formattedDate}</span>
+      </footer>
+    </div>
   </div>
 </article>
 

@@ -51,7 +51,7 @@ export function initProfileEffects() {
     });
   }
   
-  // Portrait overlay functionality
+  // Portrait overlay
   const showPortrait = document.getElementById('show-portrait');
   const closePortrait = document.getElementById('close-portrait');
   const portraitOverlay = document.getElementById('portrait-overlay');
@@ -70,7 +70,7 @@ export function initProfileEffects() {
     });
   }
 
-  // Experiences overlay toggling (replace profile content visually without resizing)
+  // Experiences overlay (replace profile content)
   const profileContent = document.getElementById('profile-content');
   const experiencesOverlay = document.getElementById('experiences-overlay');
   function showExperiencesOverlay() {
@@ -83,7 +83,7 @@ export function initProfileEffects() {
     experiencesOverlay.classList.remove('overlay-visible');
     profileContent.classList.remove('invisible', 'pointer-events-none');
   }
-  // Delegate clicks so it works regardless of island hydration timing
+
   const delegatedClickHandler = (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
@@ -96,7 +96,6 @@ export function initProfileEffects() {
   };
   document.addEventListener('click', delegatedClickHandler);
 
-  // Return cleanup function
   return function cleanup() {
     if (ro) ro.disconnect();
     window.removeEventListener('resize', resizeHandler);

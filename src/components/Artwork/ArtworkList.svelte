@@ -38,8 +38,7 @@
   <div class="flex flex-wrap gap-2 mb-4">
     {#each tags as tag}
       <button
-        class="px-3 py-1 border-2 border-secondary hover:hov-fx rounded-xl text-sm transition-all
-               {selectedTags.includes(tag) ? 'bg-main text-black-text' : 'bg-white/10 text-white'}"
+        class="badge-lg hover:hov-fx {selectedTags.includes(tag) ? 'badge-solid' : 'badge-inactive hover:badge-active hover:text-main'}"
         onclick={() => toggleTag(tag)}
       >
         {tag}
@@ -76,7 +75,7 @@
           {#if selectedTags.length > 0}
             <div class="flex flex-wrap gap-1 mt-1">
               {#each art.tags.filter(tag => selectedTags.includes(tag)) as tag}
-                <span class="text-xs text-main">{tag}</span>
+                <span class="badge badge-active">{tag}</span>
               {/each}
             </div>
           {/if}

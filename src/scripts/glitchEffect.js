@@ -12,7 +12,7 @@ export function initGlitchEffects() {
   const originalName = nameElement.textContent;
   const japaneseText = "ダファ・マウラナ・サトリア";
   
-  // Set initial title
+  // Initial title
   updateText(titleElement, titles[currentIndex]);
   
   // Timers
@@ -38,15 +38,12 @@ export function initGlitchEffects() {
     isAnimating = true;
     titleContainer.classList.add('glitching');
     
-    // Start with current title
     updateText(titleElement, currentTitle);
     
-    // Change to next title DURING the glitch (at 60% through)
     setTimeout(() => {
       updateText(titleElement, nextTitle);
-    }, 540); // 60% of 900ms
+    }, 540);
     
-    // End the glitch effect
     setTimeout(() => {
       titleContainer.classList.remove('glitching');
       
@@ -56,17 +53,15 @@ export function initGlitchEffects() {
     }, 900);
   }
   
-  // Name-specific glitch (temporarily shows Japanese, then reverts)
+  // Name glitch (Japanese one)
   function applyNameGlitch() {
     if (isAnimating || titleContainer.classList.contains('glitching')) return false;
     
     isAnimating = true;
     nameContainer.classList.add('glitching');
     
-    // Change to Japanese
     updateText(nameElement, japaneseText, true);
     
-    // End glitch and revert to original name
     setTimeout(() => {
       nameContainer.classList.remove('glitching');
       
@@ -82,38 +77,31 @@ export function initGlitchEffects() {
   // Title rotation function
   function rotateTitle() {
     if (isAnimating) {
-      // Try again later if currently animating
       setTimeout(rotateTitle, 500);
       return;
     }
     
-    // Get current and next title
     const currentTitle = titles[currentIndex];
     const nextIndex = (currentIndex + 1) % titles.length;
     const nextTitle = titles[nextIndex];
     
-    // Apply title transition glitch
     applyTitleGlitch(currentTitle, nextTitle);
     
-    // Update current index after transition
     currentIndex = nextIndex;
     
-    // Schedule next rotation after staying on this title for a while
     titleTimer = setTimeout(rotateTitle, 3000);
   }
   
-  // Start the title rotation after a short delay
+  // Title rotation
   setTimeout(rotateTitle, 1500);
 
   let firstGlitchTimer = setTimeout(() => {
-    // first name glitch
     if (!applyNameGlitch()) {
       let retryCount = 0;
       const retryTimer = setInterval(() => {
         if (applyNameGlitch() || retryCount > 10) {
           clearInterval(retryTimer);
           
-          // Set up recurring glitches
           setTimeout(() => {
             nameTimer = setInterval(() => {
               applyNameGlitch();

@@ -1,0 +1,92 @@
+---
+title: "Damned Veil Devlog #1: Normal Mapping & Event Systems"
+date: 2025-04-22
+tags: ["Unity", "Game Dev", "C#", "Pixel Art"]
+---
+
+> Note: This is a devlog for **Damned Veil**, a dark pixel art game featuring strategic and challenging gameplay with magical and mysterious feels. Created by a team of 4, known as **Divine Table**.
+
+### Introduction
+
+**Damned Veil** is a dark, horror-themed pixel game set in a mysterious magical world. refer to [Damned Veil](/projects/damnedveil) project page for more information.
+
+As i mentioned before, I was responsible for creating the **art and environment** of the game. What makes this project special for me is my experiment with **normal mapping** in pixel art.
+Normal maps allow pixel surfaces to react to light dynamically, creating a sense of and immersion in the world, kinda something rarely seen in pixel games.
+
+<video
+  src="/projectsProperties/damnedVeil/NormalMapping.mp4"
+  autoplay
+  loop
+  muted
+  playsInline
+  style={{ maxWidth: "60%", borderRadius: "12px" }}
+/>
+
+Global normal map overview :
+
+<div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+  <img
+    src="/projectsProperties/damnedVeil/nnm.png"
+    alt="Normal Map 1"
+    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
+  />
+  <img
+    src="/projectsProperties/damnedVeil/ynm.png"
+    alt="Normal Map 2"
+    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
+  />
+</div>
+
+Short story: I had to find a way to make it work in a 2D space while keeping the pixel art with very limited tutorial resources.
+So I found a way _a shortcut_ to generate normal maps from my tilesets using this website: [Normal Map](https://cpetry.github.io/NormalMap-Online/). I don't know who the random guy that created this site is, but it was a lifesaver for me. It allowed me to create normal maps quickly and easily, and it has a lot of options to customize the results to fit my needs.
+
+I also helped with programming thing, well it wasn't anything critical, but I got to implement the main menu, level routing, and pause menu.
+Sounds simple, right? But from here, I learned something that changed how I code in Unity forever, the **Unity Event System**.
+
+
+### Challenges
+
+Working on Damned Veil came with a bunch of ~~painful~~ exciting challenges such as :
+
+- **Game Design**<br />
+  - Making the topdown strategy shooter gameplay feel engaging and not repetitive and boring.
+  - Designing levels that are difficult but still fair to win.
+  - Creating unusual, unique and challanging boss.
+
+- **Programming**
+  - Building a modular enemy spawning system with flexible timing and location settings.
+  - Calculating accurate bullet reflection paths to support the core gameplay mechanic.
+
+- **Art & Visuals**
+  - Creating a consistent dark fantasy pixel art style that feels immersive.
+  - Choosing color palettes that support both atmosphere and readability.
+  - Integrating normal maps into 2D pixel based graphic.
+
+But together, we managed to overcome these challenges and create a game that's both fun and visually appealing.<br />
+**Communication and collaboration are important.** <br />
+Anyway, I actually just stole this line from a relationship advice post, but hey, it works in game development too...
+
+### What I Learned
+
+I learned a lot from this project, especially implementing normal mapping in pixel art. It was a challenging because this game is a 2D pixel game, and normal mapping is usually associated with 3D graphics.
+
+Also I learned how to use Unity's Event System to make my code more modular and decoupled. This has been a game-changer for me, and I will definitely use it in my future projects. Here's a quick explanation of how it works:
+> - **Delegate** : You call your friend directly and ask them to do something. <br />
+> You need to know exactly who to call, and they need to have a phone ready to pick up. If your friend changes their number or isn't available, the call fails.
+
+> - **UnityEvent** : You announce something on a megaphone, and everyone who registered to listen will respond. <br />
+> You don't care who hears it. You just announce it, and whoever is subscribed/listening will react in their own way.
+
+In short:
+- Use **Delegate** for internal logic that needs precision.
+- Use **UnityEvent** when you want flexible, Inspector-exposed interactions (drag n drop in), like UI, triggers, effects.
+
+### Final Thoughts
+
+Damned Veil is a creative experiment blending dark fantasy, puzzle strategy, and pixel art. The result is a game that feels both nostalgic and fresh. With its unique mechanics and eerie aesthetic, it's more than just another pixel game **it's a mysterious veil waiting to be unveiled**. 
+
+One more thing, I’ve been working on this game solo lately for personal reasons. I’ve been experimenting a lot, especially with **Procedural Spawner Logic** (part of my thesis). I’ll talk more about it in the next devlog.
+
+---
+
+Thanks for reading

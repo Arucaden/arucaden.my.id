@@ -3,15 +3,30 @@ import Layout from '../layouts/BaseLayout.astro'
 import Profile from '@components/Profile/ProfileWrapper.astro'
 import Artworks from '@components/Artwork/ArtworkWrapper.svelte'
 import Projects from '@components/Projects/ProjectWrapper.svelte'
+import Blogs from '@components/Blog/BlogWrapper.astro'
 import { projects as projectsData} from '@data/projects.ts';
+import { blogs as blogsData} from '@data/blogs.ts';
 import { artworks } from '@data/artworks.ts';
 import { getCollection } from 'astro:content';
 import Container from '@components/Container.astro';
 
-const projectEntries = await getCollection('projects');
+const projectEntries = await getCollection('projects', ({ data }) => {
+  return data.draft !== true;
+});
 // First merge the data
 let projects = projectEntries.map(entry => ({
   ...projectsData[entry.slug],
+  ...entry.data,
+  slug: entry.slug,
+  content: entry
+}));
+
+const blogEntries = await getCollection('blog', ({ data }) => {
+  return data.draft !== true;
+});
+// First merge the data
+let blogs = blogEntries.map(entry => ({
+  ...blogsData.find((b: any) => b.slug === entry.slug),
   ...entry.data,
   slug: entry.slug,
   content: entry
@@ -25,22 +40,35 @@ projects = projects.sort((a, b) => {
 });
 ---
 <Layout>
-  <section id="profile" class="h-auto pb-10 pt-3 flex flex-col" aria-labelledby="profile-heading">
+  <section id="profile" class="scroll-animate opacity-0 translate-y-12 transition-all duration-[800ms] ease-out h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24" aria-labelledby="profile-heading">
     <Container title="Profile" headingId="profile-heading">
       <Profile/>
     </Container>
   </section>
 
-  <section id="artworks" class="min-h-screen pt-3 flex flex-col md:justify-center" aria-labelledby="artworks-heading">
+  <section id="artworks" class="scroll-animate opacity-0 translate-y-12 transition-all duration-[800ms] ease-out delay-100 h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24" aria-labelledby="artworks-heading">
     <Container title="Artworks" headingId="artworks-heading">
       <Artworks artworks={artworks} client:visible />
     </Container>
   </section>
 
-  <section id="projects" class="min-h-screen pt-3 flex flex-col md:justify-center" aria-labelledby="projects-heading">
+  <section id="projects" class="scroll-animate opacity-0 translate-y-12 transition-all duration-[800ms] ease-out delay-100 h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24" aria-labelledby="projects-heading">
     <Container title="Projects" headingId="projects-heading">
       <Projects projects={projects} client:visible />
     </Container>
   </section>
 
+    <section id="blogs" class="scroll-animate opacity-0 translate-y-12 transition-all duration-[800ms] ease-out delay-100 h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24" aria-labelledby="blogs-heading">
+    <Container title="Blog" headingId="blogs-heading">
+      <Blogs blogs={blogs} />
+    </Container>
+  </section>
+
 </Layout>
+
+<script>
+  import { initScrollAnimations } from '../scripts/scrollAnimations.ts';
+
+  document.addEventListener('DOMContentLoaded', initScrollAnimations);
+  document.addEventListener('astro:page-load', initScrollAnimations);
+</script>

@@ -4,13 +4,7 @@ date: 2025-04-22
 description: "A unique pixel game with carrom-style mechanics, magical elements, and intense boss fights."
 ---
 
-> Note: This is a project page for **Damned Veil**, a dark pixel art game featuring strategic and challenging gameplay with magical and mysterious feels. Created by a team of 4, known as **Round Table**.
-
-### Introduction
-
-**Damned Veil** is a dark, horror-themed pixel game set in a mysterious magical world. The gameplay is inspired by the mechanics of carrom. Player must carefully plan each shot to defeat enemies with limited ammo.
-
-The core mechanic centers around aiming and shooting a projectile that can bounce off walls and obstacles. Neither the player nor the enemies move, so strategy and precision are everything.
+> **Damned Veil** is a dark, horror-themed pixel game set in a mysterious magical world. Inspired by the physics of carrom, players must carefully plan each geometric shot to defeat enemies using limited ammo.
 
 ### Unique Features
 
@@ -18,88 +12,37 @@ The core mechanic centers around aiming and shooting a projectile that can bounc
 Like carrom, every shot counts. Angles matter, and smart plays can clear the map.
 
 - **Easter Egg** <br />
-Player who discover mysterious symbols can unlock powerful effect, dare to try it out?.
+Player who discover mysterious pattern can unlock powerful effect, dare to try it out?.
 
-- **Boss Battles** <br />
+- **Challanging Boss Battles** <br />
 Featuring a challenging Souls-like boss that requires careful planning and strategic thinking!.
 
-### My Role: Environment Artist & Programmer
+### My Role: Artist & Programmer
 
-I was responsible for designing the game's atmosphere and environments. What makes this project special for me is my experiment with **normal mapping** in pixel art.
-Normal maps allow pixel surfaces to react to light dynamically, creating a sense of and immersion in the world, kinda something rarely seen in pixel games.
+I was responsible for designing the game's atmosphere and environments (map). What makes this project special for me is my experiment with **normal mapping** in pixel art. I also creating the **Procedural Spawner Logic** (a part of my thesis) for this game.
 
-<video
-  src="/projectsProperties/damnedVeil/NormalMapping.mp4"
-  autoplay
-  loop
-  muted
-  playsInline
-  style={{ maxWidth: "60%", borderRadius: "12px" }}
-/>
+### The Problem & The Solution
 
-Global normal map overview :
+**The Problem:** 
+- Native 2D pixel art often feels visually flat under standard lighting.
+- The Game Designer has difficult time to create a challenging and fun level.
 
-<div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-  <img
-    src="/projectsProperties/damnedVeil/nnm.png"
-    alt="Normal Map 1"
-    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
-  />
-  <img
-    src="/projectsProperties/damnedVeil/ynm.png"
-    alt="Normal Map 2"
-    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
-  />
-</div>
+**The Solution:** 
+- I implemented an experimental 2D Normal Mapping technique to make the pixel environment react dynamically to pinpoint light sources, it works!.
+- I created a procedural spawner logic to create a challenging and fun level yet balanced.
 
-Short story: I had to find a way to make it work in a 2D space while keeping the pixel art — with very limited tutorial resources.
-So I found a way _a shortcut_ to generate normal maps from my tilesets using this website: [Normal Map](https://cpetry.github.io/NormalMap-Online/). *I don't know who the random guy that created this site is, but it was a lifesaver for me. It allowed me to create normal maps quickly and easily, and it has a lot of options to customize the results to fit my needs.
+### Technical Details
 
-I also helped with programming thing, well it wasn't anything critical, but I got to implement the main menu, level routing, and pause menu.
-Sounds simple, right? But from here, I learned something that changed how I code in Unity forever, the **Unity Event System**.
+- **Carrom-inspired Combat:** Calculated exact angle reflections for bounce shots across complex map geometry.
+- **Dynamic Normal Mapping:** Attached generated normal maps natively to 2D sprites, drastically shifting how the engine renders light in a flat space.
+- **Procedural Spawner Generation:** Created a system that can generate deterministic enemy placement.
 
+### Challenges & Learnings
 
-### Challenges
+Building highly modular systems using UnityEvents was an absolute game-changer. I learned that relying entirely on tightly coupled **Delegates** often breaks fast-moving architectures. Moving to a UnityEvent setup meant I could trigger UI changes, particle effects, and death sequences directly from the Inspector without hard-coding references! I also learned how to achieve 3D like lighting effect on 2D pixel art by using normal maps.
 
-Working on Damned Veil came with a bunch of ~painful~ exciting challenges such as :
+<br />
 
-- **Game Design**<br />
-  - Making the topdown strategy shooter gameplay feel engaging and not repetitive and boring.
-  - Designing levels that are difficult but still fair to win.
-  - Creating unusual, unique and challanging boss.
+There is a lot more to tell about making this game, i will write the journey when i have time.
 
-- **Programming**
-  - Building a modular enemy spawning system with flexible timing and location settings.
-  - Calculating accurate bullet reflection paths to support the core gameplay mechanic.
-
-- **Art & Visuals**
-  - Creating a consistent dark fantasy pixel art style that feels immersive.
-  - Choosing color palettes that support both atmosphere and readability.
-  - Integrating normal maps into 2D pixel based graphic.
-
-But together, we managed to overcome these challenges and create a game that's both fun and visually appealing.<br />
-**Communication and collaboration are important.** <br />
-Anyway, I actually just stole this line from a relationship advice post, but hey, it works in game development too...
-
-### What I Learned
-
-I learned a lot from this project, especially implementing normal mapping in pixel art. It was a challenging because this game is a 2D pixel game, and normal mapping is usually associated with 3D graphics.
-
-Also I learned how to use Unity's Event System to make my code more modular and decoupled. This has been a game-changer for me, and I will definitely use it in my future projects. Here's a quick explanation of how it works:
-> - **Delegate** : You call your friend directly and ask them to do something. <br />
-> You need to know exactly who to call, and they need to have a phone ready to pick up. If your friend changes their number or isn't available, the call fails.
-
-> - **UnityEvent** : You announce something on a megaphone, and everyone who registered to listen will respond. <br />
-> You don't care who hears it. You just announce it, and whoever is subscribed/listening will react in their own way.
-
-In short:
-- Use **Delegate** for internal logic that needs precision.
-- Use **UnityEvent** when you want flexible, Inspector-exposed interactions (drag n drop in), like UI, triggers, effects.
-
-### Final Thoughts
-
-Damned Veil is a creative experiment blending dark fantasy, puzzle strategy, and pixel art. The result is a game that feels both nostalgic and fresh. With its unique mechanics and eerie aesthetic, it's more than just another pixel game **it's a mysterious veil waiting to be unveiled**.
-
----
-
-Thanks for reading
+<a href="/blog/damnedveil" class="inline-block px-4 py-2 mt-4 text-sm font-semibold rounded-md bg-main/20 text-main border border-main hover:bg-main hover:text-black transition-colors" style={{ textDecoration: 'none' }}>Read the full Devlog </a>

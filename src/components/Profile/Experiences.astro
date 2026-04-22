@@ -1,5 +1,6 @@
 ---
 import { experiences } from '@data/experiences.ts';
+import ExperienceBadge from './ExperienceBadge.svelte';
 ---
 
 <section aria-labelledby="experience-heading" class="flex flex-col flex-1 min-h-0">
@@ -12,7 +13,10 @@ import { experiences } from '@data/experiences.ts';
           <p class="prose-text font-medium">{exp.company}</p>
           <p class="prose-text color-gray-text">{exp.period}</p>
         </div>
-        <p class="text-sm color-gray-text mt-1">{exp.type}</p>
+        <div class="mt-1 flex gap-1.5">
+          <ExperienceBadge text={exp.type} />
+          <ExperienceBadge text={exp.location} />
+        </div>
 
         {exp.points?.length > 0 && (
           <ul class="mt-2 list-disc list-inside">

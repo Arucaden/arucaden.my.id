@@ -1,34 +1,37 @@
 <script lang="ts">
   import { experiences } from '@data/experiences.ts';
-  const latest = experiences[0];
+  import ExperienceBadge from './ExperienceBadge.svelte';
+  const latestExperiences = experiences.slice(0, 4);
 </script>
 
 <section aria-labelledby="experience-heading" class="flex flex-col flex-1 min-h-0">
-  <h2 id="experience-heading" class="section-title">.Experiences</h2>
+  <div class="flex justify-between items-center mb-1">
+    <h2 id="experience-heading" class="section-title m-0">.Experiences</h2>
+  </div>
 
-  {#if latest}
-    <article class="border-2 border-secondary/30 bg-black/30 rounded-lg p-2">
-
-      <div class="flex min-w-0 gap-2 flex-col sm:flex-row sm:items-center">
-        <div class="flex items-center gap-2 sm:contents">
-          <span class="font-bold sm:order-1">{latest.company}</span>
-          <span class="text-sm color-gray-text whitespace-nowrap ml-auto sm:order-3">{latest.period}</span>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+    {#each latestExperiences as exp, i}
+      <article
+        class={`flex flex-col gap-1 border-2 rounded-xl bg-black/50 p-3 transition-all hover:hov-fx
+          ${i === 0 
+            ? 'text-white border-main' 
+            : 'text-white-text border-tertiary hover:border-main hover:text-white'}
+        `}
+      >
+        <div class="flex justify-between items-start gap-2">
+          <span class="font-bold text-sm">{exp.company}</span>
+          <span class="text-xs whitespace-nowrap mt-0.5 text-gray-text">{exp.period}</span>
         </div>
-        <div class="mt-1 flex gap-2 sm:mt-0 sm:order-2">
-          <span class="text-sm px-2 py-0.5 rounded-full bg-main/15 text-main border border-main/40">{latest.type}</span>
-          <span class="text-sm px-2 py-0.5 rounded-full border border-secondary/40 color-gray-text">{latest.location}</span>
+        
+        <span class="text-xs text-gray-text">{exp.role}</span>
+        
+        <div class="mt-1 flex flex-wrap gap-1.5">
+          <ExperienceBadge text={exp.type} />
+          <ExperienceBadge text={exp.location} />
         </div>
-      </div>
-
-        <span class="text-sm color-gray-text mt-0.5">{latest.role}</span>
-
-        <ul class="mt-2 list-disc list-inside space-y-1">
-          {#each latest.points as pt}
-            <li class="text-sm text-white/90 leading-snug">{pt}</li>
-          {/each}
-        </ul>
-    </article>
-  {/if}
+      </article>
+    {/each}
+  </div>
 
   <button id="show-all-experiences" type="button" class="button-fx w-full mt-3">
     Show All Experiences
