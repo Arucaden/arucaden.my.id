@@ -4,31 +4,38 @@ date: 2025-03-10
 description: "My personal portfolio website, built with Astro, Svelte, and UnoCSS. Deployed on Firebase."
 ---
 
-**arucaden.my.id** is my personal portfolio website, architected specifically to showcase my interactive projects, skills, and experiences.
+**arucaden.my.id** is my personal portfolio website, built to showcase my projects, skills, experiences and sometimes share my opinions.
 
 ### Executive Summary
 
-Acting as the **sole Frontend Engineer & UI/UX Designer**, I designed this platform as a major upgrade from generic CMS templates. It functions as a blazing-fast static site while injecting deep javascript reactivity exactly where it's needed using Astro Islands and Svelte Runes.
+As a **Frontend Engineer & UI/UX Designer**, I designed this platform as an upgrade from my old portfolio (which using slides). It functions as a fast static site while injecting javascript reactivity when needed using Astro Islands and Svelte Runes.
 
 ### The Problem & The Solution
 
-**The Problem:** Typical developer portfolios often feel like highly static corporate templates, or they swing in the complete opposite direction—relying on heavy client-side frameworks (like React) that bloat loading times and destroy SEO simply just to host a few buttons.
+**The Problem:** 
+- Typical developer portfolios often feel like highly static corporate templates.
+- Heavy client-side frameworks (like React) that bloat loading times and destroy SEO (Using High Tech for FOMO).
+- Complicated animations (Like my name animation).
 
-**The Solution:** I architected this website utilizing Astro for lightning-fast server-side HTML generation, Svelte 5 for precise, reactive "Islands" (like modals and overlays), and UnoCSS to completely eliminate CSS stylesheet bloat. The result achieved a unique cyber-glitch aesthetic that loads almost instantly.
+**The Solution:** 
+- I built this website using Astro for fast server-side HTML generation, Svelte 5 for precise, reactive "Islands" (like modals and overlays), and UnoCSS to completely eliminate CSS stylesheet bloat. 
+- I used vanilla JavaScript to make complicated animation, because it will never achieved with Svelte or Astro.
 
 ### Technical Details
 
-- **Blazing Fast Performance:** Powered entirely by Astro's static site generation and island architecture.
-- **Reactive Components:** Leveraged Svelte 5's new `$state` Runes to drive high-performance overlays and reactive data bindings.
+- **Fast Performance:** Powered entirely by Astro's static site generation and island architecture.
+- **Reactive Components:** Leveraged Svelte 5's new $state Runes to drive high-performance overlays and reactive data bindings.
 - **Utility-first Styling:** Completely custom-themed using UnoCSS for on-demand optimized CSS output.
-- **Cyber Animations:** Integrated native JavaScript intersection observers, CSS transitions, and completely custom glitch effects.
+- **Complicated Animations:** Using vanilla JavaScript, CSS transitions, and completely custom glitch effects.
+- **Responsive Design:** Designed to be good looking website in all platform
 
 ### Challenges & Learnings
 
-Merging Astro routing with Svelte's component hydration was extremely tricky at first. I learned deeply about partial hydration concepts (figuring out when to use `client:idle` versus `client:visible`). Furthermore, adapting to Svelte 5's explicit Runes forced me to understand exactly how reactivity flows, making my interactive components drastically more robust. The biggest takeaway? Always design with the end-user's navigation experience in mind over personal developer ego!
+Merging Astro routing with Svelte's component hydration was extremely tricky at first. I need to learn more about partial hydration concepts (figuring out when to use client:idle or  client:visible). Furthermore, adapting to Svelte's explicit Runes forced me to understand exactly how reactivity flows, making robust interactive components. 
+Also **Always design with the end-user's experience** over personal taste, in the end its the user who visits the website.
 
 <br />
 
-> Curious why I ditched React for Svelte? Or why I absolutely hated my first design drafts from 2024?
+> There is a story behind this website, check out below to know more!
 
 <a href="/blog/arucaden" class="inline-block px-4 py-2 mt-4 text-sm font-semibold rounded-md bg-main/20 text-white border border-main hover:bg-main hover:text-black transition-colors" style={{ textDecoration: 'none' }}>Read the full Devlog ➔</a>

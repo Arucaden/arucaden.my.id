@@ -1,7 +1,7 @@
 <script lang="ts">
   import { experiences } from '@data/experiences.ts';
   import ExperienceBadge from './ExperienceBadge.svelte';
-  const latestExperiences = experiences.slice(0, 4);
+  const latestExperiences = experiences.slice(0, 2);
 </script>
 
 <section aria-labelledby="experience-heading" class="flex flex-col flex-1 min-h-0">

@@ -3,7 +3,7 @@ export const links = [
       name: 'Email',
       href: 'mailto:daffamaulanasatria@gmail.com',
       icon: '/icons/logos--google-gmail.svg',
-      description: 'Contact email',
+      description: 'Contact me',
     },
     {
       name: 'LinkedIn',
@@ -24,9 +24,9 @@ export const links = [
       description: 'Check out my games',
     },
     {
-      name: 'cv',
+      name: 'Resume',
       href: 'https://drive.google.com/file/d/1hoDgLe8ihe8UtMwUHxrwFh3fDYPD43qw/view?usp=sharing',
       icon: '/icons/mdi--file-document.svg',
-      description: 'Read my CV here',
+      description: 'Read my resume here',
     },
   ];

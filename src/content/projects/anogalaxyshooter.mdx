@@ -1,28 +1,32 @@
 ---
-title: "Ano Galaxy Shooter : Yet Another Space Shooter Game"
+title: "Ano Galaxy Shooter"
 date: 2024-12-24
 description: "A simple 2D web space shooter game with basic mechanics and immersive gameplay."
 ---
 
-**Ano Galaxy Shooter** is a fast-paced 2D desktop space shooter geared towards testing fundamental gameplay mechanics and logic structures.
+**Ano Galaxy Shooter** is a fast-paced 2D desktop space shooter (Yet Another Space Shooter Game).
 
 ### Executive Summary
 
-Acting as the **sole Programmer**, I built this project completely from scratch without logic templates. My principal goal was to understand precisely how to inject "Game Feel" into barebones engines. From post-processing to tight input response, the project focuses purely on polish over scale.
+As a **Programmer**, I built this project to understand precisely how to inject "Game Feel". From post-processing to tight input response, the project focuses purely on polish over scale.
 
 ### The Problem & The Solution
 
-**The Problem:** Creating an arcade game where you simply "shoot enemies" frequently results in a hollow, floaty, and unrewarding experience if there is no physical weight behind the visual actions.
+**The Problem:** 
+Creating an arcade game where you simply "shoot enemies" frequently results in a hollow, floaty, and unrewarding experience if there is no physical weight behind the visual actions.
 
-**The Solution:** I ignored padding the game with deep lore or massive levels. Instead, I hyper-focused on "Game Feel"—specifically engineering tight input responses, dramatic visual screen-shake, precise damage flashing, and heavy post-processing so that every single hit feels incredibly impactful.
+**The Solution:** 
+I ignored padding the game with deep lore or massive levels. Instead, I focused on "Game Feel", specifically engineering tight input responses, dramatic visual screen-shake, precise damage flashing, and heavy post-processing so that every single hit feels incredibly impactful.
 
 ### Technical Details
 
-- **Advanced State Machines:** Constructed all boss behavioral patterns and wave transitions completely via highly-structured C# Finite State Machines.
-- **Quaternion Math Implementations:** Engineered custom rotation handlers and precision enemy tracking logic without relying on built-in pathfinding meshes.
-- **Deep Visual Feedback:** Heavily integrated screen unsteadiness arrays and warp-speed particle effects cleanly separated from core physics math.
-- **Post-Processing:** Balanced bloom and chromatic aberration effects cranked specifically for maximum retro-arcade aesthetic.
+- **State Machines:** Constructed all boss behavioral patterns and wave transitions completely via simple Finite State Machines (FSM).
+- **Visual Feedback:** Integrate screen shake, particle effects, and damage flashing etc. to make the game feel more impactful.
+- **Post-Processing:** Bloom, chromatic aberration and other effects maximize game aesthetic and leverage User Experiences.
 
 ### Challenges & Learnings
 
-The single greatest challenge wasn't just getting things to logically "work," but getting them to "feel good." I learned that raw code architecture is only half the battle. Mastering Quaternion math rotations to properly point enemies, along with strict time manipulation (through Unity Coroutines), allowed me to sequence smooth attack patterns. Most importantly, I learned that purposefully breaking logic to understand exactly *why* it worked is completely necessary to master game engine fundamentals.
+The big challenge wasn't just getting things to logically work, **but getting them to "feel good."** I learned that raw code architecture is only half the battle. 
+Mastering Quaternion math rotations, Unity Coroutines, even simple FSMs allowed me to make smooth attack patterns. 
+
+Most importantly, I learned that **breaking logic on purpose to understand exactly why it worked** is completely necessary to master logic fundamentals.

@@ -38,7 +38,7 @@ export const projects = {
   "damnedveil": {
     title: 'DAMNED VEIL',
     description: 'Horror game with psychological elements and immersive storytelling',
-    date: '2025-04-22',
+    date: '2024-04-22',
     image: '/projects/DamnedVeil.png',
     url: 'https://noiverre.itch.io/damnedveil',
     tech: ['Unity', 'C#', 'Clip Studio'],
@@ -50,6 +50,14 @@ export const projects = {
     image: '/projects/AnoGalaxyShooter.png',
     url: 'https://arucaden.itch.io/ano-galaxy-shooter',
     tech: ['Unity', 'C#'],
+  },
+    "magicaffeine": {
+    title: 'Magicaffeine',
+    description: "You were a coffee-loving barista in your previous life, but now you've been thrown into a fantasy world.",
+    date: '2025-08-04',
+    image: '/projects/Magicaffeine.webp',
+    url: 'https://amamiyarn.itch.io/93-si-tanpa-cahaya-student-magicaffeine',
+    tech: ['Unity', 'C#', 'Clip Studio'],
   },
 };
 

@@ -25,17 +25,18 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
     <!-- Description + Techstack + Links -->
     <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
       <section aria-labelledby="desc-heading" class="flex flex-col">
-        <h2 id="desc-heading" class="section-title">.Description</h2>
-        <p id="desc-paragraph" class="prose-text leading-relaxed">
+        <div class="flex justify-between items-center">
+          <h2 id="desc-heading" class="section-title mb-1">.Description</h2>
+          <!-- Mobile portrait trigger -->
+          <button id="show-portrait" class="md:hidden text-sm text-main hover:text-white transition-colors mb-1 tracking-wide"> .Show_Portrait </button>
+        </div>
+        <p id="desc-paragraph" class="prose-text leading-relaxed mt-1">
         I build games and interactive visuals as a Computer Science student focused on game development and creative tech. 
         As <a href="https://drive.google.com/file/d/15sRZIJPUoKbrHDbzhk_kAQvc2xNkSRo-/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-fx">
           Unity Certified Associate: Programmer
         </a>, I explore how ideas turn into playable experiences.
         <span class="block mt-4">On my free time, I like to watch anime or play games.</span>
         </p>
-
-        <!-- Mobile portrait trigger -->
-        <button id="show-portrait" class="md:hidden button-fx w-max">Show Portrait</button>
       </section>
 
       <section aria-labelledby="links-heading">
