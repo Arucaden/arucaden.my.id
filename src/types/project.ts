@@ -7,4 +7,5 @@ export type Project = {
   url?: string;
   sourceUrl?: string;
   slug: string;
+  pin?: boolean;
 };

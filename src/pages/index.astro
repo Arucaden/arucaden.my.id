@@ -32,8 +32,18 @@ let blogs = blogEntries.map(entry => ({
   content: entry
 }));
 
-// sort by full date (newest first)
+// sort by pin then full date (newest first)
 projects = projects.sort((a, b) => {
+  if (a.pin && !b.pin) return -1;
+  if (!a.pin && b.pin) return 1;
+  const dateA = a.date ? new Date(a.date).getTime() : 0;
+  const dateB = b.date ? new Date(b.date).getTime() : 0;
+  return dateB - dateA;
+});
+
+blogs = blogs.sort((a, b) => {
+  if (a.pin && !b.pin) return -1;
+  if (!a.pin && b.pin) return 1;
   const dateA = a.date ? new Date(a.date).getTime() : 0;
   const dateB = b.date ? new Date(b.date).getTime() : 0;
   return dateB - dateA;

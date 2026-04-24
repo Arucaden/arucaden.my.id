@@ -9,7 +9,7 @@
 
   let hovered = $state(false);
   let isMobile = $state(false);
-  let { title, description, image, tech = [], url = undefined, slug } = $props();
+  let { title, description, image, tech = [], url = undefined, slug, pin = false } = $props();
 
   onMount(() => {
     isMobile = window.innerWidth < 768;
@@ -71,6 +71,12 @@
     height="600"
     class="rounded-sm object-cover w-full h-full"
   />
+
+  {#if pin}
+    <div class="absolute top-2 right-2 bg-black/60 rounded-full p-1.5 z-20 shadow-sm border border-white/10 backdrop-blur-sm" title="Pinned Project">
+      <div class="i-ri-pushpin-fill w-4 h-4 text-white"></div>
+    </div>
+  {/if}
 
   <!-- Mobile bar  -->
   <div class="md:hidden absolute bottom-1 left-1 right-1 bg-black/70 p-3 gap-2 rounded-b-sm z-10">

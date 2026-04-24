@@ -6,5 +6,6 @@ export type Blog = {
   readTime?: string;
   tags?: string[];
   href?: string; // link
+  pin?: boolean;
 };
 
