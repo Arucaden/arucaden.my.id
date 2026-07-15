@@ -1,6 +1,21 @@
 import type { Experience } from '@/types/experience.ts';
 
 export const experiences: Experience[] = [
+    {
+    company: 'Ariverse Studio',
+    period: 'June 2026 - current',
+    type: 'Internship',
+    location: 'Hybrid',
+    role: 'Game Programmer',
+    points: 
+    [
+      'Collaborate with Artists and Game Designer to Implements mechanics, systems, and gameplay features in Unity.',
+      'Learning and Implement about Unity Unit Testing.',
+      'Learning and Implement about Proper Project Architecture and Assembly Definition.',
+      'Developing and mantain documentation for game systems and gameplay features.',
+      'Integrate and extending third-party modules into game.'
+    ],
+  },
   {
     company: 'Nanami.id',
     period: 'October 2025 - current',

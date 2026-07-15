@@ -70,7 +70,7 @@ blogs = blogs.sort((a, b) => {
 
     <section id="blogs" class="scroll-animate opacity-0 translate-y-12 transition-all duration-[800ms] ease-out delay-100 h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24" aria-labelledby="blogs-heading">
     <Container title="Blog" headingId="blogs-heading">
-      <Blogs blogs={blogs} />
+      <Blogs blogs={blogs} client:visible />
     </Container>
   </section>
 
