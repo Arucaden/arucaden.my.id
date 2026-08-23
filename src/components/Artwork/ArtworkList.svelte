@@ -1,34 +1,35 @@
 <script lang="ts">
   import type { Artwork } from '@/types/artwork.ts';
 
-  let { artworks, onSelect = undefined, previewMode = false }: {
-    artworks: Artwork[],
-    onSelect?: (art: Artwork) => void,
-    previewMode?: boolean
+  let {
+    artworks,
+    onSelect = undefined,
+    previewMode = false,
+  }: {
+    artworks: Artwork[];
+    onSelect?: (art: Artwork) => void;
+    previewMode?: boolean;
   } = $props();
 
-  const sortedArtworks = artworks.sort((a, b) => 
-    (b.year || 0) - (a.year || 0)
+  const sortedArtworks = $derived(
+    [...artworks].sort((a, b) => (b.year || 0) - (a.year || 0))
   );
 
-  const tags = ["#2d", "#pixel", "#scenery", '#oc', '#fanart', '#design', '#3d'];
+  const tags = ['#2d', '#pixel', '#scenery', '#oc', '#fanart', '#design', '#3d'];
   let selectedTags = $state<string[]>([]);
 
   function toggleTag(tag: string) {
     if (selectedTags.includes(tag)) {
-      selectedTags = selectedTags.filter(t => t !== tag);
+      selectedTags = selectedTags.filter((t) => t !== tag);
     } else {
       selectedTags = [...selectedTags, tag];
     }
   }
 
-
   let filtered = $derived(
-    selectedTags.length > 0 
-      ? sortedArtworks.filter(art => 
-          selectedTags.every(selectedTag => 
-            art.tags.includes(selectedTag)
-          )
+    selectedTags.length > 0
+      ? sortedArtworks.filter((art) =>
+          selectedTags.every((selectedTag) => art.tags.includes(selectedTag))
         )
       : sortedArtworks
   );
@@ -38,7 +39,10 @@
   <div class="flex flex-wrap gap-2 mb-4">
     {#each tags as tag}
       <button
-        class="badge-lg hover:hov-fx {selectedTags.includes(tag) ? 'badge-solid' : 'badge-inactive hover:badge-active hover:text-main'}"
+        type="button"
+        class="badge-lg hover:hov-fx {selectedTags.includes(tag)
+          ? 'badge-solid'
+          : 'badge-inactive hover:badge-active hover:text-main'}"
         onclick={() => toggleTag(tag)}
       >
         {tag}
@@ -47,38 +51,36 @@
   </div>
 {/if}
 
-<div class={previewMode ? 'flex overflow-x-auto gap-4 py-2' : 'grid grid-cols-2 sm:grid-cols-5 gap-2'}>
+<div
+  class={previewMode
+    ? 'flex overflow-x-auto gap-4 py-2'
+    : 'grid grid-cols-2 sm:grid-cols-5 gap-2'}
+>
   {#each filtered as art (art.title)}
     <button
-      class="image-border2 overflow-hidden hover:hov-fx transition-all w-full flex flex-col"
-      onclick={() => { 
-        if (onSelect) {
-          onSelect(art); 
-        } else if (typeof window !== 'undefined') {
-          window.dispatchEvent(new CustomEvent('artwork:select', { detail: art }));
-        }
-      }}
+      type="button"
+      class="relative overflow-hidden rounded-lg border-2 border-tertiary hover:hov-fx cursor-pointer text-left p-0 bg-transparent"
+      onclick={() => onSelect?.(art)}
     >
-      <img 
-        src={art.image} 
-        alt={art.title} 
-        loading="lazy" 
+      <img
+        src={art.image}
+        alt={art.title}
+        loading="lazy"
         decoding="async"
-        width="800"
-        height="600"
-        class="rounded-sm object-cover w-full h-36"
+        class="w-full h-full object-cover aspect-square"
+        width="300"
+        height="300"
       />
       {#if !previewMode}
-        <div class="p-2 text-sm font-semibold text-left">
-          {art.title}
-          
-          {#if selectedTags.length > 0}
-            <div class="flex flex-wrap gap-1 mt-1">
-              {#each art.tags.filter(tag => selectedTags.includes(tag)) as tag}
-                <span class="badge badge-active">{tag}</span>
-              {/each}
-            </div>
-          {/if}
+        <div
+          class="absolute inset-x-0 bottom-0 bg-black/70 p-2 opacity-0 hover:opacity-100 focus-within:opacity-100 transition-opacity"
+        >
+          <p class="text-xs text-white truncate font-bold">{art.title}</p>
+          <div class="flex flex-wrap gap-1 mt-1">
+            {#each art.tags.filter((tag) => selectedTags.includes(tag)) as tag}
+              <span class="badge badge-active">{tag}</span>
+            {/each}
+          </div>
         </div>
       {/if}
     </button>

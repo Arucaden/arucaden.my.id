@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+}
+
+const SITE = 'https://arucaden.my.id';
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  ogType = 'website',
+  ogImage = '/artworks/Me.jpeg',
+  jsonLd,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, SITE).toString();
+const absoluteImage = ogImage.startsWith('http')
+  ? ogImage
+  : new URL(ogImage, SITE).toString();
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#E25172" />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:site_name" content="Daffa Maulana Satria" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={absoluteImage} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImage} />
+
+{jsonLd && (
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+)}

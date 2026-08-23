@@ -1,6 +1,4 @@
-
 export function initProfileEffects() {
-  // Sync portrait height with the entire left column on desktop
   const leftCol = document.getElementById('profile-left');
   const portraitWrapper = document.getElementById('portrait-wrapper');
   const portraitTitle = document.getElementById('portrait-title');
@@ -10,7 +8,7 @@ export function initProfileEffects() {
     const isDesktop = window.matchMedia('(min-width: 768px)').matches;
     if (isDesktop) {
       const colH = leftCol.offsetHeight;
-      const titleH = portraitTitle ? portraitTitle.offsetHeight + 8 : 0; // small gap
+      const titleH = portraitTitle ? portraitTitle.offsetHeight + 8 : 0;
       const targetH = Math.max(0, colH - titleH);
       portraitWrapper.style.height = targetH > 0 ? targetH + 'px' : '';
     } else {
@@ -18,7 +16,6 @@ export function initProfileEffects() {
     }
   }
 
-  // Observe left column resize and window resize
   let ro;
   if (window.ResizeObserver && leftCol && portraitWrapper) {
     ro = new ResizeObserver(() => setPortraitHeight());
@@ -26,19 +23,18 @@ export function initProfileEffects() {
   }
   const resizeHandler = () => setPortraitHeight();
   window.addEventListener('resize', resizeHandler);
-  // initial sync after layout
   requestAnimationFrame(setPortraitHeight);
 
-  // Tech stack expand/collapse
   const techToggle = document.getElementById('tech-toggle');
   const techContainer = document.getElementById('tech-container');
-  
+  let techToggleHandler;
+
   if (techToggle && techContainer) {
     let expanded = false;
 
-    techToggle.addEventListener('click', () => {
+    techToggleHandler = () => {
       expanded = !expanded;
-      
+
       if (expanded) {
         techContainer.style.maxHeight = techContainer.scrollHeight + 'px';
         techToggle.textContent = 'Show Less';
@@ -48,36 +44,45 @@ export function initProfileEffects() {
         techToggle.textContent = 'Show All';
         techContainer.classList.remove('expanded');
       }
-    });
+    };
+
+    techToggle.addEventListener('click', techToggleHandler);
   }
-  
-  // Portrait overlay
+
   const showPortrait = document.getElementById('show-portrait');
   const closePortrait = document.getElementById('close-portrait');
   const portraitOverlay = document.getElementById('portrait-overlay');
-  
-  if (showPortrait && closePortrait && portraitOverlay) {
-    showPortrait.addEventListener('click', () => {
-      portraitOverlay.classList.remove('hidden');
-      portraitOverlay.classList.add('flex');
-      document.body.classList.add('overflow-hidden');
-    });
-    
-    closePortrait.addEventListener('click', () => {
-      portraitOverlay.classList.add('hidden');
-      portraitOverlay.classList.remove('flex');
-      document.body.classList.remove('overflow-hidden');
-    });
+
+  function openPortrait() {
+    if (!portraitOverlay) return;
+    portraitOverlay.classList.remove('hidden');
+    portraitOverlay.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+    closePortrait?.focus();
   }
 
-  // Experiences overlay (replace profile content)
+  function closePortraitOverlay() {
+    if (!portraitOverlay) return;
+    portraitOverlay.classList.add('hidden');
+    portraitOverlay.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+    showPortrait?.focus();
+  }
+
+  if (showPortrait && closePortrait && portraitOverlay) {
+    showPortrait.addEventListener('click', openPortrait);
+    closePortrait.addEventListener('click', closePortraitOverlay);
+  }
+
   const profileContent = document.getElementById('profile-content');
   const experiencesOverlay = document.getElementById('experiences-overlay');
+
   function showExperiencesOverlay() {
     if (!profileContent || !experiencesOverlay) return;
     profileContent.classList.add('invisible', 'pointer-events-none');
     experiencesOverlay.classList.add('overlay-visible');
   }
+
   function hideExperiencesOverlay() {
     if (!profileContent || !experiencesOverlay) return;
     experiencesOverlay.classList.remove('overlay-visible');
@@ -96,18 +101,30 @@ export function initProfileEffects() {
   };
   document.addEventListener('click', delegatedClickHandler);
 
+  const keydownHandler = (e) => {
+    if (e.key !== 'Escape') return;
+    if (portraitOverlay && !portraitOverlay.classList.contains('hidden')) {
+      closePortraitOverlay();
+    }
+    if (experiencesOverlay?.classList.contains('overlay-visible')) {
+      hideExperiencesOverlay();
+    }
+  };
+  document.addEventListener('keydown', keydownHandler);
+
   return function cleanup() {
     if (ro) ro.disconnect();
     window.removeEventListener('resize', resizeHandler);
-    if (techToggle) {
-      techToggle.removeEventListener('click', () => {});
+    if (techToggle && techToggleHandler) {
+      techToggle.removeEventListener('click', techToggleHandler);
     }
     if (showPortrait) {
-      showPortrait.removeEventListener('click', () => {});
+      showPortrait.removeEventListener('click', openPortrait);
     }
     if (closePortrait) {
-      closePortrait.removeEventListener('click', () => {});
+      closePortrait.removeEventListener('click', closePortraitOverlay);
     }
     document.removeEventListener('click', delegatedClickHandler);
+    document.removeEventListener('keydown', keydownHandler);
   };
 }

@@ -17,13 +17,13 @@
   ];
   
   // Filter featured ones
-  const previewArtworks = artworks.filter(art => 
-    featuredArtworkTitles.includes(art.title)
-  );
-  
-  previewArtworks.sort((a, b) => {
-    return featuredArtworkTitles.indexOf(a.title) - featuredArtworkTitles.indexOf(b.title);
-  });
+  const previewArtworks = [...artworks]
+    .filter((art) => featuredArtworkTitles.includes(art.title))
+    .sort(
+      (a, b) =>
+        featuredArtworkTitles.indexOf(a.title) -
+        featuredArtworkTitles.indexOf(b.title)
+    );
 
   let currentArtwork: ArtType = $state(previewArtworks.length > 0 ? previewArtworks[0] : artworks[0]);
   let overlayVisible = $state(false);
@@ -69,9 +69,6 @@
     </div>
     <div class="flex-1 overflow-y-auto">
       <div class="p-1" in:fly={{ y: 20, duration: 250 }}>
-        <script>
-          import ArtworkList from './ArtworkList.svelte';
-        </script>
         <ArtworkList artworks={artworks} onSelect={handleSelect} />
       </div>
     </div>

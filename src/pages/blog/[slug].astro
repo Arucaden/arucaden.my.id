@@ -1,20 +1,18 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogLayout from '@/layouts/BlogLayout.astro';
-import { blogs as blogsData } from '@data/blogs.ts';
 
 export async function getStaticPaths() {
   const blogs = await getCollection('blog', ({ data }) => {
     return data.draft !== true;
   });
-  return blogs.map((entry: any) => ({
+  return blogs.map((entry) => ({
     params: { slug: entry.slug },
-    props: { entry }
+    props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const extraData = blogsData.find((b: any) => b.slug === entry.slug) || {};
 ---
 
-<BlogLayout entry={entry} extraData={extraData} />
+<BlogLayout entry={entry} />

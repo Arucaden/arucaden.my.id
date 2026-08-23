@@ -1,6 +1,19 @@
 import type { Artwork } from '../types/artwork.ts';
 
-export const artworks: Artwork[] = [
+/** Normalize tags to lowercase `#slug` form for consistent filtering. */
+export function normalizeTag(tag: string): string {
+  const trimmed = tag.trim().toLowerCase();
+  return trimmed.startsWith('#') ? trimmed : `#${trimmed}`;
+}
+
+function withNormalizedTags(items: Artwork[]): Artwork[] {
+  return items.map((art) => ({
+    ...art,
+    tags: art.tags.map(normalizeTag),
+  }));
+}
+
+const rawArtworks: Artwork[] = [
   {
     title: "Mikazuki 「三日月」 feat. 1koma",
     year: 2023,
@@ -205,3 +218,5 @@ export const artworks: Artwork[] = [
     tags: ["#oc", "#2d"],
   },
 ];
+
+export const artworks: Artwork[] = withNormalizedTags(rawArtworks);

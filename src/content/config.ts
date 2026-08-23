@@ -8,8 +8,8 @@ const projectsCollection = defineCollection({
     date: z.coerce.date(),
     image: z.string().optional(),
     tech: z.array(z.string()).optional(),
-    url: z.string().optional(),
-    sourceUrl: z.string().optional(),
+    url: z.string().url().optional(),
+    sourceUrl: z.string().url().optional(),
     draft: z.boolean().optional(),
     pin: z.boolean().optional(),
   }),
@@ -23,12 +23,13 @@ const blogCollection = defineCollection({
     date: z.coerce.date(),
     image: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    readTime: z.string().optional(),
     draft: z.boolean().optional(),
     pin: z.boolean().optional(),
   }),
 });
 
 export const collections = {
-  'projects': projectsCollection,
-  'blog': blogCollection,
+  projects: projectsCollection,
+  blog: blogCollection,
 };

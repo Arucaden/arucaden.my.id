@@ -1,3 +1,7 @@
+@import '@fontsource/figtree/400.css';
+@import '@fontsource/figtree/700.css';
+@import '@fontsource/figtree/800.css';
+
 .crt-bg {
   background: radial-gradient(circle at center, #4b004b 0%, #0d0010 70%);
 }
@@ -8,6 +12,38 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.scroll-animate {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 800ms ease-out, transform 800ms ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-animate:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  .scroll-animate.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .custom-scroll::-webkit-scrollbar {
@@ -58,4 +94,27 @@ html {
 
 .link-fx:hover::after, .link-fx-white:hover::after {
   width: 100%;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
 }

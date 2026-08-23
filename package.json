@@ -1,29 +1,30 @@
 {
-  "name": "",
+  "name": "arucaden-my-id",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "typecheck": "tsc --noEmit",
+    "check": "astro check && tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.7",
+    "@astrojs/sitemap": "^3.4.1",
     "@astrojs/svelte": "^7.2.0",
-    "@unocss/preset-wind": "^66.1.0-beta.10",
+    "@fontsource/figtree": "^5.2.8",
     "astro": "^5.18.1",
-    "firebase-tools": "^15.15.0",
     "rehype-slug": "^6.0.0",
-    "svelte": "^5.25.7",
-    "typescript": "^5.8.3"
+    "svelte": "^5.25.7"
   },
   "devDependencies": {
     "@iconify-json/grommet-icons": "^1.2.1",
     "@iconify-json/ri": "^1.2.5",
     "@unocss/astro": "^66.6.8",
-    "@unocss/preset-icons": "^66.1.0-beta.10",
-    "@unocss/preset-web-fonts": "^66.1.0-beta.11",
+    "@unocss/preset-icons": "^66.6.8",
+    "typescript": "^5.8.3",
     "unocss": "^66.6.8"
   }
 }
