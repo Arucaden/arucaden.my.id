@@ -6,47 +6,37 @@ import ExperienceBadge from "./ExperienceBadge.svelte";
 
 <Overlay
   id="experiences-overlay"
-  title=".Experiences"
+  title="Experiences"
   closeButtonId="hide-all-experiences"
+  closeLabel="Close"
 >
-  <div class="space-y-2">
+  <div class="space-y-3 p-1">
     {
       experiences.map((exp) => (
-        <article class="border-2 border-secondary/30 bg-black/70 rounded-lg p-2">
-          <div class="flex flex-col md:flex-row md:items-center gap-1 md:gap-1.5 min-w-0">
-            <div class="flex flex-col md:mr-1">
-              <p class="prose-text font-semibold leading-tight">
-                {exp.company}
-              </p>
-              {exp.role && (
-                <p class="md:hidden text-[13px] text-gray-text mt-0.5">
-                  {exp.role}
-                </p>
-              )}
+        <article class="flex flex-col justify-between gap-3 rounded-2xl p-4 bg-white/[0.03] border border-white/10 hover:border-main/50 hover:bg-white/[0.06] hover:shadow-[0_0_20px_var(--color-accent-glow)] transition-all duration-300">
+          <div>
+            <div class="flex justify-between items-start gap-2 mb-1">
+              <span class="font-bold text-sm text-white">{exp.company}</span>
+              <span class="text-[10px] font-mono whitespace-nowrap text-gray-text">{exp.period}</span>
             </div>
 
-            <div class="flex flex-wrap items-center gap-1.5 mt-0.5 md:mt-0">
-              <ExperienceBadge text={exp.type} customClass="shrink-0" />
-              <ExperienceBadge text={exp.location} customClass="shrink-0" />
-            </div>
+            {exp.role && (
+              <span class="text-xs font-mono text-main font-medium block">{exp.role}</span>
+            )}
 
-            <span class="md:ml-auto text-xs text-gray-text whitespace-nowrap mt-1 md:mt-0">
-              {exp.period}
-            </span>
+            {exp.points?.length > 0 && (
+              <ul class="mt-2.5 list-disc list-inside space-y-1 text-xs text-gray-text leading-relaxed">
+                {exp.points.map((pt) => (
+                  <li class="leading-relaxed">{pt}</li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          {exp.role && (
-            <p class="hidden md:block text-xs text-gray-text mt-0.5">
-              {exp.role}
-            </p>
-          )}
-          {exp.points?.length > 0 && (
-            <ul class="mt-2 list-disc list-inside space-y-1">
-              {exp.points.map((pt) => (
-                <li class="text-sm text-white/90 leading-snug">{pt}</li>
-              ))}
-            </ul>
-          )}
+          <div class="mt-2 flex flex-wrap gap-1.5 pt-2 border-t border-white/10">
+            <ExperienceBadge text={exp.type} />
+            <ExperienceBadge text={exp.location} />
+          </div>
         </article>
       ))
     }

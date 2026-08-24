@@ -1,9 +1,6 @@
 ---
 import TechCard from '@/components/TechCard.svelte';
 import { techItems } from '@data/techstack.ts';
-import { Image } from 'astro:assets';
-import web from 'public/icons/majesticons--globe-earth-2-line.svg';
-import source from 'public/icons/logos--github-icon.svg';
 
 interface Props {
   title: string;
@@ -30,169 +27,77 @@ function findTechWithIcon(name: string) {
 }
 ---
 
-<aside class="md:sticky md:top-2 self-start w-full">
-  <!-- Desktop view -->
-  <div class="hidden md:block">
-    {(url || sourceUrl) && (
-      <div class="rounded-xl">
-        <h2 id="links-heading" class="project-side-title">.Links</h2>
-        <div class="flex gap-2 flex-wrap">
-          {url && (
+<aside class="md:sticky md:top-6 self-start w-full space-y-6">
+  <!-- Links -->
+  {(url || sourceUrl) && (
+    <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+      <h2 id="links-heading" class="project-side-title">// LINKS</h2>
+      <div class="flex gap-2 flex-wrap mt-2">
+        {url && (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-main hover:bg-main/10 text-gray-text hover:text-white text-xs font-mono transition-all duration-200 shadow-sm hover:shadow-[0_0_12px_rgba(255,59,105,0.25)] group"
+          >
+            <span class="i-ri-global-line w-4 h-4 text-main transition-transform group-hover:scale-110"></span>
+            <span>Live Project</span>
+          </a>
+        )}
+        {sourceUrl && (
+          <a
+            href={sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-main hover:bg-main/10 text-gray-text hover:text-white text-xs font-mono transition-all duration-200 shadow-sm hover:shadow-[0_0_12px_rgba(255,59,105,0.25)] group"
+          >
+            <span class="i-ri-github-fill w-4 h-4 text-main transition-transform group-hover:scale-110"></span>
+            <span>Source Code</span>
+          </a>
+        )}
+      </div>
+    </div>
+  )}
+
+  <!-- Tech Stack -->
+  {tech.length > 0 && (
+    <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+      <h2 id="tech-heading" class="project-side-title">// TECH STACK</h2>
+      <div class="flex gap-2 flex-wrap mt-2">
+        {tech.map((t) => {
+          const techWithIcon = findTechWithIcon(t);
+          return (
+            <TechCard
+              name={techWithIcon.name}
+              icon={techWithIcon.icon}
+              type={techWithIcon.type}
+              showName={true}
+              customClass="px-2.5 py-1 text-xs"
+              iconClass="w-3.5 h-3.5"
+            />
+          );
+        })}
+      </div>
+    </div>
+  )}
+
+  <!-- Table of Contents -->
+  {contentHeadings.length > 0 && (
+    <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+      <h2 id="contents-heading" class="project-side-title">// CONTENTS</h2>
+      <ul class="text-xs font-mono space-y-2 mt-2">
+        {contentHeadings.map((heading) => (
+          <li class={`${heading.depth === 3 ? 'ml-3' : ''}`}>
             <a
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-bold text-center inline-flex items-center gap-2 bg-main/10 hover:bg-main/20 text-main text-sm px-3 py-2 rounded-lg transition-colors"
+              href={`#${heading.slug}`}
+              class="text-gray-text hover:text-main transition-colors flex items-center gap-1.5 py-0.5"
             >
-              <Image
-                src={web}
-                alt=""
-                class="w-4 h-4"
-                decoding="async"
-              />
-              Visit
+              <span class="w-1 h-1 rounded-full bg-main/60"></span>
+              <span>{heading.text}</span>
             </a>
-          )}
-          {sourceUrl && (
-            <a
-              href={sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-bold text-center inline-flex items-center gap-2 bg-main/10 hover:bg-main/20 text-main text-sm px-3 py-2 rounded-lg transition-colors"
-            >
-              <Image
-                src={source}
-                alt=""
-                class="w-4 h-4"
-                decoding="async"
-              />
-              Source
-            </a>
-          )}
-        </div>
-        <div class="h-2px w-full bg-tertiary mt-4"></div>
-      </div>
-    )}
-
-    {tech.length > 0 && (
-      <div class="rounded-xl mt-4">
-        <h2 id="tech-heading" class="project-side-title">.Tech_Stack</h2>
-        <div class="flex gap-2 flex-wrap">
-          {tech.map((t) => {
-            const techWithIcon = findTechWithIcon(t);
-            return (
-              <TechCard
-                name={techWithIcon.name}
-                icon={techWithIcon.icon}
-                type={techWithIcon.type}
-                showName={true}
-                customClass="px-2 py-1 text-xs"
-                iconClass="w-4 h-4"
-              />
-            );
-          })}
-        </div>
-        <div class="h-2px w-full bg-tertiary mt-4"></div>
-      </div>
-    )}
-
-    {contentHeadings.length > 0 && (
-      <div class="rounded-xl mt-4">
-        <h2 id="contents-heading" class="project-side-title">.Contents</h2>
-        <ul class="text-sm list-disc list-inside space-y-1 text-white/80">
-          {contentHeadings.map((heading) => (
-            <li class={`${heading.depth === 3 ? 'ml-4' : ''}`}>
-              <a href={`#${heading.slug}`}>{heading.text}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    )}
-  </div>
-
-  <!-- Mobile view -->
-  <div class="block md:hidden border-2 border-tertiary rounded-lg overflow-hidden">
-    <table class="w-full">
-      {(url || sourceUrl) && (
-        <tr class="border-b-2 border-tertiary items-center">
-          <th class="p-3 text-left text-main text-sm font-mono">.Links</th>
-          <td class="p-3">
-            <div class="flex gap-2 flex-wrap">
-              {url && (
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-bold inline-flex items-center gap-2 bg-main/10 hover:bg-main/20 text-main text-sm px-3 py-2 rounded-lg transition-colors"
-                >
-                  <Image
-                    src={web}
-                    alt=""
-                    class="w-5 h-5"
-                    decoding="async"
-                  />
-                  Visit
-                </a>
-              )}
-              {sourceUrl && (
-                <a
-                  href={sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="bg-main/20 hover:bg-main text-main text-sm px-3 py-1 rounded-full transition-colors"
-                >
-                  Source
-                </a>
-              )}
-            </div>
-          </td>
-        </tr>
-      )}
-
-      {tech.length > 0 && (
-        <tr class="border-b-2 border-tertiary">
-          <th class="p-3 text-left text-main text-sm font-mono">.Tech_Stack</th>
-          <td class="p-3">
-            <div class="flex gap-2 flex-wrap">
-              {tech.map((t) => {
-                const techWithIcon = findTechWithIcon(t);
-                return (
-                  <TechCard
-                    name={techWithIcon.name}
-                    icon={techWithIcon.icon}
-                    type={techWithIcon.type}
-                    showName={true}
-                    customClass="px-2 py-1 text-xs"
-                    iconClass="w-4 h-4"
-                  />
-                );
-              })}
-            </div>
-          </td>
-        </tr>
-      )}
-
-      {contentHeadings.length > 0 && (
-        <tr>
-          <th class="p-3 text-left text-main text-sm font-mono">.Contents</th>
-          <td class="p-3">
-            <ul class="text-sm space-y-1 text-white/80">
-              {contentHeadings.map((heading) => (
-                <li class={`${heading.depth === 3 ? 'ml-4' : ''}`}>
-                  <a href={`#${heading.slug}`}>{heading.text}</a>
-                </li>
-              ))}
-            </ul>
-          </td>
-        </tr>
-      )}
-    </table>
-  </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
 </aside>
-
-<style>
-  th {
-    vertical-align: top;
-    width: 30%;
-  }
-</style>

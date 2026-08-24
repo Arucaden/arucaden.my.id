@@ -92,10 +92,10 @@ export function initProfileEffects() {
   const delegatedClickHandler = (e) => {
     const target = e.target;
     if (!(target instanceof Element)) return;
-    if (target.id === 'show-all-experiences') {
+    if (target.closest('#show-all-experiences')) {
       showExperiencesOverlay();
     }
-    if (target.id === 'hide-all-experiences') {
+    if (target.closest('#hide-all-experiences')) {
       hideExperiencesOverlay();
     }
   };

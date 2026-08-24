@@ -48,3 +48,36 @@ const absoluteImage = ogImage.startsWith('http')
 {jsonLd && (
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 )}
+
+<script is:inline>
+  (function() {
+    try {
+      var saved = localStorage.getItem('arucaden_theme_color');
+      if (saved) {
+        var cleanHex = saved.replace(/^#/, '');
+        var r = 255, g = 59, b = 105;
+        if (cleanHex.length === 6) {
+          r = parseInt(cleanHex.substring(0, 2), 16);
+          g = parseInt(cleanHex.substring(2, 4), 16);
+          b = parseInt(cleanHex.substring(4, 6), 16);
+        } else if (cleanHex.length === 3) {
+          r = parseInt(cleanHex[0] + cleanHex[0], 16);
+          g = parseInt(cleanHex[1] + cleanHex[1], 16);
+          b = parseInt(cleanHex[2] + cleanHex[2], 16);
+        }
+        if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
+          var root = document.documentElement;
+          root.style.setProperty('--color-main', saved);
+          root.style.setProperty('--color-main-rgb', r + ' ' + g + ' ' + b);
+          root.style.setProperty('--color-secondary', saved);
+          root.style.setProperty('--color-secondary-rgb', r + ' ' + g + ' ' + b);
+          root.style.setProperty('--color-tertiary-rgb', Math.round(r * 0.58) + ' ' + Math.round(g * 0.58) + ' ' + Math.round(b * 0.58));
+          root.style.setProperty('--color-main-shade-rgb', Math.round(r * 0.63) + ' ' + Math.round(g * 0.63) + ' ' + Math.round(b * 0.63));
+          root.style.setProperty('--color-accent', saved);
+          root.style.setProperty('--color-accent-glow', 'rgba(' + r + ',' + g + ',' + b + ', 0.35)');
+        }
+      }
+    } catch(e) {}
+  })();
+</script>
+

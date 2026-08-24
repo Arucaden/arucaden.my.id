@@ -23,20 +23,21 @@ export default defineConfig({
     // Glassmorphism & Surface utilities
     ['glass-panel', 'bg-[rgba(18,14,24,0.75)] backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.37)]'],
     ['glass-panel-subtle', 'bg-[rgba(14,11,18,0.6)] backdrop-blur-md border border-white/[0.08] rounded-xl'],
-    ['glass-panel-glow', 'bg-[rgba(22,16,30,0.85)] backdrop-blur-xl border border-main/30 rounded-2xl shadow-[0_0_24px_rgba(255,59,105,0.15)]'],
+    ['glass-panel-glow', 'bg-[rgba(22,16,30,0.85)] backdrop-blur-xl border border-main rounded-2xl shadow-[0_0_24px_var(--color-accent-glow)]'],
+    ['article-container', 'bg-[rgba(18,14,24,0.8)] backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)] p-6 sm:p-8 md:p-10'],
     
-    // Interactive & Cards
-    ['interactive-card', 'transition-all duration-300 ease-out hover:translate-y--1 hover:border-main/50 hover:shadow-[0_12px_30px_-10px_rgba(255,59,105,0.25)]'],
-    ['image-border', 'border border-white/10 p-1 rounded-xl'],
-    ['image-border2', 'border border-tertiary/60 p-1 rounded-xl'],
+    // Interactive & Cards (Centralized white outline -> dynamic main accent on hover)
+    ['interactive-card', 'bg-white/[0.03] border border-white/10 hover:border-main hover:bg-white/[0.06] hover:shadow-[0_0_24px_var(--color-accent-glow)] rounded-2xl transition-all duration-300'],
+    ['image-border', 'border border-white/10 hover:border-main transition-all duration-300 p-1 rounded-xl'],
+    ['image-border2', 'border border-white/10 hover:border-main transition-all duration-300 p-1 rounded-xl shadow-sm hover:shadow-[0_0_24px_var(--color-accent-glow)]'],
     [
       'hov-fx',
-      'transition-all duration-300 ease-out hover:scale-[1.02] hover:border-main hover:shadow-[0_0_20px_rgba(255,59,105,0.35)]',
+      'transition-all duration-300 ease-out hover:scale-[1.01] hover:border-main hover:shadow-[0_0_24px_var(--color-accent-glow)]',
     ],
     
     // Typography & Titles
     ['section-title', 'text-xs font-mono font-medium tracking-widest text-main uppercase mb-1'],
-    ['project-side-title', 'text-base font-bold text-main mb-1'],
+    ['project-side-title', 'text-sm font-mono font-bold tracking-wider text-main uppercase mb-2'],
     ['prose-text', 'text-base leading-relaxed text-gray-text'],
     ['editorial-title', 'text-3xl md:text-5xl font-black tracking-tight text-white'],
     
@@ -49,44 +50,53 @@ export default defineConfig({
     ['badge-accent', 'px-2.5 py-0.5 text-xs badge-shape border-main/40 bg-main/15 text-main font-medium'],
     [
       'badge-lg',
-      'px-3.5 py-1 text-xs rounded-full border border-white/15 bg-white/5 font-mono tracking-wide whitespace-nowrap transition-all cursor-pointer hover:border-main hover:text-white',
+      'px-3.5 py-1 text-xs rounded-full border border-white/15 bg-white/5 font-mono tracking-wide whitespace-nowrap transition-all cursor-pointer hover:border-main hover:text-main',
     ],
-    ['badge-active', 'bg-main/20 text-white border-main shadow-[0_0_12px_rgba(255,59,105,0.3)]'],
+    ['badge-active', 'bg-main/20 text-white border-main shadow-[0_0_12px_var(--color-accent-glow)]'],
     ['badge-inactive', 'bg-black/40 text-gray-text border-white/10 hover:border-white/20 hover:text-white'],
     [
       'badge-solid',
-      'bg-main border-main text-black font-semibold shadow-[0_0_12px_rgba(255,59,105,0.4)]',
+      'bg-main border-main text-black font-semibold shadow-[0_0_12px_var(--color-accent-glow)]',
     ],
     
     // Buttons
     [
       'btn-primary',
-      'inline-flex items-center justify-center gap-2 bg-gradient-to-r from-main to-tertiary text-white font-medium px-5 py-2.5 rounded-xl transition-all duration-200 hover:shadow-[0_0_20px_rgba(255,59,105,0.4)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer',
+      'inline-flex items-center justify-center gap-2 bg-gradient-to-r from-main to-tertiary text-white font-medium px-5 py-2.5 rounded-xl transition-all duration-200 hover:shadow-[0_0_20px_var(--color-accent-glow)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer',
     ],
     [
       'btn-secondary',
-      'inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white-text border border-white/10 hover:border-white/25 font-medium px-5 py-2.5 rounded-xl transition-all duration-200 cursor-pointer',
+      'inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white-text border border-white/10 hover:border-main hover:text-main font-medium px-5 py-2.5 rounded-xl transition-all duration-200 cursor-pointer',
+    ],
+    [
+      'btn-back',
+      'inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-main/15 border border-white/10 hover:border-main text-xs font-mono font-bold text-gray-text hover:text-main transition-all duration-200 shadow-sm cursor-pointer',
+    ],
+    [
+      'btn-view-all',
+      'w-full mt-4 py-2.5 px-4 rounded-xl bg-white/[0.04] hover:bg-main/15 border border-white/10 hover:border-main text-xs font-mono font-bold text-gray-text hover:text-main uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200 shadow-sm hover:shadow-[0_0_20px_var(--color-accent-glow)] cursor-pointer',
     ],
     [
       'button-fx',
-      'bg-main/15 text-main border border-main/30 font-medium hover:bg-main hover:text-black transition-all duration-200 py-2 px-4 rounded-xl text-center cursor-pointer shadow-sm hover:shadow-[0_0_14px_rgba(255,59,105,0.3)]',
+      'bg-main/15 text-main border border-main/30 font-medium hover:bg-main hover:text-black transition-all duration-200 py-2 px-4 rounded-xl text-center cursor-pointer shadow-sm hover:shadow-[0_0_14px_var(--color-accent-glow)]',
     ],
     [
       'hov-button-fx',
-      'scale-102% duration-200 ease-in-out shadow-[0_0_12px_rgba(255,59,105,0.2)] text-white',
+      'scale-102% duration-200 ease-in-out shadow-[0_0_12px_var(--color-accent-glow)] text-white',
     ],
 
+    // Editorial Prose / Markdown styling
     [
       'purosu',
-      "prose prose-p:text-gray-text prose-headings:text-white prose-strong:text-white prose-a:text-main prose-a:underline hover:prose-a:text-white prose-li:marker:text-main prose-li:text-gray-text prose-ul:list-disc prose-blockquote:bg-main/10 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-xl prose-blockquote:break-words prose-blockquote:border-main prose-table:border-collapse prose-table:text-white/90 prose-th:bg-main/15 prose-th:text-left prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2 prose-tr:border-b prose-tr:border-white/10",
+      'prose prose-invert max-w-none prose-p:text-gray-text prose-p:leading-relaxed prose-headings:text-white prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h2:border-b prose-h2:border-main/30 prose-h2:pb-2 prose-h3:text-lg prose-strong:text-white prose-a:text-main prose-a:no-underline hover:prose-a:underline prose-li:marker:text-main prose-li:text-gray-text prose-ul:list-disc prose-blockquote:bg-main/10 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-xl prose-blockquote:border-l-4 prose-blockquote:border-main prose-pre:bg-black/60 prose-pre:border prose-pre:border-white/10 prose-pre:rounded-xl prose-code:text-main prose-code:font-mono prose-table:border-collapse prose-table:text-white/90 prose-th:bg-main/15 prose-th:text-left prose-th:px-3 prose-th:py-2 prose-td:px-3 prose-td:py-2 prose-tr:border-b prose-tr:border-main/20',
     ],
   ],
   theme: {
     colors: {
-      main: '#FF3B69',
-      secondary: '#FF3B69',
-      tertiary: '#934355',
-      'main-shade': '#A13741',
+      main: 'var(--color-main, #FF3B69)',
+      secondary: 'var(--color-secondary, #FF3B69)',
+      tertiary: 'var(--color-tertiary, #934355)',
+      'main-shade': 'var(--color-main-shade, #A13741)',
       'white-text': '#F5E6EB',
       'gray-text': '#C8BAC3',
       'black-text': '#08060B',
@@ -97,4 +107,3 @@ export default defineConfig({
     },
   },
 });
-

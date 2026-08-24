@@ -1,6 +1,7 @@
 <script lang="ts">
   import { experiences } from '@data/experiences.ts';
   import ExperienceBadge from './ExperienceBadge.svelte';
+  import ViewAllButton from '../Common/ViewAllButton.svelte';
   const latestExperiences = experiences.slice(0, 3);
 </script>
 
@@ -20,8 +21,8 @@
       <article
         class={`flex flex-col justify-between gap-3 rounded-2xl p-4 transition-all duration-300 ${
           i === 0
-            ? 'bg-[rgba(255,59,105,0.08)] border border-main/40 shadow-[0_0_20px_rgba(255,59,105,0.15)]'
-            : 'bg-white/[0.03] border border-white/10 hover:border-white/20'
+            ? 'bg-main/10 border border-main/40 shadow-[0_0_20px_var(--color-accent-glow)] hover:border-main hover:bg-main/15'
+            : 'bg-white/[0.03] border border-white/10 hover:border-main/50 hover:bg-white/[0.06] hover:shadow-[0_0_20px_var(--color-accent-glow)]'
         }`}
       >
         <div>
@@ -45,13 +46,10 @@
     {/each}
   </div>
 
-  <button
+  <ViewAllButton
     id="show-all-experiences"
-    type="button"
-    class="btn-secondary w-full mt-4 text-xs font-mono py-2.5"
-  >
-    View Full Experience History ({experiences.length} Positions) ➔
-  </button>
+    text={`View Full Experience History (${experiences.length} Positions)`}
+  />
 </section>
 
 <style>
@@ -63,4 +61,3 @@
     overflow: hidden;
   }
 </style>
-

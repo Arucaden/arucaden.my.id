@@ -1,13 +1,13 @@
 ---
-const { href = '/#projects', text = 'Back to Projects' } = Astro.props;
-import { Image } from 'astro:assets';
-import arrow from 'public/icons/arrow-down.svg';
+interface Props {
+  href?: string;
+  text?: string;
+}
+
+const { href = '/#projects', text = 'Back to Projects' } = Astro.props as Props;
 ---
 
-<a
-  href={href}
-  class="inline-flex items-center font-bold gap-2 px-4 py-2 rounded-xl bg-main/10 text-main hover:bg-main/20 transition-colors mb-4"
->
-  <Image src={arrow} alt="" class="w-4 h-4 rotate-90" />
+<a href={href} class="btn-back group mb-6">
+  <span class="i-ri-arrow-left-line w-4 h-4 text-main transition-transform group-hover:-translate-x-1"></span>
   <span>{text}</span>
 </a>

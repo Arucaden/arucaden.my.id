@@ -9,40 +9,36 @@ interface Props {
   headerClass?: string;
   zIndexClass?: string;
   paddingClass?: string;
-  shade?: boolean;
-  backdropBlur?: string; 
 }
 
 const {
   id,
   title,
   closeButtonId = 'overlay-close',
-  closeLabel = 'Back',
+  closeLabel = 'Close',
   stickyHeader = true,
   class: rootExtra = '',
   headerClass = '',
-  zIndexClass = 'z-10',
+  zIndexClass = 'z-50',
   paddingClass = 'p-2',
-  shade = true,
-  backdropBlur = 'backdrop-blur-sm',
 } = Astro.props as Props;
 ---
 
-<div id={id} class={`absolute inset-0 ${zIndexClass} overlay-base flex flex-col ${paddingClass} ${rootExtra} ${shade ? 'bg-black/60' : ''} ${backdropBlur}`}>
+<div id={id} class={`absolute inset-0 ${zIndexClass} overlay-base flex flex-col ${paddingClass} ${rootExtra}`}>
   {Astro.slots.has('header') || title || closeButtonId ? (
-    <div class={`flex items-center justify-between mb-2 bg-black/70 border border-secondary/30 rounded-md px-3 py-2 ${stickyHeader ? 'sticky top-0 z-20' : ''} ${headerClass}`}>
+    <div class={`flex items-center justify-between mb-2 bg-black/80 border border-white/15 rounded-xl px-4 py-2.5 ${stickyHeader ? 'sticky top-0 z-20' : ''} backdrop-blur-md ${headerClass}`}>
       {Astro.slots.has('header') ? (
         <slot name="header" />
       ) : (
         <>
-          <h2 class="section-title m-0">{title}</h2>
-          <button id={closeButtonId} type="button" class="button-fx">{closeLabel}</button>
+          <h2 class="text-sm font-mono font-bold tracking-wider text-white uppercase m-0">{title}</h2>
+          <button id={closeButtonId} type="button" class="btn-secondary py-1 px-3 text-xs">{closeLabel}</button>
         </>
       )}
     </div>
   ) : null}
 
-  <div class="flex-1 overflow-y-auto">
+  <div class="flex-1 overflow-y-auto w-full pb-4">
     <slot />
   </div>
 </div>
@@ -52,7 +48,10 @@ const {
     opacity: 0;
     transform: translateY(8px);
     pointer-events: none;
+    background: rgba(8, 6, 11, 0.85);
+    backdrop-filter: blur(12px);
     transition: opacity 200ms ease, transform 200ms ease;
+    border-radius: 1rem;
   }
   .overlay-base.overlay-visible {
     opacity: 1;
@@ -60,4 +59,3 @@ const {
     pointer-events: auto;
   }
 </style>
-

@@ -1,5 +1,6 @@
 <script lang="ts">
   import Artwork from './ArtworkDetail.svelte';
+  import ViewAllButton from '../Common/ViewAllButton.svelte';
   import type { Artwork as ArtType } from '@/types/artwork.ts';
   import '@/styles/global.css';
   import ArtworkList from './ArtworkList.svelte';
@@ -43,7 +44,7 @@
     <div class="hidden sm:grid grid-cols-5 gap-2 mt-4">
       {#each previewArtworks as art (art.title)}
         <button
-          class="image-border2 brightness-90 overflow-hidden hover:hov-fx hover:brightness-100 transition-all"
+          class="image-border2 brightness-90 overflow-hidden hover:hov-fx hover:brightness-100 transition-all cursor-pointer"
           onclick={() => (currentArtwork = art)}
         >
           <img src={art.image} alt={art.title} class="w-full h-24 object-cover rounded-md" />
@@ -51,21 +52,20 @@
       {/each}
     </div>
 
-    <button 
+    <ViewAllButton
       id="show-all-artworks"
-      type="button" 
-      class="button-fx w-full mt-4"
-      onclick={() => overlayVisible = true}
-    >
-      View All Artworks
-    </button>
+      text={`View All Artworks (${artworks.length})`}
+      onclick={() => (overlayVisible = true)}
+    />
   </div>
 
   <!-- List artworks -->
   <div id="artworks-overlay" class={`absolute inset-0 overlay-base flex flex-col p-2 ${overlayVisible ? 'overlay-visible' : ''}`}>
-    <div class="flex items-center justify-between mb-2 bg-black/70 border border-secondary/30 rounded-md px-3 py-2 sticky top-0 z-20">
-      <h2 class="section-title m-0">.Artworks</h2>
-      <button id="hide-all-artworks" type="button" class="button-fx" onclick={() => overlayVisible = false}>Back</button>
+    <div class="flex items-center justify-between mb-2 bg-black/80 border border-white/15 rounded-xl px-4 py-2.5 sticky top-0 z-20 backdrop-blur-md">
+      <h2 class="text-sm font-mono font-bold tracking-wider text-white uppercase m-0">Artworks</h2>
+      <button id="hide-all-artworks" type="button" class="btn-secondary py-1 px-3 text-xs" onclick={() => (overlayVisible = false)}>
+        Close
+      </button>
     </div>
     <div class="flex-1 overflow-y-auto">
       <div class="p-1" in:fly={{ y: 20, duration: 250 }}>
@@ -80,9 +80,11 @@
     opacity: 0;
     transform: translateY(8px);
     pointer-events: none;
-    background: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(4px);
+    background: rgba(8, 6, 11, 0.85);
+    backdrop-filter: blur(12px);
     transition: opacity 200ms ease, transform 200ms ease;
+    border-radius: 1rem;
+    z-index: 50;
   }
   .overlay-base.overlay-visible {
     opacity: 1;

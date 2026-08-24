@@ -6,6 +6,7 @@
 #title-container.glitching #title-text {
   animation: glitch 1s linear;
   position: relative;
+  white-space: nowrap;
 }
 
 #title-container.glitching #title-text::before,
@@ -15,6 +16,7 @@
   left: 0;
   top: 0;
   width: 100%;
+  white-space: nowrap;
 }
 
 #title-container.glitching #title-text::before {
@@ -31,6 +33,7 @@
 #name-container.glitching #name-text {
   animation: glitch 1.2s linear;
   position: relative;
+  white-space: nowrap;
 }
 
 #name-container.glitching #name-text::before,
@@ -40,6 +43,7 @@
   left: 0;
   top: 0;
   width: 100%;
+  white-space: nowrap;
 }
 
 #name-container.glitching #name-text::before {
@@ -54,15 +58,18 @@
 
 /* Japanese text styling */
 .text-japanese {
-  color: #ff4873;
-  text-shadow: 0 0 5px rgba(240, 116, 186, 0.27);
+  color: var(--color-main, #ff3b69);
+  text-shadow: 0 0 12px var(--color-accent-glow, rgba(255, 59, 105, 0.4));
+  white-space: nowrap !important;
 }
 
 #name-container.glitching .text-japanese::before,
 #name-container.glitching .text-japanese::after {
-  color: #ff4873;
-  text-shadow: 0 0 5px rgba(240, 116, 186, 0.27);
+  color: var(--color-main, #ff3b69);
+  text-shadow: 0 0 12px var(--color-accent-glow, rgba(255, 59, 105, 0.4));
+  white-space: nowrap !important;
 }
+
 
 
 /* Keyframes */

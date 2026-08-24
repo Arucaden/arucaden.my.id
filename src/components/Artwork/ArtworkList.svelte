@@ -59,7 +59,7 @@
   {#each filtered as art (art.title)}
     <button
       type="button"
-      class="relative overflow-hidden rounded-lg border-2 border-tertiary hover:hov-fx cursor-pointer text-left p-0 bg-transparent"
+      class="relative overflow-hidden image-border2 hover:hov-fx cursor-pointer text-left bg-transparent block"
       onclick={() => onSelect?.(art)}
     >
       <img
