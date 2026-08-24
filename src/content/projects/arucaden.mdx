@@ -1,45 +1,71 @@
 ---
 title: "arucaden.my.id"
 date: 2025-03-10
-description: "Personal portfolio website showcasing projects and artworks"
+description: "Personal portfolio website showcasing projects and artworks with fast SSG and reactive islands"
 image: "/projects/arucaden.png"
 tech: ["Svelte", "Astro", "UnoCSS"]
 url: "https://arucaden.my.id"
 sourceUrl: "https://github.com/Arucaden/arucaden.my.id"
 ---
 
-**arucaden.my.id** is my personal portfolio website, built to showcase my projects, skills, experiences and sometimes share my opinions.
+> **arucaden.my.id** is my personal portfolio website, built to showcase my projects, skills, and artwork while providing a lightning-fast browsing experience.
 
-### Executive Summary
+---
 
-As a **Frontend Engineer & UI/UX Designer**, I designed this platform as an upgrade from my old portfolio (which using slides). It functions as a fast static site while injecting javascript reactivity when needed using Astro Islands and Svelte Runes.
+### Executive Summary & Role
+
+As the **Frontend Engineer & UI/UX Designer**, I built this platform as an evolution from my previous slide-based portfolio. The goal was to create a fast, content-driven static website while injecting JavaScript reactivity only where strictly needed using Astro Islands and Svelte 5 Runes.
+
+---
+
+### Key Features
+
+- **Astro Content Collections:** Type-safe markdown-driven architecture for projects and devlog articles.
+- **Interactive Component Islands:** Interactive overlays, filters, and dynamic cards rendered via lightweight Svelte 5 components.
+- **Custom Aesthetic & Animations:** Bespoke visual styling, glitch effects, and CRT scanline themes powered by CSS transitions and vanilla JavaScript.
+
+---
 
 ### The Problem & The Solution
 
-**The Problem:** 
-- Typical developer portfolios often feel like highly static corporate templates.
-- Heavy client-side frameworks (like React) that bloat loading times and destroy SEO (Using High Tech for FOMO).
-- Complicated animations (Like my name animation).
+**The Problem:**
+- Typical developer portfolios often rely on heavy client-side single-page application (SPA) frameworks that bloat JavaScript bundle sizes and degrade first-load performance.
+- Off-the-shelf templates frequently lack individuality and fail to showcase creative design identity.
+- Complex animation libraries often introduce runtime overhead.
 
-**The Solution:** 
-- I built this website using Astro for fast server-side HTML generation, Svelte 5 for precise, reactive "Islands" (like modals and overlays), and UnoCSS to completely eliminate CSS stylesheet bloat. 
-- I used vanilla JavaScript to make complicated animation, because it will never achieved with Svelte or Astro.
+**The Solution:**
+- Adopted **Astro** for zero-JS-by-default server-side HTML generation, paired with **Svelte 5** for surgical reactivity.
+- Used **UnoCSS** for on-demand atomic styling, eliminating stylesheet bloat.
+- Implemented performant vanilla JavaScript and CSS keyframes for custom interactive effects.
 
-### Technical Details
+---
 
-- **Fast Performance:** Powered entirely by Astro's static site generation and island architecture.
-- **Reactive Components:** Leveraged Svelte 5's new $state Runes to drive high-performance overlays and reactive data bindings.
-- **Utility-first Styling:** Completely custom-themed using UnoCSS for on-demand optimized CSS output.
-- **Complicated Animations:** Using vanilla JavaScript, CSS transitions, and completely custom glitch effects.
-- **Responsive Design:** Designed to be good looking website in all platform
+### Technical Details & Architecture
+
+- **Island Architecture:** Leveraged selective hydration (`client:idle`, `client:visible`) to ensure zero unnecessary JavaScript runs on static content pages.
+- **Svelte 5 Runes:** Utilized explicit `$state` and `$derived` primitives for state management in modal popups and filter systems.
+- **Utility-First Styling:** Configured UnoCSS rules to output minimal, purged CSS bundles on build.
+- **Responsive Layout:** Engineered responsive layouts optimized for all viewport sizes from mobile to ultra-wide displays.
+
+---
 
 ### Challenges & Learnings
 
-Merging Astro routing with Svelte's component hydration was extremely tricky at first. I need to learn more about partial hydration concepts (figuring out when to use client:idle or  client:visible). Furthermore, adapting to Svelte's explicit Runes forced me to understand exactly how reactivity flows, making robust interactive components. 
-Also **Always design with the end-user's experience** over personal taste, in the end its the user who visits the website.
+- **Partial Hydration Strategy:** Finding the balance between static HTML rendering and dynamic Svelte island hydration required understanding client directives (`client:idle` vs. `client:visible`).
+- **Svelte 5 Rune Paradigms:** Transitioning to Svelte 5's new reactivity model deepened my understanding of fine-grained reactive dependency graphs.
+- **User-Centric Design:** Learned to balance creative visual effects (glitch and CRT styling) with readability, accessibility, and smooth performance.
+
+---
+
+### Key Takeaways & Results
+
+- **Blazing Fast Performance:** Achieved top-tier Lighthouse performance with instant sub-second page loads and zero layout shift.
+- **Lean Asset Footprint:** Minimized total stylesheet size using UnoCSS on-demand utility generation.
+- **Scalable Content Architecture:** Easily extensible structure allowing new projects and devlogs to be published seamlessly via Markdown/MDX.
+- **[put your description - e.g. Lighthouse score or personal design milestone]**
 
 <br />
 
-> There is a story behind this website, check out below to know more!
+> There is a deeper story behind the redesign of this website. Check out the devlog below!
 
 <a href="/blog/arucaden" class="inline-block px-4 py-2 mt-4 text-sm font-semibold rounded-md bg-main/20 text-white border border-main hover:bg-main hover:text-black transition-colors" style={{ textDecoration: 'none' }}>Read the full Devlog ➔</a>

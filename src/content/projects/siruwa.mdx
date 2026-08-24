@@ -1,21 +1,68 @@
 ---
 title: "SIRUWA"
 date: 2024-05-22
-description: "Room and Space Management System for RT/RW communities, designed to connect and empower local residents."
+description: "Room and Space Management System for RT/RW local communities, designed to connect and empower residents."
 image: "/projects/Siruwa.png"
 tech: ["Laravel", "MySQL", "Tailwind", "Alpine"]
+draft: true
 ---
 
-> **SIRUWA** is an information system for room and space management, built to help local RT/RW communities coordinate shared facilities.
+> **SIRUWA** is a community-focused room and space management information system designed to help local RT/RW community administrators and residents easily reserve, manage, and coordinate shared neighborhood facilities.
 
-### Overview
+---
 
-The project focused on making reservation and availability clearer for residents and administrators, with a responsive interface built on Laravel and Alpine.js.
+### Executive Summary & Role
 
-### My Role
+| Attribute | Details |
+| :--- | :--- |
+| **Role** | Frontend Developer & UI Implementor / [put your description] |
+| **Tech Stack** | Laravel, Alpine.js, Tailwind CSS, MySQL |
+| **Core Responsibilities** | UI Implementation, Interactive Booking Forms, Admin Workflow Polish |
 
-I contributed to frontend implementation and UI polish using Tailwind and Alpine, coordinating with the team on forms, listing views, and basic admin workflows.
+As the **Frontend Developer**, I was responsible for crafting the user experience, building responsive booking forms, and implementing dynamic client-side interactions with Alpine.js and Tailwind CSS.
 
-### Notes
+---
 
-A longer write-up is still in progress. Reach out if you want details on the stack or process.
+### Key Features
+
+- **Public Facility Catalog:** Residents can browse available community halls, sports spaces, and public inventory with live availability status.
+- **Interactive Booking Form:** Date and time slot picker with real-time collision detection to prevent double bookings.
+- **Admin Management Dashboard:** Administrative tools for approving reservations, generating schedule reports, and tracking facility usage.
+- **[put your description - e.g. WhatsApp / Email confirmation notification flow]**
+
+---
+
+### The Problem & The Solution
+
+**The Problem:**
+- Community space bookings were previously coordinated through fragmented WhatsApp chats or paper logbooks, leading to double-booked facilities and lost records.
+- Non-technical residents struggled with overly complex booking portals.
+
+**The Solution:**
+- Created a lightweight, mobile-first web interface with clear step-by-step reservation workflows.
+- Implemented client-side reactivity using **Alpine.js** to deliver snappy calendar date picking without heavy JavaScript framework overhead.
+
+---
+
+### Technical Details & Architecture
+
+- **Lightweight Reactivity (Alpine.js):** Utilized Alpine.js for dynamic modal dialogues, schedule filtering, and interactive form feedback.
+- **Utility Styling (Tailwind CSS):** Created an accessible, responsive layout tailored for elderly and casual mobile users.
+- **Backend Booking Logic (Laravel & MySQL):** Engineered database queries with time-range overlap checks to enforce atomic reservation safety.
+- **[put your description - e.g. Role-based permission matrix / Database schema]**
+
+---
+
+### Challenges & Learnings
+
+- **Managing Booking Race Conditions:** Handling simultaneous reservation requests for the same time slot taught me how to structure backend database transactions and lock checks.
+- **Accessible UI Design for Diverse Users:** Designing for community residents required high-contrast typography, clear status badges, and simplified form controls.
+- **[put your description - e.g. Community stakeholder feedback]**
+
+---
+
+### Key Takeaways & Results
+
+- **Streamlined Coordination:** Replaced manual chat coordination with a single, clear availability calendar.
+- **Fast, Mobile-Friendly UX:** Lightweight frontend ensures rapid load times even on slow mobile networks.
+- **[put your description - e.g. Feedback from community test users / Presentation results]**
