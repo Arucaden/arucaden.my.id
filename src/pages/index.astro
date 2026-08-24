@@ -54,7 +54,7 @@ blogs = blogs.sort((a, b) => {
 ---
 
 <Layout>
-  <!-- 1. Profile / Bio -->
+  <!-- Profile -->
   <section
     id="profile"
     class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
@@ -62,14 +62,14 @@ blogs = blogs.sort((a, b) => {
   >
     <Container
       title="Profile"
-      subtitle="About & Roles"
+      subtitle="About & Experience"
       headingId="profile-heading"
     >
       <Profile />
     </Container>
   </section>
 
-  <!-- 2. Projects -->
+  <!-- Projects -->
   <section
     id="projects"
     class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
@@ -77,14 +77,14 @@ blogs = blogs.sort((a, b) => {
   >
     <Container
       title="Projects"
-      subtitle="Selected Works"
+      subtitle="Apps and Game Works"
       headingId="projects-heading"
     >
       <Projects projects={projects} client:visible />
     </Container>
   </section>
 
-  <!-- 3. Artworks -->
+  <!-- Artworks -->
   <section
     id="artworks"
     class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
@@ -92,14 +92,14 @@ blogs = blogs.sort((a, b) => {
   >
     <Container
       title="Artworks"
-      subtitle="Visuals & 2D Art"
+      subtitle="Design and Illustrations"
       headingId="artworks-heading"
     >
       <Artworks artworks={artworks} client:visible />
     </Container>
   </section>
 
-  <!-- 4. Blogs -->
+  <!-- Blogs -->
   <section
     id="blogs"
     class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
@@ -107,7 +107,7 @@ blogs = blogs.sort((a, b) => {
   >
     <Container
       title="Blog"
-      subtitle="Devlog & Insights"
+      subtitle="Thoughts & Devlog"
       headingId="blogs-heading"
     >
       <Blogs blogs={blogs} />

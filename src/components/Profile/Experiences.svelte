@@ -8,12 +8,11 @@
 <section aria-labelledby="experience-heading" class="flex flex-col flex-1 min-h-0">
   <div class="flex justify-between items-center mb-3">
     <div class="flex items-center gap-2">
-      <span class="w-2 h-2 rounded-full bg-main"></span>
       <h3 id="experience-heading" class="text-xs font-mono font-bold tracking-wider text-white uppercase m-0">
-        Career & Engineering Roles
+        Experiences
       </h3>
     </div>
-    <span class="text-[11px] font-mono text-gray-text">Latest 3 Highlights</span>
+    <span class="text-[11px] font-mono text-gray-text">Latest Experiences</span>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
@@ -21,7 +20,7 @@
       <article
         class={`flex flex-col justify-between gap-3 rounded-2xl p-4 transition-all duration-300 ${
           i === 0
-            ? 'bg-main/10 border border-main/40 shadow-[0_0_20px_var(--color-accent-glow)] hover:border-main hover:bg-main/15'
+            ? 'border border-main/80 shadow-[0_0_8px_var(--color-accent-glow)] hover:border-main hover:bg-main/15'
             : 'bg-white/[0.03] border border-white/10 hover:border-main/50 hover:bg-white/[0.06] hover:shadow-[0_0_20px_var(--color-accent-glow)]'
         }`}
       >
@@ -48,7 +47,7 @@
 
   <ViewAllButton
     id="show-all-experiences"
-    text={`View Full Experience History (${experiences.length} Positions)`}
+    text={`Show All Experience`}
   />
 </section>
 

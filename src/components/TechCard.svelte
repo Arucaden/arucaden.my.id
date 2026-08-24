@@ -7,7 +7,7 @@
 </script>
 
 <div
-  class={`inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border px-3 py-1.5 text-xs font-mono transition-all duration-200 hover:border-main hover:bg-main/15 hover:text-main hover:shadow-[0_0_12px_var(--color-accent-glow)] cursor-default
+  class={`inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border px-4 py-2.5 text-xs font-mono transition-all duration-200 hover:border-main hover:bg-main/15 hover:text-main hover:shadow-[0_0_12px_var(--color-accent-glow)] cursor-default
     ${highlight 
       ? 'text-white border-main bg-main/10 shadow-[0_0_12px_var(--color-accent-glow)]' 
       : 'text-gray-text border-white/10'} ${customClass}

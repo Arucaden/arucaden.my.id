@@ -74,20 +74,16 @@
   });
 </script>
 
-<!-- Desktop Navbar matching Container Width -->
 <header class="sticky top-4 z-50 w-full mb-8 hidden md:block">
-  <nav
-    class="w-full flex items-center justify-between px-4 py-1.5 rounded-2xl bg-[rgba(14,10,18,0.85)] backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]"
-  >
-    <!-- Nav Links (No inner individual borders) -->
-    <div class="flex items-center gap-1">
+  <nav class="w-full flex items-center justify-between px-4 py-2 rounded-2xl bg-[rgba(14,10,18,0.85)] backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)]">
+    <div class="flex items-center gap-2">
       {#each navLinks as link}
         <a
           href={link.href}
           onclick={(e) => handleNavClick(e, link)}
           class={`px-4 py-2 rounded-xl text-xs font-mono tracking-wide transition-all duration-200 flex items-center justify-center ${
             isActive(link)
-              ? 'bg-main/20 text-main font-bold border border-main/40 shadow-[0_0_12px_var(--color-accent-glow)]'
+              ? 'bg-main/20 text-main font-bold shadow-[0_0_4px_var(--color-accent-glow)]'
               : 'text-gray-text hover:text-main hover:bg-white/5'
           }`}
         >
@@ -100,16 +96,13 @@
       {/each}
     </div>
 
-    <!-- Date indicator + Color Palette Picker on the right -->
-    <div class="flex items-center gap-3 pr-1">
-      <span class="text-xs font-mono text-gray-text">{date}</span>
-      <div class="w-[1px] h-4 bg-white/10"></div>
+    <div class="flex items-center gap-3 pr-2">
+      <span class="text-sm font-mono text-gray-text">{date}</span>
       <ColorPalettePicker />
     </div>
   </nav>
 </header>
 
-<!-- Mobile Floating Bottom Bar -->
 <div class="fixed md:hidden inset-x-0 bottom-4 z-50 flex justify-center px-3 pointer-events-none">
   <nav
     class="pointer-events-auto w-full max-w-md flex items-center justify-around py-2.5 px-3 rounded-2xl bg-[rgba(14,10,18,0.92)] backdrop-blur-2xl border border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
@@ -132,7 +125,6 @@
       </a>
     {/each}
 
-    <!-- Mobile Palette Trigger -->
     <div class="border-l border-white/10 pl-2">
       <ColorPalettePicker />
     </div>

@@ -9,13 +9,13 @@ import me from '@/public/Me.jpeg';
 import MyLinks from './MyLinks.astro';
 
 const techToShow = [
-  'Unity', 'Blender', 'Figma', 'Illustrator', 'Clip Studio', 'Photoshop', 'Laravel', 'Flutter', 
+  'Unity', 'Figma', 'TypeScript', 'Clip Studio', 'Laravel', 'Flutter', 'Spline', 'MySQL', 'three.js', 'Svelte'
 ];
 
 const tech = techItems
   .filter(item => item.type === 'tech' && techToShow.includes(item.name));
 
-const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
+const highlightedTechSet = new Set(["Unity", "Clip Studio", "Figma", "TypeScript"]);
 ---
 
 <div id="profile-shell" class="relative">
@@ -25,42 +25,42 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
       <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
         <section aria-labelledby="desc-heading" class="flex flex-col">
           <div class="flex items-center justify-between mb-2">
-            <span class="text-xs font-mono text-main uppercase tracking-widest">// ABOUT & POSITIONING</span>
+            <span class="text-xs font-mono text-main uppercase tracking-widest">// ABOUT</span>
             <button id="show-portrait" class="md:hidden text-xs font-mono text-main hover:text-white transition-colors">
               [View Portrait]
             </button>
           </div>
 
           <p id="desc-paragraph" class="text-sm sm:text-base text-gray-text leading-relaxed">
-            I am a <strong class="text-white">UI/UX Designer and Creative Technologist</strong> with a Computer Science foundation. 
-            I specialize in crafting systematic design tokens, high-fidelity prototypes, and performant interactive experiences spanning web, mobile, and game engines.
+            Computer Science student graduate. I like to explore new technologies and create innovative solutions.
+On my free time, I like to watch anime or play games, drawing included.
           </p>
 
-          <!-- Verified Credential Badge (Styled matching TechCard) -->
+          <!-- Verified Credential Badge -->
           <div class="mt-4 flex flex-wrap gap-2">
             <a
               href="https://drive.google.com/file/d/15sRZIJPUoKbrHDbzhk_kAQvc2xNkSRo-/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border border-white/10 hover:border-main hover:bg-main/15 text-gray-text hover:text-main px-3 py-1.5 text-xs font-mono transition-all duration-200 shadow-sm hover:shadow-[0_0_12px_var(--color-accent-glow)] group"
+              class="inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border border-white/10 hover:border-main hover:bg-main/15 text-gray-text hover:text-main px-3 py-1.5 text-xs font-mono transition-all duration-200 shadow-sm hover:shadow-[0_0_8px_var(--color-accent-glow)] group"
               title="View Verified Unity Certification"
             >
-              <div class="i-ri-shield-check-fill w-4 h-4 text-main transition-transform group-hover:scale-110"></div>
+              <div class="i-ri-shield-check-fill w-4 h-6 text-main transition-transform group-hover:scale-110"></div>
               <span class="font-medium text-white group-hover:text-main transition-colors">Unity Certified Associate: Programmer</span>
             </a>
           </div>
         </section>
 
-        <!-- Social & Professional Links -->
+        <!-- Links -->
         <section aria-labelledby="links-heading">
-          <span id="links-heading" class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// CONNECT & CHANNELS</span>
+          <span id="links-heading" class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// Contacts</span>
           <MyLinks />
         </section>
 
-        <!-- Tech Stack Matrix -->
+        <!-- Tech Stack -->
         <section aria-labelledby="tech-heading">
           <div class="flex justify-between items-center mb-2">
-            <span id="tech-heading" class="text-xs font-mono text-main uppercase tracking-widest">// TOOLING & STACK</span>
+            <span id="tech-heading" class="text-xs font-mono text-main uppercase tracking-widest">// TECH STACK</span>
             <button id="tech-toggle" class="md:hidden text-xs font-mono text-main hover:text-white">Show All</button>
           </div>
 
@@ -81,7 +81,7 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
         </section>
       </div>
 
-      <!-- Right Column: Portrait with Prominent Outline -->
+      <!-- Right Column: Portrait -->
       <aside class="hidden md:flex flex-col gap-4 md:col-span-1">
         <div>
           <span class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// PROFILE</span>
@@ -97,14 +97,14 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
               class="w-full h-full object-cover object-top filter grayscale contrast-105 group-hover:grayscale-0 group-hover:contrast-100 transition-all duration-500 group-hover:scale-105"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
-              <span class="text-xs font-mono text-white">Daffa Maulana Satria</span>
+              <span class="text-sm font-mono text-white">Daffa Maulana Satria</span>
             </div>
           </div>
         </div>
       </aside>
     </div>
 
-    <!-- Career Trajectory / Experiences -->
+    <!-- Experiences -->
     <div class="pt-4 border-t border-white/10">
       <Experiences client:visible />
     </div>
@@ -114,7 +114,7 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
   <ExperienceOverlay />
 </div>
 
-<!-- Mobile Portrait Lightbox Modal -->
+<!-- Mobile Portrait -->
 <div id="portrait-overlay" class="fixed inset-0 bg-black/90 z-50 hidden flex-col items-center justify-center p-4">
   <div class="relative w-3/4 max-w-md max-h-[80vh] overflow-hidden rounded-2xl border-2 border-white/20">
     <Image 

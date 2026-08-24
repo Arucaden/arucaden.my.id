@@ -4,14 +4,14 @@
   const DEFAULT_COLOR = '#FF3B69';
 
   const presets = [
-    { name: 'Electric Crimson', hex: '#FF3B69' },
-    { name: 'Cyber Cyan', hex: '#00F0FF' },
-    { name: 'Neon Emerald', hex: '#00FF9D' },
-    { name: 'Ultra Violet', hex: '#A855F7' },
-    { name: 'Solar Amber', hex: '#FFB800' },
-    { name: 'Hyper Blue', hex: '#3B82F6' },
-    { name: 'Sakura Pink', hex: '#FF69B4' },
-    { name: 'Matrix Green', hex: '#22C55E' },
+    { name: 'Crimson', hex: '#FF3B69' },
+    { name: 'Cyan', hex: '#00F0FF' },
+    { name: 'Emerald', hex: '#00FF9D' },
+    { name: 'Violet', hex: '#A855F7' },
+    { name: 'Solar', hex: '#FFB800' },
+    { name: 'Blue', hex: '#3B82F6' },
+    { name: 'Sakura', hex: '#FF69B4' },
+    { name: 'Matrix', hex: '#22C55E' },
   ];
 
   let isOpen = $state(false);
@@ -42,7 +42,6 @@
 
     activeHex = hex.toUpperCase();
 
-    // Darker tone for tertiary & shade
     const tertiaryR = Math.round(rgb.r * 0.58);
     const tertiaryG = Math.round(rgb.g * 0.58);
     const tertiaryB = Math.round(rgb.b * 0.58);
@@ -51,7 +50,6 @@
     const shadeG = Math.round(rgb.g * 0.63);
     const shadeB = Math.round(rgb.b * 0.63);
 
-    // Apply directly to Document Element Root
     const root = document.documentElement;
     root.style.setProperty('--color-main', hex);
     root.style.setProperty('--color-main-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`);
@@ -68,7 +66,6 @@
       } catch (e) {}
     }
 
-    // Broadcast event for components
     window.dispatchEvent(
       new CustomEvent('theme-color-change', {
         detail: { hex, r: rgb.r, g: rgb.g, b: rgb.b },
@@ -103,25 +100,19 @@
 </script>
 
 <div id="palette-picker-container" class="relative inline-block">
-  <!-- Trigger Button beside Date -->
   <button
     type="button"
     onclick={(e) => {
       e.stopPropagation();
       isOpen = !isOpen;
     }}
-    class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-main/50 transition-all duration-200 cursor-pointer group shadow-sm"
+    class="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white/[0.04] hover:bg-white/5 transition-all duration-200 cursor-pointer group shadow-sm"
     title="Customize Website Accent Color"
     aria-label="Theme Color Picker"
   >
-    <div
-      class="w-2.5 h-2.5 rounded-full transition-transform group-hover:scale-125 shadow-[0_0_8px_var(--color-accent-glow)]"
-      style="background-color: {activeHex};"
-    ></div>
-    <span class="i-ri-palette-line w-3.5 h-3.5 text-gray-text group-hover:text-main transition-colors"></span>
+    <span class="i-ri-palette-fill w-3.5 h-3.5 text-main group-hover:text-main transition-colors"></span>
   </button>
 
-  <!-- Floating Preset Popover -->
   {#if isOpen}
     <div
       class="absolute right-0 top-full mt-2 w-64 rounded-2xl bg-[rgba(14,10,18,0.96)] backdrop-blur-2xl border border-white/15 p-3.5 shadow-[0_12px_40px_rgba(0,0,0,0.85)] z-50 animate-in fade-in zoom-in-95 duration-150"
@@ -145,7 +136,6 @@
         </button>
       </div>
 
-      <!-- Preset Swatches List -->
       <div class="grid grid-cols-2 gap-1.5 mb-2.5">
         {#each presets as preset}
           <button
@@ -169,15 +159,13 @@
         {/each}
       </div>
 
-      <!-- Quick Reset Button -->
       <div class="pt-2 border-t border-white/10 flex justify-between items-center">
-        <span class="text-[9px] font-mono text-gray-text uppercase">Live Web Palette</span>
         <button
           type="button"
           onclick={resetDefault}
-          class="text-[9px] font-mono text-main hover:text-white hover:underline transition-colors cursor-pointer"
+          class="text-[12px] font-mono hover:text-main text-white hover:underline transition-colors cursor-pointer"
         >
-          Reset Default
+          Reset
         </button>
       </div>
     </div>

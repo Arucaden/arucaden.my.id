@@ -43,13 +43,13 @@ const links = [
       title={link.description ? `${link.name} — ${link.description}` : link.name}
       rel="noopener noreferrer"
     >
-      <div class="border-2 border-main bg-main/10 hover:bg-main/25 w-10 h-10 md:w-11 md:h-11 rounded-xl flex items-center justify-center transition-all duration-300 shadow-[0_0_12px_var(--color-accent-glow)] hover:scale-105 hover:shadow-[0_0_20px_var(--color-accent-glow)]">
-        <span class={`${link.iconClass} w-5 h-5 text-main transition-transform duration-300 group-hover:scale-110`}></span>
+      <div class="border-2 border-white/20 hover:bg-main/25 hover:border-main w-12 h-12 md:w-14 md:h-11 rounded-xl flex items-center justify-center transition-all duration-300 hover:shadow-[0_0_20px_var(--color-accent-glow)]">
+        <span class={`${link.iconClass} w-8 h-5 text-white/70 hover:text-main transition-transform duration-300`}></span>
       </div>
 
       <div
         role="tooltip"
-        class="absolute top-10 left-0 mt-2 px-3 py-2 bg-black/95 border border-main text-white text-xs rounded-xl opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-20 shadow-[0_4px_20px_rgba(0,0,0,0.8)]"
+        class="absolute top-10 left-0 mt-2 px-4 py-2 bg-black/95 border border-main text-white text-xs rounded-xl opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-20 shadow-[0_4px_12px_rgba(0,0,0,0.8)]"
       >
         <div class="font-bold text-main">{link.name}</div>
         {link.description && (

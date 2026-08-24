@@ -41,7 +41,11 @@
 {#if href}
   <a
     href={href}
-    class="relative image-border2 hover:hov-fx rounded-2 overflow-hidden transition-all duration-300 ease-in-out w-full h-54 block group"
+    class={`relative rounded-4 overflow-hidden transition-all duration-300 ease-in-out w-full h-54 block group ${
+      pin
+        ? 'border-1 border-main/80 shadow-[0_0_16px_var(--color-accent-glow)] bg-main/5 p-1 hover:shadow-[0_0_24px_var(--color-accent-glow)]'
+        : 'image-border2 hover:hov-fx'
+    }`}
     onmouseenter={() => (hovered = true)}
     onfocus={() => (hovered = true)}
     onmouseleave={() => (hovered = false)}
@@ -59,10 +63,10 @@
 
     {#if pin}
       <div
-        class="absolute top-2 right-2 bg-black/60 rounded-full p-1.5 z-20 border border-white/10 backdrop-blur-sm"
-        title="Pinned Project"
+        class="absolute top-2 right-2 bg-black/80 rounded-full p-1.5 z-20 border border-main text-main shadow-[0_0_10px_var(--color-accent-glow)] backdrop-blur-sm"
+        title="Pinned Featured Project"
       >
-        <div class="i-ri-pushpin-fill w-4 h-4 text-white"></div>
+        <div class="i-ri-pushpin-fill w-3.5 h-3.5 text-main"></div>
       </div>
     {/if}
 
@@ -84,7 +88,7 @@
           <h3 class="text-lg font-bold leading-snug link-fx-white">{title}</h3>
         </div>
 
-        <p class="text-sm">{description}</p>
+        <p class="text-sm text-gray-200">{description}</p>
 
         <div
           class="flex gap-1 flex-wrap mt-auto"
@@ -95,7 +99,7 @@
               {...t}
               iconClass="w-4 h-4"
               showName={false}
-              customClass="px-2 py-1"
+              customClass="px-3 py-1.5"
             />
           {/each}
         </div>
@@ -104,7 +108,11 @@
   </a>
 {:else}
   <div
-    class="relative image-border2 rounded-2 overflow-hidden transition-all duration-300 ease-in-out w-full h-54"
+    class={`relative rounded-2 overflow-hidden transition-all duration-300 ease-in-out w-full h-54 ${
+      pin
+        ? 'border-2 border-main shadow-[0_0_16px_var(--color-accent-glow)] bg-main/5 p-1'
+        : 'image-border2'
+    }`}
   >
     <img
       src={image}

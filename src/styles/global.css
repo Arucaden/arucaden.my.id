@@ -116,6 +116,23 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], section[id] {
 }
 
 /* ==========================================================================
+   Full Width Prose / Markdown Adjustments (Eliminate 65ch empty gap)
+   ========================================================================== */
+
+.purosu,
+.purosu > *,
+.purosu p,
+.purosu div,
+.purosu ul,
+.purosu ol,
+.purosu li,
+.purosu blockquote,
+.purosu table {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* ==========================================================================
    Links and Utilities
    ========================================================================== */
 
