@@ -20,98 +20,120 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
 
 <div id="profile-shell" class="relative">
   <div id="profile-content" class="flex flex-col gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-x-12 items-start">
+      <!-- Description + Links + Tech -->
+      <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
+        <section aria-labelledby="desc-heading" class="flex flex-col">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-mono text-main uppercase tracking-widest">// ABOUT & POSITIONING</span>
+            <button id="show-portrait" class="md:hidden text-xs font-mono text-main hover:text-white transition-colors">
+              [View Portrait]
+            </button>
+          </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-x-14 items-start">
-    <!-- Description + Techstack + Links -->
-    <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
-      <section aria-labelledby="desc-heading" class="flex flex-col">
-        <div class="flex justify-between items-center">
-          <h2 id="desc-heading" class="section-title mb-1">.Description</h2>
-          <!-- Mobile portrait trigger -->
-          <button id="show-portrait" class="md:hidden text-sm text-main hover:text-white transition-colors mb-1 tracking-wide"> .Show_Portrait </button>
-        </div>
-        <p id="desc-paragraph" class="prose-text leading-relaxed mt-1">
-        I build games and interactive visuals as a Computer Science student focused on game development and creative tech. 
-        As <a href="https://drive.google.com/file/d/15sRZIJPUoKbrHDbzhk_kAQvc2xNkSRo-/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="link-fx">
-          Unity Certified Associate: Programmer
-        </a>, I explore how ideas turn into playable experiences.
-        <span class="block mt-4">On my free time, I like to watch anime or play games.</span>
-        </p>
-      </section>
+          <p id="desc-paragraph" class="text-sm sm:text-base text-gray-text leading-relaxed">
+            I am a <strong class="text-white">UI/UX Designer and Creative Technologist</strong> with a Computer Science foundation. 
+            I specialize in crafting systematic design tokens, high-fidelity prototypes, and performant interactive experiences spanning web, mobile, and game engines.
+          </p>
 
-      <section aria-labelledby="links-heading">
-        <h2 id="links-heading" class="section-title">.Links</h2>
-        <MyLinks />
-      </section>
-
-      <section aria-labelledby="tech-heading">
-        <div class="flex justify-between items-center">
-          <h2 id="tech-heading" class="section-title">.Techstack</h2>
-          <button id="tech-toggle" class="md:hidden text-sm text-main hover:text-white"> Show_All </button>
-        </div>
-
-        <div id="tech-container" class="flex flex-row flex-wrap gap-2 md:max-h-full max-h-[120px] overflow-y-hidden transition-all duration-300 py-1 pb-2 md:pb-1 px-1">
-          {tech.map((t, index) => (
-            <div class={`tech-card-wrapper ${index > 6 ? 'md:opacity-100 md:translate-y-0 hidden-card opacity-0 translate-y-0' : ''}`}>
-              <TechCard
-                name={t.name}
-                type={t.type}
-                icon={t.icon}
-                highlight={highlightedTechSet.has(t.name)}
-                showName={true}
-                client:visible
-              />
+          <!-- Verified Credential Badge -->
+          <div class="mt-4 flex flex-wrap gap-2">
+            <a
+              href="https://drive.google.com/file/d/15sRZIJPUoKbrHDbzhk_kAQvc2xNkSRo-/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-main/10 border border-main/30 text-xs font-mono text-main hover:bg-main hover:text-black transition-all"
+            >
+              <div class="i-ri-shield-check-fill w-4 h-4"></div>
+              <span>Unity Certified Associate: Programmer</span>
+            </a>
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/5 border border-white/10 text-xs font-mono text-gray-text">
+              <div class="i-ri-layout-masonry-fill w-4 h-4 text-main"></div>
+              <span>Design Systems & Prototyping</span>
             </div>
-          ))}
+          </div>
+        </section>
+
+        <!-- Social & Professional Links -->
+        <section aria-labelledby="links-heading">
+          <span id="links-heading" class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// CONNECT & CHANNELS</span>
+          <MyLinks />
+        </section>
+
+        <!-- Tech Stack Matrix -->
+        <section aria-labelledby="tech-heading">
+          <div class="flex justify-between items-center mb-2">
+            <span id="tech-heading" class="text-xs font-mono text-main uppercase tracking-widest">// TOOLING & STACK</span>
+            <button id="tech-toggle" class="md:hidden text-xs font-mono text-main hover:text-white">Show All</button>
+          </div>
+
+          <div id="tech-container" class="flex flex-row flex-wrap gap-2 md:max-h-full max-h-[120px] overflow-y-hidden transition-all duration-300 py-1 px-1">
+            {tech.map((t, index) => (
+              <div class={`tech-card-wrapper ${index > 6 ? 'md:opacity-100 md:translate-y-0 hidden-card opacity-0 translate-y-0' : ''}`}>
+                <TechCard
+                  name={t.name}
+                  type={t.type}
+                  icon={t.icon}
+                  highlight={highlightedTechSet.has(t.name)}
+                  showName={true}
+                  client:visible
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column: Portrait -->
+      <aside class="hidden md:flex flex-col gap-4 md:col-span-1">
+        <div>
+          <span class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// PROFILE</span>
+          <div id="portrait-wrapper" class="relative w-full overflow-hidden rounded-2xl border border-white/10 shadow-xl group">
+            <Image
+              src={me}
+              alt="Portrait of Daffa Maulana Satria"
+              widths={[200, 400]}
+              sizes="(max-width: 768px) 100vw, 50vw"
+              class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+              <span class="text-xs font-mono text-white">Daffa Maulana Satria</span>
+            </div>
+          </div>
         </div>
-      </section>
+      </aside>
     </div>
 
-    <!-- Right column: Portrait -->
-    <aside class="hidden md:flex flex-col gap-4 md:col-span-1">
-      <div>
-        <h2 id="portrait-title" class="section-title">.Portrait</h2>
-        <div id="portrait-wrapper" class="relative w-full overflow-hidden rounded-lg">
-          <Image
-            src={me}
-            alt="Portrait of Daffa Maulana Satria"
-            widths={[200, 400]}
-            sizes="(max-width: 768px) 100vw, 50vw"
-            class="image-border2 w-full h-full object-cover object-top"
-          />
-        </div>
-      </div>
-    </aside>
-  </div>
-
-    <!-- Experiences -->
-    <Experiences client:visible />
+    <!-- Career Trajectory / Experiences -->
+    <div class="pt-4 border-t border-white/10">
+      <Experiences client:visible />
+    </div>
   </div>
 
   <!-- Experiences Overlay -->
   <ExperienceOverlay />
 </div>
 
-<!-- Me full screen  -->
+<!-- Mobile Portrait Lightbox Modal -->
 <div id="portrait-overlay" class="fixed inset-0 bg-black/90 z-50 hidden flex-col items-center justify-center p-4">
-  <div class="relative w-3/4 max-w-md max-h-[80vh] overflow-hidden">
+  <div class="relative w-3/4 max-w-md max-h-[80vh] overflow-hidden rounded-2xl border border-white/20">
     <Image 
       src={me}
       alt="Portrait of Daffa Maulana Satria"
       widths={[400, 800]}
       sizes="100vw"
-      class="w-full h-auto rounded-lg image-border2"
+      class="w-full h-auto rounded-2xl"
     />
     <button 
       id="close-portrait" 
-      class="absolute top-3 right-3"
+      class="absolute top-3 right-3 p-1.5 rounded-full bg-black/70 border border-white/20"
+      aria-label="Close portrait"
     >
       <img 
         src="/icons/close-button.svg" 
         alt="Close" 
-        width="24" 
-        height="24"
-        class="rounded-sm"
+        width="20" 
+        height="20"
       />
     </button>
   </div>
@@ -126,3 +148,4 @@ const highlightedTechSet = new Set(["Unity", "C#", "Clip Studio", "Figma"]);
     document.addEventListener('astro:before-swap', cleanup);
   });
 </script>
+

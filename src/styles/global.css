@@ -2,16 +2,44 @@
 @import '@fontsource/figtree/700.css';
 @import '@fontsource/figtree/800.css';
 
+:root {
+  --color-bg: #08060B;
+  --color-accent: #FF3B69;
+  --color-accent-glow: rgba(255, 59, 105, 0.25);
+  --color-border: rgba(255, 255, 255, 0.08);
+}
+
 .crt-bg {
-  background: radial-gradient(circle at center, #4b004b 0%, #0d0010 70%);
+  background-color: #08060B;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 50, 78, 0.18), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(255, 59, 105, 0.07), transparent 60%),
+    radial-gradient(circle at 50% 50%, #0c0912 0%, #08060B 100%);
+  background-attachment: fixed;
 }
 
 .crt-bg-flat {
-  background: #1a001a;
+  background-color: #08060B;
+  background-image: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(168, 50, 78, 0.12), transparent 70%);
+}
+
+/* Subtle cyber ambient grid line */
+.cyber-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
+  background-color: #08060B;
+}
+
+/* Ensure anchor links jump with comfortable top margin */
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], section[id] {
+  scroll-margin-top: 5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -31,13 +59,13 @@ html {
 .scroll-animate {
   opacity: 1;
   transform: translateY(0);
-  transition: opacity 800ms ease-out, transform 800ms ease-out;
+  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1), transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .scroll-animate:not(.is-visible) {
     opacity: 0;
-    transform: translateY(3rem);
+    transform: translateY(2rem);
   }
 
   .scroll-animate.is-visible {
@@ -46,24 +74,42 @@ html {
   }
 }
 
-.custom-scroll::-webkit-scrollbar {
-  width: 10px;
+/* ==========================================================================
+   Modern Minimalist Scrollbar
+   ========================================================================== */
+
+* {
+  scrollbar-color: rgba(255, 59, 105, 0.35) rgba(15, 10, 20, 0.8);
+  scrollbar-width: thin;
 }
 
-.custom-scroll-container::-webkit-scrollbar {
-  width: 5px;
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-.custom-scroll::-webkit-scrollbar-thumb,
-.custom-scroll-container::-webkit-scrollbar-thumb {
-  background-color: #ff00778d;
-  border-radius: 5px;
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 59, 105, 0.3);
+  border-radius: 9999px;
 }
 
-.custom-scroll::-webkit-scrollbar-track,
-.custom-scroll-container::-webkit-scrollbar-track {
-  background-color: #2b090e;
+*::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 59, 105, 0.6);
 }
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(10, 7, 14, 0.8);
+}
+
+.custom-scroll,
+.custom-scroll-container {
+  scrollbar-color: rgba(255, 59, 105, 0.35) rgba(15, 10, 20, 0.8);
+  scrollbar-width: thin;
+}
+
+/* ==========================================================================
+   Links and Utilities
+   ========================================================================== */
 
 .link-fx, .link-fx-white {
   text-decoration: none;
@@ -72,25 +118,25 @@ html {
   transition: color 0.2s ease-in-out;
 }
 
-.link-fx { color: #E25172; }
+.link-fx { color: #FF3B69; }
 .link-fx:hover { color: #ffffff; }
 
 .link-fx-white { color: #ffffff; }
-.link-fx-white:hover { color: #E25172; }
+.link-fx-white:hover { color: #FF3B69; }
 
 .link-fx::after, .link-fx-white::after {
   content: '';
   position: absolute;
   display: block;
   left: 0;
-  bottom: -3px;
+  bottom: -2px;
   width: 0;
-  height: 2px;
-  transition: width 0.3s ease-in-out;
+  height: 1.5px;
+  transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .link-fx::after { background-color: #ffffff; }
-.link-fx-white::after { background-color: #E25172; }
+.link-fx-white::after { background-color: #FF3B69; }
 
 .link-fx:hover::after, .link-fx-white:hover::after {
   width: 100%;
@@ -118,3 +164,4 @@ html {
   clip: auto;
   white-space: normal;
 }
+

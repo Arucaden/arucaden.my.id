@@ -15,9 +15,11 @@
     "@astrojs/sitemap": "^3.4.1",
     "@astrojs/svelte": "^7.2.0",
     "@fontsource/figtree": "^5.2.8",
+    "@types/three": "^0.185.4",
     "astro": "^5.18.1",
     "rehype-slug": "^6.0.0",
-    "svelte": "^5.25.7"
+    "svelte": "^5.25.7",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@iconify-json/grommet-icons": "^1.2.1",

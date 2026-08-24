@@ -1,25 +1,24 @@
 <script lang="ts">
-  let date = new Date().toLocaleDateString('en-ID');
-
   const navLinks = [
     { name: 'HOME', href: '/#', id: '', isIcon: true, icon: '/icons/mdi--home.svg' },
+    { name: 'PROJECTS', href: '/#projects', id: 'projects' },
+    { name: 'UI/UX LAB', href: '/#lab', id: 'lab' },
     { name: 'PROFILE', href: '/#profile', id: 'profile' },
     { name: 'ARTWORKS', href: '/#artworks', id: 'artworks' },
-    { name: 'PROJECTS', href: '/#projects', id: 'projects' },
     { name: 'BLOG', href: '/#blogs', id: 'blogs' },
   ];
 
   let activeSection = $state('');
   let scrolledPastTop = $state(false);
-  
-  function isActive(link) {
+
+  function isActive(link: { id: string }) {
     if (link.id === '') {
       return !scrolledPastTop && activeSection === '';
     }
     return link.id === activeSection;
   }
 
-  function handleNavClick(e: Event, link: any) {
+  function handleNavClick(e: Event, link: { href: string; id: string }) {
     if (link.href.includes('#')) {
       if (link.id === '') {
         e.preventDefault();
@@ -42,10 +41,9 @@
     if (window.location.hash) {
       activeSection = window.location.hash.substring(1);
     }
-    
+
     const sections = Array.from(document.querySelectorAll('section[id]'));
-    
-    // Use an IntersectionObserver to cleanly detect active section in view
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -54,18 +52,18 @@
           }
         });
       },
-      { rootMargin: '-20% 0px -50% 0px', threshold: 0 }
+      { rootMargin: '-25% 0px -45% 0px', threshold: 0 }
     );
-    sections.forEach(sec => observer.observe(sec));
+    sections.forEach((sec) => observer.observe(sec));
 
     const scrollHandler = () => {
       scrolledPastTop = window.scrollY > 100;
-      if (window.scrollY < 100) activeSection = ''; 
+      if (window.scrollY < 100) activeSection = '';
     };
-    
+
     window.addEventListener('scroll', scrollHandler);
     scrollHandler();
-    
+
     return () => {
       window.removeEventListener('scroll', scrollHandler);
       observer.disconnect();
@@ -73,53 +71,78 @@
   });
 </script>
 
-<nav class="md:sticky md:top-0 flex justify-between items-center mb-0 md:mb-8 bg-black/80 z-50">
-  <div class="hidden md:block absolute bottom-0 h-2px w-full bg-tertiary"></div>
-  
-  <!-- Mobile -->
-  <div class="fixed md:hidden inset-x-0 bottom-0 z-50">
-    <div class="flex justify-evenly py-3 bg-black/90 border-t-2 border-tertiary shadow-[0_0_10px_2px_rgba(255,0,102,0.3)]">
+<!-- Desktop Floating Pill Navbar -->
+<header class="sticky top-5 z-50 w-full flex justify-center px-4 mb-8 pointer-events-none">
+  <nav
+    class="pointer-events-auto hidden md:flex items-center justify-between gap-6 px-4 py-2 rounded-full bg-[rgba(14,10,18,0.8)] backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.5)] transition-all duration-300"
+  >
+    <!-- Logo / Brand Signature -->
+    <a
+      href="/#"
+      onclick={(e) => handleNavClick(e, { href: '/#', id: '' })}
+      class="flex items-center gap-2 pl-2 pr-1 group"
+    >
+      <div class="w-2 h-2 rounded-full bg-main group-hover:scale-125 transition-transform duration-200 shadow-[0_0_8px_rgba(255,59,105,0.8)]"></div>
+      <span class="text-xs font-mono font-bold tracking-wider text-white group-hover:text-main transition-colors">
+        ARUCADEN.UI
+      </span>
+    </a>
+
+    <!-- Nav Item Links -->
+    <div class="flex items-center gap-1 bg-white/[0.04] p-1 rounded-full border border-white/5">
       {#each navLinks as link}
         <a
           href={link.href}
           onclick={(e) => handleNavClick(e, link)}
-          class={`${link.isIcon ? 'px-2' : 'px-3'} py-1 text-sm transition-all duration-200 ${
+          class={`px-3.5 py-1.5 rounded-full text-xs font-mono tracking-wide transition-all duration-200 ${
             isActive(link)
-              ? 'text-white font-bold'
-              : 'text-tertiary hover:text-main'
+              ? 'bg-main text-black font-bold shadow-[0_0_12px_rgba(255,59,105,0.4)] scale-102'
+              : 'text-gray-text hover:text-white hover:bg-white/5'
           }`}
         >
-          {#if link.isIcon}
-            <img src={link.icon} alt="Home" class="w-5 h-5 inline-block" />
-          {:else}
-            {link.name}
-          {/if}
+          {link.name}
         </a>
       {/each}
     </div>
-  </div>
 
-  <!-- Desktop -->
-  <div class="hidden md:flex text-md text-main w-full">
+    <!-- Status & Quick Contact -->
+    <div class="flex items-center gap-3 pr-2">
+      <div class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[11px] font-mono text-emerald-400">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>Open for roles</span>
+      </div>
+
+      <a
+        href="mailto:daffamaulanasatria@gmail.com"
+        class="text-xs font-mono px-3 py-1.5 rounded-full bg-main/15 text-main border border-main/30 hover:bg-main hover:text-black font-semibold transition-all duration-200"
+      >
+        Contact ➔
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Floating Bottom Dock -->
+<div class="fixed md:hidden inset-x-0 bottom-4 z-50 flex justify-center px-3 pointer-events-none">
+  <nav
+    class="pointer-events-auto w-full max-w-md flex items-center justify-around py-2.5 px-3 rounded-2xl bg-[rgba(14,10,18,0.92)] backdrop-blur-2xl border border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.8)]"
+  >
     {#each navLinks as link}
       <a
         href={link.href}
         onclick={(e) => handleNavClick(e, link)}
-        class={`${link.isIcon ? 'px-5' : 'px-10'} py-3 transition-all duration-200 text-sm ${
+        class={`flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-xl transition-all ${
           isActive(link)
-            ? 'bg-main/20 text-white border-b-4 border-main font-bold'
-            : 'hover:bg-main/12 text-secondary'
+            ? 'text-main font-bold scale-105'
+            : 'text-gray-text hover:text-white'
         }`}
       >
         {#if link.isIcon}
-          <img src={link.icon} alt="Home" class="w-5 h-5 inline-block" />
+          <img src={link.icon} alt="Home" class="w-4 h-4" />
         {:else}
-          {link.name}
+          <span class="text-[10px] font-mono">{link.name.replace('UI/UX ', '')}</span>
         {/if}
       </a>
     {/each}
-  </div>
-  <div class="hidden md:block md:mr-4">
-    <span class="font-semibold text-white-text">{date}</span>
-  </div>
-</nav>
+  </nav>
+</div>

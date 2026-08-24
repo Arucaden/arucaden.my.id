@@ -4,16 +4,16 @@ import SiteHead from '@components/SiteHead.astro';
 import '../styles/global.css';
 import HeroSection from '@components/HeroSection.astro';
 
-const pageTitle = 'Daffa Maulana Satria';
+const pageTitle = 'Daffa Maulana Satria | UI/UX Designer & Creative Technologist';
 const description =
-  'Game Developer, 2D Illustrator, and UI/UX Designer - Gamedev - Illustrator.';
+  'UI/UX Designer, Creative Technologist, and Game Developer specializing in tactile digital interfaces, procedural systems, and interactive 3D WebGL experiences.';
 
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Daffa Maulana Satria',
   url: 'https://arucaden.my.id',
-  jobTitle: ['Game Developer', 'Front End Developer', '2D Illustrator', 'UI/UX Designer'],
+  jobTitle: ['UI/UX Designer', 'Creative Technologist', 'Frontend Developer', 'Game Developer'],
   sameAs: [
     'https://github.com/Arucaden',
     'https://linkedin.com/in/daffa-ms',
@@ -31,25 +31,39 @@ const personJsonLd = {
       ogImage="/artworks/Mikazuki.webp"
       jsonLd={personJsonLd}
     />
-    <link rel="preload" as="image" href="/artworks/Mikazuki.webp" fetchpriority="high" />
   </head>
 
-  <body class="flex crt-bg flex-col text-white min-h-screen custom-scroll">
+  <body class="flex crt-bg flex-col text-white min-h-screen custom-scroll antialiased selection:bg-main selection:text-black">
     <a
-      href="#profile"
-      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-main focus:text-black-text focus:px-4 focus:py-2 focus:rounded-lg"
+      href="#projects"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-main focus:text-black focus:px-4 focus:py-2 focus:rounded-xl focus:font-mono"
     >
       Skip to content
     </a>
+    
     <HeroSection />
-    <main class="flex-grow mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 pt-8 md:pt-12">
+    
+    <main class="flex-grow mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">
       <Navbar client:load />
       <slot />
     </main>
-    <footer class="w-full h-12 text-center flex items-center justify-center mt-4 md:mt-0 mb-16 md:mb-4">
-      <span class="text-center text-sm text-main">
-        &copy; 2026 Daffa Maulana Satria. All rights reserved.
-      </span>
+
+    <footer class="w-full border-t border-white/10 mt-16 py-8 px-4 sm:px-8 bg-black/40 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-text">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-main"></span>
+          <span class="text-white font-bold">ARUCADEN.MY.ID</span>
+          <span>// Designed & Engineered by Daffa Maulana Satria</span>
+        </div>
+
+        <div class="flex items-center gap-6">
+          <a href="https://github.com/Arucaden" target="_blank" rel="noopener noreferrer" class="hover:text-main transition-colors">GitHub</a>
+          <a href="https://linkedin.com/in/daffa-ms" target="_blank" rel="noopener noreferrer" class="hover:text-main transition-colors">LinkedIn</a>
+          <a href="https://itch.io/profile/arucaden" target="_blank" rel="noopener noreferrer" class="hover:text-main transition-colors">itch.io</a>
+          <span class="text-white/40">&copy; 2026</span>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
+

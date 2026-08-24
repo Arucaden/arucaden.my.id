@@ -4,6 +4,7 @@ import Profile from '@components/Profile/ProfileWrapper.astro';
 import Artworks from '@components/Artwork/ArtworkWrapper.svelte';
 import Projects from '@components/Projects/ProjectWrapper.svelte';
 import Blogs from '@components/Blog/BlogWrapper.astro';
+import InteractiveLab from '@components/Lab/InteractiveLab.svelte';
 import { artworks } from '@data/artworks.ts';
 import { getCollection } from 'astro:content';
 import Container from '@components/Container.astro';
@@ -54,42 +55,82 @@ blogs = blogs.sort((a, b) => {
 ---
 
 <Layout>
-  <section
-    id="profile"
-    class="scroll-animate h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24"
-    aria-labelledby="profile-heading"
-  >
-    <Container title="Profile" headingId="profile-heading">
-      <Profile />
-    </Container>
-  </section>
-
-  <section
-    id="artworks"
-    class="scroll-animate h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24"
-    aria-labelledby="artworks-heading"
-  >
-    <Container title="Artworks" headingId="artworks-heading">
-      <Artworks artworks={artworks} client:visible />
-    </Container>
-  </section>
-
+  <!-- 1. Featured Case Studies & Projects (Top Priority for UI/UX Recruiter) -->
   <section
     id="projects"
-    class="scroll-animate h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24"
+    class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
     aria-labelledby="projects-heading"
   >
-    <Container title="Projects" headingId="projects-heading">
+    <Container
+      title="Selected Works"
+      tag="// 01. CASE STUDIES"
+      subtitle="Comprehensive UI/UX workflows, interactive web applications, and game systems."
+      headingId="projects-heading"
+    >
       <Projects projects={projects} client:visible />
     </Container>
   </section>
 
+  <!-- 2. Interactive UI/UX & 3D Lab Playground -->
+  <section
+    id="lab"
+    class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
+    aria-labelledby="lab-heading"
+  >
+    <Container
+      title="UI/UX & 3D Lab"
+      tag="// 02. INTERACTION PLAYGROUND"
+      subtitle="Live experimental shaders, tactile spring physics, and design token architecture."
+      headingId="lab-heading"
+    >
+      <InteractiveLab client:visible />
+    </Container>
+  </section>
+
+  <!-- 3. Profile & Career Trajectory -->
+  <section
+    id="profile"
+    class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
+    aria-labelledby="profile-heading"
+  >
+    <Container
+      title="About & Experience"
+      tag="// 03. BACKGROUND"
+      subtitle="Engineering trajectory, Unity certification, and systematic design skills."
+      headingId="profile-heading"
+    >
+      <Profile />
+    </Container>
+  </section>
+
+  <!-- 4. Creative Vault: 2D Illustrations & Artworks -->
+  <section
+    id="artworks"
+    class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
+    aria-labelledby="artworks-heading"
+  >
+    <Container
+      title="Creative Vault"
+      tag="// 04. 2D ART & VISUALS"
+      subtitle="Character concept designs, pixel art landscapes, and creative illustrations."
+      headingId="artworks-heading"
+    >
+      <Artworks artworks={artworks} client:visible />
+    </Container>
+  </section>
+
+  <!-- 5. Devlog & Insights -->
   <section
     id="blogs"
-    class="scroll-animate h-auto pb-24 md:pb-32 pt-3 flex flex-col md:scroll-mt-24"
+    class="scroll-animate h-auto pb-16 md:pb-24 pt-2 flex flex-col md:scroll-mt-24"
     aria-labelledby="blogs-heading"
   >
-    <Container title="Blog" headingId="blogs-heading">
+    <Container
+      title="Devlog & Insights"
+      tag="// 05. WRITING"
+      subtitle="Articles, post-mortems, and technical explorations."
+      headingId="blogs-heading"
+    >
       <Blogs blogs={blogs} />
     </Container>
   </section>
@@ -101,3 +142,4 @@ blogs = blogs.sort((a, b) => {
   document.addEventListener('DOMContentLoaded', initScrollAnimations);
   document.addEventListener('astro:page-load', initScrollAnimations);
 </script>
+
