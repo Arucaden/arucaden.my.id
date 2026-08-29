@@ -12,14 +12,24 @@ const projectEntries = await getCollection('projects', ({ data }) => {
   return data.draft !== true;
 });
 
-let projects = projectEntries.map((entry) => ({
-  ...entry.data,
-  date: entry.data.date.toISOString(),
-  description: entry.data.description ?? '',
-  image: entry.data.image ?? '',
-  tech: entry.data.tech ?? [],
-  slug: entry.slug,
-}));
+let projects = projectEntries.map((entry) => {
+  const isGame = entry.data.category === 'game' || 
+                 entry.data.tech?.includes('Unity') || 
+                 entry.slug.includes('galaxy') || 
+                 entry.slug.includes('veil');
+  const isMobile = entry.data.tech?.includes('Flutter');
+  const defaultTags = isGame ? ['#game'] : isMobile ? ['#apps', '#mobile'] : ['#apps', '#web'];
+  
+  return {
+    ...entry.data,
+    date: entry.data.date.toISOString(),
+    description: entry.data.description ?? '',
+    image: entry.data.image ?? '',
+    tech: entry.data.tech ?? [],
+    tags: entry.data.tags && entry.data.tags.length > 0 ? entry.data.tags : defaultTags,
+    slug: entry.slug,
+  };
+});
 
 const blogEntries = await getCollection('blog', ({ data }) => {
   return data.draft !== true;

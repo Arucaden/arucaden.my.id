@@ -8,6 +8,8 @@ const projectsCollection = defineCollection({
     date: z.coerce.date(),
     image: z.string().optional(),
     tech: z.array(z.string()).optional(),
+    tags: z.array(z.string()).optional(),
+    category: z.string().optional(),
     url: z.string().url().optional(),
     sourceUrl: z.string().url().optional(),
     draft: z.boolean().optional(),

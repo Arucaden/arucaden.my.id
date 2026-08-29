@@ -1,78 +1,101 @@
 /**
- * Hero Ambient Particles System
- * Customizable floating luminous particles that drift upwards in 3D parallax space.
+ * Hero Ambient Celestial Starfield System
+ * Particles spawn, breathe slowly like twinkling stars, and gently shift with mouse motion.
  */
 
-export interface ParticleConfig {
-  /** Maximum number of particles (defaults to screen-density adaptive max 50) */
-  maxCount?: number;
-  /** Minimum particle radius in pixels (default: 0.8) */
+export interface StarfieldConfig {
+  /** Maximum number of stars (default: 65) */
+  count?: number;
+  /** Minimum star radius in px (default: 0.7) */
   minRadius?: number;
-  /** Maximum particle radius in pixels (default: 2.4) */
+  /** Maximum star radius in px (default: 2.2) */
   maxRadius?: number;
-  /** Minimum upward float speed (default: 0.35) */
-  minSpeedY?: number;
-  /** Maximum upward float speed (default: 0.85) */
-  maxSpeedY?: number;
-  /** Particle base opacity range [min, max] (default: [0.3, 0.75]) */
-  opacityRange?: [number, number];
-  /** Glow blur radius in px (default: 8) */
-  glowBlur?: number;
-  /** Particle color in rgba format (default: '255, 255, 255') */
+  /** Star color in RGB (default: '255, 255, 255') */
   colorRgb?: string;
-  /** Horizontal flutter sway wave strength (default: 0.45) */
-  flutterStrength?: number;
+  /** Minimum breathing speed (default: 0.008) */
+  minBreatheSpeed?: number;
+  /** Maximum breathing speed (default: 0.022) */
+  maxBreatheSpeed?: number;
+  /** Glow blur radius in px (default: 10) */
+  glowBlur?: number;
+  /** Mouse parallax responsiveness (default: 28) */
+  mouseParallaxFactor?: number;
 }
 
-interface Particle {
+interface Star {
   x: number;
   y: number;
+  baseX: number;
+  baseY: number;
   radius: number;
-  speedY: number;
-  baseOpacity: number;
+  currentRadius: number;
+  maxOpacity: number;
   opacity: number;
-  pulseSpeed: number;
-  pulsePhase: number;
-  flutterPhase: number;
-  flutterSpeed: number;
+  breathePhase: number;
+  breatheSpeed: number;
+  life: number;
+  maxLife: number;
+  fadeSpeed: number;
+  state: 'fadeIn' | 'breathing' | 'fadeOut';
+  depth: number; // 0.2 (distant) to 1.0 (close) for 3D parallax deflection
+  hasFlare: boolean; // 4-point subtle star twinkle flare
 }
 
 export function initHeroParticles(
   canvas: HTMLCanvasElement,
-  userConfig: ParticleConfig = {}
+  userConfig: StarfieldConfig = {}
 ) {
-  const config: Required<ParticleConfig> = {
-    maxCount: userConfig.maxCount ?? 50,
-    minRadius: userConfig.minRadius ?? 0.8,
-    maxRadius: userConfig.maxRadius ?? 2.4,
-    minSpeedY: userConfig.minSpeedY ?? 0.35,
-    maxSpeedY: userConfig.maxSpeedY ?? 0.85,
-    opacityRange: userConfig.opacityRange ?? [0.3, 0.75],
-    glowBlur: userConfig.glowBlur ?? 8,
+  const config: Required<StarfieldConfig> = {
+    count: userConfig.count ?? 65,
+    minRadius: userConfig.minRadius ?? 0.7,
+    maxRadius: userConfig.maxRadius ?? 2.2,
     colorRgb: userConfig.colorRgb ?? '255, 255, 255',
-    flutterStrength: userConfig.flutterStrength ?? 0.45,
+    minBreatheSpeed: userConfig.minBreatheSpeed ?? 0.008,
+    maxBreatheSpeed: userConfig.maxBreatheSpeed ?? 0.022,
+    glowBlur: userConfig.glowBlur ?? 10,
+    mouseParallaxFactor: userConfig.mouseParallaxFactor ?? 28,
   };
 
   const ctx = canvas.getContext('2d');
   if (!ctx) return { destroy: () => {} };
 
-  let particles: Particle[] = [];
+  let stars: Star[] = [];
   let animId: number;
   let isDestroyed = false;
 
-  const createParticle = (width: number, height: number, randomizeY = true): Particle => {
-    const [minOp, maxOp] = config.opacityRange;
+  // Mouse tracking for directional space deflection
+  let targetMouseX = 0;
+  let targetMouseY = 0;
+  let currentMouseX = 0;
+  let currentMouseY = 0;
+
+  const createStar = (width: number, height: number, initial = false): Star => {
+    const depth = Math.random() * 0.8 + 0.2; // 0.2 - 1.0
+    const maxLife = Math.floor(Math.random() * 400 + 350); // Lifespan in frames
+    const radius = Math.random() * (config.maxRadius - config.minRadius) + config.minRadius;
+    const maxOpacity = Math.random() * 0.55 + 0.4;
+    const x = Math.random() * width;
+    const y = Math.random() * height;
+
     return {
-      x: Math.random() * width,
-      y: randomizeY ? Math.random() * height : height + 10,
-      radius: Math.random() * (config.maxRadius - config.minRadius) + config.minRadius,
-      speedY: Math.random() * (config.maxSpeedY - config.minSpeedY) + config.minSpeedY,
-      baseOpacity: Math.random() * (maxOp - minOp) + minOp,
-      opacity: minOp,
-      pulseSpeed: Math.random() * 0.03 + 0.015,
-      pulsePhase: Math.random() * Math.PI * 2,
-      flutterPhase: Math.random() * Math.PI * 2,
-      flutterSpeed: Math.random() * 0.02 + 0.01,
+      x,
+      y,
+      baseX: x,
+      baseY: y,
+      radius,
+      currentRadius: radius,
+      maxOpacity,
+      opacity: initial ? Math.random() * maxOpacity : 0,
+      breathePhase: Math.random() * Math.PI * 2,
+      breatheSpeed:
+        Math.random() * (config.maxBreatheSpeed - config.minBreatheSpeed) +
+        config.minBreatheSpeed,
+      life: initial ? Math.floor(Math.random() * maxLife) : 0,
+      maxLife,
+      fadeSpeed: Math.random() * 0.015 + 0.008,
+      state: initial ? 'breathing' : 'fadeIn',
+      depth,
+      hasFlare: radius > 1.7 && Math.random() > 0.6,
     };
   };
 
@@ -81,15 +104,23 @@ export function initHeroParticles(
     const width = (canvas.width = canvas.clientWidth);
     const height = (canvas.height = canvas.clientHeight);
 
-    particles = [];
-    const count = Math.min(config.maxCount, Math.floor((width * height) / 24000));
+    stars = [];
+    const count = Math.min(config.count, Math.floor((width * height) / 20000));
     for (let i = 0; i < count; i++) {
-      particles.push(createParticle(width, height, true));
+      stars.push(createStar(width, height, true));
     }
   };
 
   resize();
   window.addEventListener('resize', resize);
+
+  const onMouseMove = (e: MouseEvent) => {
+    const { innerWidth, innerHeight } = window;
+    targetMouseX = (e.clientX / innerWidth) * 2 - 1;
+    targetMouseY = (e.clientY / innerHeight) * 2 - 1;
+  };
+
+  window.addEventListener('mousemove', onMouseMove);
 
   const render = () => {
     if (isDestroyed) return;
@@ -99,28 +130,64 @@ export function initHeroParticles(
     const h = canvas.height;
     ctx.clearRect(0, 0, w, h);
 
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
-      p.y -= p.speedY;
-      p.flutterPhase += p.flutterSpeed;
-      p.pulsePhase += p.pulseSpeed;
+    // Smooth inertia lerp towards mouse direction
+    currentMouseX += (targetMouseX - currentMouseX) * 0.04;
+    currentMouseY += (targetMouseY - currentMouseY) * 0.04;
 
-      p.x += Math.sin(p.flutterPhase) * config.flutterStrength;
-      p.opacity = p.baseOpacity + Math.sin(p.pulsePhase) * 0.25;
+    for (let i = 0; i < stars.length; i++) {
+      const s = stars[i];
+      s.life++;
+      s.breathePhase += s.breatheSpeed;
 
-      // Wrap around boundary
-      if (p.y < -15) {
-        particles[i] = createParticle(w, h, false);
+      // Lifecycle management (fadeIn -> breathing -> fadeOut -> respawn)
+      if (s.state === 'fadeIn') {
+        s.opacity += s.fadeSpeed;
+        if (s.opacity >= s.maxOpacity) {
+          s.opacity = s.maxOpacity;
+          s.state = 'breathing';
+        }
+      } else if (s.state === 'breathing') {
+        // Slow sinusoidal breathing / twinkling
+        const breath = Math.sin(s.breathePhase);
+        s.opacity = s.maxOpacity * (0.6 + 0.4 * breath);
+        s.currentRadius = s.radius * (0.85 + 0.15 * breath);
+
+        if (s.life >= s.maxLife) {
+          s.state = 'fadeOut';
+        }
+      } else if (s.state === 'fadeOut') {
+        s.opacity -= s.fadeSpeed;
+        if (s.opacity <= 0.01) {
+          stars[i] = createStar(w, h, false);
+          continue;
+        }
       }
-      if (p.x < -15) p.x = w + 15;
-      if (p.x > w + 15) p.x = -15;
 
+      // Parallax shift based on depth and mouse direction
+      const posX = s.baseX + currentMouseX * config.mouseParallaxFactor * s.depth;
+      const posY = s.baseY + currentMouseY * config.mouseParallaxFactor * s.depth;
+
+      // Draw Glowing Star
+      const op = Math.max(0, Math.min(1, s.opacity));
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-      ctx.shadowBlur = config.glowBlur;
-      ctx.shadowColor = `rgba(${config.colorRgb}, 0.9)`;
-      ctx.fillStyle = `rgba(${config.colorRgb}, ${Math.max(0.08, Math.min(1, p.opacity))})`;
+      ctx.arc(posX, posY, s.currentRadius, 0, Math.PI * 2);
+      ctx.shadowBlur = config.glowBlur * s.depth;
+      ctx.shadowColor = `rgba(${config.colorRgb}, ${op * 0.9})`;
+      ctx.fillStyle = `rgba(${config.colorRgb}, ${op})`;
       ctx.fill();
+
+      // Subtle 4-point celestial cross flare for brighter larger stars
+      if (s.hasFlare && op > 0.45) {
+        const flareSize = s.currentRadius * 2.8;
+        ctx.beginPath();
+        ctx.moveTo(posX - flareSize, posY);
+        ctx.lineTo(posX + flareSize, posY);
+        ctx.moveTo(posX, posY - flareSize);
+        ctx.lineTo(posX, posY + flareSize);
+        ctx.strokeStyle = `rgba(${config.colorRgb}, ${op * 0.35})`;
+        ctx.lineWidth = 0.75;
+        ctx.stroke();
+      }
     }
   };
 
@@ -131,6 +198,7 @@ export function initHeroParticles(
       isDestroyed = true;
       cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMouseMove);
     },
   };
 }

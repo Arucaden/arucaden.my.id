@@ -19,16 +19,10 @@
 
 .crt-bg {
   background-color: #08060B;
-  background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(var(--color-main-rgb), 0.15), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(var(--color-main-rgb), 0.07), transparent 60%),
-    radial-gradient(circle at 50% 50%, #0c0912 0%, #08060B 100%);
-  background-attachment: fixed;
 }
 
 .crt-bg-flat {
   background-color: #08060B;
-  background-image: radial-gradient(ellipse 80% 40% at 50% 0%, rgba(var(--color-main-rgb), 0.12), transparent 70%);
 }
 
 /* Subtle cyber ambient grid line */

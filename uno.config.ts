@@ -47,16 +47,28 @@ export default defineConfig({
       'inline-flex items-center gap-2 rounded-full border font-mono tracking-wide whitespace-nowrap transition-all',
     ],
     ['badge', 'px-4 py-2 text-xs badge-shape border-white/10 bg-white/5 text-gray-text'],
-    ['badge-accent', 'px-4 py-2 text-xs badge-shape border-main/40 bg-main/15 text-main font-medium'],
+    ['badge-accent', 'px-3 py-1 text-xs rounded-xl border-main/40 bg-main/15 text-main font-medium'],
     [
       'badge-lg',
-      'px-8 py-2 text-xs rounded-full border border-white/15 bg-white/5 font-mono tracking-wide whitespace-nowrap transition-all cursor-pointer hover:border-main hover:text-main',
+      'px-3.5 py-1.5 text-xs font-mono rounded-xl border border-white/10 bg-white/[0.04] text-gray-text tracking-wide whitespace-nowrap transition-all duration-200 cursor-pointer hover:border-main hover:text-main hover:bg-main/15 hover:shadow-[0_0_12px_var(--color-accent-glow)]',
     ],
-    ['badge-active', 'bg-main/20 text-white border-main shadow-[0_0_4px_var(--color-accent-glow)]'],
-    ['badge-inactive', 'bg-black/40 text-gray-text border-white/10 hover:border-white/20 hover:text-white'],
+    ['badge-active', 'bg-main/20 text-main border-main font-semibold shadow-[0_0_12px_var(--color-accent-glow)]'],
+    ['badge-inactive', 'bg-white/[0.04] text-gray-text border-white/10 hover:border-main hover:text-main hover:bg-main/15 hover:shadow-[0_0_12px_var(--color-accent-glow)]'],
     [
       'badge-solid',
-      'bg-main border-main text-black font-semibold shadow-[0_0_8px_var(--color-accent-glow)]',
+      'bg-main border-main text-black font-bold shadow-[0_0_14px_var(--color-accent-glow)]',
+    ],
+    [
+      'filter-btn',
+      'inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 rounded-xl font-mono text-xs border transition-all duration-200 cursor-pointer select-none shadow-sm',
+    ],
+    [
+      'filter-btn-inactive',
+      'bg-white/[0.04] border-white/10 text-gray-text hover:border-main hover:text-main hover:bg-main/15 hover:shadow-[0_0_12px_var(--color-accent-glow)]',
+    ],
+    [
+      'filter-btn-active',
+      'bg-main text-black border-main font-bold shadow-[0_0_14px_var(--color-accent-glow)]',
     ],
     
     // Buttons

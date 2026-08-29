@@ -43,7 +43,7 @@
     href={href}
     class={`relative rounded-4 overflow-hidden transition-all duration-300 ease-in-out w-full h-54 block group ${
       pin
-        ? 'border-1 border-main/80 shadow-[0_0_16px_var(--color-accent-glow)] bg-main/5 p-1 hover:shadow-[0_0_24px_var(--color-accent-glow)]'
+        ? 'border-1 border-main shadow-[0_0_16px_var(--color-accent-glow)] bg-main/5 p-1 hover:shadow-[0_0_24px_var(--color-accent-glow)]'
         : 'image-border2 hover:hov-fx'
     }`}
     onmouseenter={() => (hovered = true)}
@@ -58,7 +58,7 @@
       decoding="async"
       width="800"
       height="600"
-      class="rounded-sm object-cover w-full h-full"
+      class="rounded-3 object-cover w-full h-full"
     />
 
     {#if pin}

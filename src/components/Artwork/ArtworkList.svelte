@@ -40,9 +40,7 @@
     {#each tags as tag}
       <button
         type="button"
-        class="badge-lg hover:hov-fx {selectedTags.includes(tag)
-          ? 'badge-solid'
-          : 'badge-inactive hover:badge-active hover:text-main'}"
+        class="filter-btn {selectedTags.includes(tag) ? 'filter-btn-active' : 'filter-btn-inactive'}"
         onclick={() => toggleTag(tag)}
       >
         {tag}

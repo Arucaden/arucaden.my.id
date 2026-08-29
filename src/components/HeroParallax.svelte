@@ -41,18 +41,19 @@
   let frontX = $state(0);
   let frontY = $state(0);
 
-  function triggerNameGlitch() {
+  function triggerNameGlitch(callback?: () => void) {
     if (isNameGlitching) return;
     isNameGlitching = true;
 
     setTimeout(() => {
       isJapanese = !isJapanese;
       currentName = isJapanese ? japaneseName : name;
-    }, 450);
+    }, 180);
 
     setTimeout(() => {
       isNameGlitching = false;
-    }, 900);
+      callback?.();
+    }, 380);
   }
 
   function rotateRole() {
@@ -61,23 +62,32 @@
 
     setTimeout(() => {
       currentRoleIndex = (currentRoleIndex + 1) % roles.length;
-    }, 400);
+    }, 160);
 
     setTimeout(() => {
       isRoleGlitching = false;
-    }, 850);
+    }, 360);
   }
 
   onMount(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let nameInterval: any;
+    let nameTimeoutId: any;
     let roleInterval: any;
 
+    const scheduleNextNameGlitch = () => {
+      // English normal name stays for 6000ms; Japanese name stays for a shorter duration of 2200ms
+      const displayDuration = isJapanese ? 2200 : 6000;
+
+      nameTimeoutId = setTimeout(() => {
+        triggerNameGlitch(() => {
+          scheduleNextNameGlitch();
+        });
+      }, displayDuration);
+    };
+
     if (!prefersReducedMotion) {
-      nameInterval = setInterval(() => {
-        triggerNameGlitch();
-      }, 5000);
+      scheduleNextNameGlitch();
 
       roleInterval = setInterval(() => {
         rotateRole();
@@ -88,13 +98,12 @@
     let particleSystem: { destroy: () => void } | null = null;
     if (particleCanvas) {
       particleSystem = initHeroParticles(particleCanvas, {
-        maxCount: 50,
-        minRadius: 0.8,
+        count: 65,
+        minRadius: 0.7,
         maxRadius: 2.2,
-        minSpeedY: 0.35,
-        maxSpeedY: 0.85,
         colorRgb: '255, 255, 255',
-        glowBlur: 8,
+        glowBlur: 10,
+        mouseParallaxFactor: 28,
       });
     }
 
@@ -144,7 +153,7 @@
 
     return () => {
       cancelAnimationFrame(animId);
-      clearInterval(nameInterval);
+      clearTimeout(nameTimeoutId);
       clearInterval(roleInterval);
       particleSystem?.destroy();
       window.removeEventListener('mousemove', handleMouseMove);
@@ -232,22 +241,16 @@
   </div>
 
   <!-- =========================================================================
-       STATIC EDITORIAL CONTENT WITH GLITCH & JAPANESE TRANSLATION
+       STATIC EDITORIAL CONTENT WITH FIRM CYBERPUNK GLITCH
        ========================================================================= -->
   <div
-    class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-28 flex flex-col items-center text-center gap-6"
+    class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-28 flex flex-col items-center text-center gap-6 select-none"
   >
     <div class="space-y-3 w-full flex flex-col items-center">
-      <!-- Name Container with Glitch Effect -->
+      <!-- Name Container with Sharp Cyberpunk Glitch -->
       <div
         id="name-container"
-        class={`relative cursor-pointer transition-all max-w-full overflow-visible flex justify-center ${isNameGlitching ? 'glitching' : ''}`}
-        onclick={triggerNameGlitch}
-        onmouseenter={triggerNameGlitch}
-        role="button"
-        tabindex="0"
-        onkeydown={(e) => e.key === 'Enter' && triggerNameGlitch()}
-        title="Click or hover to glitch / switch language"
+        class={`relative transition-all max-w-full overflow-visible flex justify-center cursor-default select-none ${isNameGlitching ? 'glitching' : ''}`}
       >
         <h1
           id="name-text"

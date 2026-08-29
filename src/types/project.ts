@@ -4,6 +4,8 @@ export type Project = {
   date: string;
   image: string;
   tech: string[];
+  tags?: string[];
+  category?: string;
   url?: string;
   sourceUrl?: string;
   slug: string;

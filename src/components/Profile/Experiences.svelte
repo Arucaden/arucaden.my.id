@@ -2,7 +2,7 @@
   import { experiences } from '@data/experiences.ts';
   import ExperienceBadge from './ExperienceBadge.svelte';
   import ViewAllButton from '../Common/ViewAllButton.svelte';
-  const latestExperiences = experiences.slice(0, 3);
+  const latestExperiences = experiences.slice(0, 2);
 </script>
 
 <section aria-labelledby="experience-heading" class="flex flex-col flex-1 min-h-0">
@@ -12,16 +12,16 @@
         Experiences
       </h3>
     </div>
-    <span class="text-[11px] font-mono text-gray-text">Latest Experiences</span>
+    <span class="text-[11px] font-mono text-gray-text">2 Highlights</span>
   </div>
 
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-1">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-1">
     {#each latestExperiences as exp, i}
       <article
         class={`flex flex-col justify-between gap-3 rounded-2xl p-4 transition-all duration-300 ${
           i === 0
-            ? 'border border-main/80 shadow-[0_0_8px_var(--color-accent-glow)] hover:border-main hover:bg-main/15'
-            : 'bg-white/[0.03] border border-white/10 hover:border-main/50 hover:bg-white/[0.06] hover:shadow-[0_0_20px_var(--color-accent-glow)]'
+            ? 'bg-main/0.1 border border-main/70 shadow-[0_0_12px_var(--color-accent-glow)] hover:border-main hover:bg-main/15'
+            : 'bg-white/[0.03] border border-white/10 hover:border-main hover:bg-white/[0.06] hover:shadow-[0_0_20px_var(--color-accent-glow)]'
         }`}
       >
         <div>
@@ -47,7 +47,7 @@
 
   <ViewAllButton
     id="show-all-experiences"
-    text={`Show All Experience`}
+    text="View Full Experience History"
   />
 </section>
 

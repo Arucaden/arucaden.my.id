@@ -4,6 +4,7 @@ import TechCard from '../TechCard.svelte';
 import Experiences from './Experiences.svelte';
 import ExperienceOverlay from './ExperienceOverlay.astro';
 import { techItems } from '@data/techstack.ts';
+import { certificates } from '@data/certificates.ts';
 import { Image } from 'astro:assets';
 import me from '@/public/Me.jpeg';
 import MyLinks from './MyLinks.astro';
@@ -21,7 +22,7 @@ const highlightedTechSet = new Set(["Unity", "Clip Studio", "Figma", "TypeScript
 <div id="profile-shell" class="relative">
   <div id="profile-content" class="flex flex-col gap-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-x-12 items-start">
-      <!-- Description + Links + Tech -->
+      <!-- Description + Links + Tech + Certificates -->
       <div id="profile-left" class="flex flex-col gap-6 md:col-span-2">
         <section aria-labelledby="desc-heading" class="flex flex-col">
           <div class="flex items-center justify-between mb-2">
@@ -35,21 +36,42 @@ const highlightedTechSet = new Set(["Unity", "Clip Studio", "Figma", "TypeScript
             Computer Science student graduate. I like to explore new technologies and create innovative solutions.
 On my free time, I like to watch anime or play games, drawing included.
           </p>
-
-          <!-- Verified Credential Badge -->
-          <div class="mt-4 flex flex-wrap gap-2">
-            <a
-              href="https://drive.google.com/file/d/15sRZIJPUoKbrHDbzhk_kAQvc2xNkSRo-/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border border-white/10 hover:border-main hover:bg-main/15 text-gray-text hover:text-main px-3 py-1.5 text-xs font-mono transition-all duration-200 shadow-sm hover:shadow-[0_0_8px_var(--color-accent-glow)] group"
-              title="View Verified Unity Certification"
-            >
-              <div class="i-ri-shield-check-fill w-4 h-6 text-main transition-transform group-hover:scale-110"></div>
-              <span class="font-medium text-white group-hover:text-main transition-colors">Unity Certified Associate: Programmer</span>
-            </a>
-          </div>
         </section>
+
+        <!-- Certificates -->
+        {certificates.length > 0 && (
+          <section aria-labelledby="cert-heading">
+            <span id="cert-heading" class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// CERTIFICATE</span>
+            <div class="flex flex-row flex-wrap gap-2 py-1">
+              {certificates.map((cert) => (
+                <a
+                  href={cert.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class={`inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border px-4 py-2.5 text-xs font-mono transition-all duration-200 hover:border-main hover:bg-main/15 hover:text-main hover:shadow-[0_0_12px_var(--color-accent-glow)] group cursor-pointer ${
+                    cert.highlight
+                      ? 'text-white border-main bg-main/10 shadow-[0_0_12px_var(--color-accent-glow)]'
+                      : 'text-gray-text border-white/10'
+                  }`}
+                  title={`View Certificate: ${cert.name}`}
+                >
+                  {cert.icon ? (
+                    <img
+                      src={cert.icon}
+                      alt={cert.name}
+                      width="18"
+                      height="18"
+                      class="w-4.5 h-4.5 object-contain transition-transform duration-200"
+                    />
+                  ) : (
+                    <div class="i-ri-shield-check-fill w-4.5 h-4.5 text-main shrink-0"></div>
+                  )}
+                  <span class="font-medium text-white group-hover:text-main transition-colors">{cert.name}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        )}
 
         <!-- Links -->
         <section aria-labelledby="links-heading">

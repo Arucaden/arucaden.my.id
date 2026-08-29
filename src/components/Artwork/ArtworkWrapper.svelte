@@ -54,7 +54,7 @@
 
     <ViewAllButton
       id="show-all-artworks"
-      text={`View All Artworks (${artworks.length})`}
+      text="View All Artworks"
       onclick={() => (overlayVisible = true)}
     />
   </div>

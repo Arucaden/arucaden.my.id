@@ -1,0 +1,92 @@
+---
+---
+
+<div id="cyber-preloader" class="fixed inset-0 z-[9999] bg-[#08060B] flex flex-col items-center justify-center select-none transition-opacity duration-500">
+  <div class="flex flex-col items-center gap-3.5 max-w-xs w-full px-6">
+    <!-- Header -->
+    <div class="flex items-center gap-2">
+      <span class="text-xs font-mono font-bold tracking-widest text-white uppercase">
+        LOADING<span class="text-main animate-pulse">...</span>
+      </span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden relative">
+      <div id="preloader-bar" class="h-full bg-main rounded-full w-0 transition-all duration-75 ease-linear shadow-[0_0_12px_var(--color-accent-glow)]"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function runPreloader() {
+    const preloader = document.getElementById('cyber-preloader');
+    const bar = document.getElementById('preloader-bar');
+
+    if (!preloader || !bar) return;
+
+    const preloaderEl: HTMLElement = preloader;
+    const barEl: HTMLElement = bar;
+
+    if (sessionStorage.getItem('visited')) {
+      preloaderEl.style.opacity = '0';
+      preloaderEl.style.pointerEvents = 'none';
+      setTimeout(() => preloaderEl.remove(), 400);
+      return;
+    }
+
+    const heroImages = [
+      '/HeroArt/Background.webp',
+      '/HeroArt/Moon.webp',
+      '/HeroArt/Middlelayer.webp',
+      '/HeroArt/FrontLayer.webp'
+    ];
+
+    let imagesLoaded = 0;
+    heroImages.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      if (img.complete) {
+        imagesLoaded++;
+      } else {
+        img.onload = () => imagesLoaded++;
+        img.onerror = () => imagesLoaded++;
+      }
+    });
+
+    const DURATION = 1800; // Duration in ms to clearly see the bar fill
+    const startTime = performance.now();
+
+    function updateFrame(now: number) {
+      const elapsed = now - startTime;
+      const rawProgress = Math.min(1, elapsed / DURATION);
+      
+      // Smooth cubic-bezier ease-in-out fill
+      const easedProgress = rawProgress < 0.5 
+        ? 2 * rawProgress * rawProgress 
+        : 1 - Math.pow(-2 * rawProgress + 2, 2) / 2;
+
+      const percent = Math.min(100, Math.round(easedProgress * 100));
+      barEl.style.width = `${percent}%`;
+
+      if (rawProgress < 1) {
+        requestAnimationFrame(updateFrame);
+      } else {
+        barEl.style.width = '100%';
+        sessionStorage.setItem('visited', 'true');
+        setTimeout(() => {
+          preloaderEl.style.opacity = '0';
+          preloaderEl.style.pointerEvents = 'none';
+          setTimeout(() => preloaderEl.remove(), 500);
+        }, 250);
+      }
+    }
+
+    requestAnimationFrame(updateFrame);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runPreloader);
+  } else {
+    runPreloader();
+  }
+</script>
