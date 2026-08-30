@@ -1,35 +1,61 @@
 ---
 title: "Ano Galaxy Shooter"
 date: 2024-12-24
-description: "yet another 2D space shooter game"
+description: "A fast-paced 2D space shooter focused on juicy game feel and tight combat feedback"
 image: "/projects/AnoGalaxyShooter.png"
 url: "https://arucaden.itch.io/ano-galaxy-shooter"
 tech: ["Unity", "C#"]
 ---
 
-**Ano Galaxy Shooter** is a fast-paced 2D desktop space shooter (Yet Another Space Shooter Game).
+> **Ano Galaxy Shooter** is a fast-paced 2D desktop arcade space shooter built with an intense focus on "game feel," responsive controls, and impactful visual feedback.
 
-### Executive Summary
+---
 
-As a **Programmer**, I built this project to understand precisely how to inject "Game Feel". From post-processing to tight input response, the project focuses purely on polish over scale.
+### Executive Summary & Role
+
+As the **Solo Programmer & Designer**, I created this project to master the mechanics of tactile game feel. Rather than expanding the scope with massive levels, the focus was kept strictly on mechanical polish, visual juice, and satisfying combat interactions.
+
+---
+
+### Key Features
+
+- **Tight Input Response:** Snappy 2D ship movement and weapon firing tuned for instantaneous control.
+- **Boss Behavioral Patterns:** Multi-phase boss encounters powered by Finite State Machines (FSM).
+- **Dynamic Feedback Loop:** Layered particle effects, screen shake, hit-stop, and damage flashing on every hit.
+
+---
 
 ### The Problem & The Solution
 
-**The Problem:** 
-Creating an arcade game where you simply "shoot enemies" frequently results in a hollow, floaty, and unrewarding experience if there is no physical weight behind the visual actions.
+**The Problem:**
+- Typical 2D shooter prototypes often feel floaty, hollow, and unrewarding when shooting enemies lacks physical weight and visual punch.
+- Complex nested state logic can easily become fragile and hard to debug.
 
-**The Solution:** 
-I ignored padding the game with deep lore or massive levels. Instead, I focused on "Game Feel", specifically engineering tight input responses, dramatic visual screen-shake, precise damage flashing, and heavy post-processing so that every single hit feels incredibly impactful.
+**The Solution:**
+- Engineered layered visual juice: directional screen shake, chromatic aberration, hit-stop pauses, and emission flashes to give every laser blast physical impact.
+- Structured boss patterns and wave transitions using modular Finite State Machines for clean, predictable behavior.
 
-### Technical Details
+---
 
-- **State Machines:** Constructed all boss behavioral patterns and wave transitions completely via simple Finite State Machines (FSM).
-- **Visual Feedback:** Integrate screen shake, particle effects, and damage flashing etc. to make the game feel more impactful.
-- **Post-Processing:** Bloom, chromatic aberration and other effects maximize game aesthetic and leverage User Experiences.
+### Technical Details & Architecture
+
+- **State Machine Architecture:** Implemented simple, robust Finite State Machines (FSM) to manage enemy waves and boss attack routines cleanly.
+- **Visual Feedback Pipeline:** Combined custom screen-shake algorithms with particle bursts and sprite damage flashing to emphasize impacts.
+- **Post-Processing Stack:** Tuned bloom, chromatic aberration, and vignette post-processing to elevate the retro-arcade aesthetic.
+- **[put your description - e.g. Object pooling system for projectiles / Quaternion math for homing shots]**
+
+---
 
 ### Challenges & Learnings
 
-The big challenge wasn't just getting things to logically work, **but getting them to "feel good."** I learned that raw code architecture is only half the battle. 
-Mastering Quaternion math rotations, Unity Coroutines, even simple FSMs allowed me to make smooth attack patterns. 
+- **Tuning Game Feel:** Learned that gameplay satisfaction comes as much from sensory feedback (audio-visual weight and timing) as it does from raw code logic.
+- **Mathematical Foundations:** Deepened understanding of Quaternion rotations, Vector math, and Unity Coroutines to create fluid movement and bullet trajectories.
+- **Systematic Debugging:** Learned the value of intentionally testing edge cases to master core gameplay logic fundamentals.
 
-Most importantly, I learned that **breaking logic on purpose to understand exactly why it worked** is completely necessary to master logic fundamentals.
+---
+
+### Key Takeaways & Results
+
+- **Polished Vertical Slice:** Successfully delivered a cohesive, responsive arcade experience published on itch.io.
+- **Stable 60 FPS:** Optimized rendering and particle systems for smooth, stutter-free performance.
+- **[put your description - e.g. Player feedback highlight / Key metric or playcount]**

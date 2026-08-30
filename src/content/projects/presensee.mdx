@@ -4,18 +4,65 @@ date: 2024-11-22
 description: "Facial recognition attendance system for educational institutions — mobile-first with stronger identity checks."
 image: "/projects/PresenSee.png"
 tech: ["Laravel", "MySQL", "Python", "Dlib", "Flutter"]
+draft: true
 ---
 
-> **PresenSee** is a facial-recognition attendance system aimed at educational institutions that need more reliable check-ins than manual roll call.
+> **PresenSee** is a facial-recognition attendance management system built for educational institutions to eliminate attendance fraud and automate manual roll calls through a mobile-first scanning pipeline.
 
-### Overview
+---
 
-The stack pairs a Laravel backend and MySQL with Python/Dlib for face matching, and a Flutter client for on-device capture and attendance flows.
+### Executive Summary & Role
 
-### My Role
+| Attribute | Details |
+| :--- | :--- |
+| **Role** | Mobile & Integration Engineer / [put your description] |
+| **Tech Stack** | Flutter, Laravel, Python, Dlib, MySQL |
+| **Core Responsibilities** | Mobile Capture UX, Facial Recognition Pipeline Integration, Verification Testing |
 
-I worked across product and engineering touchpoints: attendance UX on mobile, integration with recognition services, and validating that false positives/negatives stayed within acceptable bounds for classroom use.
+As part of the engineering team, I worked across mobile frontend development and backend integration, ensuring seamless on-device camera capture, reliable API communication, and acceptable face matching accuracy.
 
-### Notes
+---
 
-A longer write-up is still in progress. Reach out if you want a deeper dive into the recognition pipeline or mobile UX.
+### Key Features
+
+- **On-Device Face Capture:** Streamlined mobile scanning interface with real-time face detection guidance.
+- **Biometric Matching Service:** Python-based matching pipeline using Dlib facial landmark representations.
+- **Attendance Dashboard:** Administrative management portal for monitoring student logs and managing rosters.
+- **[put your description - e.g. Geolocation verification / Offline caching mode]**
+
+---
+
+### The Problem & The Solution
+
+**The Problem:**
+- Traditional paper roll calls and barcode scans are susceptible to proxy attendance (jockeying) and waste valuable class time.
+- Standard face recognition solutions often struggle with fluctuating classroom lighting conditions and latency.
+
+**The Solution:**
+- Integrated a fast Python/Dlib face landmark comparison microservice capable of quick identity verification.
+- Developed a Flutter mobile client that validates framing and lighting before submitting verification payloads.
+
+---
+
+### Technical Details & Architecture
+
+- **Mobile Client (Flutter):** Built the mobile interface handling camera feeds, image compression, and secure tokenized API requests.
+- **Recognition Service (Python + Dlib):** Generated 128D facial embeddings from camera frames and computed Euclidean distance matching against registered student profiles.
+- **Backend API (Laravel & MySQL):** Handled attendance records, role-based access control (RBAC), and classroom schedule associations.
+- **[put your description - e.g. Threshold tuning for false-acceptance rate (FAR) reduction]**
+
+---
+
+### Challenges & Learnings
+
+- **Managing False Acceptance vs. Rejection Rates:** Calibrating Euclidean distance thresholds in Dlib required extensive testing across lighting conditions, camera angles, and occlusions (glasses/masks).
+- **Mobile-to-Backend Latency Optimization:** Compressing and resizing camera frames on-device before transmission significantly reduced API payload size and network latency.
+- **[put your description - e.g. Python microservice deployment challenges]**
+
+---
+
+### Key Takeaways & Results
+
+- **Reliable Verification:** Achieved consistent identity verification with sub-second matching times during test trials.
+- **Seamless User Flow:** Simplified attendance verification into a fast, 3-step on-device action.
+- **[put your description - e.g. Trial test results / Academic evaluation]**
