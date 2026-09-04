@@ -1,35 +1,60 @@
 ---
 title: "Pandora's Snake"
 date: 2024-12-24
-description: "yet another 2D space shooter game"
+description: "Fast-paced, 2D action-arcade shooter where you play as a streamer who got cursed by a witch and turned into a world-destroying snake with a machine gun."
 image: "/projects/PandorasSnake.webp"
 url: "https://lordzaini.itch.io/pandoras-snake"
 tech: ["Unity", "C#", "Aseprite", "FL Studio"]
 ---
 
-**Pandoras Snake** is a fast-paced 2D desktop space shooter (Yet Another Space Shooter Game).
+> **Pandora's Snake** is a fast-paced, absurdly comedic 2D action-arcade shooter where you play as a streamer who got cursed by a witch and turned into a giant, world-destroying snake... with a machine gun strapped to its back.
 
-### Executive Summary
+---
 
-As a **Programmer**, I built this project to understand precisely how to inject "Game Feel". From post-processing to tight input response, the project focuses purely on polish over scale.
+### Executive Summary & Role
+
+**Pandoras Snake** developed by various developers under **[Slafurry Studios](https://slafurrystudios.com/)**, for GameSeed 2026, a game making competition hosted by GameSeed Team Indonesia. My role is Lead Programmer, responsible for implementing the core gameplay mechanics, integration and communication with the rest of the team.
+
+This is not classic Snake game. Instead of just eating apples and avoiding your own tail, what if your growth was a vehicle for mass destruction? We built this game in Unity to be a fast-paced, top-down run-and-gun (or slither-and-gun?) experience. The player cursed into Jormungandr by an unhinged witch and need to hunt down a legendary Sage to break the curse. 
+
+The game have a feature called "livestream chat" that reacts to your gameplay, throws absurd challenges your way, and directly impacts the gameplay directly with "donations" from your loyal streamers.
+
+---
+
+### Key Features
+
+- **Destructive Growth System:** Just like classic snake games, you are constantly growing. But here, getting bigger means feeling like an unstoppable, world-destroying monster.
+- **Run-and-Gun Mechanics:** You literally have a machine gun strapped to your snake body. You have to shoot through enemies, bosses, and entire environments while managing your ridiculous length.
+- **Simulated Livestream Chat:** A dynamic, fake Twitch-style chat filled with multiverse viewers. They react to your actions, spam emotes, and trigger random gameplay modifiers that completely alter the flow of the game.
+- **Expressive Artstyle:** The game features a vibrant, exaggerated pixel art style that emphasizes the absurdity of the situation and enhances the comedic tone.
+
+---
 
 ### The Problem & The Solution
 
-**The Problem:** 
-Creating an arcade game where you simply "shoot enemies" frequently results in a hollow, floaty, and unrewarding experience if there is no physical weight behind the visual actions.
+**The Problem:**
+- **Stale Mechanics:** Classic *Snake* games get repetitive fast. The core loop of "eat thing, get longer, don't die" lacks the high-octane engagement modern arcade players want.
+- **Static Gameplay:** Top-down shooters can sometimes feel like you're just holding down the fire button while walking in circles.
+- **Lack of Player Interaction:** Many games fail to create a sense of community or player engagement beyond the core gameplay loop.
 
-**The Solution:** 
-I ignored padding the game with deep lore or massive levels. Instead, I focused on "Game Feel", specifically engineering tight input responses, dramatic visual screen-shake, precise damage flashing, and heavy post-processing so that every single hit feels incredibly impactful.
-
-### Technical Details
-
-- **State Machines:** Constructed all boss behavioral patterns and wave transitions completely via simple Finite State Machines (FSM).
-- **Visual Feedback:** Integrate screen shake, particle effects, and damage flashing etc. to make the game feel more impactful.
-- **Post-Processing:** Bloom, chromatic aberration and other effects maximize game aesthetic and leverage User Experiences.
+**The Solution:**
+- **Weaponized Growth:** We turned the snake's growth into a massive gameplay advantage. Managing your body while dodging bullet hells makes movement a puzzle in itself.
+- **Dynamic Stream Events:** The simulated livestream isn't just for jokes. The chat actively disrupts the game by spawning enemies, dropping buffs, or changing the rules, ensuring no two playthroughs feel exactly the same.
+- **Comedic Tone and Art Style:** The dynamic and expressive pixel art and absurd scenarios making the game feel fresh and engaging.
+---
 
 ### Challenges & Learnings
 
-The big challenge wasn't just getting things to logically work, **but getting them to "feel good."** I learned that raw code architecture is only half the battle. 
-Mastering Quaternion math rotations, Unity Coroutines, even simple FSMs allowed me to make smooth attack patterns. 
+Game dev is never as easy as it sounds. Here is what I learned while working on Pandora's Snake:
+- **System Integration:** Integrating all features from different programmers  was a nightmare. I had to constantly communicate with the team to ensure that the features all worked together seamlessly, and constantly coordinate which architecture and how to make placeholder testing logic.
+- **Using Existing Algorithms:** I had to research and implement existing algorithms for Boss Behaviour (HFSM), Pathfinding (A*), etc. to make sure the game worked as intended without sacrificing performance and time (because its a competition).
+- **Game Feel and Juice:** I learned that the small details like screen shake, particle effects, and audio feedback when destroying things made the game infinitely more satisfying.
+---
 
-Most importantly, I learned that **breaking logic on purpose to understand exactly why it worked** is completely necessary to master logic fundamentals.
+### Key Takeaways & Results
+
+Building Pandora's Snake was an absolute blast and a huge learning experience in game feel and juice.
+
+- **Game Feel Matters:** Nailing the screen shake, particle effects, and audio feedback when destroying things made the game infinitely more satisfying.
+- **Existing Algorithms are Your Friend:** Using existing algorithms saved us a lot of time and allowed us to focus on the other parts of the game (its not wrong, as long you understand how they work).
+- **Team Communication is Key:** Constant communication and coordination with the team was essential to ensure that all features worked together seamlessly.

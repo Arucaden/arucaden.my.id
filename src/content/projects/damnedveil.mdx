@@ -1,76 +1,67 @@
 ---
 title: "Damned Veil"
 date: 2024-04-22
-description: "Dark horror-themed pixel game combining carrom-inspired physics with 2D dynamic normal mapping"
+description: "Dark horror-themed pixel game combining with carrom-inspired mechanics"
 image: "/projects/DamnedVeil.png"
 url: "https://noiverre.itch.io/damnedveil"
 tech: ["Unity", "C#", "Clip Studio"]
 pin: true
 ---
 
-> **Damned Veil** is a dark, horror-themed pixel game set in a mysterious magical world. Combining tactical carrom-inspired physics with limited ammo, players must carefully plan geometric bounce shots to conquer challenging encounters.
+> **Damned Veil** is a horror themed pixel game set in a dark magical world. Combined with carrom-inspired mechanic with limited ammo, players must carefully plan bounce shots to beat the level.
 
 ---
 
 ### Executive Summary & Role
 
-| Attribute | Details |
-| :--- | :--- |
-| **Role** | Environment Artist & Gameplay / Systems Programmer |
-| **Key Research** | Experimental 2D Pixel Art Normal Mapping & Procedural Spawner Logic (Thesis research) |
-| **Core Tools** | Unity 2D, C#, Clip Studio Paint |
+My role is **Environment Artist** in a 4-person team called **Divine Table** (and later continuing solo for my thesis as Game Programmer). 
 
-As **Artist and Programmer**, I created the atmospheric pixel environment, engineered the experimental 2D normal-mapped lighting pipeline, and developed the procedural spawner algorithm that powers dynamic level encounters.
+I was responsible for creating the environments 2D tilesets, researching an experimental 2D normal-mapped lighting pipeline, and implementing Procedural Content Generation (PCG) algorithms for enemy .
+
+We didn't just want another generic pixel shooter. We wanted a game where light feels alive and every bounce shot requires thinking and plan carefully.
 
 ---
 
 ### Key Features
 
-- **Carrom-Inspired Combat:** Every shot counts. Players calculate geometric bounce angles against map walls to clear enemies using limited ammunition.
-- **Dynamic 2D Lighting:** Integrated custom normal maps onto hand-crafted 2D pixel art to react realistically to dynamic point lights.
-- **Challenging Boss Battles:** Multi-stage encounters requiring deliberate positioning, aim accuracy, and tactical resource management.
-- **Hidden Secrets & Easter Eggs:** Secret geometry patterns that reward observant players with special gameplay effects.
+- **Carrom-Inspired Mechanics:** Every shot counts. Players must calculate bounce angles against map walls to clear enemies using limited ammunition.
+- **Dynamic 2D Normal-Mapped Lighting:** Integrated custom normal maps onto 2D pixel art so surfaces react to moving point lights and cast shadows dynamically.
+- **Procedural Enemy Spawner:** Using Procedural Content Generation (PCG) algorithmsthat automatically generates balanced, deterministic, and solvable enemy placements.
+- **Dynamic Puzzle and Boss Encounters:** Each level is a puzzle in itself, with unique enemy placements and boss encounters that require players to think strategically about their shots.
 
 ---
 
 ### The Problem & The Solution
 
 **The Problem:**
-- Traditional 2D pixel art often appears visually flat under standard engine lighting without depth or directional illumination.
-- Designing balanced, handcrafted combat encounters that remain engaging and unpredictable across multiple playthroughs is difficult for designers.
+- **Flat Pixel Art:** Standard 2D pixel sprites often look flat and generic without shadow and illumination.
+- **The Manual Enemy Placement:** Because the core mechanic relies on ricocheting bullets, manually placing enemies was an agonizing trial-and-error loop. Miss an angle placement lead to unbeatable level.
+- **Spaghetti Code:** Hardcoding delegates between UI, audio, and gameplay logic made systems fragile and painful to iterate on.
 
 **The Solution:**
-- Generated and attached custom **2D Normal Maps** directly to sprite sheets, enabling Unity's universal render pipeline (URP) light sources to create authentic 3D-like depth and shadow casting across pixel surfaces.
-- Built a **Procedural Spawner System** that generates balanced, deterministic enemy compositions and placements based on difficulty curves.
-
----
-
-### Technical Details & Architecture
-
-- **Angle Reflection & Physics:** Calculated precise vector reflection angles for projectile bouncing across complex environmental colliders without clipping or tunneling.
-- **2D Normal Mapping Pipeline:** Authored normal maps in Clip Studio / SpriteIlluminator and integrated them into Unity's 2D lighting system.
-- **Procedural Spawning Logic:** Implemented rule-based generation algorithms to ensure fair yet challenging enemy distribution.
-- **Decoupled Architecture with UnityEvents:** Replaced tightly coupled C# delegates with Inspector-driven `UnityEvent` setups, allowing UI triggers, audio cues, and particle effects to be configured without modifying core scripts.
-- **[put your description - e.g. Custom shader graph details / Save system architecture]**
+- **2D Normal Mapping Pipeline:** Authored custom normal maps for 2D tilesets, allowing Unity's Universal Render Pipeline (URP) light sources to create authentic 3D-like depth across pixel surfaces.
+- **Algorithmic PCG Spawner:** Combined **Specular Path** (to trace projectile bounce trajectories) and **Constraint Satisfaction Problem (CSP)** to validate enemy distances and safe zones automatically.
+- **Event Driven Architecture:** Built a broadcast-style event architecture so UI triggers, particle bursts, and audio cues fire independently without tightly coupling gameplay scripts.
 
 ---
 
 ### Challenges & Learnings
 
-- **Event Decoupling:** Moving from hardcoded delegates to modular `UnityEvent` architectures taught me the power of building decoupled, designer-friendly game systems.
-- **Normal Mapping in Pixel Art:** Discovered how to balance high-frequency pixel details with smooth normal map gradients without destroying the classic pixel art aesthetic.
-- **Thesis Integration:** Successfully bridged academic research in procedural generation into a playable, enjoyable game mechanic.
+Building Damned Veil pushed both my artistic and mathematical limits:
+- **Balancing Pixel Art:** Normal maps are inherently smooth gradients, while pixel art is sharp and clustered. Finding the sweet spot where normal lighting enhances the pixel art without making it look like muddy 3D took weeks of trial and error.
+- **Level Solvability:** Replacing manual enemy placement with a PCG algorithm (my thesis research) taught me that math can solve game design bottlenecks you could never brute-force by hand.
+- **Team Communication & Collaboration:** Coordinating art direction, level design, and code across a 4-person team taught me the value of building modular, designer-friendly tools in Unity.
 
 ---
 
 ### Key Takeaways & Results
 
-- **Visual Innovation:** Successfully achieved dynamic lighting and realistic depth across dark pixel-art environments.
-- **Reliable Physics Mechanics:** Delivers consistent, deterministic projectile rebounds without physics glitches.
-- **[put your description - e.g. Community reception / Itch.io playtest feedback]**
+- **Proven PCG Reliability:** Tested the PCG spawner across 15 map layouts (149 trials), achieving **7.6 ms** average generation speed, **92%** reliability, and **99%** layout uniqueness.
+- **High Player Satisfaction:** Beta testing evaluated via the Player Experience Inventory (PXI) yielded high scores across both Functional (5.77/7) and Psychosocial (5.76/7) consequences.
+- **Atmospheric Visual Polish:** Successfully merged dynamic retro lighting with challenging arcade-puzzle combat.
 
 <br />
 
-> There is a lot more to tell about making this game. Check out the devlog below!
+> There is a lot more to tell about making this game, including the normal mapping experiments and the PCG algorithm. Check out the devlogs below!
 
-<a href="/blog/damnedveil" class="inline-block px-4 py-2 mt-4 text-sm font-semibold rounded-md bg-main/20 text-main border border-main hover:bg-main hover:text-black transition-colors" style={{ textDecoration: 'none' }}>Read the full Devlog ➔</a>
+<a href="/blog/damnedveil" class="inline-block px-4 py-2 mt-4 text-sm font-semibold rounded-md bg-main/20 text-white border border-main hover:bg-main hover:text-black transition-colors" style={{ textDecoration: 'none' }}>Read the full Devlog ➔</a>

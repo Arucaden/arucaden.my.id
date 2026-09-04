@@ -1,97 +1,70 @@
 ---
-title: "Procedural Spawner: Bachelor Thesis"
-date: 2024-12-24
-description: "A retrospective on building a space shooter from scratch and exactly why \"game feel\" makes all the difference."
-readTime: "4 min read"
-tags: ["Unity", "C#", "Game Design"]
-draft: false
+title: "Damned Veil: How I Automated Enemy Spawning Using PCG and Math"
+date: 2025-05-20
+description: "Designing levels for a bounce-mechanic shooter was driving me crazy, so I built a Procedural Content Generation (PCG) system to do it for me."
+readTime: "6 min read"
+tags: ["Game Dev", "PCG", "Unity", "C#", "Damned Veil"]
 ---
-
-> Note: This is a devlog for **Another Galaxy Shooter**, a simple 2D web space shooter game with basic mechanics and immersive gameplay, built by me.
 
 ### Introduction
 
-**Ano Galaxy Shooter** is a fast-paced 2D space shooter where you control a ship trying to survive waves of enemy spaceships. It's simple, but enjoyable.
+Let me tell you about **Damned Veil**. It’s a 2D horror, strategy, and shooter game I’ve been working on. The core mechanic is simple but tricky: you have to defeat all the enemies in an arena using a single projectile that bounces off the walls. You have to find the absolute perfect shooting angle so the projectile ricochets and hits multiple targets in one go.
 
-Fly, shoot, dodge, obtain power. <br />
-No deep lore, just good ol' arcade fun in space.
+Sounds fun for the player, right? Well, for the developer (me), it was an absolute nightmare to design.
 
-### Unique Features
+### The Problem: Manual Placement is a Trap
 
-- **Fast Paced Game** <br />
-No worries about spending too much of your precious time on this game.
+When I started developing the levels, I placed the enemies manually. 
 
-- **A boss** <br />
-Think a small game can't have a boss? Think again! This one does!
+Here is what the workflow looked like: Place an enemy ➔ guess the bounce angle ➔ playtest ➔ realize the angle is off by 2 degrees and the enemy is unreachable ➔ adjust ➔ playtest again ➔ cry a little ➔ repeat. 
 
-### My Role: Programmer
-I was built this from scratch _but no not for the art tho_, but for the **programming experience**. Why, though? Because I wanted to learn how to build a simple game from the scratch. I wanted to figure out the best and most efficient way to make a game, and I also wanted to experiment with how gameplay feels.
-Let me give you an example:
-<div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-  <video
-    src="/projectsProperties/anoGalaxyShooter/a.mp4"
-    autoplay
-    loop
-    muted
-    playsInline
-    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
-  />
+Manual placement was incredibly inefficient. It took way too long to ensure a level was actually solvable, and the resulting levels felt repetitive. _(Seriously, I was losing my mind doing trial-and-error physics simulations in my head)._ 
 
-  <video
-    src="/projectsProperties/anoGalaxyShooter/b.mp4"
-    autoplay
-    loop
-    muted
-    playsInline
-    style={{ flex: "1", minWidth: "300px", borderRadius: "12px" }}
-  />
-</div>
+I couldn't just use pure random placement either, because spawning an enemy in a spot that the projectile mathematically cannot reach would completely break the game. I needed an automated system that was random enough to be fresh, but smart enough to guarantee the level was playable.
 
-You might feel like: ~~WOW SO COOL, I CAN'T STOP PLAYING THIS GAME!~~ <br />
-I'm joking, no one will be that amazed like that, but the point is, in the second video, I added several feedback elements, like:
+### The Solution: Procedural Content Generation (PCG)
 
-- Screen shake when the player gets hit
+To fix this, I decided to build a Procedural Content Generation (PCG) system in **Unity** using **C#**. But not just any random spawner—I combined two specific algorithmic approaches: **Specular Path** and **Constraint Satisfaction Problem (CSP)**.
 
-- The boss blinks when damaged
+Here is how the magic works:
 
-- Speed-like effect when the player gets a speed power-up,
+- **Specular Path**: Before spawning anyone, the algorithm calculates the exact trajectory of the projectile based on the player's position and the arena's walls. It essentially draws the invisible "bounce lines" across the map. These lines become our candidate spawning spots.
+- **Constraint Satisfaction Problem (CSP)**: This acts as the strict bouncer/validator. It takes those candidate spots and filters them through strict game rules. Are the enemies too close to each other? Are they spawning inside the player's safe zone? Are they actually on the bounce path? If a position passes the CSP checks, an enemy is spawned!
 
-- Bloom and chromatic aberration (if you noticed).
+> - **why Specular Path?** Because in a game strictly governed by ricochet physics, the path of the bullet is the only thing that matters. You have to design the level around the bullet, not the bullet around the level.
+> - **why CSP?** Because pure randomness is chaotic. CSP ensures the game remains balanced, fair, and mathematically solvable.
 
-This is why small effects matter, they make the game feel more immersive and fun to play right?
+### The Results & Performance
 
-### Challenges
+I wasn't just going to guess if this system was good—I rigorously tested it across 15 different maps (5 small, 5 medium, and 5 large arenas) with a total of 149 trials. 
 
-Challenges?, more like I created them myself just because I wanted to understand how things work behind em:
+Here are the numbers:
+- **Speed**: The algorithm took an average of **7.616 ms** to execute. That is blazing fast. It generates the entire enemy layout in the blink of an eye.
+- **Reliability**: It achieved a **92%** reliability rate (137 out of 149 configurations were mathematically valid and playable).
+- **Expressivity**: Out of those 137 valid layouts, **135 were completely unique**. That's a 99% expressivity rate, meaning the game basically never gets boring or repetitive.
 
-- **Learning how stuff works:**
-  - Quaternion math : I had to wrap my head around how to rotate objects, the camera, and more.
-  - Time management in Unity : I learned how to control and smooth out gameplay timing.
-  - Vector math : For calculating player and enemy movements precisely.
-  - Coroutines : To manage game flow and create smooth sequences of actions.
-  - Finite State Machine (FSM) : I used it to control the boss's behavior and skill transitions.
-  - I also had to learn how post-processing works to give that juicy visual feedback.
+### Did the Players Actually Like It?
 
-and other many things.
+Metrics are cool, but player experience is what actually matters. I conducted a beta test and evaluated it using the **Player Experience Inventory (PXI)**. 
 
-### What I Learned
+The results were incredibly positive. The **Functional Consequences** (how clear and playable the game feels) scored a **5.773**, and the **Psychosocial Consequences** (how fun, challenging, and engaging it feels) scored a **5.762**. Both of these fall into the "High" category! 
 
-From this game, I realized how much the **feel** of a game relies on small, intentional details.
-I learned not just how to make a game work, but how to make it feel good to play, from responsive controls, visual feedback, to clean and modular code structure.
+This proved that using procedural generation didn't ruin the handcrafted feel of the game. It maintained player curiosity, strategic freedom, and the perfect level of challenge.
 
-It taught me the importance of experimentation, iteration, and… <br />
-Sometimes, **breaking things just to understand how to fix them again.**
+### What I Learned & What's Next
 
-### Final Thoughts
+Building this PCG system taught me a massive lesson: **don't brute-force game design if math can do it better.** 
 
-Ano Galaxy Shooter is a simple game, but it was a valuable learning experience for me. I got to explore different aspects of game development. Honestly, I had a lot of fun making it.
+While the system works beautifully, it currently has some limitations. It only handles 2D static players and static enemies. 
 
-I did intend to make this game bigger and better... <br />
-But yeah, I'm not sure when I'll have the time for that.
-So for now, this is it.
+In the future, I want to evolve this system by adding:
+- **Dynamic / Moving Enemies**
+- **Adaptive Difficulty** (scaling the complexity based on how well the player is doing)
+- **Complex Arena Structures** (like puzzles and boss mechanics)
 
-> *ps : thanks for GameDevHQ for the awesome resources, they helped me a lot in this project.*
+<br />
+
+> Combining Specular Path and CSP saved my sanity and made Damned Veil infinitely more replayable. Sometimes, the best way to design a game is to teach the game how to design itself!
 
 ---
-
-Thanks for reading
+Thanks for reading!

@@ -126,6 +126,85 @@ h1[id], h2[id], h3[id], h4[id], h5[id], h6[id], section[id] {
   width: 100% !important;
 }
 
+.purosu blockquote {
+  position: relative !important;
+  margin: 2rem 0 !important;
+  padding: 1.25rem 1.75rem !important;
+  background:rgba(255, 59, 105, 0.06) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 0.875rem !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 16px rgba(255, 59, 105, 0.06) !important;
+  font-style: normal !important;
+  color: #E6DCE2 !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow: hidden !important;
+}
+
+.purosu blockquote:hover {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 59, 105, 0.14) !important;
+}
+
+.purosu blockquote::after {
+  content: '”' !important;
+  position: absolute !important;
+  top: -0.75rem !important;
+  right: 1.25rem !important;
+  font-size: 5rem !important;
+  font-family: Georgia, Cambria, 'Times New Roman', Times, serif !important;
+  font-weight: 900 !important;
+  color: rgba(255, 59, 105, 0.12) !important;
+  line-height: 1 !important;
+  pointer-events: none !important;
+  user-select: none !important;
+}
+
+/* Remove default quotation marks injected by markdown / typography presets */
+.purosu blockquote p::before,
+.purosu blockquote p::after,
+.purosu blockquote::before {
+  content: none !important;
+}
+
+.purosu blockquote p {
+  margin: 0 !important;
+  line-height: 1.75 !important;
+  color: #DDD2D9 !important;
+}
+
+.purosu blockquote p + p {
+  margin-top: 0.75rem !important;
+}
+
+.purosu blockquote strong {
+  color: #FFFFFF !important;
+  font-weight: 700 !important;
+}
+
+.purosu blockquote a {
+  color: var(--color-main) !important;
+  font-weight: 600 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+
+.purosu blockquote ul,
+.purosu blockquote ol {
+  margin: 0.5rem 0 !important;
+  padding-left: 1.25rem !important;
+}
+
+.purosu blockquote li {
+  margin: 0.35rem 0 !important;
+  color: #DDD2D9 !important;
+}
+
+.purosu blockquote li::marker {
+  color: var(--color-main) !important;
+}
+
 /* ==========================================================================
    Links and Utilities
    ========================================================================== */

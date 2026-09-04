@@ -30,7 +30,7 @@ function findTechWithIcon(name: string) {
 <aside class="md:sticky md:top-6 self-start w-full space-y-6">
   <!-- Links -->
   {(url || sourceUrl) && (
-    <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+    <div class="rounded-2xl bg-white/[0.03] border border-white/50 p-4">
       <h2 id="links-heading" class="project-side-title">// LINKS</h2>
       <div class="flex gap-2 flex-wrap mt-2">
         {url && (
@@ -61,7 +61,7 @@ function findTechWithIcon(name: string) {
 
   <!-- Tech Stack -->
   {tech.length > 0 && (
-    <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+    <div class="rounded-2xl bg-white/[0.03] border border-white/50 p-4">
       <h2 id="tech-heading" class="project-side-title">// TECH STACK</h2>
       <div class="flex gap-2 flex-wrap mt-2">
         {tech.map((t) => {
@@ -83,7 +83,7 @@ function findTechWithIcon(name: string) {
 
   <!-- Table of Contents -->
   {contentHeadings.length > 0 && (
-    <div class="rounded-2xl bg-white/[0.03] border border-white/10 p-4">
+    <div class="rounded-2xl bg-white/[0.03] border border-white/50 p-4">
       <h2 id="contents-heading" class="project-side-title">// CONTENTS</h2>
       <ul class="text-xs font-mono space-y-2 mt-2">
         {contentHeadings.map((heading) => (

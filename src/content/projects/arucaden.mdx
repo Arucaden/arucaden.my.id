@@ -8,64 +8,74 @@ url: "https://arucaden.my.id"
 sourceUrl: "https://github.com/Arucaden/arucaden.my.id"
 ---
 
-> **arucaden.my.id** is my personal portfolio website, built to showcase my projects, skills, and artwork while providing a lightning-fast browsing experience.
+> **arucaden.my.id** is my personal portfolio website, built to showcase my projects, skills, and artwork while providing a lightning-fast browsing experience with zero unnecessary bloat.
 
 ---
 
 ### Executive Summary & Role
 
-As the **Frontend Engineer & UI/UX Designer**, I built this platform as an evolution from my previous slide-based portfolio. The goal was to create a fast, content-driven static website while injecting JavaScript reactivity only where strictly needed using Astro Islands and Svelte 5 Runes.
+As the **Frontend Engineer & UI/UX Designer**, I built this platform as an evolution from my previous slide-based portfolio. 
+
+Previously, I always used slide decks to showcase my work, but they never felt interactive or engaging enough. I wanted a personal corner of the internet that truly reflects my style—blending game-like cyber aesthetic, CRT scanlines, and subtle glitch effects with modern, high-performance web standards.
+
+The goal was simple: create a fast, content-driven static website while injecting JavaScript reactivity only where strictly needed using Astro Islands and Svelte 5 Runes.
 
 ---
 
 ### Key Features
 
-- **Astro Content Collections:** Type-safe markdown-driven architecture for projects and devlog articles.
-- **Interactive Component Islands:** Interactive overlays, filters, and dynamic cards rendered via lightweight Svelte 5 components.
-- **Custom Aesthetic & Animations:** Bespoke visual styling, glitch effects, and CRT scanline themes powered by CSS transitions and vanilla JavaScript.
+- **Astro Content Collections:** Type-safe markdown/MDX-driven architecture for projects and devlog articles with zero CMS overhead.
+- **Interactive Component Islands:** Interactive overlays, custom filter badges, and dynamic project cards rendered via lightweight Svelte 5 components.
+- **Custom Cyberpunk Aesthetic:** Bespoke visual styling, scanline CRT overlays, firm glitch transitions, and ambient particle stars powered by performant vanilla JavaScript and CSS.
+- **Full-Width Markdown Layouts:** Custom typography and prose containers designed for readable, expansive technical walkthroughs.
 
 ---
 
 ### The Problem & The Solution
 
 **The Problem:**
-- Typical developer portfolios often rely on heavy client-side single-page application (SPA) frameworks that bloat JavaScript bundle sizes and degrade first-load performance.
-- Off-the-shelf templates frequently lack individuality and fail to showcase creative design identity.
-- Complex animation libraries often introduce runtime overhead.
+- **Bloated JavaScript Bundles:** Typical developer portfolios often rely on heavy client-side single-page application (SPA) frameworks that degrade initial load times.
+- **Cookie-Cutter Templates:** Off-the-shelf portfolio templates frequently lack individuality and fail to showcase a cohesive creative design identity.
+- **Performance Drag from Animations:** Heavy third-party animation libraries often introduce significant runtime stutter and layout shift.
 
 **The Solution:**
-- Adopted **Astro** for zero-JS-by-default server-side HTML generation, paired with **Svelte 5** for surgical reactivity.
-- Used **UnoCSS** for on-demand atomic styling, eliminating stylesheet bloat.
-- Implemented performant vanilla JavaScript and CSS keyframes for custom interactive effects.
+- **Zero-JS by Default:** Adopted **Astro** for lightning-fast server-rendered HTML, hydrating client JavaScript only for interactive islands like filter bars and modal drawers.
+- **On-Demand Utility Styling:** Configured **UnoCSS** to generate only the exact CSS utilities used, eliminating stylesheet bloat.
+- **Handcrafted Vanilla Effects:** Implemented lightweight CSS keyframes and modular canvas scripts for ambient particles and glitch effects without external runtime dependencies.
 
 ---
 
 ### Technical Details & Architecture
 
+Here is how the website architecture is structured:
 - **Island Architecture:** Leveraged selective hydration (`client:idle`, `client:visible`) to ensure zero unnecessary JavaScript runs on static content pages.
-- **Svelte 5 Runes:** Utilized explicit `$state` and `$derived` primitives for state management in modal popups and filter systems.
-- **Utility-First Styling:** Configured UnoCSS rules to output minimal, purged CSS bundles on build.
-- **Responsive Layout:** Engineered responsive layouts optimized for all viewport sizes from mobile to ultra-wide displays.
+- **Svelte 5 Runes:** Utilized `$state` and `$derived` primitives for fine-grained reactivity in modal drawers and tag filtering systems.
+- **Atomic Styling with UnoCSS:** Configured custom color presets and design shortcuts (e.g., glowing borders, active filter pills) purged at build time.
+- **Responsive Geometry:** Engineered responsive layouts optimized for all viewport sizes from mobile phones to ultrawide monitors.
+
+> - **why Astro?** Content collections make writing project breakdowns and devlogs as simple as dropping a Markdown file into the repo—no database or external CMS needed.
+> - **why Svelte 5 over React?** React felt like overkill for a portfolio. Svelte 5's runes provide pure, intuitive reactivity with minimal boilerplate and tiny bundle sizes.
+> - **why UnoCSS?** UnoCSS generates utility CSS on-demand at lightning build speeds, outputting only the bytes you actually use.
 
 ---
 
 ### Challenges & Learnings
 
-- **Partial Hydration Strategy:** Finding the balance between static HTML rendering and dynamic Svelte island hydration required understanding client directives (`client:idle` vs. `client:visible`).
-- **Svelte 5 Rune Paradigms:** Transitioning to Svelte 5's new reactivity model deepened my understanding of fine-grained reactive dependency graphs.
-- **User-Centric Design:** Learned to balance creative visual effects (glitch and CRT styling) with readability, accessibility, and smooth performance.
+Building a portfolio from scratch pushed me to refine both my design and architectural sensibilities:
+- **Balancing Aesthetics & Readability:** Finding the right balance between edgy game-inspired visual effects (glitch tears, CRT lines) and clean typography required careful contrast tuning and restraint.
+- **Mastering Svelte 5 Runes:** Transitioning from legacy Svelte to Svelte 5's new reactivity model deepened my understanding of fine-grained reactive dependency graphs.
+- **Selective Hydration Strategy:** Figuring out the boundary between static HTML rendering and dynamic Svelte islands ensured the site achieves instant page loads.
 
 ---
 
 ### Key Takeaways & Results
 
-- **Blazing Fast Performance:** Achieved top-tier Lighthouse performance with instant sub-second page loads and zero layout shift.
-- **Lean Asset Footprint:** Minimized total stylesheet size using UnoCSS on-demand utility generation.
-- **Scalable Content Architecture:** Easily extensible structure allowing new projects and devlogs to be published seamlessly via Markdown/MDX.
-- **[put your description - e.g. Lighthouse score or personal design milestone]**
+- **Blazing Fast Performance:** Achieved top-tier Lighthouse scores with sub-second page loads and zero cumulative layout shift (CLS).
+- **Lean Asset Footprint:** Minimized total stylesheet and script weight through on-demand compilation.
+- **Scalable Content Hub:** An extensible structure allowing new projects and devlogs to be published seamlessly via Markdown/MDX.
 
 <br />
 
-> There is a deeper story behind the redesign of this website. Check out the devlog below!
+> There is a deeper story behind the redesign of this website and the lessons learned along the way. Check out the full devlog below!
 
 <a href="/blog/arucaden" class="inline-block px-4 py-2 mt-4 text-sm font-semibold rounded-md bg-main/20 text-white border border-main hover:bg-main hover:text-black transition-colors" style={{ textDecoration: 'none' }}>Read the full Devlog ➔</a>

@@ -1,68 +1,81 @@
 ---
-title: "SIRUWA"
-date: 2024-05-22
-description: "Room and Space Management System for RT/RW local communities, designed to connect and empower residents."
-image: "/projects/Siruwa.png"
-tech: ["Laravel", "MySQL", "Tailwind", "Alpine"]
-draft: true
+title: "SIRUWA (Sistem Informasi Rukun Warga)"
+date: 2024-05-31
+description: "A modern digital governance and community administration platform for RT/RW."
+image: "/projects/siruwa.png"
+tech: ["Laravel", "Tailwind CSS", "Alpine.js", "MySQL"]
 ---
 
-> **SIRUWA** is a community-focused room and space management information system designed to help local RT/RW community administrators and residents easily reserve, manage, and coordinate shared neighborhood facilities.
+> **SIRUWA (Sistem Informasi Rukun Warga)** is a modern, web-based digital governance platform I helped build to digitize and centralize neighborhood-level public services (RT/RW and Dasawisma).
 
 ---
 
 ### Executive Summary & Role
 
-| Attribute | Details |
-| :--- | :--- |
-| **Role** | Frontend Developer & UI Implementor / [put your description] |
-| **Tech Stack** | Laravel, Alpine.js, Tailwind CSS, MySQL |
-| **Core Responsibilities** | UI Implementation, Interactive Booking Forms, Admin Workflow Polish |
+As part of the development team, I engineered SIRUWA to bridge the massive gap between community administrators (*Pengurus RW/RT*) and neighborhood residents (*Warga*). 
 
-As the **Frontend Developer**, I was responsible for crafting the user experience, building responsive booking forms, and implementing dynamic client-side interactions with Alpine.js and Tailwind CSS.
+Let's be honest, managing a neighborhood is chaotic. Before SIRUWA, everything—from resident demographic records and document requests to tracking monthly dues—was done manually. We wanted to build a single digital ecosystem that handles all of this seamlessly.
+
+We ended up with a powerful Laravel-based platform that not only digitizes document pipelines and financial health but actually features a smart Decision Support System (DSS) using fuzzy logic to ensure social assistance (*Bansos*) is distributed fairly and objectively!
 
 ---
 
 ### Key Features
 
-- **Public Facility Catalog:** Residents can browse available community halls, sports spaces, and public inventory with live availability status.
-- **Interactive Booking Form:** Date and time slot picker with real-time collision detection to prevent double bookings.
-- **Admin Management Dashboard:** Administrative tools for approving reservations, generating schedule reports, and tracking facility usage.
-- **[put your description - e.g. WhatsApp / Email confirmation notification flow]**
+- **Centralized Demographic DB:** A single source of truth for household data. Residents can submit profile update requests, and admins can approve them or bulk-import data via Excel.
+- **Online Document Requests:** Residents can request administrative letters from their phones, upload files, and track the approval status in real-time. _No more knocking on the RT's door at 9 PM!_
+- **Transparent Financial Ecosystem:** Dual-account ledger tracking (*Iuran Sampah* & *Iuran Kematian*). Residents upload payment proofs, and admins can track arrears and generate PDF audit reports.
+- **Decision Support System (SPK Bansos):** A mathematical engine combining Simple Additive Weighting (SAW) and Fuzzy Logic to objectively rank households for social aid based on income, utilities, taxes, and dependents.
+- **Public Information Portal:** A sleek landing page with interactive demographic charts, an organizational structure, a FullCalendar agenda, and rich-text news publishing.
 
 ---
 
 ### The Problem & The Solution
 
 **The Problem:**
-- Community space bookings were previously coordinated through fragmented WhatsApp chats or paper logbooks, leading to double-booked facilities and lost records.
-- Non-technical residents struggled with overly complex booking portals.
+- **Paperwork Chaos:** Resident data was kept in dusty binders or messy spreadsheets. Errors, duplicates, and missing NIKs were everywhere.
+- **Painful Document Requests:** Need an official letter? You had to physically track down the neighborhood leader during specific hours. Such a hassle.
+- **Opaque Finances:** Tracking monthly waste collection and funeral funds manually meant lost physical receipts, uncollected arrears (*tunggakan*), and zero financial transparency.
+- **Subjective Social Aid:** Distributing *Bansos* without data-driven scoring often caused drama, disputes, and accusations of bias. 
 
 **The Solution:**
-- Created a lightweight, mobile-first web interface with clear step-by-step reservation workflows.
-- Implemented client-side reactivity using **Alpine.js** to deliver snappy calendar date picking without heavy JavaScript framework overhead.
+- **Digital Ecosystem:** A dedicated web portal where residents self-serve and admins validate. 
+- **Automated Pipelines:** Document requests and financial payments are tracked digitally with clear status phases (Submitted ➔ Validated ➔ Completed).
+- **Algorithmic Fairness:** The built-in DSS engine mathematically evaluates households so aid distribution is 100% objective and transparent.
+- **Central Communication Hub:** An interactive public portal keeps everyone informed about agendas and community news.
 
 ---
 
 ### Technical Details & Architecture
 
-- **Lightweight Reactivity (Alpine.js):** Utilized Alpine.js for dynamic modal dialogues, schedule filtering, and interactive form feedback.
-- **Utility Styling (Tailwind CSS):** Created an accessible, responsive layout tailored for elderly and casual mobile users.
-- **Backend Booking Logic (Laravel & MySQL):** Engineered database queries with time-range overlap checks to enforce atomic reservation safety.
-- **[put your description - e.g. Role-based permission matrix / Database schema]**
+Here is why we chose the technologies we used:
+- **Laravel 10 (PHP 8.1+)**: The absolute powerhouse for this project. We needed a robust MVC framework with built-in routing, Eloquent ORM, and secure authentication to handle complex multi-role workflows.
+- **Tailwind CSS & Alpine.js**: We wanted the UI to look incredibly modern without the heavy JavaScript bundle of React or Vue. Alpine.js provided the perfect lightweight interactivity for modals and dropdowns.
+- **Database & Algorithmic Views**: MySQL with custom SQL views (`spk_views`) to aggregate household metrics for the DSS engine.
+- **Cloud Integrations**: Used Cloudinary API for reliable image/document uploads and DomPDF for generating those essential audit-ready financial reports.
+
+> - **why Laravel?** When dealing with complex relational data (households, residents, payments, document pipelines) and algorithmic logic, Laravel's Eloquent ORM and ecosystem are just unmatched.
+> - **why Fuzzy Logic?** Real-world social aid isn't black and white. Trapezoidal membership functions allowed us to categorize incomes and taxes into Low/Medium/High fuzzy sets for a much fairer evaluation than raw cutoffs.
 
 ---
 
 ### Challenges & Learnings
 
-- **Managing Booking Race Conditions:** Handling simultaneous reservation requests for the same time slot taught me how to structure backend database transactions and lock checks.
-- **Accessible UI Design for Diverse Users:** Designing for community residents required high-contrast typography, clear status badges, and simplified form controls.
-- **[put your description - e.g. Community stakeholder feedback]**
+Building a platform this comprehensive brought some serious challenges:
+- **The DSS Math**: Implementing Fuzzy Logic and SAW algorithms in PHP from scratch was mind-bending. Translating mathematical membership functions into clean, testable code took serious research and debugging.
+- **Role & Route Security**: Ensuring a resident couldn't accidentally (or intentionally) access financial ledgers or approve their own documents required strict middleware and session management.
+- **State & File Management**: Handling file uploads for payment proofs and document attachments—and syncing them seamlessly with Cloudinary—was a steep but rewarding learning curve.
+- **Complex Database Joins**: Creating efficient SQL views to aggregate demographic metrics across multiple tables so the DSS engine could process them without timing out.
 
 ---
 
 ### Key Takeaways & Results
 
-- **Streamlined Coordination:** Replaced manual chat coordination with a single, clear availability calendar.
-- **Fast, Mobile-Friendly UX:** Lightweight frontend ensures rapid load times even on slow mobile networks.
-- **[put your description - e.g. Feedback from community test users / Presentation results]**
+Developing SIRUWA was a massive leap in my full-stack engineering skills:
+- **Real-World Problem Solving**: We built something that genuinely modernizes digital governance and removes friction from everyday community administration.
+- **Advanced Algorithmic Logic**: I learned how to integrate complex mathematical models (Fuzzy Logic) into a standard web application to automate objective decision-making.
+- **Full-Stack Mastery**: From configuring Tailwind and Vite on the frontend to designing normalized MySQL schemas and Eloquent relationships on the backend, this project solidified my end-to-end development capabilities.
+
+<br />
+
+> SIRUWA proved to me that software isn't just about writing code—it's about creating systems that bring transparency, fairness, and efficiency to real communities.

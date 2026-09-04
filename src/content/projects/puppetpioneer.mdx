@@ -1,35 +1,76 @@
 ---
 title: "Puppet Pioneer"
 date: 2024-12-24
-description: "a 2D platformer game about a puppet show"
+description: "A theatrical 2D platformer set in a living puppet show, engineered with expressive game feel and tight mechanics"
 image: "/projects/PuppetPioneer.webp"
 url: "https://lordzaini.itch.io/the-puppet-pioneer"
 tech: ["Unity", "C#", "Aseprite"]
 ---
 
-**Puppet Pioneer** is a 2D platformer game about a puppet show.
+> **Puppet Pioneer** is a charming yet challenging 2D theatrical platformer where the world is literally an interactive puppet show. Pulling the strings behind the scenes, you must navigate tricky stages, dodge obstacles, and outsmart dynamic bosses.
 
-### Executive Summary
+---
 
-As a **Programmer**, I built this project to understand precisely how to inject "Game Feel". From post-processing to tight input response, the project focuses purely on polish over scale.
+### Executive Summary & Role
+
+As the **Lead Gameplay Programmer**, I worked on transforming what could have been a standard 2D platformer into a vibrant, stage-lit puppet theatrical experience.
+
+Platformers live and die by their jump curves and character momentum. If the player feels like they're sliding on ice or jumping like a brick, the game instantly falls flat. My primary objective was engineering tactile "game feel" into every puppet movement—from coyote time and jump buffering to custom squash-and-stretch animations.
+
+I focused on mechanical polish over sprawling scale, ensuring that running, jumping, and dodging across this miniature puppet theatre felt crisp, responsive, and full of personality.
+
+---
+
+### Key Features
+
+- **Theatrical Stage Aesthetic:** Environments styled like papercraft stage sets with dramatic curtain transitions and spotlight illumination.
+- **Precision Platforming Mechanics:** Tuned jump arcs featuring coyote time, jump buffering, and variable jump height for fair, razor-sharp controls.
+- **Dynamic Boss Behavioral Routines:** Boss encounters driven by modular Finite State Machines (FSM) that adapt across multiple theatrical acts.
+- **Sensory Visual Feedback:** Integrated dynamic squash-and-stretch sprite deformations, dust particles on landing, and hit-stop camera shake.
+- **Handcrafted Pixel Art:** Custom sprite animations crafted in Aseprite to give puppet characters their distinctive wooden, disjointed charm.
+
+---
 
 ### The Problem & The Solution
 
-**The Problem:** 
-Creating an arcade game where you simply "shoot enemies" frequently results in a hollow, floaty, and unrewarding experience if there is no physical weight behind the visual actions.
+**The Problem:**
+- **Clunky Platforming Physics:** Relying purely on default engine gravity often creates floaty, unresponsive jumps that frustrate players during tight platforming sections.
+- **Static World Presentation:** A platformer set in a "puppet theatre" risks looking like any other standard 2D game if the stage mechanics don't feel lively and performative.
 
-**The Solution:** 
-I ignored padding the game with deep lore or massive levels. Instead, I focused on "Game Feel", specifically engineering tight input responses, dramatic visual screen-shake, precise damage flashing, and heavy post-processing so that every single hit feels incredibly impactful.
+**The Solution:**
+- **Custom Platformer Controller:** Programmed a custom character motor in C# with gravity multipliers, jump cutoffs on key release, and edge-forgiveness grace periods (coyote time).
+- **Theatrical Staging & Camera Juice:** Created spotlight tracking shaders, stage curtain transitions, and post-processing bloom to sell the feeling of a miniature live puppet performance.
 
-### Technical Details
+---
 
-- **State Machines:** Constructed all boss behavioral patterns and wave transitions completely via simple Finite State Machines (FSM).
-- **Visual Feedback:** Integrate screen shake, particle effects, and damage flashing etc. to make the game feel more impactful.
-- **Post-Processing:** Bloom, chromatic aberration and other effects maximize game aesthetic and leverage User Experiences.
+### Technical Details & Architecture
+
+Here is the tech breakdown behind the puppet strings:
+- **Unity 2D & C#:** Custom physics controllers, raycast ground detection, and platform edge detection without jitter.
+- **Finite State Machine Architecture:** Handled character movement states (Grounded, Airborne, WallSlide, Hurt) and boss phase transitions cleanly without nested conditional chaos.
+- **Aseprite Animation Pipeline:** Animated character frames with exaggerated anticipation and overshoot to mimic physical wooden marionettes.
+- **Visual Feedback Systems:** Custom camera-shake scripts and sprite flash shaders on damage.
+
+> - **why build a custom jump curve instead of using default Rigidbody2D?** Default engine physics feels like floating through water. Custom gravity multipliers allow instant snappy ascents and weighted descents—the secret ingredient of great platformers like *Celeste* or *Mario*.
+> - **why Aseprite for the puppet theme?** Aseprite’s onion-skinning and timeline tools made it effortless to craft quirky, frame-by-frame puppet motions that sell the "wooden toy" aesthetic.
+
+---
 
 ### Challenges & Learnings
 
-The big challenge wasn't just getting things to logically work, **but getting them to "feel good."** I learned that raw code architecture is only half the battle. 
-Mastering Quaternion math rotations, Unity Coroutines, even simple FSMs allowed me to make smooth attack patterns. 
+Building a platformer that feels satisfying was a humbling lesson in micro-timing:
+- **Jump Physics Tuning:** Spending days tweaking millisecond values for jump buffering and gravity curves taught me that player satisfaction lives entirely in the subtle details players never consciously notice.
+- **State Machine Discipline:** Separating player locomotion and boss attack patterns into strict C# state machines saved our codebase from descending into an unmaintainable mess of booleans.
+- **Breaking Code to Master It:** Deliberately turning off subsystems to test edge cases gave me a much deeper understanding of Unity coroutines, lifecycle hooks, and physics timesteps.
 
-Most importantly, I learned that **breaking logic on purpose to understand exactly why it worked** is completely necessary to master logic fundamentals.
+---
+
+### Key Takeaways & Results
+
+- **Tight, Responsive Controls:** Successfully eliminated input lag and floatiness, creating a platformer that feels sharp and forgiving.
+- **Memorable Stage Presence:** Praised on itch.io for its unique theatrical presentation, visual polish, and punchy sound design.
+- **Comprehensive Game Dev Growth:** Solidified my grasp of platformer physics architectures and polished 2D game design pipelines.
+
+<br />
+
+> Pulling the strings on Puppet Pioneer proved that when you nail the core mechanics, even the simplest jump can bring a whole world to life!

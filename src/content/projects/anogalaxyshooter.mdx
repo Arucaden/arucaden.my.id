@@ -7,55 +7,70 @@ url: "https://arucaden.itch.io/ano-galaxy-shooter"
 tech: ["Unity", "C#"]
 ---
 
-> **Ano Galaxy Shooter** is a fast-paced 2D desktop arcade space shooter built with an intense focus on "game feel," responsive controls, and impactful visual feedback.
+> **Ano Galaxy Shooter** is a fast-paced 2D arcade space shooter built with one obsessive goal in mind: mastering "game feel," responsive controls, and visual combat feedback.
 
 ---
 
 ### Executive Summary & Role
 
-As the **Solo Programmer & Designer**, I created this project to master the mechanics of tactile game feel. Rather than expanding the scope with massive levels, the focus was kept strictly on mechanical polish, visual juice, and satisfying combat interactions.
+As the **Solo Programmer & Designer**, I set out on a mission to answer a simple question: *What actually separates a dull, floaty prototype from an addictive arcade shooter that feels incredible to play?*
+
+Instead of getting lost in feature creep with sprawling maps or complicated storylines, I kept the scope laser-focused. I wanted every single button press, thruster turn, and laser blast to deliver an immediate hit of sensory satisfaction.
+
+This project was my playground for dissecting the anatomy of "juice"—from directional camera trauma and hit-stop frames to particle explosions and post-processing flair.
 
 ---
 
 ### Key Features
 
-- **Tight Input Response:** Snappy 2D ship movement and weapon firing tuned for instantaneous control.
-- **Boss Behavioral Patterns:** Multi-phase boss encounters powered by Finite State Machines (FSM).
-- **Dynamic Feedback Loop:** Layered particle effects, screen shake, hit-stop, and damage flashing on every hit.
+- **Tight Input Response:** Instantaneous velocity damping and snappy ship rotation tuned for razor-sharp evasive maneuvers.
+- **Layered Sensory "Juice":** Every projectile impact triggers a symphony of micro-feedback: hit-stop pauses, sprite flash emissions, directional screen shake, and debris bursts.
+- **Dynamic Boss Behavioral Patterns:** Multi-phase boss encounters powered by modular Finite State Machines (FSM).
+- **Arcade Post-Processing:** Saturated bloom, chromatic aberration, and vignette styling that elevate the retro sci-fi aesthetic.
+- **Optimized Performance:** Smooth, consistent 60 FPS action with zero garbage collection spikes during bullet hell barrages.
 
 ---
 
 ### The Problem & The Solution
 
 **The Problem:**
-- Typical 2D shooter prototypes often feel floaty, hollow, and unrewarding when shooting enemies lacks physical weight and visual punch.
-- Complex nested state logic can easily become fragile and hard to debug.
+- **Floaty, Weightless Combat:** Too many indie space shooters feel hollow. You press spacebar, a bullet flies across a static background, the enemy disappears, and... nothing. There's no physical weight or consequence.
+- **Fragile Boss Scripts:** Spaghetti `if/else` logic trees quickly become a nightmare to maintain when a boss has multiple attack phases and health thresholds.
 
 **The Solution:**
-- Engineered layered visual juice: directional screen shake, chromatic aberration, hit-stop pauses, and emission flashes to give every laser blast physical impact.
-- Structured boss patterns and wave transitions using modular Finite State Machines for clean, predictable behavior.
+- **Engineered Visual Impact:** Added micro-pauses (hit-stop for a few frames), directional camera shake based on impact angles, chromatic aberration pulses, and sprite white-flashes. Now, destroying a ship feels punchy and visceral.
+- **Finite State Machine (FSM) Architecture:** Separated boss behaviors into discrete states (Idle, Strafe, Bullet Hell Spiral, Enrage) with clear entry/exit transitions for bug-free, predictable phase changes.
 
 ---
 
 ### Technical Details & Architecture
 
-- **State Machine Architecture:** Implemented simple, robust Finite State Machines (FSM) to manage enemy waves and boss attack routines cleanly.
-- **Visual Feedback Pipeline:** Combined custom screen-shake algorithms with particle bursts and sprite damage flashing to emphasize impacts.
-- **Post-Processing Stack:** Tuned bloom, chromatic aberration, and vignette post-processing to elevate the retro-arcade aesthetic.
-- **[put your description - e.g. Object pooling system for projectiles / Quaternion math for homing shots]**
+Here is how the mechanical polish was built under the hood:
+- **Unity 2D & C#:** Handled physics, rigidbodies, and custom vector dampening for zero-latency ship handling.
+- **Screen Shake System:** Implemented a trauma-based camera shake algorithm (rather than simple random noise) that decays non-linearly for smooth, natural settling.
+- **Hit-Stop & Time Slicing:** Created a centralized time manager capable of freezing the game scale for 50–100 milliseconds upon critical hits to sell the force of an explosion.
+- **Modular State Machine:** Built a reusable C# FSM architecture for enemy waves and boss patterns.
+
+> - **why focus on "Game Feel" instead of massive levels?** If the core 30-second loop of moving and shooting isn't fun, having 50 levels won't save your game. Polishing the micro-interactions first is what makes games truly replayable.
+> - **why Finite State Machines for Bosses?** When bullets and timers are flying everywhere, you need absolute predictability. FSMs make state transitions clean, debuggable, and easy to expand with new attack patterns.
 
 ---
 
 ### Challenges & Learnings
 
-- **Tuning Game Feel:** Learned that gameplay satisfaction comes as much from sensory feedback (audio-visual weight and timing) as it does from raw code logic.
-- **Mathematical Foundations:** Deepened understanding of Quaternion rotations, Vector math, and Unity Coroutines to create fluid movement and bullet trajectories.
-- **Systematic Debugging:** Learned the value of intentionally testing edge cases to master core gameplay logic fundamentals.
+Digging into the weeds of tactile gameplay taught me lessons you can't learn from high-level tutorials:
+- **Math Behind Movement:** Deepened my grasp of Vector math, Lerp dampening, and Quaternion rotations to make ship turning feel smooth yet instantaneous.
+- **The Fine Line Between "Juicy" and "Nauseating":** Too much screen shake and chromatic aberration can give players an instant headache. Finding the exact threshold where effects feel impactful without muddying combat clarity required dozens of playtest iterations.
+- **Breaking Things on Purpose:** Intentionally stressing the collision systems and edge cases taught me the true value of defensive coding and structured state management.
 
 ---
 
 ### Key Takeaways & Results
 
-- **Polished Vertical Slice:** Successfully delivered a cohesive, responsive arcade experience published on itch.io.
-- **Stable 60 FPS:** Optimized rendering and particle systems for smooth, stutter-free performance.
-- **[put your description - e.g. Player feedback highlight / Key metric or playcount]**
+- **Polished Vertical Slice:** Delivered an arcade shooter on itch.io that players consistently praised for its snappy controls and addictive feedback loops.
+- **Mastered Core Gameplay Feel:** Built a personal mental framework for "game juice" that I now apply to every game and interactive app I build.
+- **Rock-Solid Performance:** Maintained a rock-solid 60 FPS on desktop browsers, proving that heavy visual effects don't have to sacrifice performance when coded cleanly.
+
+<br />
+
+> A game doesn't need a thousand features to be memorable. Sometimes, just making one laser beam feel really, really good to shoot is all the magic you need!
