@@ -1,5 +1,14 @@
 import { defineCollection, z } from 'astro:content';
 
+const galleryItemSchema = z.union([
+  z.string(),
+  z.object({
+    src: z.string(),
+    alt: z.string().optional(),
+    caption: z.string().optional(),
+  }),
+]);
+
 const projectsCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -11,7 +20,10 @@ const projectsCollection = defineCollection({
     tags: z.array(z.string()).optional(),
     category: z.string().optional(),
     url: z.string().url().optional(),
+    liveUrl: z.string().url().optional(),
     sourceUrl: z.string().url().optional(),
+    repoUrl: z.string().url().optional(),
+    gallery: z.array(galleryItemSchema).optional(),
     draft: z.boolean().optional(),
     pin: z.boolean().optional(),
   }),

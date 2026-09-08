@@ -6,15 +6,13 @@ import HeroSection from '@components/HeroSection.astro';
 import Preloader from '@components/Preloader.astro';
 
 const pageTitle = 'Daffa Maulana Satria';
-const description =
-  'UI/UX Designer, Creative Technologist, and Game Developer specializing in tactile digital interfaces, procedural systems, and interactive 3D WebGL experiences.';
 
 const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Daffa Maulana Satria',
   url: 'https://arucaden.my.id',
-  jobTitle: ['Game Developer', 'UI/UX Designer', '2D Artist', 'Fullstack Developer'],
+  jobTitle: ['Game Developer', 'UI/UX Designer', 'Fullstack Developer'],
   sameAs: [
     'https://github.com/Arucaden',
     'https://linkedin.com/in/daffa-ms',
@@ -27,7 +25,6 @@ const personJsonLd = {
   <head>
     <SiteHead
       title={pageTitle}
-      description={description}
       ogType="website"
       ogImage="/artworks/Mikazuki.webp"
       jsonLd={personJsonLd}

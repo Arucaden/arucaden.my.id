@@ -1,35 +1,35 @@
 import type { Experience } from '@/types/experience.ts';
 
 export const experiences: Experience[] = [
-    {
-    company: 'Ariverse Studio',
-    period: 'June 2026 - current',
-    type: 'Internship',
-    location: 'Hybrid',
-    role: 'Game Programmer',
-    points: 
-    [
-      'Collaborate with Artists and Game Designer to Implements mechanics, systems, and gameplay features in Unity.',
-      'Learning and Implement about Unity Unit Testing.',
-      'Learning and Implement about Proper Project Architecture and Assembly Definition.',
-      'Developing and mantain documentation for game systems and gameplay features.',
-      'Integrate and extending third-party modules into game.'
-    ],
-  },
-  {
-    company: 'Nanami.id',
-    period: 'October 2025 - current',
-    type: 'Part-time',
-    location: 'Remote',
-    role: 'Lead of Game and Design Nanami-WAVE',
-    points: 
-    [
-      'Establish and document design and game development workflows, standards, and guidelines to ensure efficient, scalable, and consistent production processes.',
-      'Oversee the development of Visual Novel content, including story structure, branching narrative, visual direction, music mood, and controlled use of Generative AI.',
-      'Maintain effective communication and healthy collaboration within the team.',
-      'Manage design scope and priorities to align creative ambition with project timelines and available resources.'
-    ],
-  },
+  //   {
+  //   company: 'Ariverse Studio',
+  //   period: 'June 2026 - current',
+  //   type: 'Internship',
+  //   location: 'Hybrid',
+  //   role: 'Game Programmer',
+  //   points: 
+  //   [
+  //     'Collaborate with Artists and Game Designer to Implements mechanics, systems, and gameplay features in Unity.',
+  //     'Learning and Implement about Unity Unit Testing.',
+  //     'Learning and Implement about Proper Project Architecture and Assembly Definition.',
+  //     'Developing and mantain documentation for game systems and gameplay features.',
+  //     'Integrate and extending third-party modules into game.'
+  //   ],
+  // },
+  // {
+  //   company: 'Nanami.id',
+  //   period: 'October 2025 - current',
+  //   type: 'Part-time',
+  //   location: 'Remote',
+  //   role: 'Lead of Game and Design Nanami-WAVE',
+  //   points: 
+  //   [
+  //     'Establish and document design and game development workflows, standards, and guidelines to ensure efficient, scalable, and consistent production processes.',
+  //     'Oversee the development of Visual Novel content, including story structure, branching narrative, visual direction, music mood, and controlled use of Generative AI.',
+  //     'Maintain effective communication and healthy collaboration within the team.',
+  //     'Manage design scope and priorities to align creative ambition with project timelines and available resources.'
+  //   ],
+  // },
   {
     company: '3PM-Solutions',
     period: '1 July 2025 - 31 December 2025',

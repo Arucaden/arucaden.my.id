@@ -281,16 +281,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Subtitle Statement -->
-    <div class="max-w-2xl px-2 py-1">
-      <p
-        class="text-xs sm:text-sm md:text-base text-white/90 font-medium leading-relaxed"
-        style="text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 1px 4px rgba(0, 0, 0, 0.8);"
-      >
-        Designing tactile digital interfaces, procedural game architectures, and interactive WebGL experiences with systematic craftsmanship.
-      </p>
-    </div>
   </div>
 
   <!-- Scroll Down Trigger Indicator -->

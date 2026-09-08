@@ -6,11 +6,25 @@ interface Props {
   title: string;
   tech?: string[];
   url?: string;
+  liveUrl?: string;
   sourceUrl?: string;
+  repoUrl?: string;
+  hasGallery?: boolean;
   headings?: Array<{ depth: number; slug: string; text: string }>;
 }
 
-const { tech = [], url, sourceUrl, headings = [] } = Astro.props;
+const {
+  tech = [],
+  url,
+  liveUrl,
+  sourceUrl,
+  repoUrl,
+  hasGallery = false,
+  headings = [],
+} = Astro.props;
+
+const finalLiveUrl = liveUrl || url;
+const finalSourceUrl = sourceUrl || repoUrl;
 
 const contentHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 
@@ -29,13 +43,13 @@ function findTechWithIcon(name: string) {
 
 <aside class="md:sticky md:top-6 self-start w-full space-y-6">
   <!-- Links -->
-  {(url || sourceUrl) && (
+  {(finalLiveUrl || finalSourceUrl) && (
     <div class="rounded-2xl bg-white/[0.03] border border-white/50 p-4">
       <h2 id="links-heading" class="project-side-title">// LINKS</h2>
       <div class="flex gap-2 flex-wrap mt-2">
-        {url && (
+        {finalLiveUrl && (
           <a
-            href={url}
+            href={finalLiveUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-main hover:bg-main/10 text-gray-text hover:text-white text-xs font-mono transition-all duration-200 shadow-sm hover:shadow-[0_0_12px_rgba(255,59,105,0.25)] group"
@@ -44,9 +58,9 @@ function findTechWithIcon(name: string) {
             <span>Live Project</span>
           </a>
         )}
-        {sourceUrl && (
+        {finalSourceUrl && (
           <a
-            href={sourceUrl}
+            href={finalSourceUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 hover:border-main hover:bg-main/10 text-gray-text hover:text-white text-xs font-mono transition-all duration-200 shadow-sm hover:shadow-[0_0_12px_rgba(255,59,105,0.25)] group"

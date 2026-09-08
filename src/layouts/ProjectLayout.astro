@@ -4,6 +4,7 @@ import '../styles/global.css';
 import SiteHead from '@components/SiteHead.astro';
 import ArticleContainer from '@components/ArticleContainer.astro';
 import ProjectSidebar from '@components/Projects/ProjectSidebar.astro';
+import ProjectGallery from '@components/Projects/ProjectGallery.svelte';
 import BackButton from '@components/BackButton.astro';
 
 interface Props {
@@ -11,12 +12,63 @@ interface Props {
 }
 
 const { content } = Astro.props;
-const { title, image, description, tech = [], url, sourceUrl, date } = content.data;
+const {
+  title,
+  image,
+  description,
+  tech = [],
+  url,
+  liveUrl,
+  sourceUrl,
+  repoUrl,
+  gallery = [],
+  date,
+} = content.data;
+
+const finalLiveUrl = liveUrl || url;
+const finalSourceUrl = sourceUrl || repoUrl;
+
+// Normalize gallery items to { src: string, alt: string, caption?: string }
+const normalizedGallery = gallery.map((item, index) => {
+  if (typeof item === 'string') {
+    return {
+      src: item,
+      alt: `${title} snapshot ${index + 1}`,
+      caption: undefined,
+    };
+  }
+  return {
+    src: item.src,
+    alt: item.alt || item.caption || `${title} snapshot ${index + 1}`,
+    caption: item.caption,
+  };
+});
+
+const hasGallery = normalizedGallery.length > 0;
+
 const { Content, headings } = await content.render();
+
+// If hasGallery, add gallery to headings so it shows up in Table of Contents
+const enhancedHeadings = hasGallery
+  ? [...headings, { depth: 2, slug: 'gallery', text: 'App Snapshots' }]
+  : headings;
 
 const metaDescription =
   description || `Project by Daffa Maulana Satria: ${title}`;
 const ogImage = image || '/artworks/Mikazuki.webp';
+
+const galleryImageUrls = normalizedGallery.map((img) =>
+  `https://arucaden.my.id${img.src.startsWith('/') ? img.src : `/${img.src}`}`
+);
+
+const allImages = [
+  `https://arucaden.my.id${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`,
+  ...galleryImageUrls,
+];
+
+const sameAsLinks = [finalLiveUrl, finalSourceUrl].filter(
+  (l): l is string => Boolean(l)
+);
 
 const projectJsonLd = {
   '@context': 'https://schema.org',
@@ -24,14 +76,15 @@ const projectJsonLd = {
   name: title,
   description: metaDescription,
   datePublished: date.toISOString(),
-  image: `https://arucaden.my.id${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`,
+  image: allImages.length === 1 ? allImages[0] : allImages,
   author: {
     '@type': 'Person',
     name: 'Daffa Maulana Satria',
     url: 'https://arucaden.my.id',
   },
   url: new URL(Astro.url.pathname, 'https://arucaden.my.id').toString(),
-  ...(url ? { sameAs: [url] } : {}),
+  ...(sameAsLinks.length > 0 ? { sameAs: sameAsLinks } : {}),
+  ...(finalSourceUrl ? { codeRepository: finalSourceUrl } : {}),
 };
 ---
 
@@ -39,7 +92,6 @@ const projectJsonLd = {
   <head>
     <SiteHead
       title={`${title} | Daffa Maulana Satria`}
-      description={metaDescription}
       ogType="article"
       ogImage={ogImage}
       jsonLd={projectJsonLd}
@@ -73,15 +125,32 @@ const projectJsonLd = {
                 <Content />
               </div>
             </div>
+
+            <!-- Project Gallery / App Snapshots -->
+            {hasGallery && (
+              <section id="gallery" class="pt-8 mt-10 border-t border-white/10 scroll-mt-20">
+                <div class="mb-5 flex flex-col gap-1">
+                    <h2 class="text-lg sm:text-xl font-mono font-bold tracking-wider text-white uppercase m-0">
+                      App Snapshots
+                    </h2>
+                  <p class="text-xs sm:text-sm font-mono text-gray-text m-0">
+                    Visual previews for this application. Click any image to zoom.
+                  </p>
+                </div>
+
+                <ProjectGallery client:idle items={normalizedGallery} />
+              </section>
+            )}
           </div>
 
           <!-- Sticky Sidebar -->
           <ProjectSidebar
             title={title}
             tech={tech}
-            url={url}
-            sourceUrl={sourceUrl}
-            headings={headings}
+            url={finalLiveUrl}
+            sourceUrl={finalSourceUrl}
+            hasGallery={hasGallery}
+            headings={enhancedHeadings}
           />
         </div>
       </ArticleContainer>

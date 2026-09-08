@@ -1,14 +1,14 @@
 ---
-title: "Damned Veil: How I Automated Enemy Spawning Using PCG and Math"
+title: "Damned Veil: How I Automated Enemy Spawning Using PCG"
 date: 2025-05-20
-description: "Designing levels for a bounce-mechanic shooter was driving me crazy, so I built a Procedural Content Generation (PCG) system to do it for me."
+description: "I built a Procedural Content Generation (PCG) system to automate enemy spawning in my 2D shooter game."
 readTime: "6 min read"
 tags: ["Game Dev", "PCG", "Unity", "C#", "Damned Veil"]
 ---
 
 ### Introduction
 
-Let me tell you about **Damned Veil**. It’s a 2D horror, strategy, and shooter game I’ve been working on. The core mechanic is simple but tricky: you have to defeat all the enemies in an arena using a single projectile that bounces off the walls. You have to find the absolute perfect shooting angle so the projectile ricochets and hits multiple targets in one go.
+Let me tell you about **Damned Veil**. It's a 2D horror, strategy, and shooter game I've been working on. The core mechanic is simple but tricky: you have to defeat all the enemies in an arena using a single projectile that bounces off the walls. You have to find the absolute perfect shooting angle so the projectile ricochets and hits multiple targets in one go.
 
 Sounds fun for the player, right? Well, for the developer (me), it was an absolute nightmare to design.
 
@@ -16,7 +16,7 @@ Sounds fun for the player, right? Well, for the developer (me), it was an absolu
 
 When I started developing the levels, I placed the enemies manually. 
 
-Here is what the workflow looked like: Place an enemy ➔ guess the bounce angle ➔ playtest ➔ realize the angle is off by 2 degrees and the enemy is unreachable ➔ adjust ➔ playtest again ➔ cry a little ➔ repeat. 
+Here is what the workflow looked like: Place an enemy -> guess the bounce angle -> playtest -> realize the angle is off by 2 degrees and the enemy is unreachable -> adjust -> playtest again -> cry a little -> repeat. 
 
 Manual placement was incredibly inefficient. It took way too long to ensure a level was actually solvable, and the resulting levels felt repetitive. _(Seriously, I was losing my mind doing trial-and-error physics simulations in my head)._ 
 
@@ -24,7 +24,7 @@ I couldn't just use pure random placement either, because spawning an enemy in a
 
 ### The Solution: Procedural Content Generation (PCG)
 
-To fix this, I decided to build a Procedural Content Generation (PCG) system in **Unity** using **C#**. But not just any random spawner—I combined two specific algorithmic approaches: **Specular Path** and **Constraint Satisfaction Problem (CSP)**.
+To fix this, I decided to build a Procedural Content Generation (PCG) system in **Unity** using **C#**. But not just any random spawner, I combined two specific algorithmic approaches: **Specular Path** and **Constraint Satisfaction Problem (CSP)**.
 
 Here is how the magic works:
 
@@ -32,14 +32,14 @@ Here is how the magic works:
 - **Constraint Satisfaction Problem (CSP)**: This acts as the strict bouncer/validator. It takes those candidate spots and filters them through strict game rules. Are the enemies too close to each other? Are they spawning inside the player's safe zone? Are they actually on the bounce path? If a position passes the CSP checks, an enemy is spawned!
 
 > - **why Specular Path?** Because in a game strictly governed by ricochet physics, the path of the bullet is the only thing that matters. You have to design the level around the bullet, not the bullet around the level.
-> - **why CSP?** Because pure randomness is chaotic. CSP ensures the game remains balanced, fair, and mathematically solvable.
+> - **why CSP?** Because pure randomness is chaotic. CSP ensures the game remains balanced, fair, and mathematically solvable (most of PCG use constraint algorithm, so do i).
 
 ### The Results & Performance
 
-I wasn't just going to guess if this system was good—I rigorously tested it across 15 different maps (5 small, 5 medium, and 5 large arenas) with a total of 149 trials. 
+I wasn't just going to guess if this system was good, I tested it across 15 different maps (5 small, 5 medium, and 5 large arenas) with a total of 149 trials. 
 
 Here are the numbers:
-- **Speed**: The algorithm took an average of **7.616 ms** to execute. That is blazing fast. It generates the entire enemy layout in the blink of an eye.
+- **Speed**: The algorithm took an average of **7.616 ms** to execute. It generates the entire enemy layout without much delay.
 - **Reliability**: It achieved a **92%** reliability rate (137 out of 149 configurations were mathematically valid and playable).
 - **Expressivity**: Out of those 137 valid layouts, **135 were completely unique**. That's a 99% expressivity rate, meaning the game basically never gets boring or repetitive.
 
@@ -57,14 +57,6 @@ Building this PCG system taught me a massive lesson: **don't brute-force game de
 
 While the system works beautifully, it currently has some limitations. It only handles 2D static players and static enemies. 
 
-In the future, I want to evolve this system by adding:
-- **Dynamic / Moving Enemies**
-- **Adaptive Difficulty** (scaling the complexity based on how well the player is doing)
-- **Complex Arena Structures** (like puzzles and boss mechanics)
-
-<br />
-
-> Combining Specular Path and CSP saved my sanity and made Damned Veil infinitely more replayable. Sometimes, the best way to design a game is to teach the game how to design itself!
 
 ---
 Thanks for reading!

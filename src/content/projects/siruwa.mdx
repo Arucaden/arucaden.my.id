@@ -1,20 +1,40 @@
 ---
-title: "SIRUWA (Sistem Informasi Rukun Warga)"
+title: "SIRUWA"
 date: 2024-05-31
-description: "A modern digital governance and community administration platform for RT/RW."
-image: "/projects/siruwa.png"
+description: "A village governance administration platform system for RW 2 Kota Batu village."
+image: "/projects/Siruwa.png"
+sourceUrl: "https://github.com/doniwyk/siruwa"
 tech: ["Laravel", "Tailwind CSS", "Alpine.js", "MySQL"]
+gallery:
+  - src: "/projects/gallery/siruwa-dashboard.webp"
+    alt: "SIRUWA Admin Dashboard"
+    caption: "Administrative overview for real-time village data management."
+  - src: "/projects/gallery/siruwa-spk.webp"
+    alt: "SIRUWA Decision Support System"
+    caption: "Algorithmic evaluation for fair social assistance distribution using Fuzzy Logic (admin only)."
+  - src: "/projects/gallery/siruwa-news-list.webp"
+    alt: "SIRUWA News List"
+    caption: "Public village news."
+  - src: "/projects/gallery/siruwa-biodata.webp"
+    alt: "SIRUWA Resident Biodata"
+    caption: "View of a resident's profile."
+  - src: "/projects/gallery/siruwa-biodata-details.webp"
+    alt: "SIRUWA Detailed Resident Biodata"
+    caption: "Detailed view of a resident's profile, including family members and household information."
+  - src: "/projects/gallery/siruwa-doc-request.webp"
+    alt: "SIRUWA Document Request"
+    caption: "Submitting a request for an administrative document."
 ---
 
-> **SIRUWA (Sistem Informasi Rukun Warga)** is a modern, web-based digital governance platform I helped build to digitize and centralize neighborhood-level public services (RT/RW and Dasawisma).
+> **SIRUWA (Sistem Informasi Rukun Warga Dua)** is a web-based digital governance platform, build to digitize and centralize neighborhood-level public services in specific village at Kota Batu.
 
 ---
 
 ### Executive Summary & Role
 
-As part of the development team, I engineered SIRUWA to bridge the massive gap between community administrators (*Pengurus RW/RT*) and neighborhood residents (*Warga*). 
+As part of 5-person development team, I helped build SIRUWA as **fullstack developer** to bridge the massive gap between community administrators (*Pengurus RW/RT*) and neighborhood residents (*Warga*). 
 
-Let's be honest, managing a neighborhood is chaotic. Before SIRUWA, everything—from resident demographic records and document requests to tracking monthly dues—was done manually. We wanted to build a single digital ecosystem that handles all of this seamlessly.
+Let's be honest, managing a neighborhood is complicated. Before SIRUWA, everything such as resident data records and document requests to tracking monthly dues was done manually. We wanted to build a single digital ecosystem that handles all of this seamlessly.
 
 We ended up with a powerful Laravel-based platform that not only digitizes document pipelines and financial health but actually features a smart Decision Support System (DSS) using fuzzy logic to ensure social assistance (*Bansos*) is distributed fairly and objectively!
 
@@ -22,11 +42,11 @@ We ended up with a powerful Laravel-based platform that not only digitizes docum
 
 ### Key Features
 
-- **Centralized Demographic DB:** A single source of truth for household data. Residents can submit profile update requests, and admins can approve them or bulk-import data via Excel.
+- **Centralized Data Management:** A single source of truth for household data. Residents can submit profile update requests, and admins can approve them or bulk-import data via Excel.
 - **Online Document Requests:** Residents can request administrative letters from their phones, upload files, and track the approval status in real-time. _No more knocking on the RT's door at 9 PM!_
 - **Transparent Financial Ecosystem:** Dual-account ledger tracking (*Iuran Sampah* & *Iuran Kematian*). Residents upload payment proofs, and admins can track arrears and generate PDF audit reports.
-- **Decision Support System (SPK Bansos):** A mathematical engine combining Simple Additive Weighting (SAW) and Fuzzy Logic to objectively rank households for social aid based on income, utilities, taxes, and dependents.
-- **Public Information Portal:** A sleek landing page with interactive demographic charts, an organizational structure, a FullCalendar agenda, and rich-text news publishing.
+- **Decision Support System (SPK Bansos):** A mathematical logic using Fuzzy Logic to objectively rank households for social aid based on income, utilities, taxes, and dependents.
+- **Public Information Portal:** A modern landing page with interactive demographic charts, an organizational structure, a FullCalendar agenda, and rich-text news publishing.
 
 ---
 
@@ -40,7 +60,7 @@ We ended up with a powerful Laravel-based platform that not only digitizes docum
 
 **The Solution:**
 - **Digital Ecosystem:** A dedicated web portal where residents self-serve and admins validate. 
-- **Automated Pipelines:** Document requests and financial payments are tracked digitally with clear status phases (Submitted ➔ Validated ➔ Completed).
+- **Automated Pipelines:** Document requests and financial payments are tracked digitally with clear status phases (Submitted -> Validated -> Completed).
 - **Algorithmic Fairness:** The built-in DSS engine mathematically evaluates households so aid distribution is 100% objective and transparent.
 - **Central Communication Hub:** An interactive public portal keeps everyone informed about agendas and community news.
 
@@ -49,12 +69,12 @@ We ended up with a powerful Laravel-based platform that not only digitizes docum
 ### Technical Details & Architecture
 
 Here is why we chose the technologies we used:
-- **Laravel 10 (PHP 8.1+)**: The absolute powerhouse for this project. We needed a robust MVC framework with built-in routing, Eloquent ORM, and secure authentication to handle complex multi-role workflows.
+- **Laravel**: The absolute powerhouse for this project. We needed a robust MVC framework with built-in routing, Eloquent ORM, and secure authentication to handle complex multi-role workflows.
 - **Tailwind CSS & Alpine.js**: We wanted the UI to look incredibly modern without the heavy JavaScript bundle of React or Vue. Alpine.js provided the perfect lightweight interactivity for modals and dropdowns.
-- **Database & Algorithmic Views**: MySQL with custom SQL views (`spk_views`) to aggregate household metrics for the DSS engine.
+- **Database**: MySQL for storing household data and aggregating metrics for the DSS engine.
 - **Cloud Integrations**: Used Cloudinary API for reliable image/document uploads and DomPDF for generating those essential audit-ready financial reports.
 
-> - **why Laravel?** When dealing with complex relational data (households, residents, payments, document pipelines) and algorithmic logic, Laravel's Eloquent ORM and ecosystem are just unmatched.
+> - **why Laravel?** When dealing with complex and big relational data (households, residents, payments, document pipelines) and role system, we need a framework that can handle the complexity efficiently + we dont have the resources to build everything from scratch.
 > - **why Fuzzy Logic?** Real-world social aid isn't black and white. Trapezoidal membership functions allowed us to categorize incomes and taxes into Low/Medium/High fuzzy sets for a much fairer evaluation than raw cutoffs.
 
 ---
@@ -62,10 +82,9 @@ Here is why we chose the technologies we used:
 ### Challenges & Learnings
 
 Building a platform this comprehensive brought some serious challenges:
-- **The DSS Math**: Implementing Fuzzy Logic and SAW algorithms in PHP from scratch was mind-bending. Translating mathematical membership functions into clean, testable code took serious research and debugging.
+- **The DSS Math**: Implementing Fuzzy Logic in PHP from scratch was challenging. Translating mathematical membership functions into clean, testable code took serious research and debugging.
 - **Role & Route Security**: Ensuring a resident couldn't accidentally (or intentionally) access financial ledgers or approve their own documents required strict middleware and session management.
-- **State & File Management**: Handling file uploads for payment proofs and document attachments—and syncing them seamlessly with Cloudinary—was a steep but rewarding learning curve.
-- **Complex Database Joins**: Creating efficient SQL views to aggregate demographic metrics across multiple tables so the DSS engine could process them without timing out.
+- **State & File Management**: Handling file uploads for payment proofs and document attachments and syncing them seamlessly with Cloudinary was a difficult yet rewarding learning curve.
 
 ---
 
@@ -73,9 +92,5 @@ Building a platform this comprehensive brought some serious challenges:
 
 Developing SIRUWA was a massive leap in my full-stack engineering skills:
 - **Real-World Problem Solving**: We built something that genuinely modernizes digital governance and removes friction from everyday community administration.
-- **Advanced Algorithmic Logic**: I learned how to integrate complex mathematical models (Fuzzy Logic) into a standard web application to automate objective decision-making.
-- **Full-Stack Mastery**: From configuring Tailwind and Vite on the frontend to designing normalized MySQL schemas and Eloquent relationships on the backend, this project solidified my end-to-end development capabilities.
-
-<br />
-
-> SIRUWA proved to me that software isn't just about writing code—it's about creating systems that bring transparency, fairness, and efficiency to real communities.
+- **First Algorithmic Implementation**: I learned how to integrate complex mathematical models (Fuzzy Logic) into a web application to automate objective decision-making.
+- **Full Stack Developer**: From designing as UI/UX, implementing the design and doing SPK is tiring, but it was a great experience to see the whole system come together and actually work in the real world.

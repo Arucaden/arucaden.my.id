@@ -1,31 +1,45 @@
 ---
-title: "SIVENTI (PBL-Inventory)"
+title: "SIVENTI"
 date: 2023-12-15
 description: "A web-based inventory and asset loan management system built for the Department of Information Technology (JTI)."
-image: "/projects/siventi.png"
-tech: ["PHP", "MySQL", "JavaScript", "jQuery"]
+image: "/projects/Siventi.png"
+sourceUrl: "https://github.com/masizsa/PBL-Inventory"
+tech: ["PHP", "MySQL", "JavaScript"]
+gallery:
+  - src: "/projects/gallery/siventi-dashboard.webp"
+    alt: "SIVENTI Main Dashboard"
+    caption: "Administrative overview for real-time inventory tracking and active loans."
+  - src: "/projects/gallery/siventi-detail-pinjam.webp"
+    alt: "SIVENTI Detail Peminjaman"
+    caption: "Detailed view of a specific loan request and its status."
+  - src: "/projects/gallery/siventi-catalog.webp"
+    alt: "Loan Management & Catalog"
+    caption: "Student catalog for browsing departmental equipment and submitting borrow requests."
+  - src: "/projects/gallery/siventi-peminjaman.webp"
+    alt: "Loan Request Lists"
+    caption: "List of active loan requests for user side"
 ---
 
-> **SIVENTI** (Sistem Informasi Inventaris & Peminjaman Barang) is a web-based inventory and asset loan management system. We built this as a Project-Based Learning (PBL) initiative for the Department of Information Technology (JTI).
+> **SIVENTI** (Sistem Informasi Inventaris Jurusan Teknologi Informasi) is a web-based inventory and asset loan management system. We built this as a Project-Based Learning (PBL) for the Department of Information Technology (JTI).
 
 ---
 
 ### Executive Summary & Role
 
-As part of a 6-person development team, I helped build SIVENTI to digitalize and automate how our department handles asset tracking, borrowing submissions, and approvals. 
+As part of a 6-person development team, I helped build SIVENTI as **Frontend Developer** to digitalize and automate how our department handles asset tracking, borrowing submissions, and approvals. 
 
-Before this, everything was done manually with paper logs and messy spreadsheets. _(seriously, paper logs in an IT department?)_ We wanted to create a platform that actually makes life easier for both students borrowing equipment and the admins managing it. 
+Before this, everything was done manually with paper logs and messy spreadsheets. We wanted to create a platform that actually makes life easier for both students borrowing equipment and the admins managing it. 
 
-We ended up with a dual-portal system: an e-commerce-style catalog for users and a powerful dashboard for administrators to track stock, approve loans, and monitor overdue items.
+We made a dual-portal system: a catalog for users and a dashboard for administrators to track stock, approve loans, and monitor overdue items.
 
 ---
 
 ### Key Features
 
-- **Interactive Item Selection:** Users can browse the catalog, add items to a cart, and set quantities based on real-time stock availability. _Just like online shopping!_
+- **Interactive Item Selection:** Users can browse the catalog, add items to a cart, and set quantities based on real-time stock availability.
 - **Automated Stock & Lifecycle Sync:** Stock counts update automatically across the database when admins approve loans or process returns.
-- **Borrowing Quotas & Overdue Guards:** Built-in safeguards prevent users from hoarding equipment and automatically flag overdue loans as `Terlambat`.
-- **Role-Based Portals:** Completely separate experiences for general users and department administrators, securely routed and authenticated.
+- **Borrowing Quotas & Overdue Guards:** Built-in safeguards prevent users from hoarding equipment and automatically flag overdue loans.
+- **Role-Based Portals:** Completely separate experiences for general users and department administrators, securely routed and authenticated (not separated app).
 - **Central Audit History:** A global transaction log for admins to track every piece of equipment and who borrowed it.
 
 ---
@@ -33,14 +47,13 @@ We ended up with a dual-portal system: an e-commerce-style catalog for users and
 ### The Problem & The Solution
 
 **The Problem:**
-- **Messy Paperwork:** Relying on physical logbooks meant slow approvals and high chances of losing records.
+- **Paperwork:** Relying on physical logbooks meant slow approvals and high chances of losing records (also why IT department still relying on paper?).
 - **No Real-Time Visibility:** Students would come to borrow something only to find out it was already taken or broken. Such a waste of time.
 - **Lost Equipment:** Without automated tracking, it was super hard to monitor return deadlines, leading to missing or overdue assets.
 - **Data Errors:** Manual spreadsheets made it way too easy to accidentally delete active records or mess up stock counts.
 
 **The Solution:**
 - **Centralized Web App:** Built a dedicated portal for users to request items and admins to manage them.
-- **Cart-Like Experience:** Users can just pick what they need, adjust quantities, and checkout—just like shopping online, but for campus gear.
 - **Smart Safeguards:** We added referential integrity and deletion guards. You can't just delete an item if someone is currently using it.
 - **Automated Tracking:** The system handles the math. It knows exactly how many items are available, borrowed, or under maintenance at any given second.
 
@@ -49,13 +62,11 @@ We ended up with a dual-portal system: an e-commerce-style catalog for users and
 ### Technical Details & Architecture
 
 Here is why we chose the technologies we used:
-- **Custom MVC Architecture**: We built this using a native PHP MVC architecture from scratch. No heavy frameworks like Laravel, just pure PHP 7.x/8.x with Object-Oriented Programming.
-- **MySQL / MariaDB**: For a solid relational database with a normalized schema and prepared statements to keep things secure.
-- **Vanilla Tech Stack**: HTML5, CSS3, JavaScript (ES6+), and jQuery. We used custom CSS and AJAX to make the cart feel snappy.
+- **MySQL**: A relational database with a normalized schema and prepared statements to keep things secure and structured.
+- **Vanilla Tech Stack**: We used PHP, HTML, CSS, and JavaScript for the entire application, no frameworks.
 - **Native State Management**: Relied on PHP Sessions, Cookies, and `localStorage` to keep the user's cart intact.
 
-> - **why Custom MVC?** We wanted to truly understand how routing, models, and controllers work under the hood before jumping into magic frameworks.
-> - **why jQuery?** It was what we knew best at the time for handling quick DOM manipulations and AJAX requests without the complexity of modern JS frameworks.
+> - **why vanilla techstack?** We wanted to truly understand the fundamental of web development before building using frameworks.
 
 ---
 
@@ -63,21 +74,15 @@ Here is why we chose the technologies we used:
 
 Well this was one of my first major collaborative web projects, so we faced some challenges along the way, such as:
 - **Building Custom MVC**: Creating an MVC framework from scratch was a bit challenging. It forced us to really understand routing, sanitizing URLs, and enforcing role-based route guards.
-- **State and Cart Logic**: Managing the cart state with cookies and syncing it with real-time database stock limits required some serious logic juggling. _(so many edge cases!)_
+- **State and Cart Logic**: Managing the cart state with cookies and syncing it with real-time database stock limits required some trial and error. _(so many edge cases)_
 - **Database Integrity**: Learning how to properly structure relational databases and use views/constraints so users can't break the system by deleting active loans.
-- **Team Collaboration**: Working in a 6-person team on a single codebase meant we had to get really good at dividing tasks, communicating, and managing code merges. _Git conflicts, anyone?_
+- **Team Collaboration**: Working in a 6-person team on a single codebase meant we had to get really good at dividing tasks, communicating, and managing code merges. _This is my first git conflict anyway_
 
 ---
 
 ### Key Takeaways & Results
 
 Building SIVENTI improved my core web development skills a lot, like:
-- **Streamlined Workflow**: Successfully transformed a slow, paper-based process into a fast, automated digital system.
+- **Streamlined Workflow**: Successfully transformed a inefficient, paper-based process into a fast, automated digital system.
 - **Strong Fundamentals**: Building the architecture from scratch solidified my understanding of PHP, OOP, and database design.
-- **Real-World Impact**: The project wasn't just a coding exercise; it solved a genuine administrative headache for our department.
-
-I also learned how to collaborate effectively in a team environment. But most importantly, learning these core web development concepts gave me the confidence to tackle more modern, complex frameworks later on.
-
-<br />
-
-> This project was a massive stepping stone in my web development journey. It taught me how the web actually works before all the modern JS frameworks took over!
+- **Real-World Impact**: The project wasn't just a coding exercise, it solved a complicated administrative problem.

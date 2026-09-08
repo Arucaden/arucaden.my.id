@@ -1,72 +1,64 @@
 ---
-title: "Presensee (SMK Attendance Platform)"
+title: "Presensee"
 date: 2024-04-10
-description: "An AI-powered, geofenced mobile attendance system with a decoupled Laravel backend and Flutter client."
-image: "/projects/presensee.png"
-tech: ["Laravel", "Filament PHP", "Python", "Flutter", "Google ML Kit"]
+description: "A smart internal mobile attendance system with with facial recognition and admin dashboard."
+image: "/projects/PresenSee.png"
+tech: ["Laravel", "Python", "Flutter", "Google ML Kit", "Dlib"]
+pin: true
 ---
 
-> **Presensee** is a modern, enterprise-grade attendance platform that turns every employee's smartphone into a secure biometric scanner. No more physical fingerprint machines, no more buddy punching.
+> **Presensee** is a smart internal attendance platform from specific institutions that use facial recognition, some verification, and a powerful admin dashboard.
 
 ---
 
 ### Executive Summary & Role
 
-I built Presensee to completely modernize how human resources track and manage workforce attendance. 
+Me and my friends built Presensee to secure an internal attendance system for a specific institution (sorry, the institution needs to keep some information private, so I can't provide specific details). 
 
-Unlike my previous web-only projects, **this is not a monolithic application**. It uses a decoupled architecture: a powerful RESTful API backend (built with Laravel 11 and Filament PHP) serving a cross-platform mobile application (built with Flutter). 
-
-The goal was to solve the classic "buddy punching" (*titip absen*) problem while eliminating the need for expensive, high-maintenance physical fingerprint scanners. By combining **AI facial recognition** with **GPS geofencing**, the system ensures that the person clocking in is exactly who they claim to be, and that they are actually at the office!
+This is my first non-monolithic project, it has backend with Laravel and a Flutter for the frontend, also its uses a Python and Dlib for facial recognition system.
 
 ---
 
 ### Key Features
 
-- **AI Face Recognition:** The backend runs a Python computer vision pipeline that compares incoming selfies against enrolled biometric encodings using 128D vector comparison.
-- **GPS Radius Geofencing:** Employees can only clock in if their phone's GPS coordinates fall within the authorized office radius. _No more checking in from bed!_
-- **Automated THR & Payroll Recaps:** The HR dashboard automatically tallies daily attendance (Present, Sick, Leave, Alpha) and automatically computes Holiday Allowances (THR) based on job roles.
+- **Face Recognition:** The backend runs a Python computer vision pipeline that compares captured image from flutter using camera against data in the database using specific verification.
 - **On-Device ML Detection:** The Flutter mobile app uses Google ML Kit to detect a face locally before even sending the image to the server, saving bandwidth and preventing spoofing.
-- **One-Click Exports:** HR admins can instantly export perfectly formatted attendance and payroll reports to Excel and PDF.
+- **Powerful Admin Dashboard:** The admin dashboard provides a comprehensive view of attendance data, and management tools.
 
 ---
 
 ### The Problem & The Solution
 
 **The Problem:**
-- **Buddy Punching & Fraud:** Traditional PINs and RFID cards make it way too easy for employees to clock in for absent colleagues.
-- **Remote Check-In Cheating:** Without spatial validation, employees could literally submit attendance from anywhere.
-- **Hardware Bottlenecks:** Physical fingerprint scanners cause massive queues during peak hours, cost a lot of money, and break down constantly.
-- **HR Headaches:** Manually tabulating sick days, unexcused absences, and calculating THR (Tunjangan Hari Raya) is slow and highly prone to human error.
+- **Buddy Punching & Fraud:** Traditional methods make it way too easy for employees to clock in for absent colleagues.
+- **Hardware Bottlenecks:** Physical device (e.g., fingerprint scanners) cause massive queues during peak hours, cost a lot of money, and break down constantly.
+- **Admin Overhead:** Some head of departments spend too much time managing some administrative tasks also sometimes they have miscommunication each other.
 
 **The Solution:**
 - **Biometric Smartphones:** By moving attendance to the employees' own phones, we eliminated hardware queues and maintenance costs entirely.
-- **Strict Verification:** The combination of Python-based Facial Recognition (HOG models) and strictly configured Lat/Long geofences makes faking attendance nearly impossible.
-- **Unified Decoupled System:** HR gets a gorgeous, real-time web dashboard (Filament PHP) to monitor everything, while employees get a fast, secure mobile app (Flutter) to check their history and submit attendance.
-- **Automated Math:** The server does the heavy lifting, automatically aggregating attendance records and computing THR payouts with zero manual spreadsheet work required.
-
+- **Strict Verification:** The combination of Python-based Facial Recognition and strictly verification algorithms makes faking attendance nearly impossible.
+- **Centralized Admin Dashboard:** The admin dashboard provides a single source of truth for attendance data, reducing miscommunication and administrative overhead.
 ---
 
 ### Technical Details & Architecture
 
 This is where the tech stack gets really exciting. Here is why I decoupled the architecture:
 
-- **Laravel 11 & Sanctum (Backend API)**: Acts as the central brain. It handles the database, business logic, and issues secure API tokens to the mobile app.
-- **Filament PHP 3.x (Admin UI)**: The absolute best TALL-stack (Tailwind, Alpine, Laravel, Livewire) admin panel builder. It allowed me to build complex HR dashboards and export tools incredibly fast.
-- **Python OpenCV Engine (AI)**: Laravel communicates via `proc_open` to a dedicated Python script running `face_recognition`, OpenCV, and NumPy. It handles EXIF correction, contrast enhancement, and 128D Euclidean distance matching ($\le 0.5$ tolerance).
-- **Flutter & Google ML Kit (Mobile Client)**: A single codebase compiled for Android/iOS. It uses native camera integrations, secure local storage (`flutter_secure_storage`) for JWTs, and Google ML Kit to detect faces locally before firing Base64 images to the Laravel API.
+- **Laravel**: Acts as the central brain. It handles the database, business logic, and issues secure API tokens to the mobile app.
+- **Python & Dlib**: Laravel communicates to a Python script running face recognition and some algorithm to do some verification.
+- **Flutter & Google ML Kit (Mobile)**: Android app that uses native camera integrations, Google ML Kit to detect faces locally before sending the images to the Laravel API.
 
-> - **why not monolithic?** A mobile app requires a completely different client than a web dashboard. By decoupling them, the Flutter app and Filament dashboard can evolve independently while consuming the exact same Laravel API.
-> - **why Python for Face Recognition?** PHP isn't built for heavy matrix math and machine learning. Python has battle-tested computer vision libraries that process 128D facial vectors with extreme accuracy.
+> - **why not monolithic?** A mobile app requires a completely different client than a web dashboard. By decoupling them, the Flutter app and Laravel dashboard can evolve independently.
+> - **why Python for Face Recognition?** PHP isn't built for heavy math and machine learning. Python has tested computer vision libraries that process facial recognition with good accuracy.
 
 ---
 
 ### Challenges & Learnings
 
 Building a decoupled, AI-powered system brought a whole new set of challenges:
-- **Bridging PHP and Python**: Figuring out how to efficiently pass Base64 images from a Laravel controller to a Python execution script and parse the JSON response without blocking the server was a massive learning curve.
-- **Mobile Camera Quirks**: Handling camera orientation, EXIF metadata, and different aspect ratios across hundreds of different Android/iOS devices is a nightmare. I had to build a normalization pipeline to ensure the AI engine didn't fail on rotated selfies.
-- **On-Device vs. Server-Side ML**: Initially, I tried doing all face recognition on the server, but it was too slow. Adding Google ML Kit to the Flutter app as a "pre-filter" (ensuring a face actually exists in the frame before sending) drastically reduced server load.
-- **Secure Token Auth**: Moving away from traditional session-based auth to Laravel Sanctum API tokens meant I had to manage token storage securely using mobile Keychains/Keystores.
+- **Bridging PHP and Python**: Figuring out how to efficiently pass images from a Laravel controller to a Python execution script and parse the response without blocking the server was a massive learning curve.
+- **Machine Learning**: Leraning about the fundamentals of machine learning and how to apply them in a production environment.
+- [some redacted challenges and learnings]
 
 ---
 
@@ -75,9 +67,5 @@ Building a decoupled, AI-powered system brought a whole new set of challenges:
 Presensee was a massive milestone for me. It forced me to step out of the standard "monolithic web app" comfort zone and dive into the world of distributed systems and mobile development.
 
 - **Mastering Decoupled Architecture**: I now fully understand how to build secure, scalable REST APIs that serve multiple distinct clients (web dashboards and mobile apps).
-- **AI Integration**: Successfully integrating a Python machine-learning pipeline into a standard PHP backend proved that you can combine the best tools for the job.
-- **Production-Ready Mobile Dev**: Learning Flutter and integrating it with device hardware (cameras, GPS, secure storage) gave me the confidence to build full-stack cross-platform apps.
-
-<br />
-
-> This project was a game-changer for me. It showed me how combining web backends, mobile clients, and AI can solve real-world, enterprise-level problems efficiently!
+- **ML Integration**: Successfully integrating a Python machine-learning pipeline into a standard PHP backend proved that you can combine the best tools for the job.
+- **Mobile Dev**: Learning Flutter and integrating it with device hardware (cameras, etc) gave me the confidence to build full-stack cross-platform apps.
