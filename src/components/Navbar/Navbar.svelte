@@ -9,19 +9,32 @@
     { name: 'PROJECTS', href: '/#projects', id: 'projects' },
     { name: 'ARTWORKS', href: '/#artworks', id: 'artworks' },
     { name: 'BLOG', href: '/#blogs', id: 'blogs' },
+    { name: 'MAL', href: '/mal', id: 'mal', isPage: true },
   ];
 
   let activeSection = $state('');
   let scrolledPastTop = $state(false);
 
-  function isActive(link: { id: string }) {
+  function isActive(link: { id: string; href: string; isPage?: boolean }) {
+    if (typeof window !== 'undefined' && link.isPage) {
+      return window.location.pathname.startsWith(link.href);
+    }
+    if (typeof window !== 'undefined' && window.location.pathname !== '/') {
+      return false;
+    }
     if (link.id === '') {
       return !scrolledPastTop && activeSection === '';
     }
     return link.id === activeSection;
   }
 
-  function handleNavClick(e: Event, link: { href: string; id: string }) {
+  function handleNavClick(e: Event, link: { href: string; id: string; isPage?: boolean }) {
+    if (link.isPage) {
+      return;
+    }
+    if (typeof window !== 'undefined' && window.location.pathname !== '/') {
+      return;
+    }
     if (link.href.includes('#')) {
       if (link.id === '') {
         e.preventDefault();

@@ -29,4 +29,10 @@ export const links = [
       icon: '/icons/mdi--file-document.svg',
       description: 'Read my resume here',
     },
+    {
+      name: 'MyAnimeList',
+      href: '/mal',
+      icon: '/icons/simple-icons--myanimelist.svg',
+      description: 'Anime collection & ratings',
+    },
   ];

@@ -21,7 +21,7 @@ const links = [
   {
     name: 'itch.io',
     href: 'https://itch.io/profile/arucaden',
-    iconClass: 'i-ri-gamepad-fill',
+    iconClass: 'i-ri-gamepad-fill', 
     description: 'Check out my games',
   },
   {
@@ -29,6 +29,13 @@ const links = [
     href: 'https://drive.google.com/file/d/1hoDgLe8ihe8UtMwUHxrwFh3fDYPD43qw/view?usp=sharing',
     iconClass: 'i-ri-file-text-fill',
     description: 'Read my resume here',
+  },
+  {
+    name: 'MyAnimeList',
+    href: '/mal',
+    iconClass: 'i-ri-movie-2-fill',
+    description: 'Anime collection & ratings',
+    isInternal: true,
   },
 ];
 ---
@@ -38,10 +45,10 @@ const links = [
     <a
       href={link.href}
       class="inline-block transition-all relative group"
-      target="_blank"
+      target={link.isInternal ? undefined : '_blank'}
       aria-label={`${link.name}${link.description ? `: ${link.description}` : ''}`}
       title={link.description ? `${link.name} — ${link.description}` : link.name}
-      rel="noopener noreferrer"
+      rel={link.isInternal ? undefined : 'noopener noreferrer'}
     >
       <div class="border-2 border-white/20 hover:bg-main/25 hover:border-main w-12 h-12 md:w-14 md:h-11 rounded-xl flex items-center justify-center transition-all duration-300 hover:shadow-[0_0_20px_var(--color-accent-glow)]">
         <span class={`${link.iconClass} w-8 h-5 text-white/70 hover:text-main transition-transform duration-300`}></span>
