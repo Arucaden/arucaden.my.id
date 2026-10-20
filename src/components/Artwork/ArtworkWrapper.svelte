@@ -68,9 +68,11 @@
       </button>
     </div>
     <div class="flex-1 overflow-y-auto">
-      <div class="p-1" in:fly={{ y: 20, duration: 250 }}>
-        <ArtworkList artworks={artworks} onSelect={handleSelect} />
-      </div>
+      {#if overlayVisible}
+        <div class="p-1" in:fly={{ y: 20, duration: 250 }}>
+          <ArtworkList artworks={artworks} onSelect={handleSelect} />
+        </div>
+      {/if}
     </div>
   </div>
 </div>

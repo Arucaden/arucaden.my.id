@@ -10,8 +10,10 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { title, description, date, image, tags = [] } = entry.data;
+const { title, description, date, image, tags = [], readTime } = entry.data;
 const { Content } = await entry.render();
+
+const formattedDate = date ? date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
 
 const metaDescription =
   description || `Blog post by Daffa Maulana Satria: ${title}`;
@@ -53,6 +55,30 @@ const blogJsonLd = {
       <BackButton href="/#blogs" text="Back to Blog" />
 
       <ArticleContainer title={title}>
+        <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-gray-text mt-2 mb-6 pb-4 border-b border-white/10">
+          {formattedDate && (
+            <span class="flex items-center gap-1.5">
+              <span class="i-ri-calendar-line w-3.5 h-3.5 text-main"></span>
+              <span>{formattedDate}</span>
+            </span>
+          )}
+          {readTime && (
+            <span class="flex items-center gap-1.5">
+              <span class="i-ri-time-line w-3.5 h-3.5 text-main"></span>
+              <span>{readTime}</span>
+            </span>
+          )}
+          {tags.length > 0 && (
+            <div class="flex flex-wrap gap-1.5 sm:ml-auto">
+              {tags.map((tag) => (
+                <span class="px-2 py-0.5 rounded-full text-[11px] bg-white/5 border border-white/10 text-gray-text">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
         <div class="text-sm sm:text-base text-gray-text mt-4 w-full overflow-hidden">
           <div class="w-full max-w-none purosu">
             <Content />

@@ -1,6 +1,7 @@
 ---
 interface Props {
   title: string;
+  description?: string;
   canonicalPath?: string;
   ogType?: 'website' | 'article';
   ogImage?: string;
@@ -8,11 +9,15 @@ interface Props {
 }
 
 const SITE = 'https://arucaden.my.id';
+const DEFAULT_DESCRIPTION =
+  'Personal portfolio of Daffa Maulana Satria (Arucaden) - Game Developer, UI/UX Designer, and Fullstack Developer.';
+
 const {
   title,
+  description = DEFAULT_DESCRIPTION,
   canonicalPath = Astro.url.pathname,
   ogType = 'website',
-  ogImage = '/artworks/Me.jpeg',
+  ogImage = '/artworks/Mikazuki.webp',
   jsonLd,
 } = Astro.props;
 
@@ -25,6 +30,7 @@ const absoluteImage = ogImage.startsWith('http')
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{title}</title>
+<meta name="description" content={description} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#E25172" />
@@ -32,12 +38,14 @@ const absoluteImage = ogImage.startsWith('http')
 
 <meta property="og:site_name" content="Daffa Maulana Satria" />
 <meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
 <meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={absoluteImage} />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={absoluteImage} />
 
 {jsonLd && (
@@ -63,11 +71,11 @@ const absoluteImage = ogImage.startsWith('http')
         if (!isNaN(r) && !isNaN(g) && !isNaN(b)) {
           var root = document.documentElement;
           root.style.setProperty('--color-main', saved);
-          root.style.setProperty('--color-main-rgb', r + ' ' + g + ' ' + b);
+          root.style.setProperty('--color-main-rgb', r + ', ' + g + ', ' + b);
           root.style.setProperty('--color-secondary', saved);
-          root.style.setProperty('--color-secondary-rgb', r + ' ' + g + ' ' + b);
-          root.style.setProperty('--color-tertiary-rgb', Math.round(r * 0.58) + ' ' + Math.round(g * 0.58) + ' ' + Math.round(b * 0.58));
-          root.style.setProperty('--color-main-shade-rgb', Math.round(r * 0.63) + ' ' + Math.round(g * 0.63) + ' ' + Math.round(b * 0.63));
+          root.style.setProperty('--color-secondary-rgb', r + ', ' + g + ', ' + b);
+          root.style.setProperty('--color-tertiary-rgb', Math.round(r * 0.58) + ', ' + Math.round(g * 0.58) + ', ' + Math.round(b * 0.58));
+          root.style.setProperty('--color-main-shade-rgb', Math.round(r * 0.63) + ', ' + Math.round(g * 0.63) + ', ' + Math.round(b * 0.63));
           root.style.setProperty('--color-accent', saved);
           root.style.setProperty('--color-accent-glow', 'rgba(' + r + ',' + g + ',' + b + ', 0.35)');
         }

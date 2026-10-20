@@ -9,11 +9,80 @@ import fallbackMangaData from '../data/mal-manga.json';
 
 export const MAL_CLIENT_ID =
   import.meta.env.MAL_CLIENT_ID || '9c2f703956c1c0150ed0d94c45ac5b9c';
-export const MAL_CLIENT_SECRET =
-  import.meta.env.MAL_CLIENT_SECRET ||
-  '3c3bfc92e59b7f3c57b57cbb31ea098de83b8ffac3f31e4298e2e9fe70188818';
 export const MAL_USERNAME =
   import.meta.env.MAL_USERNAME || 'Arucaden';
+
+export function pruneAnimeItem(item: MALAnimeItem): MALAnimeItem {
+  return {
+    node: {
+      id: item.node.id,
+      title: item.node.title,
+      main_picture: item.node.main_picture,
+      alternative_titles: item.node.alternative_titles
+        ? {
+            en: item.node.alternative_titles.en || '',
+            ja: item.node.alternative_titles.ja || '',
+          }
+        : undefined,
+      start_date: item.node.start_date,
+      synopsis: item.node.synopsis,
+      mean: item.node.mean,
+      rank: item.node.rank,
+      media_type: item.node.media_type,
+      status: item.node.status,
+      genres: item.node.genres,
+      num_episodes: item.node.num_episodes,
+      start_season: item.node.start_season,
+      source: item.node.source,
+      rating: item.node.rating,
+      studios: item.node.studios,
+    },
+    list_status: {
+      status: item.list_status.status,
+      score: item.list_status.score,
+      num_episodes_watched: item.list_status.num_episodes_watched,
+      is_rewatching: item.list_status.is_rewatching ?? false,
+      updated_at: item.list_status.updated_at,
+      comments: item.list_status.comments,
+    },
+  };
+}
+
+export function pruneMangaItem(item: MALMangaItem): MALMangaItem {
+  return {
+    node: {
+      id: item.node.id,
+      title: item.node.title,
+      main_picture: item.node.main_picture,
+      alternative_titles: item.node.alternative_titles
+        ? {
+            en: item.node.alternative_titles.en || '',
+            ja: item.node.alternative_titles.ja || '',
+          }
+        : undefined,
+      start_date: item.node.start_date,
+      synopsis: item.node.synopsis,
+      mean: item.node.mean,
+      rank: item.node.rank,
+      media_type: item.node.media_type,
+      status: item.node.status,
+      genres: item.node.genres,
+      num_volumes: item.node.num_volumes,
+      num_chapters: item.node.num_chapters,
+      authors: item.node.authors,
+      serialization: item.node.serialization,
+    },
+    list_status: {
+      status: item.list_status.status,
+      score: item.list_status.score,
+      num_volumes_read: item.list_status.num_volumes_read,
+      num_chapters_read: item.list_status.num_chapters_read,
+      is_rereading: item.list_status.is_rereading ?? false,
+      updated_at: item.list_status.updated_at,
+      comments: item.list_status.comments,
+    },
+  };
+}
 
 const ANIME_FIELDS = [
   'list_status{status,score,num_episodes_watched,is_rewatching,updated_at,start_date,finish_date,comments}',

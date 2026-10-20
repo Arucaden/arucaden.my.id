@@ -4,13 +4,14 @@ import {
   computeMalStats,
   getMalMangaList,
   computeMalMangaStats,
+  pruneAnimeItem,
+  pruneMangaItem,
 } from '@/lib/mal.ts';
 import SiteHead from '@components/SiteHead.astro';
 import Navbar from '@components/Navbar/Navbar.svelte';
 import BackButton from '@components/BackButton.astro';
 import MALCollection from '@components/MAL/MALCollection.svelte';
 import MALSkeleton from '@components/MAL/MALSkeleton.svelte';
-import Preloader from '@components/Preloader.astro';
 import '../styles/global.css';
 
 const [animeResult, mangaResult] = await Promise.all([
@@ -18,11 +19,13 @@ const [animeResult, mangaResult] = await Promise.all([
   getMalMangaList(),
 ]);
 
-const animeData = animeResult.data;
-const animeStats = computeMalStats(animeData);
+const rawAnimeData = animeResult.data;
+const animeStats = computeMalStats(rawAnimeData);
+const animeData = rawAnimeData.map(pruneAnimeItem);
 
-const mangaData = mangaResult.data;
-const mangaStats = computeMalMangaStats(mangaData);
+const rawMangaData = mangaResult.data;
+const mangaStats = computeMalMangaStats(rawMangaData);
+const mangaData = rawMangaData.map(pruneMangaItem);
 
 const username = animeResult.username;
 const source = animeResult.source;
@@ -53,6 +56,7 @@ const malJsonLd = {
   <head>
     <SiteHead
       title={pageTitle}
+      description={metaDescription}
       ogType="website"
       ogImage="/artworks/Mikazuki.webp"
       jsonLd={malJsonLd}
@@ -60,9 +64,6 @@ const malJsonLd = {
   </head>
 
   <body class="crt-bg min-h-screen text-white custom-scroll antialiased selection:bg-main selection:text-black flex flex-col">
-    <!-- Preloader -->
-    <Preloader />
-
     <main class="flex-grow mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-4 md:py-8">
       <!-- Top Navigation -->
       <Navbar client:load />

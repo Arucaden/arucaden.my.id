@@ -74,9 +74,12 @@
 
     let nameTimeoutId: any;
     let roleInterval: any;
+    let isVisible = true;
+    let isRunning = false;
+    let animId: number;
 
     const scheduleNextNameGlitch = () => {
-      // English normal name stays for 6000ms; Japanese name stays for a shorter duration of 2200ms
+      if (!isVisible) return;
       const displayDuration = isJapanese ? 2200 : 6000;
 
       nameTimeoutId = setTimeout(() => {
@@ -86,16 +89,23 @@
       }, displayDuration);
     };
 
-    if (!prefersReducedMotion) {
+    const startTimers = () => {
+      if (prefersReducedMotion) return;
+      clearTimeout(nameTimeoutId);
+      clearInterval(roleInterval);
       scheduleNextNameGlitch();
-
       roleInterval = setInterval(() => {
-        rotateRole();
+        if (isVisible) rotateRole();
       }, 3500);
-    }
+    };
+
+    const stopTimers = () => {
+      clearTimeout(nameTimeoutId);
+      clearInterval(roleInterval);
+    };
 
     // Initialize modular particle system
-    let particleSystem: { destroy: () => void } | null = null;
+    let particleSystem: { pause: () => void; resume: () => void; destroy: () => void } | null = null;
     if (particleCanvas) {
       particleSystem = initHeroParticles(particleCanvas, {
         count: 65,
@@ -107,54 +117,100 @@
       });
     }
 
-    let animId: number;
-
     const handleMouseMove = (e: MouseEvent) => {
+      if (!isVisible) return;
       const { innerWidth, innerHeight } = window;
       targetX = (e.clientX / innerWidth) * 2 - 1;
       targetY = (e.clientY / innerHeight) * 2 - 1;
     };
 
     const handleDeviceOrientation = (e: DeviceOrientationEvent) => {
+      if (!isVisible) return;
       if (e.gamma !== null && e.beta !== null) {
         targetX = Math.max(-1, Math.min(1, e.gamma / 25));
         targetY = Math.max(-1, Math.min(1, (e.beta - 45) / 25));
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     if (window.DeviceOrientationEvent) {
-      window.addEventListener('deviceorientation', handleDeviceOrientation);
+      window.addEventListener('deviceorientation', handleDeviceOrientation, { passive: true });
     }
 
+    let lastX = 0;
+    let lastY = 0;
+
     const animateParallax = () => {
+      if (!isVisible) {
+        isRunning = false;
+        return;
+      }
+
       animId = requestAnimationFrame(animateParallax);
 
       currentX += (targetX - currentX) * 0.05;
       currentY += (targetY - currentY) * 0.05;
 
-      bgX = currentX * 28;
-      bgY = currentY * 18;
+      // Skip updating runes if position change is sub-pixel / negligible
+      if (Math.abs(currentX - lastX) > 0.0002 || Math.abs(currentY - lastY) > 0.0002) {
+        lastX = currentX;
+        lastY = currentY;
 
-      moonX = currentX * 16;
-      moonY = currentY * 11;
+        bgX = currentX * 28;
+        bgY = currentY * 18;
 
-      midX = currentX * 8;
-      midY = currentY * 5;
+        moonX = currentX * 16;
+        moonY = currentY * 11;
 
-      particleX = currentX * 12;
-      particleY = currentY * 8;
+        midX = currentX * 8;
+        midY = currentY * 5;
 
-      frontX = -currentX * 6;
-      frontY = -currentY * 4;
+        particleX = currentX * 12;
+        particleY = currentY * 8;
+
+        frontX = -currentX * 6;
+        frontY = -currentY * 4;
+      }
     };
 
-    animateParallax();
+    const startAnimation = () => {
+      if (isRunning) return;
+      isRunning = true;
+      animateParallax();
+      particleSystem?.resume();
+      startTimers();
+    };
+
+    const stopAnimation = () => {
+      isRunning = false;
+      cancelAnimationFrame(animId);
+      particleSystem?.pause();
+      stopTimers();
+    };
+
+    // Viewport IntersectionObserver to pause when scrolled out of view
+    let observer: IntersectionObserver | null = null;
+    if (heroContainer && typeof IntersectionObserver !== 'undefined') {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            startAnimation();
+          } else {
+            stopAnimation();
+          }
+        },
+        { threshold: 0.05 }
+      );
+      observer.observe(heroContainer);
+    } else {
+      startAnimation();
+    }
 
     return () => {
-      cancelAnimationFrame(animId);
-      clearTimeout(nameTimeoutId);
-      clearInterval(roleInterval);
+      stopAnimation();
+      observer?.disconnect();
       particleSystem?.destroy();
       window.removeEventListener('mousemove', handleMouseMove);
       if (window.DeviceOrientationEvent) {

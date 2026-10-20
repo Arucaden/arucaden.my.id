@@ -17,7 +17,7 @@ export const certificates: Certificate[] = [
     highlight: true,
   },
     {
-    name: 'Complete web developement course',
+    name: 'Complete Web Development Course',
     issuer: 'Udemy',
     date: '2026',
     url: 'https://drive.google.com/file/d/11AhpaBSLOU4cDcu5SBt4b7iDbc9msmQF/view?usp=sharing',

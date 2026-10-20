@@ -80,6 +80,7 @@ export interface MALAnimeNode {
   status?: string;
   genres?: MALGenre[];
   synopsis?: string;
+  start_date?: string;
   start_season?: MALStartSeason;
   studios?: MALStudio[];
   media_type?: string;

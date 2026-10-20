@@ -62,6 +62,7 @@ export function initHeroParticles(
   let stars: Star[] = [];
   let animId: number;
   let isDestroyed = false;
+  let isPaused = false;
 
   // Mouse tracking for directional space deflection
   let targetMouseX = 0;
@@ -123,7 +124,7 @@ export function initHeroParticles(
   window.addEventListener('mousemove', onMouseMove);
 
   const render = () => {
-    if (isDestroyed) return;
+    if (isDestroyed || isPaused) return;
     animId = requestAnimationFrame(render);
 
     const w = canvas.width;
@@ -167,12 +168,18 @@ export function initHeroParticles(
       const posX = s.baseX + currentMouseX * config.mouseParallaxFactor * s.depth;
       const posY = s.baseY + currentMouseY * config.mouseParallaxFactor * s.depth;
 
-      // Draw Glowing Star
+      // Draw Glowing Star (Outer halo + sharp core, avoids expensive shadowBlur)
       const op = Math.max(0, Math.min(1, s.opacity));
+
+      // Soft ambient glow halo
+      ctx.beginPath();
+      ctx.arc(posX, posY, s.currentRadius * 2.2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${config.colorRgb}, ${op * 0.22})`;
+      ctx.fill();
+
+      // Sharp central star core
       ctx.beginPath();
       ctx.arc(posX, posY, s.currentRadius, 0, Math.PI * 2);
-      ctx.shadowBlur = config.glowBlur * s.depth;
-      ctx.shadowColor = `rgba(${config.colorRgb}, ${op * 0.9})`;
       ctx.fillStyle = `rgba(${config.colorRgb}, ${op})`;
       ctx.fill();
 
@@ -194,6 +201,15 @@ export function initHeroParticles(
   render();
 
   return {
+    pause: () => {
+      isPaused = true;
+      cancelAnimationFrame(animId);
+    },
+    resume: () => {
+      if (isDestroyed || !isPaused) return;
+      isPaused = false;
+      render();
+    },
     destroy: () => {
       isDestroyed = true;
       cancelAnimationFrame(animId);

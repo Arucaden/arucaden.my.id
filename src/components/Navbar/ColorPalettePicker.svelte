@@ -16,6 +16,7 @@
 
   let isOpen = $state(false);
   let activeHex = $state(DEFAULT_COLOR);
+  let containerEl: HTMLElement | null = $state(null);
 
   function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
     const cleanHex = hex.replace(/^#/, '');
@@ -87,7 +88,7 @@
 
     const handleClickOutside = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      if (!target.closest('#palette-picker-container')) {
+      if (containerEl && !containerEl.contains(target)) {
         isOpen = false;
       }
     };
@@ -99,7 +100,7 @@
   });
 </script>
 
-<div id="palette-picker-container" class="relative inline-block">
+<div bind:this={containerEl} class="relative inline-block">
   <button
     type="button"
     onclick={(e) => {
