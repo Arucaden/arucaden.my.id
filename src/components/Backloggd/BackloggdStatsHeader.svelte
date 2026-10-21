@@ -45,11 +45,6 @@
           <h1 class="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight">
             @{username}
           </h1>
-
-          <div class="inline-flex items-center px-2.5 py-1 rounded-xl bg-[#140e1c] border border-white/15 gap-1.5 shadow-sm text-xs font-mono text-main font-bold">
-            <span class="i-ri-gamepad-line w-4 h-4"></span>
-            <span>Backloggd</span>
-          </div>
         </div>
 
         <p class="text-sm sm:text-base font-mono text-gray-text mt-1.5">

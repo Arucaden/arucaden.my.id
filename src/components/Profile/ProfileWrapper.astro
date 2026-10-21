@@ -13,8 +13,14 @@ const techToShow: readonly TechName[] = [
   'Unity', 'Figma', 'Clip Studio', 'Laravel', 'Flutter', 'MySQL', 'Svelte', 'Docker', 'Arch', 'React', 'Spline', 'Astro', 'Elysia', 'Drizzle', 'Tailwind', 'Aseprite', 'Supabase', 'Cloudflare Worker'
 ];
 
+const isTechTool = (
+  item: (typeof techItems)[number]
+): item is Extract<(typeof techItems)[number], { type: 'tech' }> =>
+  item.type === 'tech';
+
 const tech = techItems
-  .filter(item => item.type === 'tech' && techToShow.includes(item.name as TechName));
+  .filter(isTechTool)
+  .filter((item) => techToShow.includes(item.name));
 
 const highlightedTechSet: ReadonlySet<TechName> = new Set<TechName>([
   'Unity', 'Laravel', 'Tailwind', 'Arch', 'Elysia', 'React'
@@ -36,7 +42,7 @@ const highlightedTechSet: ReadonlySet<TechName> = new Set<TechName>([
 
           <p id="desc-paragraph" class="text-sm sm:text-base text-gray-text leading-relaxed">
             Computer Science student graduate. I like to explore new technologies and create innovative solutions.
-On my free time, I like to watch anime or play games, drawing included.
+            On my free time, I like to <a href="/mal" class="underline decoration-white/5 underline-offset-4">watch anime</a> or <a href="/games" class="underline decoration-white/5 underline-offset-4">play games</a>, drawing included.
           </p>
         </section>
 

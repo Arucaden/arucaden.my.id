@@ -40,9 +40,9 @@ export const techItems = [
   { name: "Google ML Kit", type: "tech", icon: "/icons/logos--googlemlkit.png" },
   { name: "FL Studio", type: "tech", icon: "i-ri-sound-module-fill" },
 
-  { name: "English", type: "language" },
-  { name: "Indonesia", type: "language" },
-  { name: "Japan", type: "language" },
+  { name: "English", type: "language", icon: undefined },
+  { name: "Indonesia", type: "language", icon: undefined },
+  { name: "Japan", type: "language", icon: undefined },
 ] as const satisfies readonly TechItem[];
 
 export type TechName = (typeof techItems)[number]["name"];
