@@ -1,3 +1,8 @@
+import type { TechName } from '../data/techstack.ts';
+
+export type ProjectCategory = 'game' | 'web' | 'mobile' | 'apps';
+export type ProjectTag = '#game' | '#apps' | '#web' | '#mobile';
+
 export type ProjectGalleryItem =
   | string
   | {
@@ -11,9 +16,9 @@ export type Project = {
   description: string;
   date: string;
   image: string;
-  tech: string[];
-  tags?: string[];
-  category?: string;
+  tech: TechName[];
+  tags: ProjectTag[];
+  category?: ProjectCategory;
   url?: string;
   liveUrl?: string;
   sourceUrl?: string;

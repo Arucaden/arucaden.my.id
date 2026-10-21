@@ -3,20 +3,22 @@ import '@/styles/profile.css';
 import TechCard from '../TechCard.svelte';
 import Experiences from './Experiences.svelte';
 import ExperienceOverlay from './ExperienceOverlay.astro';
-import { techItems } from '@data/techstack.ts';
+import { techItems, type TechName } from '@data/techstack.ts';
 import { certificates } from '@data/certificates.ts';
 import { Image } from 'astro:assets';
 import me from '@/public/Me.jpeg';
 import MyLinks from './MyLinks.astro';
 
-const techToShow = [
+const techToShow: readonly TechName[] = [
   'Unity', 'Figma', 'Clip Studio', 'Laravel', 'Flutter', 'MySQL', 'Svelte', 'Docker', 'Arch', 'React', 'Spline', 'Astro', 'Elysia', 'Drizzle', 'Tailwind', 'Aseprite', 'Supabase', 'Cloudflare Worker'
 ];
 
 const tech = techItems
-  .filter(item => item.type === 'tech' && techToShow.includes(item.name));
+  .filter(item => item.type === 'tech' && techToShow.includes(item.name as TechName));
 
-const highlightedTechSet = new Set(["Unity", "Laravel", "Tailwind", "Arch", "Elysia", "React"]);
+const highlightedTechSet: ReadonlySet<TechName> = new Set<TechName>([
+  'Unity', 'Laravel', 'Tailwind', 'Arch', 'Elysia', 'React'
+]);
 ---
 
 <div id="profile-shell" class="relative">
@@ -162,7 +164,7 @@ On my free time, I like to watch anime or play games, drawing included.
 </div>
 
 <script>
-  import { initProfileEffects } from '../../scripts/profileEffects.js';
+  import { initProfileEffects } from '../../scripts/profileEffects.ts';
   
   document.addEventListener('DOMContentLoaded', () => {
     const cleanup = initProfileEffects();

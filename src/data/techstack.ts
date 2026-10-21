@@ -1,6 +1,6 @@
-import type { Tech } from "../types/techstack.ts";
+import type { TechItem } from "../types/techstack.ts";
 
-export const techItems: Tech[] = [
+export const techItems = [
   { name: "Arch", type: "tech", icon: "/icons/simple-icons--archlinux.svg" },
   { name: "Elysia", type: "tech", icon: "/icons/simple-icons--elysia.svg" },
   { name: "Laravel", type: "tech", icon: "/icons/simple-icons--laravel.svg" },
@@ -28,7 +28,7 @@ export const techItems: Tech[] = [
   { name: "MySQL", type: "tech", icon: "/icons/simple-icons--mysql.svg" },
   { name: "Nginx", type: "tech", icon: "/icons/simple-icons--nginx.svg" },
   { name: "Photoshop", type: "tech", icon: "/icons/simple-icons--adobephotoshop.svg" },
-  { name: "Php", type: "tech", icon: "/icons/simple-icons--php.svg" },
+  { name: "PHP", type: "tech", icon: "/icons/simple-icons--php.svg" },
   { name: "Python", type: "tech", icon: "/icons/simple-icons--python.svg" },
   { name: "Svelte", type: "tech", icon: "/icons/simple-icons--svelte.svg" },
   { name: "UnoCSS", type: "tech", icon: "/icons/simple-icons--unocss.svg" },
@@ -37,8 +37,32 @@ export const techItems: Tech[] = [
   { name: "Postgre", type: "tech", icon: "/icons/simple-icons--postgresql.svg" },
   { name: "Supabase", type: "tech", icon: "/icons/simple-icons--supabase.svg" },
   { name: "Cloudflare Worker", type: "tech", icon: "/icons/simple-icons--cloudflareworker.svg" },
+  { name: "Google ML Kit", type: "tech", icon: "/icons/logos--googlemlkit.png" },
+  { name: "FL Studio", type: "tech", icon: "i-ri-sound-module-fill" },
 
   { name: "English", type: "language" },
   { name: "Indonesia", type: "language" },
   { name: "Japan", type: "language" },
+] as const satisfies readonly TechItem[];
+
+export type TechName = (typeof techItems)[number]["name"];
+
+export const TECH_NAMES = techItems.map((t) => t.name) as [
+  TechName,
+  ...TechName[],
 ];
+
+export function findTechItem(name: string): (typeof techItems)[number] | undefined {
+  const lower = name.toLowerCase();
+  return techItems.find((t) => t.name.toLowerCase() === lower);
+}
+
+export function resolveTechItem(name: string): TechItem {
+  return (
+    findTechItem(name) ?? {
+      name,
+      type: "tech",
+      icon: "",
+    }
+  );
+}

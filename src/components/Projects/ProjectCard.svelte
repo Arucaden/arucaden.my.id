@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { techItems } from '@/data/techstack.ts';
+  import { resolveTechItem } from '@/data/techstack.ts';
   import TechCard from '../TechCard.svelte';
-  import type { Tech } from '@/types/techstack.ts';
+  import type { TechItem } from '@/types/techstack.ts';
   import { fade, fly } from 'svelte/transition';
 
   let hovered = $state(false);
@@ -25,16 +25,8 @@
 
   const href = $derived(slug ? `/projects/${slug}` : url);
 
-  function resolveTech(techNames: string[]): Tech[] {
-    return techNames.map((name) => {
-      return (
-        techItems.find((t) => t.name.toLowerCase() === name.toLowerCase()) ?? {
-          name,
-          type: 'tech' as const,
-          icon: undefined,
-        }
-      );
-    });
+  function resolveTech(techNames: string[]): TechItem[] {
+    return techNames.map(resolveTechItem);
   }
 </script>
 

@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { TECH_NAMES } from '../data/techstack.ts';
 
 const galleryItemSchema = z.union([
   z.string(),
@@ -9,6 +10,9 @@ const galleryItemSchema = z.union([
   }),
 ]);
 
+export const PROJECT_TAGS = ['#game', '#apps', '#web', '#mobile'] as const;
+export const PROJECT_CATEGORIES = ['game', 'web', 'mobile', 'apps'] as const;
+
 const projectsCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -16,9 +20,9 @@ const projectsCollection = defineCollection({
     description: z.string().optional(),
     date: z.coerce.date(),
     image: z.string().optional(),
-    tech: z.array(z.string()).optional(),
-    tags: z.array(z.string()).optional(),
-    category: z.string().optional(),
+    tech: z.array(z.enum(TECH_NAMES)).optional(),
+    tags: z.array(z.enum(PROJECT_TAGS)).optional(),
+    category: z.enum(PROJECT_CATEGORIES).optional(),
     url: z.string().url().optional(),
     liveUrl: z.string().url().optional(),
     sourceUrl: z.string().url().optional(),

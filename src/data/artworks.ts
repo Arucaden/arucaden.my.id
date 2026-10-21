@@ -20,6 +20,7 @@ const rawArtworks: Artwork[] = [
     image: "/artworks/Mikazuki.webp",
     description: "Mikazuki is a 19 year old girl with very long black hair in Hime Cut with a single white streak that lines from top to above her left eyebrow. She's a tall and slender woman with crimson eyes. She often shows a calm, cold, and firm attitude outside. But at home or with people she is comfortable with she's a kind and caring person. She's a new year Psychology student at the university.",
     tags: ["#Mikazuki", "#2D", "scenery"],
+    featured: true,
   },
   {
     title: "Magical Pixel",
@@ -27,6 +28,7 @@ const rawArtworks: Artwork[] = [
     image: "/artworks/GiftCard.webp",
     description: "It was supposed to be a gift card for someone (dont ask please), but i decided to make it a pixel art.",
     tags: ["#pixel", "#scenery"],
+    featured: true,
   },
   {
     title: "Sadim",
@@ -55,6 +57,7 @@ const rawArtworks: Artwork[] = [
     image: "/artworks/Dusk.webp",
     description: "Just a random photo that i took from my phone, and i decided to make a illustration of it.",
     tags: ["#2d", "#scenery", '#drawnfromlife'],
+    featured: true,
   },
   {
     title: "Sorasaki Hina 「空崎ヒナ」",
@@ -62,6 +65,7 @@ const rawArtworks: Artwork[] = [
     image: "/artworks/Hina.webp",
     description: "My Waifu, she is a character from the game called 'Blue Archive', she is a member of the 'Gehenna' faction, and she is a very cute.",
     tags: ["#2D", "#fanart", "#bluearchive", "#scenery"],
+    featured: true,
   },
   {
     title: "Klee 「クレー」",
@@ -216,6 +220,7 @@ const rawArtworks: Artwork[] = [
     image: "/artworks/Face.webp",
     description: "I stood alone and yet, I did not fall. Because strength isn't always loud… sometimes, it breathes in stillness「強い」.",
     tags: ["#oc", "#2d"],
+    featured: true,
   },
 ];
 

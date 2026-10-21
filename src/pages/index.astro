@@ -7,26 +7,29 @@ import Blogs from '@components/Blog/BlogWrapper.astro';
 import { artworks } from '@data/artworks.ts';
 import { getCollection } from 'astro:content';
 import Container from '@components/Container.astro';
+import type { Project, ProjectTag } from '@/types/project.ts';
 
 const projectEntries = await getCollection('projects', ({ data }) => {
   return data.draft !== true;
 });
 
-let projects = projectEntries.map((entry) => {
-  const isGame = entry.data.category === 'game' || 
-                 entry.data.tech?.includes('Unity') || 
-                 entry.slug.includes('galaxy') || 
-                 entry.slug.includes('veil');
-  const isMobile = entry.data.tech?.includes('Flutter');
-  const defaultTags = isGame ? ['#game'] : isMobile ? ['#apps', '#mobile'] : ['#apps', '#web'];
-  
+let projects: Project[] = projectEntries.map((entry) => {
+  const defaultTags: ProjectTag[] =
+    entry.data.category === 'game'
+      ? ['#game']
+      : entry.data.category === 'mobile'
+        ? ['#apps', '#mobile']
+        : ['#apps', '#web'];
+
   return {
     ...entry.data,
     date: entry.data.date.toISOString(),
     description: entry.data.description ?? '',
     image: entry.data.image ?? '',
     tech: entry.data.tech ?? [],
-    tags: entry.data.tags && entry.data.tags.length > 0 ? entry.data.tags : defaultTags,
+    tags: (entry.data.tags && entry.data.tags.length > 0
+      ? entry.data.tags
+      : defaultTags) as ProjectTag[],
     slug: entry.slug,
   };
 });

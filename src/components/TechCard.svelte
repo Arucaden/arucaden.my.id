@@ -1,9 +1,23 @@
 <script lang="ts">
-  import type { Tech } from '@/types/techstack.ts';
+  import type { TechType } from '@/types/techstack.ts';
 
   let { 
-    name, icon, highlight = false, customClass = '', iconClass = 'w-4 h-4', showName = true }: 
-    Tech & { highlight?: boolean; customClass?: string; iconClass?: string; showName?: boolean; } = $props();
+    name, 
+    type = 'tech',
+    icon = undefined, 
+    highlight = false, 
+    customClass = '', 
+    iconClass = 'w-4 h-4', 
+    showName = true 
+  }: {
+    name: string;
+    type?: TechType;
+    icon?: string;
+    highlight?: boolean;
+    customClass?: string;
+    iconClass?: string;
+    showName?: boolean;
+  } = $props();
 </script>
 
 <div

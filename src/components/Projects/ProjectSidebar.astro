@@ -1,6 +1,6 @@
 ---
 import TechCard from '@/components/TechCard.svelte';
-import { techItems } from '@data/techstack.ts';
+import { resolveTechItem } from '@data/techstack.ts';
 
 interface Props {
   title: string;
@@ -27,18 +27,6 @@ const finalLiveUrl = liveUrl || url;
 const finalSourceUrl = sourceUrl || repoUrl;
 
 const contentHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
-
-function findTechWithIcon(name: string) {
-  const foundTech = techItems.find(
-    (t) => t.name.toLowerCase() === name.toLowerCase()
-  );
-
-  return {
-    name,
-    type: 'tech' as const,
-    icon: foundTech?.icon || undefined,
-  };
-}
 ---
 
 <aside class="md:sticky md:top-6 self-start w-full space-y-6">
@@ -79,12 +67,12 @@ function findTechWithIcon(name: string) {
       <h2 id="tech-heading" class="project-side-title">// TECH STACK</h2>
       <div class="flex gap-2 flex-wrap mt-2">
         {tech.map((t) => {
-          const techWithIcon = findTechWithIcon(t);
+          const item = resolveTechItem(t);
           return (
             <TechCard
-              name={techWithIcon.name}
-              icon={techWithIcon.icon}
-              type={techWithIcon.type}
+              name={item.name}
+              icon={item.icon}
+              type={item.type}
               showName={true}
               customClass="px-2.5 py-1 text-xs"
               iconClass="w-3.5 h-3.5"

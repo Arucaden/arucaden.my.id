@@ -8,7 +8,7 @@
 
   let { artworks }: { artworks: ArtType[] } = $props();
 
-  // featured artwork titles
+  // featured artwork titles ordering
   const featuredArtworkTitles = [
     "Mikazuki 「三日月」 feat. 1koma",
     "孤独",
@@ -19,7 +19,7 @@
   
   // Filter featured ones
   const previewArtworks = [...artworks]
-    .filter((art) => featuredArtworkTitles.includes(art.title))
+    .filter((art) => art.featured ?? featuredArtworkTitles.includes(art.title))
     .sort(
       (a, b) =>
         featuredArtworkTitles.indexOf(a.title) -

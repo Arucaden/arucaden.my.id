@@ -1,17 +1,19 @@
 <script lang="ts">
   import ProjectCard from './ProjectCard.svelte';
   import ViewAllButton from '../Common/ViewAllButton.svelte';
-  import type { Project } from '../../types/project.ts';
+  import type { Project, ProjectTag } from '../../types/project.ts';
   import { onMount } from 'svelte';
   import { fly } from 'svelte/transition';
   
   let { projects = [] }: { projects?: Project[] } = $props();
   
+  type FilterTag = '#all' | ProjectTag;
+
   let isMobile = $state(false);
   let overlayVisible = $state(false);
-  let activeFilter = $state('#all');
+  let activeFilter = $state<FilterTag>('#all');
 
-  const availableTags = ['#all', '#game', '#apps', '#web', '#mobile'];
+  const availableTags: readonly FilterTag[] = ['#all', '#game', '#apps', '#web', '#mobile'];
   
   const previewProjects = $derived(projects.slice(0, 6));
 
