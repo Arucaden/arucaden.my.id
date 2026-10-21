@@ -21,16 +21,75 @@ export function initProfileEffects() {
     ro = new ResizeObserver(() => setPortraitHeight());
     ro.observe(leftCol);
   }
-  const resizeHandler = () => setPortraitHeight();
+  const resizeHandler = () => {
+    setPortraitHeight();
+    updateTechContainerHeight?.();
+  };
   window.addEventListener('resize', resizeHandler);
   requestAnimationFrame(setPortraitHeight);
 
   const techToggle = document.getElementById('tech-toggle');
   const techContainer = document.getElementById('tech-container');
   let techToggleHandler;
+  let updateTechContainerHeight;
+  let transitionEndHandler;
 
   if (techToggle && techContainer) {
     let expanded = false;
+    let twoRowHeight = 96;
+
+    function getTwoRowHeight() {
+      const cards = techContainer.querySelectorAll('.tech-card-wrapper');
+      if (cards.length === 0) return 96;
+
+      const containerRect = techContainer.getBoundingClientRect();
+      let firstRowTop = null;
+      let secondRowTop = null;
+      let thirdRowTop = null;
+
+      for (let i = 0; i < cards.length; i++) {
+        const cardRect = cards[i].getBoundingClientRect();
+        const top = Math.round(cardRect.top - containerRect.top);
+
+        if (firstRowTop === null) {
+          firstRowTop = top;
+        } else if (secondRowTop === null && top > firstRowTop + 5) {
+          secondRowTop = top;
+        } else if (secondRowTop !== null && top > secondRowTop + 5) {
+          thirdRowTop = top;
+          break;
+        }
+      }
+
+      if (thirdRowTop !== null && thirdRowTop > 0) {
+        return Math.max(80, thirdRowTop);
+      }
+
+      const lastCard = cards[cards.length - 1];
+      if (lastCard) {
+        const lastCardRect = lastCard.getBoundingClientRect();
+        return Math.max(80, Math.round(lastCardRect.bottom - containerRect.top + 4));
+      }
+
+      return 96;
+    }
+
+    updateTechContainerHeight = () => {
+      const measuredH = getTwoRowHeight();
+      if (measuredH > 0) {
+        twoRowHeight = measuredH;
+      }
+      const needsToggle = techContainer.scrollHeight > twoRowHeight + 10;
+      techToggle.style.display = needsToggle ? '' : 'none';
+
+      if (expanded) {
+        techContainer.style.maxHeight = techContainer.scrollHeight + 'px';
+      } else {
+        techContainer.style.maxHeight = twoRowHeight + 'px';
+      }
+    };
+
+    requestAnimationFrame(updateTechContainerHeight);
 
     techToggleHandler = () => {
       expanded = !expanded;
@@ -40,13 +99,21 @@ export function initProfileEffects() {
         techToggle.textContent = 'Show Less';
         techContainer.classList.add('expanded');
       } else {
-        techContainer.style.maxHeight = '120px';
-        techToggle.textContent = 'Show All';
+        const targetH = twoRowHeight > 0 ? twoRowHeight : (getTwoRowHeight() || 96);
+        techContainer.style.maxHeight = targetH + 'px';
+        techToggle.textContent = 'Show More';
         techContainer.classList.remove('expanded');
       }
     };
 
     techToggle.addEventListener('click', techToggleHandler);
+
+    transitionEndHandler = (e) => {
+      if (e.propertyName === 'max-height') {
+        setPortraitHeight();
+      }
+    };
+    techContainer.addEventListener('transitionend', transitionEndHandler);
   }
 
   const showPortrait = document.getElementById('show-portrait');
@@ -117,6 +184,9 @@ export function initProfileEffects() {
     window.removeEventListener('resize', resizeHandler);
     if (techToggle && techToggleHandler) {
       techToggle.removeEventListener('click', techToggleHandler);
+    }
+    if (techContainer && transitionEndHandler) {
+      techContainer.removeEventListener('transitionend', transitionEndHandler);
     }
     if (showPortrait) {
       showPortrait.removeEventListener('click', openPortrait);

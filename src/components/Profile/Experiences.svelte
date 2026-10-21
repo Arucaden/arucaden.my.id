@@ -20,7 +20,7 @@
       <article
         class={`flex flex-col justify-between gap-3 rounded-2xl p-4 transition-all duration-300 ${
           i === 0
-            ? 'bg-main/0.1 border border-main/70 shadow-[0_0_12px_var(--color-accent-glow)] hover:border-main hover:bg-main/15'
+            ? 'bg-main/0.1 border border-main/70 shadow-[0_0_12px_var(--color-accent-glow)] hover:border-main'
             : 'bg-white/[0.03] border border-white/10 hover:border-main hover:bg-white/[0.06] hover:shadow-[0_0_20px_var(--color-accent-glow)]'
         }`}
       >

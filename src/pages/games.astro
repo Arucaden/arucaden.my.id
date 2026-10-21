@@ -1,0 +1,120 @@
+---
+import {
+  getBackloggdGameList,
+  computeBackloggdStats,
+  pruneBackloggdGame,
+} from '@/lib/backloggd.ts';
+import SiteHead from '@components/SiteHead.astro';
+import Navbar from '@components/Navbar/Navbar.svelte';
+import BackButton from '@components/BackButton.astro';
+import BackloggdCollection from '@components/Backloggd/BackloggdCollection.svelte';
+import BackloggdSkeleton from '@components/Backloggd/BackloggdSkeleton.svelte';
+import '../styles/global.css';
+
+const gameResult = await getBackloggdGameList();
+const rawData = gameResult.data;
+const stats = computeBackloggdStats(rawData);
+const gamesData = rawData.map(pruneBackloggdGame);
+
+const username = gameResult.username;
+const source = gameResult.source;
+const fetchedAt = gameResult.fetchedAt;
+
+const pageTitle = `Games Collection (@${username}) | Daffa Maulana Satria`;
+const metaDescription = `Personal video game library, backlog, ratings, and playthrough logs for ${username} (${stats.total} games tracked).`;
+
+const backloggdJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  name: pageTitle,
+  description: metaDescription,
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Daffa Maulana Satria',
+    alternateName: username,
+    sameAs: [
+      `https://backloggd.com/u/${username}`,
+      'https://github.com/Arucaden',
+      'https://arucaden.my.id',
+    ],
+  },
+};
+---
+
+<html lang="en">
+  <head>
+    <SiteHead
+      title={pageTitle}
+      description={metaDescription}
+      ogType="website"
+      ogImage="/artworks/Mikazuki.webp"
+      jsonLd={backloggdJsonLd}
+    />
+  </head>
+
+  <body class="crt-bg min-h-screen text-white custom-scroll antialiased selection:bg-main selection:text-black flex flex-col">
+    <main class="flex-grow mx-auto w-full max-w-7xl px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-4 md:py-8">
+      <!-- Top Navigation -->
+      <Navbar client:load />
+
+      <div class="mb-4">
+        <BackButton href="/" text="Back to Home" />
+      </div>
+
+      <!-- Main Backloggd Interactive Collection App -->
+      <BackloggdCollection
+        client:load
+        items={gamesData}
+        {stats}
+        {username}
+        {source}
+        {fetchedAt}
+      >
+        <div slot="fallback">
+          <BackloggdSkeleton />
+        </div>
+      </BackloggdCollection>
+
+      <!-- Floating Back to Top Button (Icon Only, Mobile Optimized) -->
+      <button
+        type="button"
+        id="floating-back-to-top"
+        aria-label="Scroll back to top"
+        title="Back to Top"
+        class="fixed bottom-20 right-4 sm:right-6 md:bottom-24 md:right-36 z-40 w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-[rgba(18,14,24,0.9)] backdrop-blur-xl border border-white/20 hover:border-main text-white hover:text-main shadow-[0_8px_30px_rgba(0,0,0,0.7)] hover:shadow-[0_0_20px_var(--color-accent-glow)] flex items-center justify-center transition-all duration-300 group cursor-pointer active:scale-95 opacity-0 pointer-events-none translate-y-3"
+      >
+        <span class="i-ri-arrow-up-line w-5 h-5 text-main transition-transform duration-200 group-hover:-translate-y-0.5"></span>
+      </button>
+
+      <script is:inline>
+        const btn = document.getElementById('floating-back-to-top');
+        if (btn) {
+          btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          });
+
+          const toggleVisibility = () => {
+            if (window.scrollY > 300) {
+              btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+              btn.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            } else {
+              btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+              btn.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+            }
+          };
+
+          window.addEventListener('scroll', toggleVisibility, { passive: true });
+          toggleVisibility();
+        }
+      </script>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-white/10 mt-16 py-8 px-4 sm:px-8 bg-black/40 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-gray-text">
+        <span>Designed and engineered carefully by Daffa Maulana Satria &copy; {new Date().getFullYear()}.</span>
+        <a href="/" class="hover:text-main transition-colors">Portfolio</a>
+      </div>
+    </footer>
+  </body>
+</html>

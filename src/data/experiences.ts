@@ -1,35 +1,52 @@
 import type { Experience } from '@/types/experience.ts';
 
 export const experiences: Experience[] = [
-  //   {
-  //   company: 'Ariverse Studio',
-  //   period: 'June 2026 - current',
-  //   type: 'Internship',
-  //   location: 'Hybrid',
-  //   role: 'Game Programmer',
-  //   points: 
-  //   [
-  //     'Collaborate with Artists and Game Designer to Implements mechanics, systems, and gameplay features in Unity.',
-  //     'Learning and Implement about Unity Unit Testing.',
-  //     'Learning and Implement about Proper Project Architecture and Assembly Definition.',
-  //     'Developing and mantain documentation for game systems and gameplay features.',
-  //     'Integrate and extending third-party modules into game.'
-  //   ],
-  // },
-  // {
-  //   company: 'Nanami.id',
-  //   period: 'October 2025 - current',
-  //   type: 'Part-time',
-  //   location: 'Remote',
-  //   role: 'Lead of Game and Design Nanami-WAVE',
-  //   points: 
-  //   [
-  //     'Establish and document design and game development workflows, standards, and guidelines to ensure efficient, scalable, and consistent production processes.',
-  //     'Oversee the development of Visual Novel content, including story structure, branching narrative, visual direction, music mood, and controlled use of Generative AI.',
-  //     'Maintain effective communication and healthy collaboration within the team.',
-  //     'Manage design scope and priorities to align creative ambition with project timelines and available resources.'
-  //   ],
-  // },
+      {
+      company: 'PT. Mega Marine Pride',
+      period: 'September 2026',
+      type: 'Internship',
+      location: 'On-site',
+      role: 'Junior Programmer Staff',
+      points: 
+      [
+        'Developed and deployed end-to-end ERP modules using Laravel and Vue.js, streamlining inter-departmental operational workflows and internal business processes.',
+        'Containerized the development and production workflows using Docker to ensure environment parity and seamless deployment.',
+        'Developed and executed automated test scripts using Selenium to perform testing, ensuring bug free and secure feature before deployed into production.',
+        'Architected relational multi database schemas, optimizing tables, relationships, and queries to support scalable data storage and integrity across new features.',
+        'Conducted rigorous manual and unit testing prior to production deployment, mitigating regressions and ensuring stable software releases.',
+        'Making technical documentation, including system flowcharts, and user manuals accelerating cross-departmental user onboarding and adoption.'
+
+      ],
+    },
+    {
+    company: 'Ariverse Studio',
+    period: 'June 2026 - December 2026',
+    type: 'Internship',
+    location: 'Hybrid',
+    role: 'Game Programmer',
+    points: 
+    [
+      'Collaborate with Artists and Game Designer to Implements mechanics, systems, and gameplay features in Unity.',
+      'Implement Unity Unit Testing to ensure bug free logic before integrated into another unit.',
+      'Implement Proper Project Architecture and Assembly Definition to decrease domain reload time.',
+      'Developing and mantain documentation for game systems and gameplay features.',
+      'Integrate and extending third-party modules into game.'
+    ],
+  },
+  {
+    company: 'Nanami.id',
+    period: 'October 2025 - October 2026',
+    type: 'Part-time',
+    location: 'Remote',
+    role: 'Lead of Game and Design Nanami-WAVE',
+    points: 
+    [
+      'Establish and document design and game development workflows, standards, and guidelines to ensure efficient, scalable, and consistent production processes.',
+      'Oversee the development of Visual Novel content, including story structure, branching narrative, visual direction, music mood, and controlled use of Generative AI.',
+      'Maintain effective communication and healthy collaboration within the team.',
+      'Manage design scope and priorities to align creative ambition with project timelines and available resources.'
+    ],
+  },
   {
     company: '3PM-Solutions',
     period: '1 July 2025 - 31 December 2025',

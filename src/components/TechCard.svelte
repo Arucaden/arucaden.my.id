@@ -14,13 +14,17 @@
   `}
 >
   {#if icon}
-    <img 
-      src={icon} 
-      alt={name} 
-      width="18"
-      height="18"
-      class={`transition-transform duration-200 ${iconClass}`} 
-    />
+    {#if icon.startsWith('i-')}
+      <span class={`${icon} ${iconClass} shrink-0 block`} aria-hidden="true"></span>
+    {:else}
+      <img 
+        src={icon} 
+        alt={name} 
+        width="18"
+        height="18"
+        class={`transition-transform duration-200 ${iconClass}`} 
+      />
+    {/if}
   {/if}
 
   {#if showName}

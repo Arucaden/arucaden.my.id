@@ -7,6 +7,14 @@ import {
 } from 'unocss';
 
 export default defineConfig({
+  safelist: [
+    'i-ri-mail-fill',
+    'i-ri-linkedin-fill',
+    'i-ri-github-fill',
+    'i-ri-gamepad-fill',
+    'i-ri-file-text-fill',
+    'i-ri-movie-2-fill',
+  ],
   presets: [
     presetWind4(),
     presetAttributify(),
@@ -16,6 +24,8 @@ export default defineConfig({
         'grommet-icons': () =>
           import('@iconify-json/grommet-icons/icons.json').then((i) => i.default),
         ri: () => import('@iconify-json/ri/icons.json').then((i) => i.default),
+        'simple-icons': () =>
+          import('@iconify-json/simple-icons/icons.json').then((i) => i.default),
       },
     }),
   ],
@@ -74,7 +84,7 @@ export default defineConfig({
     // Buttons
     [
       'btn-primary',
-      'inline-flex items-center justify-center gap-2 bg-gradient-to-r from-main to-tertiary text-white font-medium px-4 py-4 rounded-xl transition-all duration-200 hover:shadow-[0_0_12px_var(--color-accent-glow)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer',
+      'inline-flex items-center justify-center gap-2 bg-main font-medium px-4 py-4 rounded-xl transition-all duration-200 hover:shadow-[0_0_12px_var(--color-accent-glow)] hover:scale-[1.02] active:scale-[0.98] cursor-pointer',
     ],
     [
       'btn-secondary',

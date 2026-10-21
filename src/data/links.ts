@@ -37,11 +37,4 @@ export const links: SocialLink[] = [
     iconClass: 'i-ri-file-text-fill',
     description: 'Read my resume here',
   },
-  {
-    name: 'MyAnimeList',
-    href: '/mal',
-    iconClass: 'i-ri-movie-2-fill',
-    description: 'Anime collection & ratings',
-    isInternal: true,
-  },
 ];

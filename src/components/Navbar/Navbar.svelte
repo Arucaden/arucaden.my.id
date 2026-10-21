@@ -10,6 +10,7 @@
     { name: 'ARTWORKS', href: '/#artworks', id: 'artworks' },
     { name: 'BLOG', href: '/#blogs', id: 'blogs' },
     { name: 'MAL', href: '/mal', id: 'mal', isPage: true },
+    { name: 'GAMES', href: '/games', id: 'games', isPage: true },
   ];
 
   let activeSection = $state('');

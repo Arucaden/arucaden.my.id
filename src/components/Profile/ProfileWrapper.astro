@@ -10,13 +10,13 @@ import me from '@/public/Me.jpeg';
 import MyLinks from './MyLinks.astro';
 
 const techToShow = [
-  'Unity', 'Figma', 'TypeScript', 'Clip Studio', 'Laravel', 'Flutter', 'Spline', 'MySQL', 'three.js', 'Svelte'
+  'Unity', 'Figma', 'Clip Studio', 'Laravel', 'Flutter', 'MySQL', 'Svelte', 'Docker', 'Arch', 'React', 'Spline', 'Astro', 'Elysia', 'Drizzle', 'Tailwind', 'Aseprite', 'Supabase', 'Cloudflare Worker'
 ];
 
 const tech = techItems
   .filter(item => item.type === 'tech' && techToShow.includes(item.name));
 
-const highlightedTechSet = new Set(["Unity", "Clip Studio", "Figma", "TypeScript"]);
+const highlightedTechSet = new Set(["Unity", "Laravel", "Tailwind", "Arch", "Elysia", "React"]);
 ---
 
 <div id="profile-shell" class="relative">
@@ -38,66 +38,67 @@ On my free time, I like to watch anime or play games, drawing included.
           </p>
         </section>
 
-        <!-- Certificates -->
-        {certificates.length > 0 && (
-          <section aria-labelledby="cert-heading">
-            <span id="cert-heading" class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// CERTIFICATE</span>
-            <div class="flex flex-row flex-wrap gap-2 py-1">
-              {certificates.map((cert) => (
-                <a
-                  href={cert.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class={`inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border px-4 py-2.5 text-xs font-mono transition-all duration-200 hover:border-main hover:bg-main/15 hover:text-main hover:shadow-[0_0_12px_var(--color-accent-glow)] group cursor-pointer ${
-                    cert.highlight
-                      ? 'text-white border-main bg-main/10 shadow-[0_0_12px_var(--color-accent-glow)]'
-                      : 'text-gray-text border-white/10'
-                  }`}
-                  title={`View Certificate: ${cert.name}`}
-                >
-                  {cert.icon ? (
-                    <img
-                      src={cert.icon}
-                      alt={cert.name}
-                      width="18"
-                      height="18"
-                      class="w-4.5 h-4.5 object-contain transition-transform duration-200"
-                    />
-                  ) : (
-                    <div class="i-ri-shield-check-fill w-4.5 h-4.5 text-main shrink-0"></div>
-                  )}
-                  <span class="font-medium text-white group-hover:text-main transition-colors">{cert.name}</span>
-                </a>
-              ))}
-            </div>
-          </section>
-        )}
-
         <!-- Links -->
         <section aria-labelledby="links-heading">
           <span id="links-heading" class="text-xs font-mono text-main uppercase tracking-widest block mb-2">// Contacts</span>
           <MyLinks />
         </section>
 
-        <!-- Tech Stack -->
+        <!-- Technology and Certificate -->
         <section aria-labelledby="tech-heading">
           <div class="flex justify-between items-center mb-2">
-            <span id="tech-heading" class="text-xs font-mono text-main uppercase tracking-widest">// TECH STACK</span>
-            <button id="tech-toggle" class="md:hidden text-xs font-mono text-main hover:text-white">Show All</button>
+            <span id="tech-heading" class="text-xs font-mono text-main uppercase tracking-widest">// Technology and Certificate</span>
+            <button id="tech-toggle" class="text-xs font-mono text-main hover:text-white transition-colors cursor-pointer">Show More</button>
           </div>
 
-          <div id="tech-container" class="flex flex-row flex-wrap gap-2 md:max-h-full max-h-[120px] overflow-y-hidden transition-all duration-300 py-1 px-1">
-            {tech.map((t, index) => (
-              <div class={`tech-card-wrapper ${index > 6 ? 'md:opacity-100 md:translate-y-0 hidden-card opacity-0 translate-y-0' : ''}`}>
-                <TechCard
-                  name={t.name}
-                  type={t.type}
-                  icon={t.icon}
-                  highlight={highlightedTechSet.has(t.name)}
-                  showName={true}
-                />
+          <div id="tech-container" class="flex flex-col gap-4 overflow-y-hidden transition-all duration-300 py-1 px-1">
+            <div class="flex flex-row flex-wrap gap-2">
+              {tech.map((t) => (
+                <div class="tech-card-wrapper">
+                  <TechCard
+                    name={t.name}
+                    type={t.type}
+                    icon={t.icon}
+                    highlight={highlightedTechSet.has(t.name)}
+                    showName={true}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {certificates.length > 0 && (
+              <div class="pt-3 border-t border-white/10 flex flex-col gap-2">
+                <span class="text-xs font-mono text-main uppercase tracking-widest">// CERTIFICATE</span>
+                <div class="flex flex-row flex-wrap gap-2 py-0.5">
+                  {certificates.map((cert) => (
+                    <a
+                      href={cert.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class={`inline-flex items-center gap-2 rounded-xl bg-white/[0.04] border px-4 py-2.5 text-xs font-mono transition-all duration-200 hover:border-main hover:bg-main/15 hover:text-main hover:shadow-[0_0_12px_var(--color-accent-glow)] group cursor-pointer ${
+                        cert.highlight
+                          ? 'text-white border-main bg-main/10 shadow-[0_0_12px_var(--color-accent-glow)]'
+                          : 'text-gray-text border-white/10'
+                      }`}
+                      title={`View Certificate: ${cert.name}`}
+                    >
+                      {cert.icon ? (
+                        <img
+                          src={cert.icon}
+                          alt={cert.name}
+                          width="18"
+                          height="18"
+                          class="w-4.5 h-4.5 object-contain transition-transform duration-200"
+                        />
+                      ) : (
+                        <div class="i-ri-shield-check-fill w-4.5 h-4.5 text-main shrink-0"></div>
+                      )}
+                      <span class="font-medium text-white group-hover:text-main transition-colors">{cert.name}</span>
+                    </a>
+                  ))}
+                </div>
               </div>
-            ))}
+            )}
           </div>
         </section>
       </div>

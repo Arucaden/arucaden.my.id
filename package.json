@@ -9,6 +9,7 @@
     "astro": "astro",
     "typecheck": "tsc --noEmit",
     "sync:mal": "node scripts/sync-mal.mjs",
+    "sync:backloggd": "node scripts/sync-backloggd.mjs",
     "check": "astro check && tsc --noEmit",
     "knip": "knip"
   },
@@ -24,9 +25,11 @@
   "devDependencies": {
     "@iconify-json/grommet-icons": "^1.2.1",
     "@iconify-json/ri": "^1.2.5",
+    "@iconify-json/simple-icons": "^1.2.100",
     "@types/node": "^26.6.5",
     "@unocss/astro": "^66.6.8",
     "knip": "^6.42.1",
+    "simple-icons": "^16.35.0",
     "typescript": "^5.9.3",
     "unocss": "^66.6.8"
   }
