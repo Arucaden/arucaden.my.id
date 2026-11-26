@@ -129,7 +129,7 @@ paired with gte(users.balance, amount) in the WHERE clause.
 
 Instead of reading user.balance into JavaScript, doing math in memory, and sending back a hardcoded number, the database evaluates and updates the balance in one atomic step.
 
-If tx.insert(orders) fails for any reason, throwing or letting the error bubble up tells Drizzle to issue a `ROLLBACK, reverting updatedUser's balance back to what it was before.
+If tx.insert(orders) fails for any reason, throwing or letting the error bubble up tells Drizzle to issue a ROLLBACK, reverting updatedUser's balance back to what it was before.
 
 You can also trigger a rollback manually inside Drizzle by calling tx.rollback(), though throwing a descriptive error is usually clearer for upstream error handling.
 
@@ -141,7 +141,7 @@ Even when people use transactions, a few habits quietly ruin them:
    This happens a lot when calling helper/repository functions inside a transaction. If you accidentally run db.insert(...) instead of tx.insert(...), that query runs on a separate connection outside the transaction. If things fail later, that query will not roll back. Always pass tx down to any helper called inside the transaction.
 
 2. **Swallowing exceptions inside try/catch**
-   If you wrap a query inside try { ... } catch (err) { console.log(err); } inside a transaction callback and do not rethrow the error, the transaction thinks everything went fine and commits the partial changes anyway.
+   If you wrap a query inside `try { ... } catch (err) { console.log(err); }` inside a transaction callback and do not rethrow the error, the transaction thinks everything went fine and commits the partial changes anyway.
 
 3. **Calling external APIs inside a database transaction**
    Sending an email, calling a payment gateway webhook, or hitting a third-party REST API inside DB::transaction() causes two diseases:
