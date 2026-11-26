@@ -1,0 +1,160 @@
+---
+title: "Database Atomicity: All or Nothing in Practice"
+date: 2026-11-26
+description: "Understanding the ATOMIC principle in databases, why partial writes break apps, and how to handle it in Laravel and TypeScript with Drizzle ORM."
+readTime: "6 min read"
+tags: ["Database", "Backend", "Laravel", "TypeScript", "Drizzle"]
+---
+
+### Introduction
+
+Imagine a user buys an item in your app. Two things need to happen in the database:
+
+1. Deduct $50 from the user's wallet balance.
+2. Insert a new order record into the 'orders' table.
+
+Now if first step succeeds, and right before step 2 runs, the server crashes, a database constraint fails, or the request times out, the user will lost $50, and they don't even have an order to show for it. Congratulations, your database is now lying.
+
+This is the exact problem the **Atomic** principle solves.
+
+### What Does Atomic Mean?
+
+In database, **Atomicity** is the **A** in **ACID** (Atomicity, Consistency, Isolation, Durability). ~~then what is tomicity?~~
+
+The idea of this is just **all or nothing**.
+
+When you group multiple queries into a single atomic unit:
+- If every step succeeds, everything is saved permanently.
+- If any single step fails, everything that already ran inside that unit is rolled back, as if none of it ever happened.
+
+> - **why not just check everything in code first?** Even if your validation passes before running queries, a database constraint, deadlock, or sudden crash can still kill the second query after the first one already committed.
+> - **why does atomicity matter beyond payments?** Anything with linked state suffers from partial writes: creating a user alongside their default workspace, transferring inventory between warehouses, or deleting related records.
+
+### The Ancient Trap: Non-Atomic Code
+
+Here is what backend code usually looks like when people forget transactions:
+
+```ts
+// Bad: each query auto-commits on its own
+await db
+  .update(users)
+  .set({ balance: user.balance - total })
+  .where(eq(users.id, userId));
+
+// If this throws (foreign key error, timeout, bug, etc.),
+// the balance deduction above is already permanent.
+await db.insert(orders).values({
+  userId,
+  itemId,
+  total,
+});
+```
+
+By default, most SQL databases run in auto-commit mode. Every standalone query is treated as its own mini transaction and saved immediately.
+
+To make multiple operations succeed or fail together, you wrap them in a transaction (BEGIN, followed by COMMIT or ROLLBACK).
+
+### Example 1: Laravel ('DB::transaction')
+
+In Laravel, the cleanest way to enforce atomicity is using **DB::transaction()**. It opens a transaction, runs your closure, commits when the closure finishes, and automatically rolls back if any exception is thrown.
+
+```php
+use App\Models\Order;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+
+DB::transaction(function () use ($userId, $itemId, $amount) {
+    // Lock the row so two concurrent requests cannot read the same balance
+    $user = User::where('id', $userId)
+        ->lockForUpdate()
+        ->firstOrFail();
+
+    if ($user->balance < $amount) {
+        throw new \RuntimeException('Insufficient balance');
+    }
+
+    $user->decrement('balance', $amount);
+
+    Order::create([
+        'user_id' => $user->id,
+        'item_id' => $itemId,
+        'total' => $amount,
+    ]);
+});
+```
+
+Two small details worth noticing here:
+1. **lockForUpdate()**: Without a row lock, two requests arriving at the exact same millisecond could both read a balance of 100, both think 100 >= 80, and both subtract 80, leaving the balance at -60 (or 20 depending on how you wrote the update).
+2. **Deadlock retries**: DB::transaction($callback, 3) accepts a second argument for how many times Laravel should retry if the database hits a deadlock.
+
+If you need manual control instead of a closure, Laravel also provides DB::beginTransaction(), DB::commit(), and DB::rollBack() inside a try/catch block.
+
+### Example 2: TypeScript with Drizzle ORM
+
+In TypeScript using Drizzle ORM, transactions follow a similar callback pattern with `db.transaction(async (tx) => { ... })`.
+
+```ts
+import { and, eq, gte, sql } from "drizzle-orm";
+import { db } from "./db";
+import { orders, users } from "./schema";
+
+await db.transaction(async (tx) => {
+  // Atomic check-and-deduct directly in SQL
+  const [updatedUser] = await tx
+    .update(users)
+    .set({
+      balance: sql`${users.balance} - ${amount}`,
+    })
+    .where(and(eq(users.id, userId), gte(users.balance, amount)))
+    .returning();
+
+  if (!updatedUser) {
+    throw new Error("User not found or insufficient balance");
+  }
+
+  await tx.insert(orders).values({
+    userId,
+    itemId,
+    total: amount,
+  });
+});
+```
+
+Notice how the balance deduction is written:
+
+```ts
+balance: sql`${users.balance} - ${amount}`
+```
+paired with gte(users.balance, amount) in the WHERE clause.
+
+Instead of reading user.balance into JavaScript, doing math in memory, and sending back a hardcoded number, the database evaluates and updates the balance in one atomic step.
+
+If tx.insert(orders) fails for any reason, throwing or letting the error bubble up tells Drizzle to issue a `ROLLBACK, reverting updatedUser's balance back to what it was before.
+
+You can also trigger a rollback manually inside Drizzle by calling tx.rollback(), though throwing a descriptive error is usually clearer for upstream error handling.
+
+### Common Mistakes That Break Atomicity
+
+Even when people use transactions, a few habits quietly ruin them:
+
+1. **Using db instead of tx inside Drizzle transactions**
+   This happens a lot when calling helper/repository functions inside a transaction. If you accidentally run db.insert(...) instead of tx.insert(...), that query runs on a separate connection outside the transaction. If things fail later, that query will not roll back. Always pass tx down to any helper called inside the transaction.
+
+2. **Swallowing exceptions inside try/catch**
+   If you wrap a query inside try { ... } catch (err) { console.log(err); } inside a transaction callback and do not rethrow the error, the transaction thinks everything went fine and commits the partial changes anyway.
+
+3. **Calling external APIs inside a database transaction**
+   Sending an email, calling a payment gateway webhook, or hitting a third-party REST API inside DB::transaction() causes two diseases:
+   - Your database connection and row locks stay open while waiting on slow network calls.
+   - If the database rolls back afterward, you cannot un-send an email or un-charge a card.
+   Keep external side effects outside the transaction, or queue them only after the commit succeeds (for example with `DB::afterCommit()` in Laravel).
+
+### Final Thoughts
+
+You do not need transactions for every single query. Fetching data or updating one independent column does not need extra ceremony.
+
+But whenever two or more writes depend on each other to make sense, wrapping them in an atomic transaction saves you from fixing ~~user's money~~ db and backend.
+
+---
+
+Thanks for reading!
